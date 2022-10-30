@@ -2,12 +2,13 @@
 using System;
 namespace stage0
 {
-    partial class Program
+     partial class Program
     {
         static void Main(string[] args)
         {
             Welcome0035();
             Welcome7129();
+            Console.ReadKey();
         }
         static partial void Welcome7129();
         private static void Welcome0035()
