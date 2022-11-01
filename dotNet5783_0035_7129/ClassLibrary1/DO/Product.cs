@@ -4,29 +4,29 @@ using System.Xml.Linq;
 
 namespace DO;
 /// <summary>
-/// stucture for the products of the store.
+/// Stucture for the products of the store.
 /// </summary>
 
 public struct Product
 {
     /// <summary>
-    /// uniqe ID for each product.
+    /// Uniqe ID for each product.
     /// </summary>
     public int ID { get; set; }
     /// <summary>
-    /// uniqe name for each product.
+    /// Uniqe name for each product.
     /// </summary>
     public string? Name { get; set; }
     /// <summary>
-    /// the category of the product.
+    /// The category of the product.
     /// </summary>
     public Enum? Category { get; set; }
     /// <summary>
-    /// uniqe price for each product.
+    /// Uniqe price for each product.
     /// </summary>
     public double? Price { get; set; }
     /// <summary>
-    /// the amount of each product in stock.
+    /// The amount of each product in stock.
     /// </summary>
     public int? InStock { get; set; }
     /// <summary>
