@@ -13,8 +13,8 @@
 
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DalList.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="C:\Users\User\source\repos\efrat-roth\dotNet5783_0035_7129\dotNet5783_0035_7129\DalFacade\DalFacade.csproj" />
+	</ItemGroup>
+	
 </Project>
