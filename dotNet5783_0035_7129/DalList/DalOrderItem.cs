@@ -1,7 +1,9 @@
 ﻿
-namespace Dal;
-
-public class DalOdrederItem
+namespace Dal
 {
 
+    public class DalOdrederItem
+    {
+
+    }
 }

@@ -1,7 +1,10 @@
-﻿namespace Dal;
-
-public class DalOrder
+﻿namespace Dal
 {
+    public class DalOrder
+    {
 
+
+
+    }
 }
 
