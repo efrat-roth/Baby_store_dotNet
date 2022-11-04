@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\DalFacade.csproj" />
+    <ProjectReference Include="..\DalList.csproj" />
   </ItemGroup>
 
 </Project>
