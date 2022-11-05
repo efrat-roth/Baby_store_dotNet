@@ -1,20 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <BaseOutputPath></BaseOutputPath>
+	  <BaseOutputPath>$(SolutionDir)\bin\</BaseOutputPath>
 	<OutputPath>$(SolutionDir)\bin\</OutputPath>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	<RootNamespace />
-
+	<RootNamespace>Dal</RootNamespace>	  <OutputPath>$(SolutionDir)\bin\</OutputPath>
+	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
+	  
+    <RootNamespace>Dal</RootNamespace>
+    <BaseOutputPath> $(SolutionDir)\bin\</BaseOutputPath>
   </PropertyGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="C:\Users\User\source\repos\efrat-roth\dotNet5783_0035_7129\dotNet5783_0035_7129\DalFacade\DalFacade.csproj" />
-	</ItemGroup>
-	
+  <ItemGroup>
+    <ProjectReference Include="..\DalFacade\DalFacade.csproj" />
+  </ItemGroup>
+
 </Project>

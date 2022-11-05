@@ -1,6 +1,4 @@
-﻿
-
-namespace DO;
+﻿namespace DO;
 /// <summary>
 /// Struct for orders. 
 /// </summary>

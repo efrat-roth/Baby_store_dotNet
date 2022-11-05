@@ -1,5 +1,4 @@
-﻿
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Xml.Linq;
 
 namespace DO;
@@ -40,3 +39,4 @@ public struct Product
        Amount in stock: {InStock}";
 
 }
+

@@ -1,6 +1,4 @@
-﻿
-
-namespace DO;
+﻿namespace DO;
 /// <summary>
 /// Struct for the order items from the store.
 /// </summary>
@@ -28,3 +26,4 @@ public struct OrderItem
     /// </summary>
     public int? amount { get; set; }
 }
+
