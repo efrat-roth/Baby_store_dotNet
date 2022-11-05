@@ -1,5 +1,4 @@
 ﻿
-
 namespace DO;
 /// <summary>
 /// Struct for the order items from the store.

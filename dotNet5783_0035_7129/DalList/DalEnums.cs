@@ -1,6 +1,6 @@
 ﻿
 namespace Dal;
 
-public class DalProduct
+public class DalEnums
 {
 }

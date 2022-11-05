@@ -4,6 +4,7 @@ namespace Dal
 {
     internal static class DataSource
     {
+        public static readonly Random random = new Random();
         /// <summary>
         /// Random number only for read.
         /// </summary>
