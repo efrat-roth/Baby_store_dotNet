@@ -18,4 +18,8 @@
     <BaseOutputPath> $(SolutionDir)\bin\</BaseOutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="DalApi\" />
+  </ItemGroup>
+
 </Project>

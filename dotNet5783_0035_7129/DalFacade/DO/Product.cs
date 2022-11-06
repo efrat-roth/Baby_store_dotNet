@@ -15,19 +15,19 @@ public struct Product
     /// <summary>
     /// Uniqe name for each product.
     /// </summary>
-    public string? Name { get; set; }
+    public string Name { get; set; }
     /// <summary>
     /// The category of the product.
     /// </summary>
-    public Enum? Category { get; set; }
+    public Enum Category { get; set; }
     /// <summary>
     /// Uniqe price for each product.
     /// </summary>
-    public double? Price { get; set; }
+    public double Price { get; set; }
     /// <summary>
     /// The amount of each product in stock.
     /// </summary>
-    public int? InStock { get; set; }
+    public int InStock { get; set; }
     /// <summary>
     /// The product information.
     /// </summary>
@@ -37,6 +37,7 @@ public struct Product
        category - {Category}
        Price: {Price}
        Amount in stock: {InStock}";
+
 
 }
 
