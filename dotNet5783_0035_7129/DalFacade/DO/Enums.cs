@@ -17,6 +17,10 @@ public struct Enums
     /// Enum for the options of the products
     /// </summary>
     public  enum productEnum { Adding, PrintById, printAll, Update, Delete, Exit }
+    /// <summary>
+    /// Enum for the categories of the products
+    /// </summary>
+    public enum category { Clothes,Bottles, Toys,Socks, Accessories,BabyCarriages}
 };
 
 

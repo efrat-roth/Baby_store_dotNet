@@ -19,7 +19,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DalApi\" />
+    <Compile Remove="DalApi\**" />
+    <EmbeddedResource Remove="DalApi\**" />
+    <None Remove="DalApi\**" />
   </ItemGroup>
 
 </Project>
