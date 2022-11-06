@@ -1,4 +1,8 @@
-﻿namespace DO;
+﻿using static DO.Enums;
+using System.Diagnostics;
+using System.Xml.Linq;
+
+namespace DO;
 /// <summary>
 /// Struct for orders. 
 /// </summary>
@@ -33,5 +37,16 @@ public struct Order
     /// The date of the delivery day
     /// </summary>
     public DateTime DeliveryDate { get; set; }
+    /// <summary>
+    /// The order information.
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString() => $@"
+       Order ID: {ID}, 
+       Customer name: {CustomerName}
+       Customer email: {CustomerEmail}
+       Date of order: {OrderDate}
+       Date of ship: {ShipDate}
+       Date of delivery: {DeliveryDate}";
 
 }

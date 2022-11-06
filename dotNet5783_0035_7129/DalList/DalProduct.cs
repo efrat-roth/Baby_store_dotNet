@@ -9,7 +9,9 @@ public class DalProduct
 {
     public int Add(Product p)
     {
-        int index = 0;
+        products[nextEmptyProduct] = p;
+        nextCountProductID();
+        return 1;
     }
-    return
+    
 }

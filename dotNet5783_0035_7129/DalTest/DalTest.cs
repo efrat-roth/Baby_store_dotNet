@@ -16,10 +16,11 @@ namespace DalTest
             DalOrder order = new DalOrder();
             DalOrderItem orderItem = new DalOrderItem();
             DalProduct product = new DalProduct();
-            Console.WriteLine(@"Enter
-                             product to manage the products
-                             order to manage the orders
-                             orderItem to manage the items in the order");
+            Console.WriteLine(
+                              $@"Enter
+                                    product to manage the products
+                                    order to manage the orders
+                                    orderItem to manage the items in the order");
             string choice=Console.ReadLine();
             if (choice=="product")//manages the products
             {
