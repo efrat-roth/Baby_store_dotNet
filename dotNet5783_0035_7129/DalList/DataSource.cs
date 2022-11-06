@@ -6,10 +6,11 @@ namespace Dal;
 /// </summary>
 static internal class DataSource
 {
+
     /// <summary>
     /// Variable to read random numbers
     /// </summary>
-    static readonly int readNumber ;//check resets
+   public static readonly Random random=new Random();//check resets
     /// <summary>
     /// List of the products
     /// </summary>
