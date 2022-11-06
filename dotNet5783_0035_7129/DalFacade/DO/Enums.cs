@@ -20,7 +20,17 @@ public struct Enums
     /// <summary>
     /// Enum for the categories of the products
     /// </summary>
-    public enum Category { Clothes, Bottles, Toys,Socks, Accessories, BabyCarriages }
+    public enum Category { Clothes, Bottles, Toys, Socks, Accessories, BabyCarriages }
+    public enum ClothesType { PinkFloralBabygro,BlueBabygro, BasicBabygro, Pajamas,ThreeBabygro }
+    public enum BottlesType { LargeBottle, MediumBottle, SmaalBottle, ThreeBottle, DysneyBottle }
+    public enum ToysType { DisneyDall, BarbieDall, Pillow, Biter, Lego }
+    public enum SocksType { PurpleSocks, WarmSocks, CottonSocks, ThreeSocks, PinkSocks }
+    public enum AccessoriesType { Trampoline, BabyUniversitie, CarryCot, Cribe, Pacifier }
+    public enum BabyCarriagesType { BrownCarriage, NewBornCarriage, Stroller, Carriage, PinkCarriage }
+
+
+
+
 };
 
 

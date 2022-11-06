@@ -55,7 +55,7 @@ namespace Dal
             {
                 int index = 0;
                 Product product = new Product();
-                product.Category = (Category)rnd.Next(1, 7);
+                product.Category = (Enums.Category)rnd.Next(1, 7);
 
                 if (rnd.Next(0, 100) > 5)
                     product.InStock = rnd.Next(100, 250);
@@ -64,8 +64,8 @@ namespace Dal
 
                 switch (product.Category)
                 {
-                    case Category.Phone:
-                        product.Name = "" + (PhoneType)rnd.Next(0, 5);
+                    case Enums.Category.Clothes:
+                        product.Name = "" + (Enums.ClothesType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -76,8 +76,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Category.Computer:
-                        product.Name = "" + (ComputerType)rnd.Next(0, 5);
+                    case Enums.Category.Bottles:
+                        product.Name = "" + (Enums.BottlesType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -88,8 +88,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Category.Tablet:
-                        product.Name = "" + (TabletType)rnd.Next(0, 5);
+                    case Enums.Category.Toys:
+                        product.Name = "" + (Enums.ToysType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -100,8 +100,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Category.Watch:
-                        product.Name = "" + (WatchType)rnd.Next(0, 5);
+                    case Enums.Category.Socks:
+                        product.Name = "" + (Enums.SocksType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -112,8 +112,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Category.TV:
-                        product.Name = "" + (TVTipe)rnd.Next(0, 5);
+                    case Enums.Category.Accessories:
+                        product.Name = "" + (Enums.AccessoriesType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -124,8 +124,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Category.EarPhones:
-                        product.Name = "" + (EarPhonesTipe)rnd.Next(0, 5);
+                    case Enums.Category.BabyCarriages:
+                        product.Name = "" + (Enums.BabyCarriagesType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -143,10 +143,10 @@ namespace Dal
                     products[Config.nextEmptyProduct++] = product;
             }
 
-            string[] firstNames = new string[10] { "Yonatan", "Doron", "Arie", "Yosef", "Talya", "Hila", "Dvora", "Efrat", "Avraham", "Dina" };
-            string[] lastNames = new string[10] { "Levy", "Cohen", "Zilberstein", "Tzanani", "Sharabi", "Drori", "Ben tov", "Buhnic", "Shlomo", "Sinay" };
-            string[] City = new string[10] { "Jerusalem", "Tel Aviv", "Ashdod", "Haifa", "Beer Sheva", "Eilat", "Petah Tikva", "Bney Brak", "Ramat Gan", "Tveria" };
-            string[] St = new string[10] { "Hafet Haim", "Herzel", "Hashlosha", "Tveria", "Hagiborim", "Ezra", "Havradim", "Hahagana", "Tzfat", "Tora Vaavoda" };
+            string[] firstNames = new string[10] { "Yael", "Rachel", "Shilat", "Natan", "Dan", "Hila", "Daniel", "Efrat", "Yair", "Ayala" };
+            string[] lastNames = new string[10] { "Roth", "Kahana", "Vays", "Cohen", "Rubin", "Levi", "Mansur", "Perelman", "Mangel", "Sharon" };
+            string[] City = new string[10] { "Karmiel", "Bnei Brak", "Netivot", "Tiberias", "Jerusalem", "Beit Shemesh", "Tel Aviv", "Netanya", "Hadera", "Kiryat Shmona" };
+            string[] St = new string[10] { "Hshoshanim", "Hertzog", "Najara", "Beit Hadfus", "Zait", "Hertzel", "Tze'elon", "Ktav Sofer", "Yanai", "Ben Gurion" };
 
             for (int i = 0; i < 100; i++)
             {
@@ -158,22 +158,22 @@ namespace Dal
                 order.OrderDate = DateTime.Now.AddMinutes(rnd.Next(-100, -10));
                 if (rnd.Next(0, 100) > 20)
                 {
-                    order.shipDate = order.OrderDate.AddMinutes(rnd.Next(10, 100));
+                    order.ShipDate = order.OrderDate.AddMinutes(rnd.Next(10, 100));
                     if (rnd.Next(0, 100) > 40)
-                        order.deliveryDate = order.shipDate.AddDays(rnd.Next(1, 4));
+                        order.DeliveryDate = order.ShipDate.AddDays(rnd.Next(1, 4));
                     else
-                        order.deliveryDate = DateTime.MinValue;
+                        order.DeliveryDate = DateTime.MinValue;
                 }
 
                 else
                 {
-                    order.shipDate = DateTime.MinValue;
-                    order.deliveryDate = DateTime.MinValue;
+                    order.ShipDate = DateTime.MinValue;
+                    order.DeliveryDate = DateTime.MinValue;
                 }
                 orders[Config.nextEmptyOrder++] = order;
             }
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 180; i++)
             {
                 Product product = new Product();
                 OrderItem orderItem = new OrderItem();
