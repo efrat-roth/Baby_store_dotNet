@@ -42,29 +42,29 @@ namespace DalTest
                              Update to update details of product
                              Delete to delete a product
                              Exit to exit the program");
-                Enums.productEnum optionsProduct;
-                optionsProduct = (Enums.productEnum)Console.Read();
-                while (optionsProduct != Enums.productEnum.Exit)
+                Enums.ProductEnum optionsProduct;
+                optionsProduct = (Enums.ProductEnum)Console.Read();
+                while (optionsProduct != Enums.ProductEnum.Exit)
                 {
                     switch (optionsProduct)
                     {
-                        case Enums.productEnum.Adding:
+                        case Enums.ProductEnum.Adding:
 
                             break;
-                        case Enums.productEnum.PrintById:
+                        case Enums.ProductEnum.PrintById:
                             break;
-                        case Enums.productEnum.printAll:
+                        case Enums.ProductEnum.printAll:
                             break;
-                        case Enums.productEnum.Delete:
+                        case Enums.ProductEnum.Delete:
                             break;
-                        case Enums.productEnum.Update:
+                        case Enums.ProductEnum.Update:
                             break;
-                        case Enums.productEnum.Exit:
+                        case Enums.ProductEnum.Exit:
                             break;
                     }
 
                     
-                    optionsProduct = (Enums.productEnum)Console.Read();
+                    optionsProduct = (Enums.ProductEnum)Console.Read();
                 }
             }//manages the products
             void manageOrder()
@@ -76,26 +76,26 @@ namespace DalTest
                              Update to update details of order
                              Delete to delete an order
                              Exit to exit the program");
-                Enums.orderEnum optionsOrder;
-                optionsOrder = (Enums.orderEnum)Console.Read();
-                while (optionsOrder != Enums.orderEnum.Exit)
+                Enums.OrderEnum optionsOrder;
+                optionsOrder = (Enums.OrderEnum)Console.Read();
+                while (optionsOrder != Enums.OrderEnum.Exit)
                 {
                     switch (optionsOrder)
                     {
-                        case Enums.orderEnum.Adding:
+                        case Enums.OrderEnum.Adding:
                             break;
-                        case Enums.orderEnum.PrintById:
+                        case Enums.OrderEnum.PrintById:
                             break;
-                        case Enums.orderEnum.printAll:
+                        case Enums.OrderEnum.printAll:
                             break;
-                        case Enums.orderEnum.Delete:
+                        case Enums.OrderEnum.Delete:
                             break;
-                        case Enums.orderEnum.Update:
+                        case Enums.OrderEnum.Update:
                             break;
-                        case Enums.orderEnum.Exit:
+                        case Enums.OrderEnum.Exit:
                             break;
                     }
-                    optionsOrder = (Enums.orderEnum)Console.Read();
+                    optionsOrder = (Enums.OrderEnum)Console.Read();
                 }
             }//manages the orders
             void manageOrderItem()
@@ -107,27 +107,27 @@ namespace DalTest
                              Update to update details of orderItem
                              Delete to delete an orderItem
                              Exit to exit the program");
-                Enums.orderItemEnum optionsOrderItem;
-                optionsOrderItem = (Enums.orderItemEnum)Console.Read();
-                while (optionsOrderItem != Enums.orderItemEnum.Exit)
+                Enums.OrderItemEnum optionsOrderItem;
+                optionsOrderItem = (Enums.OrderItemEnum)Console.Read();
+                while (optionsOrderItem != Enums.OrderItemEnum.Exit)
                 {
                     switch(optionsOrderItem)
                     {
-                        case Enums.productEnum.Adding:
+                        case Enums.OrderItemEnum.Adding:
                             break;
-                        case Enums.productEnum.PrintById:
+                        case Enums.OrderItemEnum.PrintById:
                             break;
-                        case Enums.productEnum.printAll:
+                        case Enums.OrderItemEnum.printAll:
                             break;
-                        case Enums.productEnum.Delete:
+                        case Enums.OrderItemEnum.Delete:
                             break;
-                        case Enums.productEnum.Update:
+                        case Enums.OrderItemEnum.Update:
                             break;
-                        case Enums.productEnum.Exit:
+                        case Enums.OrderItemEnum.Exit:
                             break;
                     }
 
-                    optionsOrderItem = (Enums.orderItemEnum)Console.Read();
+                    optionsOrderItem = (Enums.OrderItemEnum)Console.Read();
                 }
             }//manages the orderItems
 

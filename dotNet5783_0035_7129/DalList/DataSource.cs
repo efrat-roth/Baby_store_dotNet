@@ -47,6 +47,9 @@ namespace Dal
                 return countOrderItemsID++;
             }
         }
+        /// <summary>
+        /// Intializes the arrays of the items
+        /// </summary>
 
         internal static void Initialize()
         {
@@ -55,7 +58,7 @@ namespace Dal
             {
                 int index = 0;
                 Product product = new Product();
-                product.Category = (Enums.Category)rnd.Next(1, 7);
+                product.Category = (Enums.Category)rnd.Next(0, 6);
 
                 if (rnd.Next(0, 100) > 5)
                     product.InStock = rnd.Next(100, 250);
@@ -186,7 +189,11 @@ namespace Dal
                 orderItems[Config.nextEmptyOrderItem++] = orderItem;
             }
         }
-
+        /// <summary>
+        /// Check if the id is in the system
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         internal static int ProductIndex(string name)
         {
             for (int i = 0; i <= Config.nextEmptyProduct; i++)
