@@ -20,7 +20,7 @@ public struct Enums
     /// <summary>
     /// Enum for the categories of the products
     /// </summary>
-    public enum category { Clothes, Bottles, Toys,Socks, Accessories, BabyCarriages }
+    public enum Category { Clothes, Bottles, Toys,Socks, Accessories, BabyCarriages }
 };
 
 

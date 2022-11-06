@@ -18,10 +18,4 @@
     <BaseOutputPath> $(SolutionDir)\bin\</BaseOutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="DalApi\**" />
-    <EmbeddedResource Remove="DalApi\**" />
-    <None Remove="DalApi\**" />
-  </ItemGroup>
-
 </Project>
