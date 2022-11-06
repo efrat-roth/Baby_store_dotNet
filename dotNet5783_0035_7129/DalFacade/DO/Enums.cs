@@ -8,7 +8,7 @@ public struct Enums
     /// <summary>
     /// Enum for the options of the orders
     /// </summary>
-    public enum  orderEnum {  Adding, PrintById,printAll,Update,Delete, Exit }
+    public enum  orderEnum {  Adding, PrintById, printAll, Update, Delete, Exit }
     /// <summary>
     /// Enum for the options of the items in the orders
     /// </summary>
@@ -20,7 +20,7 @@ public struct Enums
     /// <summary>
     /// Enum for the categories of the products
     /// </summary>
-    public enum category { Clothes,Bottles, Toys,Socks, Accessories,BabyCarriages}
+    public enum category { Clothes, Bottles, Toys,Socks, Accessories, BabyCarriages }
 };
 
 

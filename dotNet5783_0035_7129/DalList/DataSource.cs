@@ -20,7 +20,7 @@ static internal class DataSource
     /// <summary>
     /// List of the products
     /// </summary>
-    static internal List<Product> products;
+    static internal Product arr products;
     /// <summary>
     /// List of the orders
     /// </summary>
