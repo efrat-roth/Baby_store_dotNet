@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Dal;
 using DO;
 
@@ -13,6 +14,7 @@ namespace DalTest
     {
         static void Main(string[] args)
         { 
+            Order orders=new Order();
             DalOrder order = new DalOrder();
             DalOrderItem orderItem = new DalOrderItem();
             DalProduct product = new DalProduct();
@@ -49,18 +51,37 @@ namespace DalTest
                 {
                     switch (optionsProduct)
                     {
-                        case Enums.ProductEnum.Adding:
-
+                        case Enums.ProductEnum.Adding: int id=order.Add(orders);
+                            
                             break;
                         case Enums.ProductEnum.PrintById:
+                            {
+                                Console.WriteLine("enter ID");
+                                int id2 =Console.Read();
+                                orders = order.PrintById(id2);
+                            }
                             break;
                         case Enums.ProductEnum.printAll:
+                            {
+                                 order.PrintAll();
+                            }
                             break;
                         case Enums.ProductEnum.Delete:
+                            {
+                                Console.WriteLine("enter ID");
+                                int id2 = Console.Read();
+                                bool deleted= order.Delete(id2);
+                            }
                             break;
                         case Enums.ProductEnum.Update:
+                            {
+
+                                Order order1 = new Order(); 
+
+                            }
                             break;
                         case Enums.ProductEnum.Exit:
+
                             break;
                     }
 

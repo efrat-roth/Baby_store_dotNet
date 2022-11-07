@@ -63,7 +63,8 @@ public class DalOrder
             if (orders[i].ID == id)
             {
                 orders[i] = orders[Config.nextEmptyOrder];
-                --Config.nextEmptyOrder;
+                Config.nextEmptyOrder--;
+                return true;
             }
         }
         return false;
