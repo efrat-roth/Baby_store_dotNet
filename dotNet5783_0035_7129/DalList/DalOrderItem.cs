@@ -108,15 +108,15 @@ public class DalOrderItem
         throw new Exception("The OrderItem is not in the database");
     }
     /// <summary>
-    /// Return
+    /// Return array of orderItem that include the ID
     /// </summary>
-    /// <returns></returns>
+    /// <returns></returns>array of oderItem
     public IEnumerable<OrderItem> PrintAllByOrder(int idOrder)
     {
        OrderItem[] orderItemsByOrder = new OrderItem[orderItems.Length];
         for(int i=0;i<orderItems.Length-1;i++)
         {
-            if(orderItems[i].ID==idOrder)
+            if(orderItems[i].OrderID==idOrder)
             {
                 orderItemsByOrder[orderItemsByOrder.Length-1] = orderItems[i]; 
             }
