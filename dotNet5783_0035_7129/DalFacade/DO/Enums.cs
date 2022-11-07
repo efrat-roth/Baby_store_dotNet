@@ -12,7 +12,7 @@ public struct Enums
     /// <summary>
     /// Enum for the options of the items in the orders
     /// </summary>
-    public enum OrderItemEnum { Adding, PrintById, printAll, Update, Delete, Exit }
+    public enum OrderItemEnum { Adding, PrintById, printAll, PrintByTwoId, PrintAllByOrder, Update, Delete, Exit }
     /// <summary>
     /// Enum for the options of the products
     /// </summary>

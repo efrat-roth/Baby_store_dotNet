@@ -126,6 +126,10 @@ namespace DalTest
                             break;
                         case Enums.OrderItemEnum.Exit:
                             break;
+                        case Enums.OrderItemEnum.PrintByTwoId:
+                            break;
+                        case Enums.OrderItemEnum.PrintAllByOrder:
+                            break;
                     }
 
                     optionsOrderItem = (Enums.OrderItemEnum)Console.Read();
