@@ -50,16 +50,40 @@ namespace DalTest
                     switch (optionsProduct)
                     {
                         case Enums.ProductEnum.Adding:
-
-                            break;
+                            {
+                                Product p=new Product();
+                                int i=product.Add(p);
+                                break;
+                            }
                         case Enums.ProductEnum.PrintById:
-                            break;
+                            {
+                                Console.WriteLine("Enter ID of product");
+                                int id;
+                                id=Console.Read();
+                                Product p=product.PrintById(id);
+                                p.ToString();
+                                break;
+                            }
+
                         case Enums.ProductEnum.printAll:
+                            product.PrintAll().ToString();
                             break;
                         case Enums.ProductEnum.Delete:
-                            break;
+                            {
+                                Console.WriteLine("Enter ID of product");
+                                int id;
+                                id = Console.Read();
+                                bool answer=product.Delete(id);
+                                break;
+                            }
                         case Enums.ProductEnum.Update:
-                            break;
+                            {
+                                Console.WriteLine("Enter ID of product");
+                                int id;
+                                id = Console.Read();
+                                Product p = new();
+                                break;
+                            }
                         case Enums.ProductEnum.Exit:
                             break;
                     }

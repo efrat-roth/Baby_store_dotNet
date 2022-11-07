@@ -63,6 +63,7 @@ public class DalProduct
             {
                 products[i] = products[Config.nextEmptyProduct];
                 --Config.nextEmptyProduct;
+                return true;
             }
         }
         return false;
