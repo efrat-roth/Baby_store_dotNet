@@ -77,17 +77,41 @@ public class DalOrderItem
     /// </summary>
     /// <param name="oi"></param>OrderItem variable
     /// <returns></returns>True if the id is in the database, else returns false
-    public bool Update(OrderItem oi)
+    public bool Update(ref OrderItem oi)
     {
-        for(int i=0;i<orderItems.Length-1;i++)
+        Console.WriteLine("Do you want to change the id of order?, enter y for yes and n for no");
+        string answer = Console.ReadLine();
+        if (answer == "y")
         {
-            if (orderItems[i].ID==oi.ID)
-            {
-                orderItems[i] = oi;
-                return true;
-            }
+            Console.WriteLine("Enter ID order");
+            int orderID1 = Console.Read();
+            oi.OrderID = orderID1;
         }
-        return false;
+        Console.WriteLine("Do you want to change the id of product?, enter y for yes and n for no");
+        string answer1 = Console.ReadLine();
+        if (answer1 == "y")
+        {
+            Console.WriteLine("Enter ID product");
+            int productID1 = Console.Read();
+            oi.ProductID = productID1;
+        }
+        Console.WriteLine("Do you want to change the price?, enter y for yes and n for no");
+        string answer2 = Console.ReadLine();
+        if (answer == "y")
+        {
+            Console.WriteLine("Enter price");
+            double price1 = Console.Read();
+            oi.Price = price1;
+        }
+        Console.WriteLine("Do you want to change the amount?, enter y for yes and n for no");
+        string answer3 = Console.ReadLine();
+        if (answer == "y")
+        {
+            Console.WriteLine("Enter amount");
+            int amount = Console.Read();
+            oi.Amount = amount;
+        }
+        return true;
     }
     /// <summary>
     /// Return OrderItem by the id of the order and the ID of the Product

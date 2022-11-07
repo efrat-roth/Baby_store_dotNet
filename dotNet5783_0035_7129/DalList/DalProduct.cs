@@ -73,16 +73,46 @@ public class DalProduct
     /// </summary>
     /// <param name="p"></param>Product
     /// <returns></returns> True if the ID in the database, else return false
-    public bool Update(Product p)
+    public bool Update(ref Product p)
     {
-        for(int i=0;i<Config.nextEmptyProduct;i++)
+        Console.WriteLine("Do you want to change the name?, enter y for yes and n for no");
+        string answer = Console.ReadLine();
+        if (answer == "y")
         {
-            if(p.ID == products[i].ID)
-            {
-                products[i] = p;
-                return true;
-            }
+            Console.WriteLine("Enter name");
+            string name1 = Console.ReadLine();
+            p.Name = name1;
         }
-        return false;
+
+        Console.WriteLine("Do you want to change the category?, enter y for yes and n for no");
+        string answer1 = Console.ReadLine();
+        if (answer == "y")
+        {
+            Console.WriteLine("Enter category");
+            Enums.Category category1 = (Enums.Category)Console.Read();
+            p.Category = category1;
+        }
+        Console.WriteLine("Do you want to change the price?, enter y for yes and n for no");
+        string answer2 = Console.ReadLine();
+        if (answer == "y")
+        {
+            Console.WriteLine("Enter price");
+            double price1 = Console.Read();
+            p.Price = price1;
+        }
+        Console.WriteLine("Do you want to change the in stock?, enter y for yes and n for no");
+        string answer3 = Console.ReadLine();
+        if (answer == "y")
+        {
+            Console.WriteLine("Enter in stock?");
+            int inStock1 = Console.Read();
+            p.InStock = inStock1;
+        }
+        return true;
     }
+
+         
+          
+        
+    
 }

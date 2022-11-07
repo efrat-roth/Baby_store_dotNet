@@ -8,15 +8,15 @@ public struct Enums
     /// <summary>
     /// Enum for the options of the orders
     /// </summary>
-    public enum  OrderEnum {  Adding, PrintById, printAll, Update, Delete, Exit }
+    public enum  OrderEnum {  Adding, PrintById, PrintAll, Update, Delete, Exit }
     /// <summary>
     /// Enum for the options of the items in the orders
     /// </summary>
-    public enum OrderItemEnum { Adding, PrintById, printAll, PrintByTwoId, PrintAllByOrder, Update, Delete, Exit }
+    public enum OrderItemEnum { Adding, PrintById, PrintAll, PrintByTwoId, PrintAllByOrder, Update, Delete, Exit }
     /// <summary>
     /// Enum for the options of the products
     /// </summary>
-    public  enum ProductEnum { Adding, PrintById, printAll, Update, Delete, Exit }
+    public  enum ProductEnum { Adding, PrintById, PrintAll, Update, Delete, Exit }
     /// <summary>
     /// Enum for the categories of the products
     /// </summary>
