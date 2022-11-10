@@ -48,7 +48,7 @@ namespace DalTest
                              Delete to delete a product
                              Exit to exit the program");
                     Enums.ProductEnum optionsProduct;
-                    optionsProduct = (Enums.ProductEnum.) Console.Read();
+                    optionsProduct = (Enums.ProductEnum) Console.Read();
                     while (optionsProduct != Enums.ProductEnum.Exit)
                     {
                         switch (optionsProduct)
@@ -147,7 +147,6 @@ namespace DalTest
                                     bool answer = order.Delete(id);
                                     break;
                                 }
-                                break;
                             case Enums.OrderEnum.Update:
                                 {
 
@@ -159,7 +158,6 @@ namespace DalTest
                                     bool answer = order.Update(ref p);
                                     break;
                                 }
-                                break;
                             case Enums.OrderEnum.Exit:
 
                                 break;
