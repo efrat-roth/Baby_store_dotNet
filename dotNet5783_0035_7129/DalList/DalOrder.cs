@@ -8,7 +8,7 @@ namespace Dal;
 internal class DalOrder : IOrder
 {
     /// <summary>
-    /// Adding an Order
+    /// Adding an IOrder
     /// </summary>
     /// <param name="p"></param>
     /// <returns></returns>The ID of the new order
@@ -27,8 +27,8 @@ internal class DalOrder : IOrder
     /// Return order by its ID
     /// </summary>
     /// <param name="id"></param>integer
-    /// <returns></returns>Order
-    public Order PrintById(int id)
+    /// <returns></returns>IOrder
+    public Order PrintByID(int id)
     {
         foreach (Order o in orders) 
         { 
@@ -70,7 +70,7 @@ internal class DalOrder : IOrder
     /// <summary>
     /// Update details of order
     /// </summary>
-    /// <param name="p"></param>Order
+    /// <param name="p"></param>IOrder
     /// <returns></returns> True if the ID in the database, else return false
     public bool Update(ref Order  p)
     {

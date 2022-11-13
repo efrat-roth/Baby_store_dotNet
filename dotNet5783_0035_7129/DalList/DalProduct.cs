@@ -17,18 +17,18 @@ internal class DalProduct:IProduct
         {
             if (p.ID == product.ID)
             {
-                throw Exception.throwNotId();
+                throw new Exception();
             }
         };
         products.Add(p);
         return p.ID;
     }
     /// <summary>
-    /// Return Product by its ID
+    /// Return IProduct by its ID
     /// </summary>
     /// <param name="id"></param>
-    /// <returns></returns>Product
-    public Product PrintById(int id)
+    /// <returns></returns>IProduct
+    public Product PrintByID(int id)
     {
         foreach (Product p in products)
         {
@@ -70,7 +70,7 @@ internal class DalProduct:IProduct
     /// <summary>
     /// Update details of product
     /// </summary>
-    /// <param name="p"></param>Product
+    /// <param name="p"></param>IProduct
     /// <returns></returns> True if the ID in the database, else return false
     public bool Update(ref Product p)
     {
