@@ -17,10 +17,9 @@ namespace DalTest
         {
             try
             {
+                IDal dalList1=new DalList();
                 Order orders = new Order();
-                DalOrder order = new DalOrder();
-                DalOrderItem orderItem = new DalOrderItem();
-                DalProduct product = new DalProduct();
+                
                 Console.WriteLine(
                                   $@"Enter
                                     product to manage the products
@@ -57,7 +56,7 @@ namespace DalTest
                             case Enums.ProductEnum.Adding:
                                 {
                                     Product p = new Product();
-                                    int i = product.Add(p);
+                                    int i = dalList1.IProduct.Add(p);
                                     break;
                                 }
                             case Enums.ProductEnum.PrintById:
@@ -65,7 +64,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of product");
                                     int id;
                                     id = Console.Read();
-                                    Product p = product.PrintById(id);
+                                    Product p = dalList1.IProduct.PrintByID(id);
                                     p.ToString();
                                     break;
                                 }
@@ -73,7 +72,7 @@ namespace DalTest
                             case Enums.ProductEnum.PrintAll:
                                 {
                                     IEnumerable<Product> productPrint;
-                                    productPrint = product.PrintAll();
+                                    productPrint = dalList1.IProduct.PrintAll();
                                     foreach (Product p in productPrint) { p.ToString(); }
                                     break;
                                 }
@@ -82,7 +81,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of product");
                                     int id;
                                     id = Console.Read();
-                                    bool answer = product.Delete(id);
+                                    bool answer = dalList1.IProduct.Delete(id);
                                     break;
                                 }
                             case Enums.ProductEnum.Update:
@@ -90,8 +89,8 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of product");
                                     int id;
                                     id = Console.Read();
-                                    Product p = product.PrintById(id);
-                                    bool result = product.Update(ref p);
+                                    Product p = dalList1.IProduct.PrintByID(id);
+                                    bool result = dalList1.IProduct.Update(ref p);
                                     break;
                                 }
                             case Enums.ProductEnum.Exit:
@@ -120,7 +119,7 @@ namespace DalTest
                             case Enums.OrderEnum.Adding:
                                 {
                                     Order p = new Order();
-                                    int i = order.Add(p);
+                                    int i = dalList1.IOrder.Add(p);
                                     break;
                                 }
 
@@ -129,14 +128,14 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of order");
                                     int id;
                                     id = Console.Read();
-                                    Order p = order.PrintById(id);
+                                    Order p = dalList1.IOrder.PrintByID(id);
                                     p.ToString();
                                     break;
                                 }
                             case Enums.OrderEnum.PrintAll:
                                 {
                                     IEnumerable<Order> orderPrint;
-                                    orderPrint = order.PrintAll();
+                                    orderPrint = dalList1.IOrder.PrintAll();
                                     foreach (Order p in orderPrint) { p.ToString(); }
                                     break;
                                 }
@@ -145,7 +144,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of order");
                                     int id;
                                     id = Console.Read();
-                                    bool answer = order.Delete(id);
+                                    bool answer = dalList1.IOrder.Delete(id);
                                     break;
                                 }
                             case Enums.OrderEnum.Update:
@@ -155,8 +154,8 @@ namespace DalTest
                                     int id;
                                     id = Console.Read();
                                     Order p = new Order();
-                                    p = order.PrintById(id);
-                                    bool answer = order.Update(ref p);
+                                    p = dalList1.IOrder.PrintByID(id);
+                                    bool answer = dalList1.IOrder.Update(ref p);
                                     break;
                                 }
                             case Enums.OrderEnum.Exit:
@@ -184,7 +183,7 @@ namespace DalTest
                             case Enums.OrderItemEnum.Adding:
                                 {
                                     OrderItem p = new OrderItem();
-                                    int i = orderItem.Add(p);
+                                    int i = dalList1.IOrderItem.Add(p);
                                     break;
                                 }
                             case Enums.OrderItemEnum.PrintById:
@@ -192,14 +191,14 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of orderItem");
                                     int id;
                                     id = Console.Read();
-                                    OrderItem p = orderItem.PrintByID(id);
+                                    OrderItem p = dalList1.IOrderItem.PrintByID(id);
                                     p.ToString();
                                     break;
                                 }
                             case Enums.OrderItemEnum.PrintAll:
                                 {
                                     IEnumerable<OrderItem> orderItemPrint;
-                                    orderItemPrint = orderItem.PrintAll();
+                                    orderItemPrint = dalList1.IOrderItem.PrintAll();
                                     foreach (OrderItem p in orderItemPrint) { p.ToString(); }
                                     break;
                                 }
@@ -208,7 +207,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of orderItem");
                                     int id;
                                     id = Console.Read();
-                                    bool answer = orderItem.Delete(id);
+                                    bool answer = dalList1.IOrderItem.Delete(id);
                                     break;
                                 }
                             case Enums.OrderItemEnum.Update:
@@ -218,8 +217,8 @@ namespace DalTest
                                     int id;
                                     id = Console.Read();
                                     OrderItem p = new OrderItem();
-                                    p = orderItem.PrintByID(id);
-                                    bool answer = orderItem.Update(ref p);
+                                    p = dalList1.IOrderItem.PrintByID(id);
+                                    bool answer = dalList1.IOrderItem.Update(ref p);
                                     break;
                                 }
                             case Enums.OrderItemEnum.Exit:
@@ -230,7 +229,7 @@ namespace DalTest
                                     int id1 = Console.Read();
                                     Console.WriteLine("Enter product ID");
                                     int id2 = Console.Read();
-                                    OrderItem oi = orderItem.PrintByTwoId(id2, id1);
+                                    OrderItem oi = dalList1.IOrderItem.PrintByTwoId(id2, id1);
                                     oi.ToString();
                                     break;
                                 }
@@ -240,7 +239,7 @@ namespace DalTest
                                     Console.WriteLine("Enter order ID");
                                     int id1 = Console.Read();
                                     IEnumerable<OrderItem> orderItemByOrderId;
-                                    orderItemByOrderId = orderItem.PrintAllByOrder(id1);
+                                    orderItemByOrderId = dalList1.IOrderItem.PrintAllByOrder(id1);
                                     foreach (OrderItem p in orderItemByOrderId) { p.ToString(); }
                                     break;
                                 }

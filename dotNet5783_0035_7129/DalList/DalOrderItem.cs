@@ -8,9 +8,9 @@ namespace Dal;
 internal class DalOrderItem:IOrderItem
 {
     /// <summary>
-    /// Adding new OrderItem to the database
+    /// Adding new IOrderItem to the database
     /// </summary>
-    /// <param name="oi"></param>OrderItem variable
+    /// <param name="oi"></param>IOrderItem variable
     /// <returns></returns>ID of the new orderItem
     /// <exception cref="Exception"></exception>
     public int Add(OrderItem oi)
@@ -26,10 +26,10 @@ internal class DalOrderItem:IOrderItem
         return oi.ID;
     }
     /// <summary>
-    /// Returns OrderItem by its ID
+    /// Returns IOrderItem by its ID
     /// </summary>
-    /// <param name="id"></param>integer-ID of the OrderItem
-    /// <returns></returns>OrderItem
+    /// <param name="id"></param>integer-ID of the IOrderItem
+    /// <returns></returns>IOrderItem
     public OrderItem PrintByID(int id)
     {
         foreach (OrderItem oI in orderItems)
@@ -44,7 +44,7 @@ internal class DalOrderItem:IOrderItem
     /// <summary>
     /// 
     /// </summary>
-    /// <returns></returns>Returns the all database of OrderItem
+    /// <returns></returns>Returns the all database of IOrderItem
     public IEnumerable<OrderItem> PrintAll()
     {
         if(orders.Count()==0)
@@ -73,7 +73,7 @@ internal class DalOrderItem:IOrderItem
     /// <summary>
     /// Update the details of an orderItem
     /// </summary>
-    /// <param name="oi"></param>OrderItem variable
+    /// <param name="oi"></param>IOrderItem variable
     /// <returns></returns>True if the id is in the database, else returns false
     public bool Update(ref OrderItem oi)
     {
@@ -112,11 +112,11 @@ internal class DalOrderItem:IOrderItem
         return true;
     }
     /// <summary>
-    /// Return OrderItem by the id of the order and the ID of the Product
+    /// Return IOrderItem by the id of the order and the ID of the IProduct
     /// </summary>
     /// <param name="productID"></param>Integer variable
     /// <param name="orderID"></param>Integer variable
-    /// <returns></returns>OrderItem
+    /// <returns></returns>IOrderItem
     public OrderItem PrintByTwoId(int productID, int orderID)
     {
         foreach(OrderItem oI in orderItems)
@@ -127,7 +127,7 @@ internal class DalOrderItem:IOrderItem
                     return oI;
             }
         }
-        throw new Exception("The OrderItem is not in the database");
+        throw new Exception("The IOrderItem is not in the database");
     }
     /// <summary>
     /// Return array of orderItem that include the ID
