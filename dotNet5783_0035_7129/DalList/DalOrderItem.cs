@@ -134,12 +134,12 @@ public class DalOrderItem
     /// <returns></returns>array of oderItem
     public IEnumerable<OrderItem> PrintAllByOrder(int idOrder)
     {
-       List<OrderItem> orderItemsByOrder;
-        for(int i=0;i<orderItems.Count())
+       List<OrderItem> orderItemsByOrder=null;
+        for(int i=0;i<orderItems.Count();i++)
         {
-            if(orderItems..OrderID==idOrder)
+            if(orderItems.ElementAt(i).OrderID==idOrder)
             {
-                orderItemsByOrder.Add(oI); 
+                orderItemsByOrder.Add(orderItems.ElementAt(i)); 
             }
         }
         if(orderItemsByOrder.Count<=0)
