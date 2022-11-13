@@ -6,42 +6,39 @@ using System.Threading.Tasks;
 using DO;
 
 namespace DalApi;
+[Serializable]
 
-public class Exception
+public class Exceptions: Exception
 {
     /// <summary>
     /// Throwing the error problem. There is no id as requested.
     /// </summary>
     /// <returns></returns>
-    public string throwNotId()
+    public   Exceptions(string message):base(message)
     {
-        return "There is no id as you asked for";
+        Console.WriteLine ("There is no id as you asked for");
     }
     /// <summary>
     /// Throwing the error problem. There is another is as requested.
     /// </summary>
     /// <returns></returns>
-    public string throwMoretId()
+    public Exceptions() : base()
     {
-        return "There is another id as you gave";
+        
     }
     /// <summary>
     /// Throwing the error problem.The list is empty.
     /// </summary>
     /// <returns></returns>
-    public string throwNotList()
+    public Exceptions(string message,Exception inner) : base(message, inner)
     {
-        return "There is another id as you gave";
+        Console.WriteLine("There is another id as you gave");
 
     }
     /// <summary>
     /// Throwing the error problem.The date is invalid.
     /// </summary>
     /// <returns></returns>
-    public string throwNoDate()
-    {
-        return "The date is invalid";
-
-    }
+   
 
 }

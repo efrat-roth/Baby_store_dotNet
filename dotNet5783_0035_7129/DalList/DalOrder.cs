@@ -1,10 +1,11 @@
 ﻿using System.Data;
 using DO;
 using static Dal.DataSource;
+using DalApi;
 
 namespace Dal;
 
-public class DalOrder
+internal class DalOrder : IOrder
 {
     /// <summary>
     /// Adding an Order
