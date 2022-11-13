@@ -14,16 +14,14 @@ internal class DalOrder : IOrder
     /// <returns></returns>The ID of the new order
     public int Add(Order p)
     {
-        for (int i = 0; i < Config.nextEmptyOrder; i++)
+        foreach (Order o in orders)
         {
-            if (p.ID == orders[i].ID)
+            if (p.ID == o.ID)
             {
-                throw new Exception("The ID is in the database already");
-            }
-        }
-        orders[Config.nextEmptyOrder] = p;
-        ++Config.nextEmptyOrder;
-        return orders[Config.nextEmptyOrder].ID;
+                throw Exception.throwNotId();
+            }; }
+        orders.Add(p);
+        return p.ID;
     }
     /// <summary>
     /// Return order by its ID
@@ -32,13 +30,13 @@ internal class DalOrder : IOrder
     /// <returns></returns>Order
     public Order PrintById(int id)
     {
-        for (int i = 0; i < Config.nextEmptyOrder; i++)
-        {
-            if (id == orders[i].ID)
+        foreach (Order o in orders) 
+        { 
+            if (id == o.ID)
             {
-                return orders[i];
+                return o;
             }
-        }
+        };   
         throw new Exception("The order is not on the database");
     }
     /// <summary>
@@ -47,7 +45,7 @@ internal class DalOrder : IOrder
     /// <returns></returns>The database of the all orders
     public IEnumerable<Order> PrintAll()
     {
-        if (Config.nextEmptyOrder == 0)
+        if (orders.Count() == 0)
         {
             throw new Exception("There are no orders in the database");
         }
@@ -59,15 +57,14 @@ internal class DalOrder : IOrder
     /// <param name="id"></param>ID of the order to delete
     public bool Delete(int id)
     {
-        for (int i = 0; i < Config.nextEmptyOrder; i++)
+        foreach (Order o in orders)
         {
-            if (orders[i].ID == id)
+            if(id == o.ID)
             {
-                orders[i] = orders[Config.nextEmptyOrder];
-                Config.nextEmptyOrder--;
+                orders.Remove(o);
                 return true;
             }
-        }
+        };
         return false;
     }
     /// <summary>
