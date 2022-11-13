@@ -21,7 +21,7 @@ public interface ICrud <T>
     /// </summary>
     /// <param name="t"></param>
     /// <returns></returns>
-   bool Update(T t);
+   bool Update(ref T t);
     /// <summary>
     /// 
     /// </summary>
@@ -33,7 +33,7 @@ public interface ICrud <T>
     /// </summary>
     /// <param name="t"></param>
     /// <returns></returns>
-   T PrintById(int id);
+   T PrintByID(int id);
     /// <summary>
     /// 
     /// </summary>

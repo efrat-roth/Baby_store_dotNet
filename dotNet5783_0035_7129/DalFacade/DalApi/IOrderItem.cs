@@ -23,9 +23,6 @@ public interface IOrderItem: ICrud<OrderItem>
     /// <param name="orderID"></param>
     /// <returns></returns>
     OrderItem PrintByTwoId(int productID, int orderID);
-    int  Add(OrderItem orderItem)
-    {
-
-    }
+  
 }
 
