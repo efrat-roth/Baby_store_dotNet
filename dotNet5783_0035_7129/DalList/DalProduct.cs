@@ -12,16 +12,15 @@ public class DalProduct
     /// <returns></returns>The ID of the new product
     public int Add(Product p)
     {
-        for(int i=0;i< Config.nextEmptyProduct;i++)
+        foreach(Product product in products)
         {
-            if (p.ID == products[i].ID)
+            if (p.ID == product.ID)
             {
-                throw new Exception("The ID is in the database already");
+                throw Exception.throwNotId();
             }
-        }
-        products[Config.nextEmptyProduct] = p;
-        ++Config.nextEmptyProduct;
-        return products[Config.nextEmptyProduct].ID;
+        };
+        products.Add(p);
+        return p.ID;
     }
     /// <summary>
     /// Return Product by its ID
@@ -30,13 +29,13 @@ public class DalProduct
     /// <returns></returns>Product
     public Product PrintById(int id)
     {
-        for(int i=0;i<Config.nextEmptyProduct;i++)
+        foreach (Product p in products)
         {
-            if(id== products[i].ID)
+            if (id == p.ID)
             {
-                return products[i];
+                return p;
             }
-        }
+        };
         throw new Exception("The product is not on the database");
     }
     /// <summary>
@@ -45,7 +44,7 @@ public class DalProduct
     /// <returns></returns>The database of the all products
     public IEnumerable<Product> PrintAll()
     {
-        if(Config.nextEmptyProduct==0)
+        if(products.Count==0)
         {
             throw new Exception("There are no products in the database");
         }
@@ -57,15 +56,14 @@ public class DalProduct
     /// <param name="id"></param>ID of the product to delete
     public bool Delete(int id)
     {
-        for(int i=0;i<Config.nextEmptyProduct;i++)
+        foreach (Product p in products)
         {
-            if(products[i].ID == id)
+            if (id == p.ID)
             {
-                products[i] = products[Config.nextEmptyProduct];
-                --Config.nextEmptyProduct;
+                products.Remove(p);
                 return true;
             }
-        }
+        };
         return false;
     }
     /// <summary>
