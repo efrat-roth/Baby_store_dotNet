@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalApi
+namespace DalApi;
+
+
+public interface IDal
 {
-    internal interface IDal
-    {
-        IProduct product { get; }
-        IOrder order { get; }
-        IOrderItem orderitem { get; }
+    IProduct product { get; }
+    IOrder order { get; }
+    IOrderItem orderitem { get; }
 
 
-    }
-  
 }
+

@@ -6,28 +6,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalApi
+namespace DalApi;
+
+public interface IOrderItem: ICrud<OrderItem>
 {
-
-    internal interface IOrderItem: ICrud<OrderItem>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="idOrder"></param>
+    /// <returns></returns>
+    IEnumerable<OrderItem> PrintAllByOrder(int idOrder);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="productID"></param>
+    /// <param name="orderID"></param>
+    /// <returns></returns>
+    OrderItem PrintByTwoId(int productID, int orderID);
+    int  Add(OrderItem orderItem)
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="idOrder"></param>
-        /// <returns></returns>
-        IEnumerable<OrderItem> PrintAllByOrder(int idOrder);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="productID"></param>
-        /// <param name="orderID"></param>
-        /// <returns></returns>
-        OrderItem PrintByTwoId(int productID, int orderID);
-        int  Add(OrderItem orderItem)
-        {
 
-        }
     }
-
 }
+
