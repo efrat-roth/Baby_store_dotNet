@@ -28,7 +28,7 @@ internal class DalProduct:IProduct
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>Product
-    public Product PrintById(int id)
+    public Product PrintByID(int id)
     {
         foreach (Product p in products)
         {

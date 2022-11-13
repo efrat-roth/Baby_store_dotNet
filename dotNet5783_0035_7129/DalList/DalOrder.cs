@@ -28,7 +28,7 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="id"></param>integer
     /// <returns></returns>Order
-    public Order PrintById(int id)
+    public Order PrintByID(int id)
     {
         foreach (Order o in orders) 
         { 
