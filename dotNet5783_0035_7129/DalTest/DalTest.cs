@@ -11,7 +11,7 @@ using DO;
 
 namespace DalTest
 {
-    internal class DalTest
+    internal class DalTest 
     {
         static void Main(string[] args)
         {

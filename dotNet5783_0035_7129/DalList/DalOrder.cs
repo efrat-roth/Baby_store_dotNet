@@ -18,7 +18,7 @@ internal class DalOrder : IOrder
         {
             if (p.ID == o.ID)
             {
-                throw Exception.throwNotId();
+                throw new Exception("exception");
             }; }
         orders.Add(p);
         return p.ID;

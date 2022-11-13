@@ -1,9 +1,10 @@
-﻿using DO;
+﻿using DalApi;
+using DO;
 using static Dal.DataSource;
 
 namespace Dal;
 
-public class DalProduct
+internal class DalProduct:IProduct
 {
     /// <summary>
     /// Adding a product
