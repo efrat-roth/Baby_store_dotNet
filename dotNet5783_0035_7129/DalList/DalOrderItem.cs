@@ -1,8 +1,6 @@
 ﻿using DO;
 using static Dal.DataSource;
 
-using System.Runtime.CompilerServices;
-using DO;
 
 namespace Dal;
 
@@ -16,15 +14,15 @@ public class DalOrderItem
     /// <exception cref="Exception"></exception>
     public int Add(OrderItem oi)
     {
-        for(int i=0;i<Config.nextEmptyOrderItem;i++)
+        foreach (OrderItem oI in orderItems)
         {
-            if(oi.ID==orderItems[i].ID)
+            if (oi.ID == oI.ID)
             {
-                throw new Exception("The ID is in the database already");
-            }
+                throw Exception.throwNotId();
+            };
         }
-        orderItems[orderItems.Length-1] = oi;
-        return orderItems[orderItems.Length-1].ID;
+        orderItems.Add(oi);
+        return oi.ID;
     }
     /// <summary>
     /// Returns OrderItem by its ID
@@ -33,13 +31,13 @@ public class DalOrderItem
     /// <returns></returns>OrderItem
     public OrderItem PrintByID(int id)
     {
-        for (int i = 0; i < Config.nextEmptyOrderItem; i++)
+        foreach (OrderItem oI in orderItems)
         {
-            if(orderItems[i].ID==id)
+            if (id == oI.ID)
             {
-                 return orderItems[i];
+                return oI;
             }
-        }
+        };
         throw new Exception("The ID is not in the database");
     }
     /// <summary>
@@ -48,7 +46,7 @@ public class DalOrderItem
     /// <returns></returns>Returns the all database of OrderItem
     public IEnumerable<OrderItem> PrintAll()
     {
-        if(Config.nextEmptyOrderItem==0)
+        if(orders.Count()==0)
         {
             throw new Exception("The database is empty");
         }
@@ -61,12 +59,11 @@ public class DalOrderItem
     /// <returns></returns>True if the orderItem in the database, else returns false
     public bool Delete(int id)
     {
-        for(int i=0;i<orderItems.Length-1;i++)
+        foreach(OrderItem oI in orderItems )
         {
-            if (orderItems[i].ID==id)
+            if (oI.ID==id)
             {
-                orderItems[i] = orderItems[Config.nextEmptyOrderItem - 1];
-                --Config.nextEmptyOrderItem;
+                orderItems.Remove(oI);
                 return true;
             }
         }
@@ -121,12 +118,12 @@ public class DalOrderItem
     /// <returns></returns>OrderItem
     public OrderItem PrintByTwoId(int productID, int orderID)
     {
-        for(int i=0;i<Config.nextEmptyOrderItem;i++)
+        foreach(OrderItem oI in orderItems)
         {
-            if (orderItems[i].OrderID==orderID)
+            if (oI.OrderID==orderID)
             {
-                if (orderItems[i].ProductID == productID)
-                    return orderItems[i];
+                if (oI.ProductID == productID)
+                    return oI;
             }
         }
         throw new Exception("The OrderItem is not in the database");
@@ -137,13 +134,17 @@ public class DalOrderItem
     /// <returns></returns>array of oderItem
     public IEnumerable<OrderItem> PrintAllByOrder(int idOrder)
     {
-       OrderItem[] orderItemsByOrder = new OrderItem[orderItems.Length];
-        for(int i=0;i<orderItems.Length-1;i++)
+       List<OrderItem> orderItemsByOrder;
+        for(int i=0;i<orderItems.Count())
         {
-            if(orderItems[i].OrderID==idOrder)
+            if(orderItems..OrderID==idOrder)
             {
-                orderItemsByOrder[orderItemsByOrder.Length-1] = orderItems[i]; 
+                orderItemsByOrder.Add(oI); 
             }
+        }
+        if(orderItemsByOrder.Count<=0)
+        {
+            throw new Exception("The list is empty");
         }
         return orderItemsByOrder;
     }

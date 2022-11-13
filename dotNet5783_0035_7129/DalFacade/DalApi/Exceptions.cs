@@ -7,7 +7,7 @@ using DO;
 
 namespace DalApi;
 
-public class Exception
+public class EXception
 {
     /// <summary>
     /// Throwing the error problem. There is no id as requested.

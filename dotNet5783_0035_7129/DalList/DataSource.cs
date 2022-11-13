@@ -6,9 +6,9 @@ namespace Dal
     internal static class DataSource
     {
         readonly static Random rnd = new Random();
-        internal static Product[] products = new Product[30];
-        internal static Order[] orders = new Order[125];
-        internal static OrderItem[] orderItems = new OrderItem[200];
+        internal static List<Product> products ;
+        internal static List<Order> orders;
+        internal static List<OrderItem> orderItems;
         /// <summary>
         /// Constractor that initialize the item
         /// </summary>
@@ -19,9 +19,9 @@ namespace Dal
             private static int countProductID = 100000;
             private static int countOrderID = 1;
             private static int countOrderItemsID = 1;
-            internal static int nextEmptyProduct = 0;
-            internal static int nextEmptyOrder = 0;
-            internal static int nextEmptyOrderItem = 0;
+            //internal static int nextEmptyProduct = 0;
+            //internal static int nextEmptyOrder = 0;
+            //internal static int nextEmptyOrderItem = 0;
             /// <summary>
             /// New id for the products
             /// </summary>
@@ -47,6 +47,7 @@ namespace Dal
                 return countOrderItemsID++;
             }
         }
+
         /// <summary>
         /// Intializes the arrays of the items
         /// </summary>
@@ -143,7 +144,7 @@ namespace Dal
                         break;
                 }
                 if (index == -1)
-                    products[Config.nextEmptyProduct++] = product;
+                    products.Add(product);
             }
 
             string[] firstNames = new string[10] { "Yael", "Rachel", "Shilat", "Natan", "Dan", "Hila", "Daniel", "Efrat", "Yair", "Ayala" };
@@ -173,20 +174,20 @@ namespace Dal
                     order.ShipDate = DateTime.MinValue;
                     order.DeliveryDate = DateTime.MinValue;
                 }
-                orders[Config.nextEmptyOrder++] = order;
+                orders.Add(order);
             }
 
             for (int i = 0; i < 180; i++)
             {
                 Product product = new Product();
                 OrderItem orderItem = new OrderItem();
-                product = products[rnd.Next(0, Config.nextEmptyProduct)];
+                product = products[rnd.Next(0, products.Count())];
                 orderItem.ID = Config.nextCountOrderItemsID();
                 orderItem.ProductID = product.ID;
                 orderItem.Amount = rnd.Next(1, 11);
-                orderItem.OrderID = orders[rnd.Next(0, Config.nextEmptyOrder)].ID;
+                orderItem.OrderID = orders[rnd.Next(0, orders.Count())].ID;
                 orderItem.Price = orderItem.Amount * product.Price;
-                orderItems[Config.nextEmptyOrderItem++] = orderItem;
+                orderItems.Add(orderItem);
             }
         }
         /// <summary>
@@ -194,15 +195,15 @@ namespace Dal
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        internal static int ProductIndex(string name)
-        {
-            for (int i = 0; i <= Config.nextEmptyProduct; i++)
-            {
-                if (products[i].Name == name)
-                    return i;
-            }
-            return -1;
-        }
+        //internal static int ProductIndex(string name)
+        //{
+        //    foreach (Product p in products) { };
+        //    {
+        //        if (products[i].Name == name)
+        //            return i;
+        //    }
+        //    return -1;
+        //}
     }
 }
 
