@@ -19,9 +19,6 @@ namespace Dal
             private static int countProductID = 100000;
             private static int countOrderID = 1;
             private static int countOrderItemsID = 1;
-            //internal static int nextEmptyProduct = 0;
-            //internal static int nextEmptyOrder = 0;
-            //internal static int nextEmptyOrderItem = 0;
             /// <summary>
             /// New id for the products
             /// </summary>
@@ -195,15 +192,15 @@ namespace Dal
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        //internal static int ProductIndex(string name)
-        //{
-        //    foreach (Product p in products) { };
-        //    {
-        //        if (products[i].Name == name)
-        //            return i;
-        //    }
-        //    return -1;
-        //}
+        internal static int ProductIndex(string name)
+        {
+            for (int i=0;i<products.Count;i++)
+            {
+                if (products.ElementAt(i).Name == name)
+                    return i;
+            }
+            return -1;
+        }
     }
 }
 
