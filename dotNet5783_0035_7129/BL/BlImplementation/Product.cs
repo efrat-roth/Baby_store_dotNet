@@ -24,11 +24,13 @@ internal class Product:BlApi.IProduct
         List<ProductForList> productList = new List<ProductForList>();
         foreach (DO.Product p in list)
         {
-            ProductForList listProducts = new ProductForList();
-            listProducts.ID = p.ID;
-            listProducts.Name = p.Name;
-            listProducts.Price = p.Price;
-            listProducts.Category = (Enums.Category)p.Category;
+            ProductForList listProducts = new ProductForList
+            {
+                ID = p.ID,
+                Name = p.Name,
+                Price = p.Price,
+                Category = (Enums.Category)p.Category
+            };
             productList.Add(listProducts);
         }
         return productList;
@@ -47,12 +49,14 @@ internal class Product:BlApi.IProduct
             try
             {
                 DO.Product p = dalList1.IProduct.PrintByID(ID);
-                BO.Product product = new BO.Product();
-                product.ID= p.ID;
-                product.Name = p.Name;
-                product.Price = p.Price;
-                product.Category = (Enums.Category)p.Category;
-                product.InStock = p.InStock;
+                BO.Product product = new BO.Product
+                {
+                    ID = p.ID,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Category = (Enums.Category)p.Category,
+                    InStock = p.InStock
+                };
                 return product;
             }
             catch (Exception message)
@@ -75,12 +79,14 @@ internal class Product:BlApi.IProduct
             try
             {
                 DO.Product p = dalList1.IProduct.PrintByID(ID);
-                ProductItem product = new ProductItem();
-                product.ID = p.ID;
-                product.Name = p.Name;
-                product.Price = p.Price;
-                product.Category = (Enums.Category)p.Category;
-                product.InStock = p.InStock;
+                ProductItem product = new ProductItem
+                {
+                    ID = p.ID,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Category = (Enums.Category)p.Category,
+                    InStock = p.InStock
+                };       
                 return product;
             }
             catch (Exception message)
