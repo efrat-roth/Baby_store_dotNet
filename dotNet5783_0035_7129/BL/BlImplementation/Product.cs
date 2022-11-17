@@ -152,10 +152,4 @@ internal class Product:BlApi.IProduct
         if (!dalList1.IProduct.Delete(ID))
             throw new Exception("The product is not in the store");
     }
-
-
-
-
-
-
 }
