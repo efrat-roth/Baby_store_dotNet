@@ -103,7 +103,24 @@ public interface IProduct
         }
         throw new Exception("the details are wrong"); 
     }
-   
+   public void DeleteProduct(int ID)
+    {
+        if (ID < 0)
+            throw new Exception("The ID is invalid");
+        IDal dalList1 = new DalList();
+        IEnumerable<DO.Order> orders= dalList1.IOrder.PrintAll();
+        foreach(DO.Order o in orders)
+        {
+            IEnumerable<DO.OrderItem> orderItems= dalList1.IOrderItem.PrintAllByOrder(o.ID); 
+            foreach(DO.OrderItem item in orderItems)
+            {
+                if (item.ProductID == ID)
+                    throw new Exception("The product is in order");
+            }
+        }
+        if (!dalList1.IProduct.Delete(ID))
+            throw new Exception("The product is not in the store");
+    }
     
     
 
