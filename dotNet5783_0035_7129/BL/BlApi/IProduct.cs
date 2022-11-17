@@ -38,4 +38,14 @@ public interface IProduct
         Product product = new Product();
         
     }
+    public void AddProduct(DO.Product product)
+    {
+        if(product.ID>0 && product.Name!=null && product.Price>0 && product.InStock>=0)
+        {
+            IDal dalList1 = new DalList();
+            int id=dalList1.IProduct.Add(product);
+            return;
+        }
+        throw new Exception("the details are wrong"); 
+    }
 }
