@@ -103,30 +103,8 @@ public interface IProduct
         }
         throw new Exception("the details are wrong"); 
     }
-    /// <summary>
-    /// The method return details of product
-    /// </summary>
-    /// <param name="ID"></param>ID of product
-    /// <returns></returns>ProductItem
-    public ProductItem GetProductCustomer(int ID)
-    {
-        IDal dalList1 = new DalList();
-        try
-        {
-            DO.Product p = dalList1.IProduct.PrintByID(ID);
-            ProductItem product = new ProductItem();
-            product.ID = p.ID;
-            product.Name = p.Name;
-            product.Price = p.Price;
-            product.Category = (Enums.Category)p.Category;
-            product.InStock = p.InStock;
-            return product;
-        }
-        catch (Exception message)
-        {
-            Console.WriteLine(message);
-            return null ;
-        }
-    }
+   
+    
+    
 
 }
