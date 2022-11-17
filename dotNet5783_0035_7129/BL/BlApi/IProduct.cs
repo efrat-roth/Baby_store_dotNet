@@ -31,7 +31,7 @@ public interface IProduct
         }
         return productList;
     }
-    public Product GetProduct(int ID)
+    public Product GetProductManager(int ID)
     {
         if (ID < 0)
             throw new Exception("The id is invalid");
@@ -85,9 +85,6 @@ public interface IProduct
                 Console.WriteLine(message);
                 return null;
             }
-        IDal dalList1 = new DalList();
-        DO.Product p=dalList1.IProduct.PrintByID(ID);
-        Product product = new Product();
         
     }
     public void AddProduct(DO.Product product)
