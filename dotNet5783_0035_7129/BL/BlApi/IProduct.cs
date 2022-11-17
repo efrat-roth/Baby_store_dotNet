@@ -21,7 +21,7 @@ public interface IProduct
     /// </summary>
     /// <param name="ID"></param>id of product
     /// <returns></returns>Product
-    public Product GetProductManager(int ID);
+    public BO.Product GetProductManager(int ID);
     /// <summary>
     /// The method return details of product
     /// </summary>
