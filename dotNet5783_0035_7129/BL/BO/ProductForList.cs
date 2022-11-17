@@ -23,7 +23,7 @@ public class ProductForList
     /// <summary>
     /// Category of product
     /// </summary>
-    public Enum Category { get; set; }
+    public Enums.Category Category { get; set; }
     /// <summary>
     /// The information about the product for the list of the products
     /// </summary>
