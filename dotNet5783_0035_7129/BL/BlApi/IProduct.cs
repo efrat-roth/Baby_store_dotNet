@@ -38,23 +38,28 @@ public interface IProduct
     /// <returns></returns>Product
     public Product GetProductManager(int ID)
     {
-        IDal dalList1 = new DalList();
-        try
+        if (ID < 0)
+            throw new Exception("The id is invalid");
+        else
         {
-            DO.Product p = dalList1.IProduct.PrintByID(ID);
-            Product product = new Product();
+            IDal dalList1 = new DalList();
+            try
+            {
+                DO.Product p = dalList1.IProduct.PrintByID(ID);
+                Product product = new Product();
 
-            product.ID = p.ID;
-            product.Name = p.Name;
-            product.Price = p.Price;
-            product.Category = (Enums.Category)p.Category;
-            product.InStock=p.InStock;
-            return product;
-        }
-        catch(Exception message)
-        {
-            Console.WriteLine(message);
-            return null;
+                product.ID = p.ID;
+                product.Name = p.Name;
+                product.Price = p.Price;
+                product.Category = (Enums.Category)p.Category;
+                product.InStock = p.InStock;
+                return product;
+            }
+            catch (Exception message)
+            {
+                Console.WriteLine(message);
+                return null;
+            }
         }
     }
     /// <summary>
@@ -64,23 +69,28 @@ public interface IProduct
     /// <returns></returns>ProductItem
     public ProductItem GetProductCustomer(int ID)
     {
-        IDal dalList1 = new DalList();
-        try
+        if (ID < 0)
+            throw new Exception("The id is invalid");
+        else
         {
-            DO.Product p = dalList1.IProduct.PrintByID(ID);
-            ProductItem product = new ProductItem();
-            product.ID = p.ID;
-            product.Name = p.Name;
-            product.Price = p.Price;
-            product.Category = (Enums.Category)p.Category;
-            product.InStock = p.InStock;
-            return product;
-        }
-        catch (Exception message)
-        {
-            Console.WriteLine(message);
-            return null ;
+            IDal dalList1 = new DalList();
+            try
+            {
+                DO.Product p = dalList1.IProduct.PrintByID(ID);
+                ProductItem product = new ProductItem();
+                product.ID = p.ID;
+                product.Name = p.Name;
+                product.Price = p.Price;
+                product.Category = (Enums.Category)p.Category;
+                product.InStock = p.InStock;
+                return product;
+            }
+            catch (Exception message)
+            {
+                Console.WriteLine(message);
+                return null;
+            }
         }
     }
-
+    public 
 }
