@@ -31,12 +31,7 @@ public interface IProduct
         }
         return productList;
     }
-    /// <summary>
-    /// The method return details of product
-    /// </summary>
-    /// <param name="ID"></param>id of product
-    /// <returns></returns>Product
-    public Product GetProductManager(int ID)
+    public Product GetProduct(int ID)
     {
         if (ID < 0)
             throw new Exception("The id is invalid");
@@ -90,7 +85,19 @@ public interface IProduct
                 Console.WriteLine(message);
                 return null;
             }
-        }
+        IDal dalList1 = new DalList();
+        DO.Product p=dalList1.IProduct.PrintByID(ID);
+        Product product = new Product();
+        
     }
-    public 
+    public void AddProduct(DO.Product product)
+    {
+        if(product.ID>0 && product.Name!=null && product.Price>0 && product.InStock>=0)
+        {
+            IDal dalList1 = new DalList();
+            int id=dalList1.IProduct.Add(product);
+            return;
+        }
+        throw new Exception("the details are wrong"); 
+    }
 }
