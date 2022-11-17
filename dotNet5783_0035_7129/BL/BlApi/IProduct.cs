@@ -90,6 +90,7 @@ public interface IProduct
                 Console.WriteLine(message);
                 return null;
             }
+        }
         
     }
     public void AddProduct(DO.Product product)
