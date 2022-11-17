@@ -16,24 +16,19 @@ public interface IProduct
     /// </summary>
     /// <returns></returns>List<ProductForList>
     public List<ProductForList> GetListOfProduct();
-    
     /// <summary>
     /// The method return details of product
     /// </summary>
     /// <param name="ID"></param>id of product
     /// <returns></returns>Product
     public Product GetProductManager(int ID);
-    
     /// <summary>
     /// The method return details of product
     /// </summary>
     /// <param name="ID"></param>ID of product
     /// <returns></returns>ProductItem
     public ProductItem GetProductCustomer(int ID);
-
-
     public void AddProduct(DO.Product product);
-
     /// <summary>
     /// Updates sproduct in the store.
     /// </summary>
@@ -41,11 +36,10 @@ public interface IProduct
     /// <exception cref="Exception"></exception>
 
     public void UpdatingProductDetails(DO.Product product);
-
-
-
+    /// <summary>
+    /// The method delete product from the store
+    /// </summary>
+    /// <param name="ID"></param>Integer
+    /// <exception cref="Exception"></exception>
    public void DeleteProduct(int ID);
-    
-    
-
 }
