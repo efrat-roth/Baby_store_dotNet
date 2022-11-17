@@ -101,10 +101,26 @@ public interface IProduct
             int id=dalList1.IProduct.Add(product);
             return;
         }
-        throw new Exception("the details are wrong"); 
+        throw new Exception("Cannot add the details are wrong"); 
     }
-   
-    
-    
+    /// <summary>
+    /// Updates sproduct in the store.
+    /// </summary>
+    /// <param name="product"></param>
+    /// <exception cref="Exception"></exception>
+
+    public void UpdatingProductDetails(DO.Product product)
+    {
+        bool update = false;
+        if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
+        {
+            IDal dalList1 = new DalList();
+            update = dalList1.IProduct.Update(ref product);       
+        }
+        if(update)
+            throw new Exception("Cannot update because the details are wrong");
+        return;
+    }
+
 
 }
