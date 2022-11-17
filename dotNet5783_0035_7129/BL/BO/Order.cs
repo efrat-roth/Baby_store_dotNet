@@ -31,11 +31,7 @@ public class Order
     /// <summary>
     /// The status of the order.
     /// </summary>
-    public OrderStatus Status { get; set; }
-    /// <summary>
-    /// The payment date.
-    /// </summary>
-    public DateTime PaymentDate { get; set; }
+    public Enums.OrderStatus Status { get; set; }
     /// <summary>
     /// The ship date.
     /// </summary>
@@ -47,7 +43,7 @@ public class Order
     /// <summary>
     ///  The list of the order details.
     /// </summary>
-    public OrderItem Items { get; set; }
+    public List<OrderItem> Items { get; set; }
     /// <summary>
     ///  The total price of the order.
     /// </summary>

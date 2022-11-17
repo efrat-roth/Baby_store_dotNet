@@ -13,7 +13,7 @@ namespace BlImplementation;
 internal class Product:BlApi.IProduct
 {
     IDal dalList1 = new DalList();
- 
+
     /// <summary>
     /// The method asking for list of products
     /// </summary>
@@ -57,8 +57,7 @@ internal class Product:BlApi.IProduct
             }
             catch (Exception message)
             {
-                Console.WriteLine(message);
-                return null;
+                throw message;
             }
         }
     }
@@ -86,20 +85,26 @@ internal class Product:BlApi.IProduct
             }
             catch (Exception message)
             {
-                Console.WriteLine(message);
-                return null;
+                throw message;
             }
         }
 
     }
     public void AddProduct(DO.Product product)
     {
-        if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
+        try
         {
-            int id = dalList1.IProduct.Add(product);
-            return;
+            if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
+            {
+                int id = dalList1.IProduct.Add(product);
+                return;
+            }
+            throw new Exception("Cannot add the details are wrong");
         }
-        throw new Exception("Cannot add the details are wrong");
+        catch (Exception message)
+        {
+            throw message;
+        }
     }
     /// <summary>
     /// Updates sproduct in the store.
@@ -109,16 +114,27 @@ internal class Product:BlApi.IProduct
 
     public void UpdatingProductDetails(DO.Product product)
     {
-        bool update = false;
-        if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
+        try
         {
-            update = dalList1.IProduct.Update(ref product);
+            bool update = false;
+            if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
+            {
+                update = dalList1.IProduct.Update(ref product);
+            }
+            if (update)
+                throw new Exception("Cannot update because the details are wrong");
+            return;
         }
-        if (update)
-            throw new Exception("Cannot update because the details are wrong");
-        return;
+        catch(Exception message)
+        {
+            throw message;
+        }
     }
-
+    /// <summary>
+    /// The method delete product from the store
+    /// </summary>
+    /// <param name="ID"></param>Integer
+    /// <exception cref="Exception"></exception>
     public void DeleteProduct(int ID)
     {
         if (ID < 0)

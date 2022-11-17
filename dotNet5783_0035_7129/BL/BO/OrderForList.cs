@@ -19,7 +19,7 @@ public class OrderForList
     /// <summary>
     /// The status of the order.
     /// </summary>
-    public OrderStatus Status { get; set; }
+    public Enums.OrderStatus Status { get; set; }
     /// <summary>
     /// The amount of items in the order.
     /// </summary>

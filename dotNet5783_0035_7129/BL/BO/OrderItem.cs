@@ -29,7 +29,7 @@ public class OrderItem
     /// </summary>
     public int Amount { get; set; }
     /// <summary>
-    ///  The total price of the products in the order.
+    ///  The total price of the product in the order.
     /// </summary>
     public double TotalPrice { get; set; }
     /// <summary>
