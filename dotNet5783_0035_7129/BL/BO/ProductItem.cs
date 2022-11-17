@@ -25,9 +25,9 @@ public class ProductItem
     /// </summary>
     public Enum Category { get; set; }
     /// <summary>
-    /// check if the product in stock
+    /// the amount of product in stock
     /// </summary>
-    public bool InStock { get; set; }
+    public int InStock { get; set; }
     /// <summary>
     /// The amount of the product in the cart
     /// </summary>
@@ -40,6 +40,6 @@ public class ProductItem
        Product ID={ID}: {Name}, 
        category - {Category},
        Price: {Price},
-       Stock availability: {InStock},
+       The amount in stock: {InStock},
        Amount in the cart: {AmountInCart}";
 }
