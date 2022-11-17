@@ -9,6 +9,8 @@
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
+	  <RootNamespace>Dal</RootNamespace>
+	  <OutputType>Exe</OutputType>
 
   </PropertyGroup>
 

@@ -19,7 +19,7 @@ internal class DalOrderItem:IOrderItem
         {
             if (oi.ID == oI.ID)
             {
-                throw Exception.throwNotId();
+                throw new Exception("T");
             };
         }
         orderItems.Add(oi);
