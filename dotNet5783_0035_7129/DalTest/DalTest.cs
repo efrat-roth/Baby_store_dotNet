@@ -17,7 +17,6 @@ namespace DalTest
         {
             IDal dalList1=new DalList();
             Order orders = new Order();
-            string chice = "start";
             mainActions();
             void manageProduct()
             {
@@ -598,6 +597,7 @@ Exit to exit the program");
             string choice = "start";
             void mainActions()
             {
+                string choice = "start";
                 do
                 {
                     switch (choice)
