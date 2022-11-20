@@ -49,4 +49,13 @@ public interface IOrder
     /// <returns></returns>OrderTracking
     /// <exception cref="Exception"></exception>The Order was shiped already
     public OrderTracking OrderTracking(int IDOrder);
+    /// <summary>
+    /// The method update the amount of product in exist order
+    /// </summary>
+    /// <param name="IDOrder"></param>ID of Order
+    /// <param name="IDProduct"></param>ID of product
+    /// <param name="newAmount"></param>New amont of product
+    /// <returns></returns>BO.Order with the new amount
+    /// <exception cref="Exception"></exception>The ID is less than zero / The order was shiped already
+    public BO.Order UpdateOrder(int IDOrder, int IDProduct, int newAmount)
 }

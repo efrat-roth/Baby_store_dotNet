@@ -33,15 +33,15 @@ internal class Order:BlApi.IOrder
                 TotalPrice = 0
             };
            
-            if(o.DeliveryDate<DateTime.Today)
+            if(o.DeliveryDate<DateTime.Now)
             {
                 OrderList.Status = Enums.OrderStatus.ArrivedOrder;
             }
-            if (o.ShipDate < DateTime.Today)
+            if (o.ShipDate < DateTime.Now)
             {
                 OrderList.Status = Enums.OrderStatus.DeliveredOrder;
             }
-            if (o.OrderDate < DateTime.Today)
+            if (o.OrderDate < DateTime.Now)
             {
                 OrderList.Status = Enums.OrderStatus.ConfirmedOrder;
             }
@@ -70,7 +70,7 @@ internal class Order:BlApi.IOrder
             IEnumerable<DO.OrderItem> orderItems = dalList1.IOrderItem.PrintAllByOrder(ID);//List of orderItems of the order
             BO.Order logicOrder = new BO.Order
             {
-                ID = ID,
+                ID = order1.ID,
                 CustomerName = order1.CustomerName,
                 CustomerEmail = order1.CustomerEmail,
                 CustomerAdress = order1.CustomerAdress,
@@ -135,7 +135,7 @@ internal class Order:BlApi.IOrder
             {
                 throw new Exception("The order was shiped already");
             }
-            //CheckOrder.ShipDate;////לזכור לעדכן שדה
+            CheckOrder.ShipDate=DateTime.Now;
             IEnumerable<DO.OrderItem> items1 = dalList1.IOrderItem.PrintAllByOrder(IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {
@@ -238,7 +238,7 @@ internal class Order:BlApi.IOrder
         }
         IEnumerable<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
         Enums.OrderStatus status1 = new Enums.OrderStatus();
-        if (CheckOrder.OrderDate != null)
+        if (CheckOrder.OrderDate <=DateTime.Now )
         {
             NodeDateStatus newNode = new NodeDateStatus
             {
@@ -248,7 +248,7 @@ internal class Order:BlApi.IOrder
             ListDateStatus1.Append(newNode);
             status1 = Enums.OrderStatus.ConfirmedOrder;
         }
-        if (CheckOrder.ShipDate != null)
+        if (CheckOrder.ShipDate <=DateTime.Now)
         {
             NodeDateStatus newNode1 = new NodeDateStatus
             {
@@ -258,7 +258,7 @@ internal class Order:BlApi.IOrder
             ListDateStatus1.Append(newNode1);
             status1 = Enums.OrderStatus.DeliveredOrder;
         }
-        if (CheckOrder.DeliveryDate != null)
+        if (CheckOrder.DeliveryDate <=DateTime.Now )
         {
             NodeDateStatus newNode2 = new NodeDateStatus
             {
@@ -268,14 +268,46 @@ internal class Order:BlApi.IOrder
             ListDateStatus1.Append(newNode2);
             status1 = Enums.OrderStatus.ArrivedOrder;
         }
-        OrderTracking orderTracking = new OrderTracking
+        OrderTracking NewOrderTracking = new OrderTracking
         {
             ID = IDOrder,
             Status=status1,
             ListDateStatus=ListDateStatus1
         };
-        return orderTracking;
+        return NewOrderTracking;
     }
-    
-
+    /// <summary>
+    /// The method update the amount of product in exist order
+    /// </summary>
+    /// <param name="IDOrder"></param>ID of Order
+    /// <param name="IDProduct"></param>ID of product
+    /// <param name="newAmount"></param>New amont of product
+    /// <returns></returns>BO.Order with the new amount
+    /// <exception cref="Exception"></exception>The ID is less than zero / The order was shiped already
+    public BO.Order UpdateOrder(int IDOrder,int IDProduct, int  newAmount)
+    {
+        if (IDOrder < 0)
+            throw new Exception("The ID is invalid");
+        if (dalList1.IOrder.PrintByID(IDOrder).ShipDate <= DateTime.Now)
+            throw new Exception("The Order was shiped already");
+        try
+        {
+            BO.Order wantedOrder = GetDetailsOrderManager(IDOrder);
+            foreach (OrderItem orderItem in wantedOrder.Items)
+            {
+                if (orderItem.ProductID == IDProduct)
+                {
+                    wantedOrder.TotalPrice -= orderItem.TotalPrice;//for calculate the new total price of the order
+                    orderItem.Amount = newAmount;
+                    orderItem.TotalPrice = newAmount * orderItem.Price;
+                    wantedOrder.TotalPrice += orderItem.TotalPrice;//for calculate the new total price of the order
+                }
+            }
+            return wantedOrder;
+        }
+        catch(Exception message)
+        {
+            throw message;
+        }
+    }
 }

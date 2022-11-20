@@ -15,92 +15,120 @@ namespace DalTest
     {
         static void Main(string[] args)
         {
-            try
+            IDal dalList1=new DalList();
+            Order orders = new Order();
+            string chice = "start";
+            mainActions();
+            void manageProduct()
             {
-                IDal dalList1=new DalList();
-                Order orders = new Order();
-                Console.WriteLine(
-                                  $@"Enter
-product to manage the products
-order to manage the orders
-orderItem to manage the items in the order");
-                
-                string choice = Console.ReadLine();
-                if (choice == "product")//manages the products
+
+                Product inputProduct()//return product
                 {
-                    manageProduct();
-                }
-                if (choice == "order")//manages the orders
-                {
-                    manageOrder();
-                }
-                if (choice == "orderItem")//manages the orderItems
-                {
-                    manageOrderItem();
-                }
-                void manageProduct()
-                {
-                    
-                    Product inputProduct()//return product
-                    {
-                        Product p=new Product();
-                        Console.WriteLine("Enter the id of product to add");
-                        int id1 = Console.Read();
-                        p.ID = id1;
-                        Console.WriteLine("Enter the name of product to add");
-                        string name1 = Console.ReadLine();
-                        p.Name = name1;
-                        Console.WriteLine("Enter the category of product to add");
-                        Enums.Category category1 = (Enums.Category)Console.Read();
-                        p.Category = category1;
-                        Console.WriteLine("Enter the price of product to add");
-                        double price1 = Console.Read();
-                        p.Price = price1;
-                        Console.WriteLine("Enter amount of products in stock");
-                        int inStock1 = Console.Read();
-                        p.InStock = inStock1;
-                        return p;
-                    }//input details of new product
-                    Console.WriteLine(@"Enter
+                    Product p = new Product();
+                    Console.WriteLine("Enter the id of product to add");
+                    int id1 = Console.Read();
+                    p.ID = id1;
+                    Console.WriteLine("Enter the name of product to add");
+                    string name1 = Console.ReadLine();
+                    p.Name = name1;
+                    Console.WriteLine("Enter the category of product to add");
+                    Enums.Category category1 = (Enums.Category)Console.Read();
+                    p.Category = category1;
+                    Console.WriteLine("Enter the price of product to add");
+                    double price1 = Console.Read();
+                    p.Price = price1;
+                    Console.WriteLine("Enter amount of products in stock");
+                    int inStock1 = Console.Read();
+                    p.InStock = inStock1;
+                    return p;
+                }//input details of new product
+                Console.WriteLine(@"Enter
 Adding to add product
 printById to print product by input id of product
 PrintAll to print the all list of the products
 Update to update details of product
 Delete to delete a product
 Exit to exit the program");
-                    Enums.ProductEnum optionsProduct;
-                    optionsProduct = (Enums.ProductEnum) Console.Read();
-                    while (optionsProduct != Enums.ProductEnum.Exit)
+
+                Enums.ProductEnum optionsProduct;
+                optionsProduct = (Enums.ProductEnum)Console.Read();
+                while (optionsProduct != Enums.ProductEnum.Exit)
+                {
+                    switch (optionsProduct)
                     {
-                        switch (optionsProduct)
-                        {
-                            case Enums.ProductEnum.Adding:
+                        case Enums.ProductEnum.Adding:
+                            {
+                                try
                                 {
                                     Product p = inputProduct();
                                     int i = dalList1.IProduct.Add(p);
+                                }
+                                catch(InvalidVariableException m)
+                                {
+                                    Console.WriteLine(m);
+                                    Console.WriteLine("Enter the variable again");
+                                }
+                                catch (IdAlreadyExistException m)
+                                {
+                                    Console.WriteLine(m);
                                     break;
                                 }
-                            case Enums.ProductEnum.PrintById:
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
+                        case Enums.ProductEnum.PrintById:
+                            {
+                                try
                                 {
                                     Console.WriteLine("Enter ID of product");
                                     int id;
                                     id = Console.Read();
                                     Product p = dalList1.IProduct.PrintByID(id);
-                                    Console.WriteLine( p);
+                                    Console.WriteLine(p);
                                     break;
                                 }
+                                catch(IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                catch(Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                            }
 
-                            case Enums.ProductEnum.PrintAll:
+                        case Enums.ProductEnum.PrintAll:
+                            {
+                                try
                                 {
                                     IEnumerable<Product> productPrint;
                                     productPrint = dalList1.IProduct.PrintAll();
                                     foreach (Product p in productPrint)
                                     {
-                                        Console.WriteLine( p);
+                                        Console.WriteLine(p);
                                     }
+                                }
+                                catch(ListIsEmptyException m)
+                                {
+                                    Console.WriteLine(m);
                                     break;
                                 }
-                            case Enums.ProductEnum.Delete:
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
+                        case Enums.ProductEnum.Delete:
+                            {
+                                try
                                 {
                                     Console.WriteLine("Enter ID of product");
                                     int id;
@@ -108,7 +136,20 @@ Exit to exit the program");
                                     bool answer = dalList1.IProduct.Delete(id);
                                     break;
                                 }
-                            case Enums.ProductEnum.Update:
+                                catch(IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                            }
+                        case Enums.ProductEnum.Update:
+                            {
+                                try
                                 {
                                     Console.WriteLine("Enter ID of product");
                                     int id;
@@ -117,15 +158,33 @@ Exit to exit the program");
                                     bool result = dalList1.IProduct.Update(ref p);
                                     break;
                                 }
-                            case Enums.ProductEnum.Exit:
+                                catch (IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (InvalidVariableException m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+
+                                }
                                 break;
-                        }
-
-
-                        optionsProduct = (Enums.ProductEnum)Console.Read();
+                            }
+                        case Enums.ProductEnum.Exit:
+                            break;
                     }
-                }//manages the products
-                void manageOrder()
+
+
+                    optionsProduct = (Enums.ProductEnum)Console.Read();
+                }
+            }//manages the products
+
+            void manageOrder()
                 {
                     Order inputOrder()//return order
                     {
@@ -146,45 +205,45 @@ Exit to exit the program");
                         string orderDate = Console.ReadLine();
                         if (int.Parse(orderDate) / 10000 < 1 | int.Parse(orderDate) / 1000 > 30)
                         {
-                            throw new Exception("The date is invalid");
+                            throw new InvalidVariableException();
                         }
                         if (int.Parse(orderDate) - (int.Parse(orderDate) / 10000 * 10000) < 1 | (int.Parse(orderDate) - (int.Parse(orderDate) / 10000 * 10000) / 100) > 12)
                         {
-                            throw new Exception("The date is invalid");
+                            throw new InvalidVariableException();
                         }
                         if (int.Parse(orderDate) - (int.Parse(orderDate) / 100 * 100) < 1)
                         {
-                            throw new Exception("The date is invalid");
+                            throw new InvalidVariableException();
                         }
                         o.OrderDate = DateTime.Parse(orderDate);
                         Console.WriteLine("Enter ship date in ######:for day,month,year format");
                         string shipDate = Console.ReadLine();
                         if (int.Parse(shipDate) / 10000 < 1 | int.Parse(shipDate) / 1000 > 30)
                         {
-                            throw new Exception("The date is invalid");
+                             throw new InvalidVariableException();
                         }
                         if (int.Parse(shipDate) - (int.Parse(shipDate) / 10000 * 10000) < 1 | (int.Parse(shipDate) - (int.Parse(shipDate) / 10000 * 10000) / 100) > 12)
                         {
-                            throw new Exception("The date is invalid");
+                             throw new InvalidVariableException();
                         }
                         if (int.Parse(shipDate) - (int.Parse(shipDate) / 100 * 100) < 1)
                         {
-                            throw new Exception("The date is invalid");
+                             throw new InvalidVariableException();
                         }
                         o.ShipDate = DateTime.Parse(shipDate);
                         Console.WriteLine("Enter delivery date in ######:for day,month,year format");
                         string deliveryDate = Console.ReadLine();
                         if (int.Parse(deliveryDate) / 10000 < 1 | int.Parse(deliveryDate) / 1000 > 30)
                         {
-                            throw new Exception("The date is invalid");
+                            throw new InvalidVariableException();
                         }
                         if (int.Parse(deliveryDate) - (int.Parse(deliveryDate) / 10000 * 10000) < 1 | (int.Parse(deliveryDate) - (int.Parse(deliveryDate) / 10000 * 10000) / 100) > 12)
                         {
-                            throw new Exception("The date is invalid");
+                            throw new InvalidVariableException();
                         }
                         if (int.Parse(deliveryDate) - (int.Parse(deliveryDate) / 100 * 100) < 1)
                         {
-                            throw new Exception("The date is invalid");
+                            throw new InvalidVariableException();
                         }
                         o.DeliveryDate = DateTime.Parse(deliveryDate);
                         return o;
@@ -205,32 +264,76 @@ Exit to exit the program");
                         {
                             case Enums.OrderEnum.Adding:
                                 {
+                                try
+                                {
                                     Order order1 = inputOrder();
                                     int i = dalList1.IOrder.Add(order1);
                                     break;
                                 }
+                                catch (InvalidVariableException message)
+                                {
+                                    Console.WriteLine(message);
+                                }
+                                catch(IdAlreadyExistException m)
+                                {
+                                    Console.WriteLine(m);
+
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                                }
 
                             case Enums.OrderEnum.PrintById:
+                                {
+                                try
                                 {
                                     Console.WriteLine("Enter ID of order");
                                     int id;
                                     id = Console.Read();
                                     Order p = dalList1.IOrder.PrintByID(id);
                                     Console.WriteLine(value: p);
+                                }
+                                catch(IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
                                     break;
                                 }
+                                break;
+                                }
                             case Enums.OrderEnum.PrintAll:
+                                {
+                                try
                                 {
                                     IEnumerable<Order> orderPrint;
                                     orderPrint = dalList1.IOrder.PrintAll();
                                     foreach (Order p in orderPrint)
                                     {
                                         Console.WriteLine(value: p);
-                                    
+
                                     }
+                                }
+                                catch(ListIsEmptyException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
                                     break;
                                 }
+                                break;
+                                }
                             case Enums.OrderEnum.Delete:
+                                {
+                                try
                                 {
                                     Console.WriteLine("Enter ID of order");
                                     int id;
@@ -238,9 +341,22 @@ Exit to exit the program");
                                     bool answer = dalList1.IOrder.Delete(id);
                                     break;
                                 }
+                                catch(IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
                             case Enums.OrderEnum.Update:
                                 {
 
+                                try
+                                {
                                     Console.WriteLine("Enter ID of order");
                                     int id;
                                     id = Console.Read();
@@ -249,6 +365,21 @@ Exit to exit the program");
                                     bool answer = dalList1.IOrder.Update(ref p);
                                     break;
                                 }
+                                catch(IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch(InvalidVariableException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
                             case Enums.OrderEnum.Exit:
 
                                 break;
@@ -256,7 +387,8 @@ Exit to exit the program");
                         optionsOrder = (Enums.OrderEnum)Console.Read();
                     }
                 }//manages the orders
-                void manageOrderItem()
+
+            void manageOrderItem()
                 {
                     OrderItem inputOrderItem()//return product
                     {
@@ -293,11 +425,30 @@ Exit to exit the program");
                         {
                             case Enums.OrderItemEnum.Adding:
                                 {
+                                try
+                                {
                                     OrderItem p = inputOrderItem();
                                     int i = dalList1.IOrderItem.Add(p);
                                     break;
                                 }
+                                catch(InvalidVariableException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch(IdAlreadyExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
                             case Enums.OrderItemEnum.PrintById:
+                                {
+                                try
                                 {
                                     Console.WriteLine("Enter ID of orderItem");
                                     int id;
@@ -306,7 +457,20 @@ Exit to exit the program");
                                     Console.WriteLine(value: p);
                                     break;
                                 }
+                                catch(IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
                             case Enums.OrderItemEnum.PrintAll:
+                                {
+                                try
                                 {
                                     IEnumerable<OrderItem> orderItemPrint;
                                     orderItemPrint = dalList1.IOrderItem.PrintAll();
@@ -316,7 +480,20 @@ Exit to exit the program");
                                     }
                                     break;
                                 }
+                                catch(ListIsEmptyException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
                             case Enums.OrderItemEnum.Delete:
+                                {
+                                try
                                 {
                                     Console.WriteLine("Enter ID of orderItem");
                                     int id;
@@ -324,8 +501,21 @@ Exit to exit the program");
                                     bool answer = dalList1.IOrderItem.Delete(id);
                                     break;
                                 }
+                                catch(IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
                             case Enums.OrderItemEnum.Update:
 
+                                {
+                                try
                                 {
                                     Console.WriteLine("Enter ID of orderItem");
                                     int id;
@@ -335,20 +525,49 @@ Exit to exit the program");
                                     bool answer = dalList1.IOrderItem.Update(ref p);
                                     break;
                                 }
+                                catch(IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch(InvalidVariableException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
                             case Enums.OrderItemEnum.Exit:
                                 break;
                             case Enums.OrderItemEnum.PrintByTwoId:
+                                {
+                                try
                                 {
                                     Console.WriteLine("Enter order ID");
                                     int id1 = Console.Read();
                                     Console.WriteLine("Enter product ID");
                                     int id2 = Console.Read();
                                     OrderItem oi = dalList1.IOrderItem.PrintByTwoId(id2, id1);
-                                    Console.WriteLine( oi);
+                                    Console.WriteLine(oi);
                                     break;
                                 }
-
+                                catch(IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
                             case Enums.OrderItemEnum.PrintAllByOrder:
+                                {
+                                try
                                 {
                                     Console.WriteLine("Enter order ID");
                                     int id1 = Console.Read();
@@ -356,21 +575,66 @@ Exit to exit the program");
                                     orderItemByOrderId = dalList1.IOrderItem.PrintAllByOrder(id1);
                                     foreach (OrderItem p in orderItemByOrderId)
                                     {
-                                        Console.WriteLine(oi);
+                                        Console.WriteLine(p);
                                     }
                                     break;
                                 }
+                                catch(ListIsEmptyException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
                         }
 
                         optionsOrderItem = (Enums.OrderItemEnum)Console.Read();
                     }
                 }//manages the orderItems
-            }
-            catch(Exception s)
+            string choice = "start";
+            void mainActions()
             {
-                Console.WriteLine(s);
-                break;
+                do
+                {
+                    switch (choice)
+                    {
+                        case "product":
+                            {
+                                manageProduct();
+                                break;
+                            }
+                        case "order":
+                            {
+                                manageOrder();
+                                break;
+                            }
+                        case "orderItem":
+                            {
+                                manageOrderItem();
+                                break;
+                            }
+                        case "start":
+                            break;
+                        case "exit":
+                            {
+                                break;
+                            }
+                            Console.WriteLine(
+                                             $@"Enter
+product to manage the products
+order to manage the orders
+orderItem to manage the items in the order
+exit to exit the store");
+                            choice = Console.ReadLine();
+                    }
+                } while (choice != "exit");
             }
+           
+
 
 
         }

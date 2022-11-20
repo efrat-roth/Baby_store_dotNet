@@ -9,7 +9,7 @@ namespace BO;
 public class OrderItem
 {
     /// <summary>
-    /// The id of the order.
+    /// The id of the orderItem.
     /// </summary>
     public int ID { get; set; }
     /// <summary>
