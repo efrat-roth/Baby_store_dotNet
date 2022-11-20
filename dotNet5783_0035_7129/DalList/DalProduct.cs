@@ -17,7 +17,7 @@ internal class DalProduct:IProduct
         {
             if (p.ID == product.ID)
             {
-                throw new Exception();
+                throw new IdAlreadyExistException();
             }
         };
         products.Add(p);
@@ -37,17 +37,17 @@ internal class DalProduct:IProduct
                 return p;
             }
         };
-        throw new Exception("The product is not on the database");
+        throw new IdDoesNotExistException();
     }
     /// <summary>
-    /// 
+    /// Return the all products
     /// </summary>
     /// <returns></returns>The database of the all products
     public IEnumerable<Product> PrintAll()
     {
         if(products.Count==0)
         {
-            throw new Exception("There are no products in the database");
+            throw new ListIsEmptyException();
         }
         return products;
     }
@@ -108,10 +108,6 @@ internal class DalProduct:IProduct
             p.InStock = inStock1;
         }
         return true;
-    }
-
-         
-          
-        
+    }   
     
 }

@@ -18,7 +18,7 @@ internal class DalOrder : IOrder
         {
             if (p.ID == o.ID)
             {
-                throw new Exception("exception");
+                throw new DalApi.IdAlreadyExistException();
             }
         };
 
@@ -39,17 +39,17 @@ internal class DalOrder : IOrder
                 return o;
             }
         };   
-        throw new Exception("The order is not on the database");
+        throw new IdDoesNotExistException();
     }
     /// <summary>
-    /// 
+    /// Print The all orders
     /// </summary>
     /// <returns></returns>The database of the all orders
     public IEnumerable<Order> PrintAll()
     {
         if (orders.Count() == 0)
         {
-            throw new Exception("There are no orders in the database");
+            throw new ListIsEmptyException();
         }
         return orders;
     }
@@ -109,15 +109,15 @@ internal class DalOrder : IOrder
             string orderDate = Console.ReadLine();
             if (int.Parse(orderDate)/ 10000<1| int.Parse(orderDate) / 1000>30)
             {
-                throw new Exception("The date is invalid");
+                throw new InvalidVariableException();
             }
             if(int.Parse(orderDate) - (int.Parse(orderDate) / 10000*10000)<1| (int.Parse(orderDate) - (int.Parse(orderDate) / 10000 * 10000) / 100) >12)
             {
-                throw new Exception("The date is invalid");
+                throw new InvalidVariableException();
             }
             if (int.Parse(orderDate) - (int.Parse(orderDate) / 100 * 100)  < 1 )
             {
-                throw new Exception("The date is invalid");
+                throw new InvalidVariableException();
             }
             p.OrderDate = DateTime.Parse(orderDate);
         }
@@ -129,15 +129,15 @@ internal class DalOrder : IOrder
             string shipDate = Console.ReadLine();
             if (int.Parse(shipDate) / 10000 < 1 | int.Parse(shipDate) / 1000 > 30)
             {
-                throw new Exception("The date is invalid");
+                throw new InvalidVariableException();
             }
             if (int.Parse(shipDate) - (int.Parse(shipDate) / 10000 * 10000) < 1 | (int.Parse(shipDate) - (int.Parse(shipDate) / 10000 * 10000) / 100) > 12)
             {
-                throw new Exception("The date is invalid");
+                throw new InvalidVariableException();
             }
             if (int.Parse(shipDate) - (int.Parse(shipDate) / 100 * 100) < 1)
             {
-                throw new Exception("The date is invalid");
+                throw new InvalidVariableException();
             }
             p.ShipDate = DateTime.Parse(shipDate);
         }
@@ -149,15 +149,15 @@ internal class DalOrder : IOrder
             string deliveryDate = Console.ReadLine();
             if (int.Parse(deliveryDate) / 10000 < 1 | int.Parse(deliveryDate) / 1000 > 30)
             {
-                throw new Exception("The date is invalid");
+                throw new InvalidVariableException();
             }
             if (int.Parse(deliveryDate) - (int.Parse(deliveryDate) / 10000 * 10000) < 1 | (int.Parse(deliveryDate) - (int.Parse(deliveryDate) / 10000 * 10000) / 100) > 12)
             {
-                throw new Exception("The date is invalid");
+                throw new InvalidVariableException();
             }
             if (int.Parse(deliveryDate) - (int.Parse(deliveryDate) / 100 * 100) < 1)
             {
-                throw new Exception("The date is invalid");
+                throw new InvalidVariableException();
             }
             p.DeliveryDate = DateTime.Parse(deliveryDate);
         }

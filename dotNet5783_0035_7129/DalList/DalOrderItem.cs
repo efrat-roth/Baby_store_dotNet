@@ -19,7 +19,7 @@ internal class DalOrderItem:IOrderItem
         {
             if (oi.ID == oI.ID)
             {
-                throw new Exception("T");
+                throw new IdAlreadyExistException();
             };
         }
         orderItems.Add(oi);
@@ -39,7 +39,7 @@ internal class DalOrderItem:IOrderItem
                 return oI;
             }
         };
-        throw new Exception("The ID is not in the database");
+        throw new IdDoesNotExistException();
     }
     /// <summary>
     /// 
@@ -49,7 +49,7 @@ internal class DalOrderItem:IOrderItem
     {
         if(orders.Count()==0)
         {
-            throw new Exception("The database is empty");
+            throw new ListIsEmptyException();
         }
         return orderItems;
     }
@@ -127,7 +127,7 @@ internal class DalOrderItem:IOrderItem
                     return oI;
             }
         }
-        throw new Exception("The IOrderItem is not in the database");
+        throw new IdDoesNotExistException();
     }
     /// <summary>
     /// Return array of orderItem that include the ID
@@ -145,7 +145,7 @@ internal class DalOrderItem:IOrderItem
         }
         if(orderItemsByOrder.Count<=0)
         {
-            throw new Exception("The list is empty");
+            throw new ListIsEmptyException();
         }
         return orderItemsByOrder;
     }
