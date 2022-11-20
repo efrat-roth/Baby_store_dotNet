@@ -135,7 +135,7 @@ internal class DalOrderItem:IOrderItem
     /// <returns></returns>array of oderItem
     public IEnumerable<OrderItem> PrintAllByOrder(int idOrder)
     {
-       List<OrderItem> orderItemsByOrder=null;
+       List<OrderItem> orderItemsByOrder=new List<OrderItem>();
         for(int i=0;i<orderItems.Count();i++)
         {
             if(orderItems.ElementAt(i).OrderID==idOrder)

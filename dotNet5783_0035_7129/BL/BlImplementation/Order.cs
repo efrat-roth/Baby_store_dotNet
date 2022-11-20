@@ -20,39 +20,50 @@ internal class Order:BlApi.IOrder
     /// <returns></returns>List of OrderForList
     public List<OrderForList> GetListOfOrders()
     {
-        IEnumerable<DO.Order> orders = dalList1.IOrder.PrintAll();
-        List<OrderForList> listOrders=new List<OrderForList>();
-        foreach (DO.Order o in orders)
+        try
         {
-            IEnumerable<DO.OrderItem>  orderItems = dalList1.IOrderItem.PrintAllByOrder(o.ID);
-            OrderForList OrderList = new OrderForList
+            IEnumerable<DO.Order> orders = dalList1.IOrder.PrintAll();
+            List<OrderForList> listOrders = new List<OrderForList>();
+            foreach (DO.Order o in orders)
             {
-                ID = o.ID,
-                CustomerName = o.CustomerName,
-                AmountOfItems = 0,
-                TotalPrice = 0
-            };
-           
-            if(o.DeliveryDate<DateTime.Now)
-            {
-                OrderList.Status = Enums.OrderStatus.ArrivedOrder;
+                IEnumerable<DO.OrderItem> orderItems = dalList1.IOrderItem.PrintAllByOrder(o.ID);
+                OrderForList OrderList = new OrderForList
+                {
+                    ID = o.ID,
+                    CustomerName = o.CustomerName,
+                    AmountOfItems = 0,
+                    TotalPrice = 0
+                };
+
+                if (o.DeliveryDate < DateTime.Now)
+                {
+                    OrderList.Status = Enums.OrderStatus.ArrivedOrder;
+                }
+                if (o.ShipDate < DateTime.Now)
+                {
+                    OrderList.Status = Enums.OrderStatus.DeliveredOrder;
+                }
+                if (o.OrderDate < DateTime.Now)
+                {
+                    OrderList.Status = Enums.OrderStatus.ConfirmedOrder;
+                }
+                foreach (DO.OrderItem OI in orderItems)
+                {
+                    ++OrderList.AmountOfItems;
+                    OrderList.TotalPrice += OI.Price;
+                }
+                listOrders.Add(OrderList);
             }
-            if (o.ShipDate < DateTime.Now)
-            {
-                OrderList.Status = Enums.OrderStatus.DeliveredOrder;
-            }
-            if (o.OrderDate < DateTime.Now)
-            {
-                OrderList.Status = Enums.OrderStatus.ConfirmedOrder;
-            }
-            foreach (DO.OrderItem OI in orderItems)
-            {
-                ++OrderList.AmountOfItems;
-                OrderList.TotalPrice += OI.Price;
-            }
-            listOrders.Add(OrderList);
+            return listOrders;
         }
-        return listOrders;       
+        catch(BO.ListIsEmptyException m)
+        {
+            throw m;
+        }
+        catch(Exception m)
+        {
+            throw m;
+        }
     }
     /// <summary>
     /// The method gets details of order for manager
@@ -63,7 +74,7 @@ internal class Order:BlApi.IOrder
     public BO.Order GetDetailsOrderManager(int ID)
     {
         if (ID < 0)
-            throw new Exception("The ID is invalid");
+            throw new BO.InvalidVariableException();
         try
         {
             DO.Order order1 = dalList1.IOrder.PrintByID(ID);//asked order
@@ -106,9 +117,17 @@ internal class Order:BlApi.IOrder
             }
             return logicOrder;
         }
-        catch(Exception message)
+        catch(BO.IdDoesNotExistException message)
         {
             throw message;
+        }
+        catch(BO.ListIsEmptyException m)
+        {
+            throw m;
+        }
+        catch(Exception m)
+        {
+            throw m;
         }
     }
     /// <summary>
@@ -167,7 +186,11 @@ internal class Order:BlApi.IOrder
             }
             return ReturnOrder;
         }
-        catch(Exception message)
+        catch(BO.IdDoesNotExistException m)
+        { throw m;  }
+        catch (BO.ListIsEmptyException m)
+        { throw m; }
+        catch (Exception message)
         {
             throw message;
         }
@@ -218,6 +241,14 @@ internal class Order:BlApi.IOrder
             }
             return ReturnOrder;
         }
+        catch(BO.IdDoesNotExistException m)
+        {
+            throw m;
+        }
+        catch(BO.ListIsEmptyException m)
+        {
+            throw m;
+        }
         catch (Exception message)
         {
             throw message;
@@ -231,50 +262,61 @@ internal class Order:BlApi.IOrder
     /// <exception cref="Exception"></exception>The Order was shiped already
     public OrderTracking OrderTracking(int IDOrder)
     {
-        DO.Order CheckOrder = dalList1.IOrder.PrintByID(IDOrder);
-        if (CheckOrder.DeliveryDate <= DateTime.Now)
+        try
         {
-            throw new Exception("The order was shiped already");
-        }
-        IEnumerable<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
-        Enums.OrderStatus status1 = new Enums.OrderStatus();
-        if (CheckOrder.OrderDate <=DateTime.Now )
-        {
-            NodeDateStatus newNode = new NodeDateStatus
+            DO.Order CheckOrder = dalList1.IOrder.PrintByID(IDOrder);
+            if (CheckOrder.DeliveryDate <= DateTime.Now)
             {
-                Date = CheckOrder.OrderDate,
-                status = "The order was created"
-            };
-            ListDateStatus1.Append(newNode);
-            status1 = Enums.OrderStatus.ConfirmedOrder;
-        }
-        if (CheckOrder.ShipDate <=DateTime.Now)
-        {
-            NodeDateStatus newNode1 = new NodeDateStatus
+                throw new Exception("The order was shiped already");
+            }
+            IEnumerable<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
+            Enums.OrderStatus status1 = new Enums.OrderStatus();
+            if (CheckOrder.OrderDate <= DateTime.Now)
             {
-                Date = CheckOrder.OrderDate,
-                status = "The order was delivered"
-            };
-            ListDateStatus1.Append(newNode1);
-            status1 = Enums.OrderStatus.DeliveredOrder;
-        }
-        if (CheckOrder.DeliveryDate <=DateTime.Now )
-        {
-            NodeDateStatus newNode2 = new NodeDateStatus
+                NodeDateStatus newNode = new NodeDateStatus
+                {
+                    Date = CheckOrder.OrderDate,
+                    status = "The order was created"
+                };
+                ListDateStatus1.Append(newNode);
+                status1 = Enums.OrderStatus.ConfirmedOrder;
+            }
+            if (CheckOrder.ShipDate <= DateTime.Now)
             {
-                Date = CheckOrder.OrderDate,
-                status = "The order was arrived"
+                NodeDateStatus newNode1 = new NodeDateStatus
+                {
+                    Date = CheckOrder.OrderDate,
+                    status = "The order was delivered"
+                };
+                ListDateStatus1.Append(newNode1);
+                status1 = Enums.OrderStatus.DeliveredOrder;
+            }
+            if (CheckOrder.DeliveryDate <= DateTime.Now)
+            {
+                NodeDateStatus newNode2 = new NodeDateStatus
+                {
+                    Date = CheckOrder.OrderDate,
+                    status = "The order was arrived"
+                };
+                ListDateStatus1.Append(newNode2);
+                status1 = Enums.OrderStatus.ArrivedOrder;
+            }
+            OrderTracking NewOrderTracking = new OrderTracking
+            {
+                ID = IDOrder,
+                Status = status1,
+                ListDateStatus = ListDateStatus1
             };
-            ListDateStatus1.Append(newNode2);
-            status1 = Enums.OrderStatus.ArrivedOrder;
+            return NewOrderTracking;
         }
-        OrderTracking NewOrderTracking = new OrderTracking
+        catch(BO.IdDoesNotExistException m)
         {
-            ID = IDOrder,
-            Status=status1,
-            ListDateStatus=ListDateStatus1
-        };
-        return NewOrderTracking;
+            throw m;
+        }
+        catch( Exception m)
+        {
+            throw m;
+        }
     }
     /// <summary>
     /// The method update the amount of product in exist order
@@ -305,7 +347,15 @@ internal class Order:BlApi.IOrder
             }
             return wantedOrder;
         }
-        catch(Exception message)
+        catch (BO.IdDoesNotExistException message)
+        {
+            throw message;
+        }
+        catch (BO.ListIsEmptyException m)
+        {
+            throw m;
+        }
+        catch (Exception message)
         {
             throw message;
         }

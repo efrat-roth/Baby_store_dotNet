@@ -47,22 +47,21 @@ printById to print product by input id of product
 PrintAll to print the all list of the products
 Update to update details of product
 Delete to delete a product
-Exit to exit the program");
-
+Exit to exit the product manager");
                 Enums.ProductEnum optionsProduct;
                 optionsProduct = (Enums.ProductEnum)Console.Read();
-                while (optionsProduct != Enums.ProductEnum.Exit)
+                do
                 {
                     switch (optionsProduct)
                     {
-                        case Enums.ProductEnum.Adding:
+                        case Enums.ProductEnum.Adding://Add a product
                             {
                                 try
                                 {
                                     Product p = inputProduct();
                                     int i = dalList1.IProduct.Add(p);
                                 }
-                                catch(InvalidVariableException m)
+                                catch (InvalidVariableException m)
                                 {
                                     Console.WriteLine(m);
                                     Console.WriteLine("Enter the variable again");
@@ -79,7 +78,7 @@ Exit to exit the program");
                                 }
                                 break;
                             }
-                        case Enums.ProductEnum.PrintById:
+                        case Enums.ProductEnum.PrintById://Print a product
                             {
                                 try
                                 {
@@ -90,19 +89,19 @@ Exit to exit the program");
                                     Console.WriteLine(p);
                                     break;
                                 }
-                                catch(IdDoesNotExistException m)
+                                catch (IdDoesNotExistException m)
                                 {
                                     Console.WriteLine(m);
                                     break;
                                 }
-                                catch(Exception m)
+                                catch (Exception m)
                                 {
                                     Console.WriteLine(m);
                                     break;
                                 }
                             }
 
-                        case Enums.ProductEnum.PrintAll:
+                        case Enums.ProductEnum.PrintAll://Print the all products
                             {
                                 try
                                 {
@@ -113,7 +112,7 @@ Exit to exit the program");
                                         Console.WriteLine(p);
                                     }
                                 }
-                                catch(ListIsEmptyException m)
+                                catch (ListIsEmptyException m)
                                 {
                                     Console.WriteLine(m);
                                     break;
@@ -125,7 +124,7 @@ Exit to exit the program");
                                 }
                                 break;
                             }
-                        case Enums.ProductEnum.Delete:
+                        case Enums.ProductEnum.Delete://Delete product
                             {
                                 try
                                 {
@@ -135,7 +134,7 @@ Exit to exit the program");
                                     bool answer = dalList1.IProduct.Delete(id);
                                     break;
                                 }
-                                catch(IdDoesNotExistException m)
+                                catch (IdDoesNotExistException m)
                                 {
                                     Console.WriteLine(m);
                                     break;
@@ -146,7 +145,7 @@ Exit to exit the program");
                                     break;
                                 }
                             }
-                        case Enums.ProductEnum.Update:
+                        case Enums.ProductEnum.Update://Update Product
                             {
                                 try
                                 {
@@ -178,9 +177,15 @@ Exit to exit the program");
                             break;
                     }
 
-
+                    Console.WriteLine(@"Enter
+Adding to add product
+printById to print product by input id of product
+PrintAll to print the all list of the products
+Update to update details of product
+Delete to delete a product
+Exit to exit the program");
                     optionsProduct = (Enums.ProductEnum)Console.Read();
-                }
+                } while (optionsProduct != Enums.ProductEnum.Exit);
             }//manages the products
 
             void manageOrder()
@@ -257,12 +262,12 @@ Delete to delete an order
 Exit to exit the program");
                     Enums.OrderEnum optionsOrder;
                     optionsOrder = (Enums.OrderEnum)Console.Read();
-                    while (optionsOrder != Enums.OrderEnum.Exit)
+                do
+                {
+                    switch (optionsOrder)
                     {
-                        switch (optionsOrder)
-                        {
-                            case Enums.OrderEnum.Adding:
-                                {
+                        case Enums.OrderEnum.Adding://Add order
+                            {
                                 try
                                 {
                                     Order order1 = inputOrder();
@@ -273,7 +278,7 @@ Exit to exit the program");
                                 {
                                     Console.WriteLine(message);
                                 }
-                                catch(IdAlreadyExistException m)
+                                catch (IdAlreadyExistException m)
                                 {
                                     Console.WriteLine(m);
 
@@ -284,10 +289,10 @@ Exit to exit the program");
                                     break;
                                 }
                                 break;
-                                }
+                            }
 
-                            case Enums.OrderEnum.PrintById:
-                                {
+                        case Enums.OrderEnum.PrintById://Print order
+                            {
                                 try
                                 {
                                     Console.WriteLine("Enter ID of order");
@@ -296,51 +301,7 @@ Exit to exit the program");
                                     Order p = dalList1.IOrder.PrintByID(id);
                                     Console.WriteLine(value: p);
                                 }
-                                catch(IdDoesNotExistException m)
-                                {
-                                    Console.WriteLine(m);
-                                }
-                                catch (Exception m)
-                                {
-                                    Console.WriteLine(m);
-                                    break;
-                                }
-                                break;
-                                }
-                            case Enums.OrderEnum.PrintAll:
-                                {
-                                try
-                                {
-                                    IEnumerable<Order> orderPrint;
-                                    orderPrint = dalList1.IOrder.PrintAll();
-                                    foreach (Order p in orderPrint)
-                                    {
-                                        Console.WriteLine(value: p);
-
-                                    }
-                                }
-                                catch(ListIsEmptyException m)
-                                {
-                                    Console.WriteLine(m);
-                                }
-                                catch (Exception m)
-                                {
-                                    Console.WriteLine(m);
-                                    break;
-                                }
-                                break;
-                                }
-                            case Enums.OrderEnum.Delete:
-                                {
-                                try
-                                {
-                                    Console.WriteLine("Enter ID of order");
-                                    int id;
-                                    id = Console.Read();
-                                    bool answer = dalList1.IOrder.Delete(id);
-                                    break;
-                                }
-                                catch(IdDoesNotExistException m)
+                                catch (IdDoesNotExistException m)
                                 {
                                     Console.WriteLine(m);
                                 }
@@ -351,8 +312,52 @@ Exit to exit the program");
                                 }
                                 break;
                             }
-                            case Enums.OrderEnum.Update:
+                        case Enums.OrderEnum.PrintAll://Print the all orders
+                            {
+                                try
                                 {
+                                    IEnumerable<Order> orderPrint;
+                                    orderPrint = dalList1.IOrder.PrintAll();
+                                    foreach (Order p in orderPrint)
+                                    {
+                                        Console.WriteLine(value: p);
+
+                                    }
+                                }
+                                catch (ListIsEmptyException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
+                        case Enums.OrderEnum.Delete://Delete the order
+                            {
+                                try
+                                {
+                                    Console.WriteLine("Enter ID of order");
+                                    int id;
+                                    id = Console.Read();
+                                    bool answer = dalList1.IOrder.Delete(id);
+                                    break;
+                                }
+                                catch (IdDoesNotExistException m)
+                                {
+                                    Console.WriteLine(m);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine(m);
+                                    break;
+                                }
+                                break;
+                            }
+                        case Enums.OrderEnum.Update://Updates the order
+                            {
 
                                 try
                                 {
@@ -364,11 +369,11 @@ Exit to exit the program");
                                     bool answer = dalList1.IOrder.Update(ref p);
                                     break;
                                 }
-                                catch(IdDoesNotExistException m)
+                                catch (IdDoesNotExistException m)
                                 {
                                     Console.WriteLine(m);
                                 }
-                                catch(InvalidVariableException m)
+                                catch (InvalidVariableException m)
                                 {
                                     Console.WriteLine(m);
                                 }
@@ -379,17 +384,24 @@ Exit to exit the program");
                                 }
                                 break;
                             }
-                            case Enums.OrderEnum.Exit:
+                        case Enums.OrderEnum.Exit:
 
-                                break;
-                        }
-                        optionsOrder = (Enums.OrderEnum)Console.Read();
+                            break;
                     }
+                    Console.WriteLine(@"Enter
+Adding to add an order
+printById to print order by input id of order
+PrintAll to print the all list of the orders
+Update to update details of order
+Delete to delete an order
+Exit to exit the program");
+                    optionsOrder = (Enums.OrderEnum)Console.Read();
+                } while (optionsOrder != Enums.OrderEnum.Exit);
                 }//manages the orders
 
             void manageOrderItem()
                 {
-                    OrderItem inputOrderItem()//return product
+                    OrderItem inputOrderItem()//return new orderItem
                     {
                         OrderItem oi = new OrderItem();
                         Console.WriteLine("Enter the id of orderItem to add");
@@ -418,11 +430,11 @@ Delete to delete an orderItem
 Exit to exit the program");
                     Enums.OrderItemEnum optionsOrderItem;
                     optionsOrderItem = (Enums.OrderItemEnum)Console.Read();
-                    while (optionsOrderItem != Enums.OrderItemEnum.Exit)
+                    do 
                     {
                         switch (optionsOrderItem)
                         {
-                            case Enums.OrderItemEnum.Adding:
+                            case Enums.OrderItemEnum.Adding://Add OrderItem
                                 {
                                 try
                                 {
@@ -445,7 +457,7 @@ Exit to exit the program");
                                 }
                                 break;
                             }
-                            case Enums.OrderItemEnum.PrintById:
+                            case Enums.OrderItemEnum.PrintById://Print orderItem
                                 {
                                 try
                                 {
@@ -453,7 +465,7 @@ Exit to exit the program");
                                     int id;
                                     id = Console.Read();
                                     OrderItem p = dalList1.IOrderItem.PrintByID(id);
-                                    Console.WriteLine(value: p);
+                                    Console.WriteLine(p);
                                     break;
                                 }
                                 catch(IdDoesNotExistException m)
@@ -467,7 +479,7 @@ Exit to exit the program");
                                 }
                                 break;
                             }
-                            case Enums.OrderItemEnum.PrintAll:
+                            case Enums.OrderItemEnum.PrintAll://Prints the all orderItems
                                 {
                                 try
                                 {
@@ -490,7 +502,7 @@ Exit to exit the program");
                                 }
                                 break;
                             }
-                            case Enums.OrderItemEnum.Delete:
+                            case Enums.OrderItemEnum.Delete://Deletes orderItem
                                 {
                                 try
                                 {
@@ -511,7 +523,7 @@ Exit to exit the program");
                                 }
                                 break;
                             }
-                            case Enums.OrderItemEnum.Update:
+                            case Enums.OrderItemEnum.Update://Update the field of orderItem
 
                                 {
                                 try
@@ -541,7 +553,7 @@ Exit to exit the program");
                             }
                             case Enums.OrderItemEnum.Exit:
                                 break;
-                            case Enums.OrderItemEnum.PrintByTwoId:
+                            case Enums.OrderItemEnum.PrintByTwoId://Prints orderItem by two identifiers
                                 {
                                 try
                                 {
@@ -564,7 +576,7 @@ Exit to exit the program");
                                 }
                                 break;
                             }
-                            case Enums.OrderItemEnum.PrintAllByOrder:
+                            case Enums.OrderItemEnum.PrintAllByOrder://Print the all orderItem of order
                                 {
                                 try
                                 {
@@ -590,12 +602,18 @@ Exit to exit the program");
                                 break;
                             }
                         }
+                    Console.WriteLine(@"Enter
+Adding to add an orderItem
+printById to print orderItem by input id of its
+PrintAll to print the all list of the orderItem
+Update to update details of orderItem
+Delete to delete an orderItem
+Exit to exit the program");
+                    optionsOrderItem = (Enums.OrderItemEnum)Console.Read();
+                    } while (optionsOrderItem != Enums.OrderItemEnum.Exit);
+            }//manages the orderItems
 
-                        optionsOrderItem = (Enums.OrderItemEnum)Console.Read();
-                    }
-                }//manages the orderItems
-            string choice = "start";
-            void mainActions()
+            void mainActions()//The method ask the user to coose the main item by enim
             {
                 string choice = "start";
                 do
@@ -633,10 +651,6 @@ exit to exit the store");
                     }
                 } while (choice != "exit");
             }
-           
-
-
-
         }
 
     }
