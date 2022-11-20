@@ -26,7 +26,7 @@ public class Cart
     /// <summary>
     ///The list of the order details.
     /// </summary>
-    public OrderItem Items { get; set; }
+    public List<OrderItem> Items { get; set; }
     /// <summary>
     /// The total price of the order.
     /// </summary>
