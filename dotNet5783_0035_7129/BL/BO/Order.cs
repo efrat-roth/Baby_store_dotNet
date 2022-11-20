@@ -59,7 +59,6 @@ public class Order
        Customer Adress= {CustomerAdress},
        Order Date: {OrderDate},
        Order Status: {Status},
-       Payment Date:{PaymentDate},
        Ship Date:{ShipDate},
        Delivery Date:{DeliveryDate},
        Order details:{Items},

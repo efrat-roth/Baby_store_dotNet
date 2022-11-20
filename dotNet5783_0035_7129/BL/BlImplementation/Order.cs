@@ -21,7 +21,7 @@ internal class Order:BlApi.IOrder
     public List<OrderForList> GetListOfOrders()
     {
         IEnumerable<DO.Order> orders = dalList1.IOrder.PrintAll();
-        List<OrderForList> listOrders=new List<OrderForList>;
+        List<OrderForList> listOrders=new List<OrderForList>();
         foreach (DO.Order o in orders)
         {
             IEnumerable<DO.OrderItem>  orderItems = dalList1.IOrderItem.PrintAllByOrder(o.ID);
@@ -55,12 +55,12 @@ internal class Order:BlApi.IOrder
         return listOrders;       
     }
     /// <summary>
-    /// The method gets details of order
+    /// The method gets details of order for manager
     /// </summary>
     /// <param name="ID"></param>ID of order
     /// <returns></returns>Order
     /// <exception cref="Exception"></exception>ID not exist
-    public BO.Order GetDetailsOrder(int ID)
+    public BO.Order GetDetailsOrderManager(int ID)
     {
         if (ID < 0)
             throw new Exception("The ID is invalid");
@@ -110,6 +110,16 @@ internal class Order:BlApi.IOrder
         {
             throw message;
         }
+    }
+    /// <summary>
+    /// The method gets details of order for customer
+    /// </summary>
+    /// <param name="ID"></param>ID of order
+    /// <returns></returns>Order
+    /// <exception cref="Exception"></exception>ID not exist
+    public BO.Order GetDetailsOrderCustomer(int ID)
+    {
+        return GetDetailsOrderManager(ID);
     }
     /// <summary>
     /// The method updates the order as delivered order
@@ -174,9 +184,9 @@ internal class Order:BlApi.IOrder
             DO.Order CheckOrder = dalList1.IOrder.PrintByID(IDOrder);
             if (CheckOrder.DeliveryDate <= DateTime.Now)
             {
-                throw new Exception("The order was shiped already");
+                throw new Exception("The order was arrived already");
             }
-            //CheckOrder.ShipDate;////לזכור לעדכן שדה
+            CheckOrder.DeliveryDate= DateTime.Now;
             IEnumerable<DO.OrderItem> items1 = dalList1.IOrderItem.PrintAllByOrder(IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {
@@ -213,7 +223,13 @@ internal class Order:BlApi.IOrder
             throw message;
         }
     }
-    public OrderTracking OrderR(int IDOrder)
+    /// <summary>
+    /// The method track after an order
+    /// </summary>
+    /// <param name="IDOrder"></param>ID of Order
+    /// <returns></returns>OrderTracking
+    /// <exception cref="Exception"></exception>The Order was shiped already
+    public OrderTracking OrderTracking(int IDOrder)
     {
         DO.Order CheckOrder = dalList1.IOrder.PrintByID(IDOrder);
         if (CheckOrder.DeliveryDate <= DateTime.Now)
@@ -258,6 +274,7 @@ internal class Order:BlApi.IOrder
             Status=status1,
             ListDateStatus=ListDateStatus1
         };
+        return orderTracking;
     }
     
 
