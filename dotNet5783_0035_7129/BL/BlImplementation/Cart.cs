@@ -119,6 +119,14 @@ internal class Cart:ICart
         }
         throw new Exception(" ");
     }
+    /// <summary>
+    /// The method makes the order.
+    /// </summary>
+    /// <param name="finalCart"></param>Cart
+    /// <param name="adress11"></param>customer adress
+    /// <param name="name11"></param>customer name
+    /// <param name="emailAdress"></param>customer email adress
+    /// <exception cref="Exception"></exception>
 
     public void MakeOrder(BO.Cart finalCart, string adress11, string name11, string emailAdress)
     {
