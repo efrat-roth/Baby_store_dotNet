@@ -1,10 +1,13 @@
-﻿namespace BlTest
+﻿using BlApi;
+
+namespace BlTest
 {
     internal class BlTest
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("t");
+            IBl bl = new BL();
+            
         }
     }
 }
