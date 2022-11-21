@@ -27,7 +27,7 @@ public class Order
     /// <summary>
     /// The date of the order.
     /// </summary>
-    public DateTime OrderDate { get; set; }
+    public DateTime? OrderDate { get; set; }
     /// <summary>
     /// The status of the order.
     /// </summary>
@@ -35,11 +35,11 @@ public class Order
     /// <summary>
     /// The ship date.
     /// </summary>
-    public DateTime ShipDate { get; set; }
+    public DateTime? ShipDate { get; set; }
     /// <summary>
     /// The delivery date.
     /// </summary>
-    public DateTime DeliveryDate { get; set; }
+    public DateTime? DeliveryDate { get; set; }
     /// <summary>
     ///  The list of the order details.
     /// </summary>

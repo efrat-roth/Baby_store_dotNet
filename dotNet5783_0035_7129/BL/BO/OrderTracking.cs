@@ -29,5 +29,6 @@ public class OrderTracking
     /// <returns></returns>string
     public override string ToString() => $@"
        Order ID={ID},
-       Status of order: {Status}";
+       Status of order: {Status}
+       List of dates ans status: {ListDateStatus}";
 }

@@ -18,6 +18,6 @@ public class Enums
     public enum OrderStatus {ConfirmedOrder, DeliveredOrder, ArrivedOrder }
     public enum OrderEnum { GetList, Details, Delivered, Arrived, Tracking, Update,Exit }
     public enum ProductEnum { getlp, getpl, getpc, add, up, del,exit}
-    public enum Cart { AddProductToCart, UpdateProductAmount, MakeOrder }
+    public enum CartEnum { Add, Update, Make,Exit }
 
 }

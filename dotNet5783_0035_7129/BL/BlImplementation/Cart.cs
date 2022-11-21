@@ -20,7 +20,7 @@ internal class Cart:ICart
     /// </summary>
     static int randomIdForOrderItem = 0;
     /// <summary>
-    /// the mothod adds new or existing product to the cart.
+    /// The mothod adds new or existing product to the cart.
     /// </summary>
     /// <param name="finalCart"></param>Cart
     /// <param name="id"></param>id of product to add
@@ -29,7 +29,10 @@ internal class Cart:ICart
     public BO.Cart AddProductToCart(BO.Cart finalCart, int id)
     {
         try
-        {           
+        {   if(id<0)
+            {
+                throw new BO.InvalidVariableException();
+            }
             DO.Product ProductInStore =dalList1.IProduct.PrintByID(id);  //variable for the product.            
             foreach (OrderItem o  in finalCart.Items )   //Goes through all products order in the cart.
             {

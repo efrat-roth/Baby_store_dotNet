@@ -330,6 +330,10 @@ internal class Order:BlApi.IOrder
     {
         if (IDOrder < 0)
             throw new Exception("The ID is invalid");
+        if (IDProduct < 0)
+            throw new Exception("The ID is invalid");
+        if (newAmount < 0)
+            throw new Exception("The amount is invalid");
         if (dalList1.IOrder.PrintByID(IDOrder).ShipDate <= DateTime.Now)
             throw new Exception("The Order was shiped already");
         try
@@ -350,6 +354,10 @@ internal class Order:BlApi.IOrder
         catch (BO.IdDoesNotExistException message)
         {
             throw message;
+        }
+        catch(BO.InvalidVariableException m)
+        {
+            throw m;
         }
         catch (BO.ListIsEmptyException m)
         {
