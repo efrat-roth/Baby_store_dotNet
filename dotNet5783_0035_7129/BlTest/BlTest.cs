@@ -14,15 +14,15 @@ internal class BlTest
         IBl bl = new BL();
 
         mainActions();
-        Cart createCart()
+        Cart createCart()//create new cart by accept the values from the user
         {
             Console.WriteLine("Enter Customer Name");
-            String name = Console.ReadLine();
+            string name = Console.ReadLine();
             Console.WriteLine("Enter Customer Email");
-            String email = Console.ReadLine();
+            string email = Console.ReadLine();
             bool isRight = false;
-            foreach (char c in email)//checks if email is correct and has the @ in their.
-                if (c == '@')
+            foreach (char d in email)//checks if email is correct and has the @ in their.
+                if (d == '@')
                     isRight = true;
             if (!isRight)
                 throw new BO.InvalidVariableException();
@@ -52,7 +52,8 @@ getpc to customer to get details of product.
 add to add product to store.
 up to update product in the store.
 del to delete product from the store.");
-                choice = (Enums.ProductEnum)Console.Read();
+                string s= Console.ReadLine();
+                Enums.ProductEnum.TryParse(s,out choice);
                 switch (choice)
                 {
                     case Enums.ProductEnum.getlp:   //asks for list of products
@@ -191,18 +192,23 @@ del to delete product from the store.");
         }
         void manageOrder()
         {
-            Enums.OrderEnum option = Enums.OrderEnum.GetList;
+            int option = 1;
 
-            while (option != Enums.OrderEnum.Exit)
+            while (option != 0)
             {
-                Console.WriteLine($@"Enter
-GetList to get the all orders
-Details to get the details of order
-Delivered to update the delivery of order
-Arrived to update that order arrived
-Tracking to track after order
-Update to update order");
-                option = (Enums.OrderEnum)Console.Read();
+                while (option > 0 & option < 7)
+                {
+                    Console.WriteLine($@"Enter
+1 to get the all orders
+2 to get the details of order
+3 to update the delivery of order
+4 to update that order arrived
+5 to track after order
+6 to update order
+0 to exit");
+                    option = Console.Read();
+                }
+               
                 switch (option)
                 {
                     case Enums.OrderEnum.GetList://return the all orders in the store
@@ -332,11 +338,11 @@ Update to update order");
         }
         void manageCart()
         {
-            Enums.CartEnum option = Enums.CartEnum.Update;
+            Enums.CartEnum option = Enums.CartEnum.Update;//resets the variable
 
             while (option != Enums.CartEnum.Exit)
             {
-                Cart c = new Cart();
+                Cart c = new Cart();//create new cart
                 try
                 {
                     c = createCart();
@@ -352,7 +358,7 @@ Make to make an order");
                 option = (Enums.CartEnum)Console.Read();
                 switch (option)
                 {
-                    case Enums.CartEnum.Add:
+                    case Enums.CartEnum.Add://add product to the cart
                         {
                             try
                             {
@@ -366,19 +372,37 @@ Make to make an order");
                             break;
 
                         }
-                    case Enums.CartEnum.Update:
+                    case Enums.CartEnum.Update://update amount of product in cart
                         {
-                            Console.WriteLine("Enter product ID");
-                            int id = Console.Read();
-                            Console.WriteLine("Enter the new Amount");
-                            int amount = Console.Read();
+                            try
+                            {
+                                Console.WriteLine("Enter product ID");
+                                int id = Console.Read();
+                                Console.WriteLine("Enter the new Amount");
+                                int amount = Console.Read();
+                                c = bl.Cart.UpdateProductAmount(c, id, amount);
+                                Console.WriteLine(c);
+                            }
+                            catch(Exception n)
+                            {
+
+                            }
                             break;
                         }
-                    case Enums.CartEnum.Make:
+                    case Enums.CartEnum.Make://make an order by the cart
                         {
+                            try
+                            {
+                                DO.Order order = bl.Cart.MakeOrder(c, c.CustomerAdress, c.CustomerName, c.CustomerEmail);
+                                Console.WriteLine(order);
+                            }
+                            catch(Exception m)
+                            {
+                                
+                            }
                             break;
                         }
-                    case Enums.CartEnum.Exit:
+                    case Enums.CartEnum.Exit://exit the actions on cart
                         {
                             mainActions();
                             break;

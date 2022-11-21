@@ -131,7 +131,7 @@ internal class Cart:ICart
     /// <param name="emailAdress"></param>customer email adress
     /// <exception cref="Exception"></exception>
 
-    public void MakeOrder(BO.Cart finalCart, string adress11, string name11, string emailAdress)
+    public DO.Order MakeOrder(BO.Cart finalCart, string adress11, string name11, string emailAdress)
     {
         try
         {
@@ -140,7 +140,6 @@ internal class Cart:ICart
             if (adress11 == null || name11 == null || emailAdress == null //checks if all the strings fields is correct.
                 || emailAdress[0] == '@' || emailAdress[emailAdress.Length - 1] == '@')
                 throw new BO.InvalidVariableException();
-
             bool isRight = false;
             foreach (char c in emailAdress)//checks if email is correct and has the @ in their.
                 if (c == '@')
@@ -194,11 +193,13 @@ internal class Cart:ICart
                 dalList1.IProduct.Update(p);
 
             }
+            return finalOrder;
         }
         catch (Exception)
         {
             throw new Exception(" ");
         }
+        
 
     }
 }
