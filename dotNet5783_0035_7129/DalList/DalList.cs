@@ -14,7 +14,5 @@ namespace Dal
         public IProduct IProduct => new DalProduct();
         public IOrderItem IOrderItem => new DalOrderItem();
 
-
-
     }
 }
