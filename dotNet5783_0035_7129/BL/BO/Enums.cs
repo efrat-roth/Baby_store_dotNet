@@ -16,6 +16,8 @@ public class Enums
     /// Enum for the status of the order.
     /// </summary>
     public enum OrderStatus {ConfirmedOrder, DeliveredOrder, ArrivedOrder }
-    public enum 
+    public enum OrderEnum { GetListOfOrders, GetDetailsOrderManager, GetDetailsOrderCustomer, DeliveredOrder, ArrivedOrder, OrderTracking, UpdateOrder }
+    public enum ProductEnum { GetListOfProduct, GetProductManager, GetProductCustomer, AddProduct, UpdatingProductDetails, DeleteProduct }
+    public enum Cart { AddProductToCart, UpdateProductAmount, MakeOrder }
 
 }
