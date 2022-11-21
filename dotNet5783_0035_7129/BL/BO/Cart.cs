@@ -39,7 +39,7 @@ public class Cart
        Customer Name={CustomerName}, 
        Customer Email - {CustomerEmail},
        Customer Adress: {CustomerAdress},
-       Order Details: {Items},
+       Order Details: {string.Join('\n', Items)},
        Total Price:{TotalPrice}";
 
 }
