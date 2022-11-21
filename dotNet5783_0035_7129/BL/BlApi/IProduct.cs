@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace BlApi;
 
 public interface IProduct
-{
     /// <summary>
     /// The method asking for list of products
     /// </summary>
