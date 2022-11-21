@@ -157,7 +157,7 @@ internal class Product:BlApi.IProduct
             bool update = false;
             if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
             {
-                update = dalList1.IProduct.Update(ref product);
+                update = dalList1.IProduct.Update( product);
             }
             if (update)
                 throw new BO.InvalidVariableException();

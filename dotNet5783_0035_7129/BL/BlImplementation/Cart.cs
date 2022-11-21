@@ -188,6 +188,8 @@ internal class Cart:ICart
                 dalList1.IOrderItem.Add(orderItem111);
                 DO.Product p = dalList1.IProduct.PrintByID(o.ProductID);
                 p.InStock -= o.Amount;  //reduces the amount of product in stock.
+                dalList1.IProduct.Update(p);
+
             }
         }
         catch (Exception)
