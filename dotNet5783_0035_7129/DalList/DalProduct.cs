@@ -72,54 +72,19 @@ internal class DalProduct:IProduct
     /// </summary>
     /// <param name="p"></param>IProduct
     /// <returns></returns> True if the ID in the database, else return false
-    public bool Update( ref Product p)
+    public bool Update( Product p)
     {
-        //DO.Product productUpdate = new Product 
-        //{ ID=ID1,Name=name1,Category=category1,Price=price1,InStock=inStock1};
-        //foreach (Product p in products)
-        //{
-        //    if (ID1 == p.ID)
-        //    {
-        //        products.Remove(p);
-        //        products.Add(productUpdate);
-        //        return true;
-        //    }
-        //};
-        //return false;
-        Console.WriteLine("Do you want to change the name?, enter y for yes and n for no");
-        string answer = Console.ReadLine();
-        if (answer == "y")
+       
+        foreach (Product product in products)
         {
-            Console.WriteLine("Enter name");
-            string name1 = Console.ReadLine();
-            p.Name = name1;
-        }
-
-        Console.WriteLine("Do you want to change the category?, enter y for yes and n for no");
-        string answer1 = Console.ReadLine();
-        if (answer == "y")
-        {
-            Console.WriteLine("Enter category");
-            Enums.Category category1 = (Enums.Category)Console.Read();
-            p.Category = category1;
-        }
-        Console.WriteLine("Do you want to change the price?, enter y for yes and n for no");
-        string answer2 = Console.ReadLine();
-        if (answer == "y")
-        {
-            Console.WriteLine("Enter price");
-            double price1 = Console.Read();
-            p.Price = price1;
-        }
-        Console.WriteLine("Do you want to change the in stock?, enter y for yes and n for no");
-        string answer3 = Console.ReadLine();
-        if (answer == "y")
-        {
-            Console.WriteLine("Enter in stock?");
-            int inStock1 = Console.Read();
-            p.InStock = inStock1;
-        }
-        return true;
+            if (product.ID == p.ID)
+            {
+                products.Remove(product);
+                products.Add(p);
+                return true;
+            }
+        };
+        return false;
     }   
     
 }
