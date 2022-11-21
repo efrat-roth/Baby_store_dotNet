@@ -32,11 +32,11 @@ public struct Order
     /// <summary>
     /// The date of the ship day.
     /// </summary>
-    public DateTime ShipDate { get; set; }
+    public DateTime? ShipDate { get; set; }
     /// <summary>
     /// The date of the delivery day
     /// </summary>
-    public DateTime DeliveryDate { get; set; }
+    public DateTime? DeliveryDate { get; set; }
     /// <summary>
     /// The order information.
     /// </summary>

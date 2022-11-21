@@ -125,27 +125,27 @@ internal class Cart:ICart
 
             if (adress11 == null || name11 == null || emailAdress == null //checks if all the strings fields is correct.
                 || emailAdress[0] == '@' || emailAdress[emailAdress.Length - 1] == '@')
-                throw new Exception(" ");
+                throw new BO.InvalidVariableException();
 
             bool isRight = false;
             foreach (char c in emailAdress)//checks if email is correct and has the @ in their.
                 if (c == '@')
                     isRight = true;
             if (!isRight)
-                throw new Exception(" ");
+                throw new BO.InvalidVariableException();
 
             bool ifExist = false;
             foreach (OrderItem o in finalCart.Items)   //Goes through all products order in the cart.
             {
                 if (o.Amount < 0)  //checks if the amount is positive.
-                    throw new Exception(" ");
+                    throw new BO.InvalidVariableException();
 
                 foreach (DO.Product temporaryProduct in ProductInStore)  //goes througe all products in store.
                 {
                     if (o.ProductID == temporaryProduct.ID)  //checks if the product is exist.
                     {
                         ifExist = true;
-                        if (o.Amount > temporaryProduct.InStock)   //checks if there are products in stock.
+                        if (o.Amount > temporaryProduct.InStock) //checks if there are products in stock.
                             throw new Exception(" ");
                     }
                 }
@@ -159,8 +159,8 @@ internal class Cart:ICart
             finalOrder.CustomerName = name11;
             finalOrder.CustomerEmail = emailAdress;
             finalOrder.OrderDate = DateTime.Now;
-            finalOrder.ShipDate = 0;
-            finalOrder.DeliveryDate = 0;
+            finalOrder.ShipDate = null;
+            finalOrder.DeliveryDate = null;
             int id = dalList1.IOrder.Add(finalOrder);   //adds the new order  
             DO.OrderItem orderItem111 = new DO.OrderItem();
             foreach (BO.OrderItem o in finalCart.Items)  //insert the order items details to the order items list.

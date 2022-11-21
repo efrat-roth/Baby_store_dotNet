@@ -78,7 +78,6 @@ internal class Product:BlApi.IProduct
             {
                 throw message;
             }
-
         }
     }
     /// <summary>
@@ -95,6 +94,7 @@ internal class Product:BlApi.IProduct
             try
             {
                 DO.Product p = dalList1.IProduct.PrintByID(ID);
+                List<DO.OrderItem> item;
                 ProductItem product = new ProductItem
                 {
                     ID = p.ID,
