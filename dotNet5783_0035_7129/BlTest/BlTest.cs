@@ -52,7 +52,8 @@ getpc to customer to get details of product.
 add to add product to store.
 up to update product in the store.
 del to delete product from the store.");
-                choice = (Enums.ProductEnum)Console.Read();
+                string s= Console.ReadLine();
+                Enums.ProductEnum.TryParse(s,out choice);
                 switch (choice)
                 {
                     case Enums.ProductEnum.getlp:   //asks for list of products
@@ -150,18 +151,23 @@ del to delete product from the store.");
         }
         void manageOrder()
         {
-            Enums.OrderEnum option = Enums.OrderEnum.GetList;
+            int option = 1;
 
-            while (option != Enums.OrderEnum.Exit)
+            while (option != 0)
             {
-                Console.WriteLine($@"Enter
-GetList to get the all orders
-Details to get the details of order
-Delivered to update the delivery of order
-Arrived to update that order arrived
-Tracking to track after order
-Update to update order");
-                option = (Enums.OrderEnum)Console.Read();
+                while (option > 0 & option < 7)
+                {
+                    Console.WriteLine($@"Enter
+1 to get the all orders
+2 to get the details of order
+3 to update the delivery of order
+4 to update that order arrived
+5 to track after order
+6 to update order
+0 to exit");
+                    option = Console.Read();
+                }
+               
                 switch (option)
                 {
                     case Enums.OrderEnum.GetList://return the all orders in the store
