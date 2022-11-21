@@ -14,15 +14,15 @@ internal class BlTest
         IBl bl = new BL();
 
         mainActions();
-        Cart createCart()
+        Cart createCart()//create new cart by accept the values from the user
         {
             Console.WriteLine("Enter Customer Name");
-            String name = Console.ReadLine();
+            string name = Console.ReadLine();
             Console.WriteLine("Enter Customer Email");
-            String email = Console.ReadLine();
+            string email = Console.ReadLine();
             bool isRight = false;
-            foreach (char c in email)//checks if email is correct and has the @ in their.
-                if (c == '@')
+            foreach (char d in email)//checks if email is correct and has the @ in their.
+                if (d == '@')
                     isRight = true;
             if (!isRight)
                 throw new BO.InvalidVariableException();
@@ -290,11 +290,11 @@ Update to update order");
         }
         void manageCart()
         {
-            Enums.CartEnum option = Enums.CartEnum.Update;
+            Enums.CartEnum option = Enums.CartEnum.Update;//resets the variable
 
             while (option != Enums.CartEnum.Exit)
             {
-                Cart c = new Cart();
+                Cart c = new Cart();//create new cart
                 try
                 {
                     c = createCart();
@@ -310,7 +310,7 @@ Make to make an order");
                 option = (Enums.CartEnum)Console.Read();
                 switch (option)
                 {
-                    case Enums.CartEnum.Add:
+                    case Enums.CartEnum.Add://add product to the cart
                         {
                             try
                             {
@@ -324,20 +324,39 @@ Make to make an order");
                             break;
 
                         }
-                    case Enums.CartEnum.Update:
+                    case Enums.CartEnum.Update://update amount of product in cart
                         {
-                            Console.WriteLine("Enter product ID");
-                            int id = Console.Read();
-                            Console.WriteLine("Enter the new Amount");
-                            int amount = Console.Read();
+                            try
+                            {
+                                Console.WriteLine("Enter product ID");
+                                int id = Console.Read();
+                                Console.WriteLine("Enter the new Amount");
+                                int amount = Console.Read();
+                                c = bl.Cart.UpdateProductAmount(c, id, amount);
+                                Console.WriteLine(c);
+                            }
+                            catch(Exception n)
+                            {
+
+                            }
                             break;
                         }
-                    case Enums.CartEnum.Make:
+                    case Enums.CartEnum.Make://make an order by the cart
                         {
+                            try
+                            {
+                                DO.Order order = bl.Cart.MakeOrder(c, c.CustomerAdress, c.CustomerName, c.CustomerEmail);
+                                Console.WriteLine(order);
+                            }
+                            catch(Exception m)
+                            {
+                                
+                            }
                             break;
                         }
-                    case Enums.CartEnum.Exit:
+                    case Enums.CartEnum.Exit://exit the actions on cart
                         {
+                            mainActions();
                             break;
                         }
                 }
