@@ -145,7 +145,7 @@ internal class Product:BlApi.IProduct
         }
     }
     /// <summary>
-    /// Updates sproduct in the store.
+    /// Updates product in the store.
     /// </summary>
     /// <param name="product"></param>
     /// <exception cref="Exception"></exception>

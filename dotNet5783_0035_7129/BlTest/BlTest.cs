@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using BO;
 
 namespace BlTest;
 
@@ -50,7 +51,29 @@ exit to exit the store");
 
         void manageProduct()
         {
-            string choice = "start";
+            Enums.ProductEnum choice = Enums.ProductEnum.getlp;
+            while(choice != Enums.ProductEnum.exit)
+            {
+                Console.WriteLine(
+                                       $@"Enter
+getlp to get the list of products.
+getpm to manager to get the details of product.
+getpc to customer to get details of product.
+add to add product to store.
+up to update product in the store.
+del to delete product from the store.");
+                choice =  (Enums.ProductEnum)Console.Read();
+                switch (choice)
+                {
+                    case Enums.ProductEnum.getlp:
+                        {
+
+                            break;
+                        }
+                   
+                        
+                }
+            }
 
         }
 
