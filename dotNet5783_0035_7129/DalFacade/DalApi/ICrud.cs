@@ -21,7 +21,7 @@ public interface ICrud <T>
     /// </summary>
     /// <param name="t"></param>
     /// <returns></returns>
-   bool Update(ref T t);
+   bool Update( T t);
     /// <summary>
     /// 
     /// </summary>
