@@ -74,7 +74,7 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="p"></param>IOrder
     /// <returns></returns> True if the ID in the database, else return false
-    public bool Update(ref Order  p)
+    public bool Update(Order  p)
     {
 
         
