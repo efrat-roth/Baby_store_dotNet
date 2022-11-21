@@ -30,7 +30,7 @@ internal class Cart:ICart
     {
         try
         {           
-            DO.Product ProductInStore = dalList1.IProduct.PrintByID(id);  //variable for the product.            
+            DO.Product ProductInStore =dalList1.IProduct.PrintByID(id);  //variable for the product.            
             foreach (OrderItem o  in finalCart.Items )   //Goes through all products order in the cart.
             {
                 if(o.ProductID == id)   //If the product is on order
@@ -51,13 +51,16 @@ internal class Cart:ICart
             if (ProductInStore.InStock > 0)   //If the product is not on order and is in
                                               //stock then it will be added to the cart.
             {
-                BO.OrderItem newProductInOrder = new BO.OrderItem();
-                newProductInOrder.ID = randomIdForOrderItem++;
-                newProductInOrder.Price = ProductInStore.Price;
-                newProductInOrder.TotalPrice = ProductInStore.Price;
-                newProductInOrder.ProductID = id;
-                newProductInOrder.Name = ProductInStore.Name;
-                newProductInOrder.Amount++;
+                BO.OrderItem newProductInOrder = new BO.OrderItem
+                { 
+                    ID = randomIdForOrderItem++,
+                    Price = ProductInStore.Price,
+                    TotalPrice = ProductInStore.Price,
+                    ProductID = id,
+                    Name = ProductInStore.Name,
+                    Amount = 1,
+                };
+                
                 finalCart.Items.Add(newProductInOrder);
                 finalCart.TotalPrice += newProductInOrder.Price;
                 return finalCart;
