@@ -19,7 +19,7 @@ public struct Product
     /// <summary>
     /// The category of the product.
     /// </summary>
-    public Enum Category { get; set; }
+    public Enums.Category Category { get; set; }
     /// <summary>
     /// Uniqe price for each product.
     /// </summary>

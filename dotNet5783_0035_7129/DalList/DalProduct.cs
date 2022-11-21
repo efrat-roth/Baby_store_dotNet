@@ -72,8 +72,20 @@ internal class DalProduct:IProduct
     /// </summary>
     /// <param name="p"></param>IProduct
     /// <returns></returns> True if the ID in the database, else return false
-    public bool Update(ref Product p)
+    public bool Update( ref Product p)
     {
+        //DO.Product productUpdate = new Product 
+        //{ ID=ID1,Name=name1,Category=category1,Price=price1,InStock=inStock1};
+        //foreach (Product p in products)
+        //{
+        //    if (ID1 == p.ID)
+        //    {
+        //        products.Remove(p);
+        //        products.Add(productUpdate);
+        //        return true;
+        //    }
+        //};
+        //return false;
         Console.WriteLine("Do you want to change the name?, enter y for yes and n for no");
         string answer = Console.ReadLine();
         if (answer == "y")
