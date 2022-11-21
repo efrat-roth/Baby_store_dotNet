@@ -12,10 +12,12 @@ namespace BO;
 public class IdDoesNotExistException : Exception
 {
     public IdDoesNotExistException(string message = "The item is not in the database") : base(message) { }
+    
+    public IdDoesNotExistException():base(){}  
     override public string ToString() => $@"
      The item is not in the database";
-
 }
+
 /// <summary>
 /// Throwing the error problem. There is another is as requested.
 /// </summary>

@@ -161,7 +161,7 @@ namespace Dal
                 {
                     order.ShipDate = order.OrderDate.AddMinutes(rnd.Next(10, 100));
                     if (rnd.Next(0, 100) > 40)
-                        order.DeliveryDate = order.ShipDate.AddDays(rnd.Next(1, 4));
+                        order.DeliveryDate = order.ShipDate.Value.AddDays(rnd.Next(1, 4));
                     else
                         order.DeliveryDate = DateTime.MinValue;
                 }
