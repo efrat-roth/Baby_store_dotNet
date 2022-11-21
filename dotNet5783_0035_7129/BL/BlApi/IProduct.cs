@@ -41,5 +41,8 @@ public interface IProduct
     /// </summary>
     /// <param name="ID"></param>Integer
     /// <exception cref="Exception"></exception>
-   public void DeleteProduct(int ID);
+    public void DeleteProduct(int ID);
+
 }
+
+
