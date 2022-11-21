@@ -20,20 +20,31 @@ internal class Product:BlApi.IProduct
     /// <returns></returns>List<ProductForList>
     public List<ProductForList> GetListOfProduct()
     {
-        IEnumerable<DO.Product> list = dalList1.IProduct.PrintAll();
-        List<ProductForList> productList = new List<ProductForList>();
-        foreach (DO.Product p in list)
+        try
         {
-            ProductForList listProducts = new ProductForList
+            IEnumerable<DO.Product> list = dalList1.IProduct.PrintAll();
+            List<ProductForList> productList = new List<ProductForList>();
+            foreach (DO.Product p in list)
             {
-                ID = p.ID,
-                Name = p.Name,
-                Price = p.Price,
-                Category = (Enums.Category)p.Category
-            };
-            productList.Add(listProducts);
+                ProductForList listProducts = new ProductForList
+                {
+                    ID = p.ID,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Category = (Enums.Category)p.Category
+                };
+                productList.Add(listProducts);
+            }
+            return productList;
         }
-        return productList;
+        catch(BO.ListIsEmptyException m)
+        {
+            throw m;
+        }
+        catch(Exception m)
+        {
+            throw m;
+        }
     }
     /// <summary>
     /// The method return details of product
@@ -43,7 +54,7 @@ internal class Product:BlApi.IProduct
     public BO.Product GetProductManager(int ID)
     {
         if (ID < 0)
-            throw new Exception("The id is invalid");
+            throw new BO.InvalidVariableException();
         else
         {           
             try
@@ -59,10 +70,15 @@ internal class Product:BlApi.IProduct
                 };
                 return product;
             }
+            catch(BO.IdDoesNotExistException m)
+            {
+                throw m;
+            }
             catch (Exception message)
             {
                 throw message;
             }
+
         }
     }
     /// <summary>
@@ -73,7 +89,7 @@ internal class Product:BlApi.IProduct
     public ProductItem GetProductCustomer(int ID)
     {
         if (ID < 0)
-            throw new Exception("The id is invalid");
+            throw new BO.InvalidVariableException();
         else
         {          
             try
@@ -89,6 +105,10 @@ internal class Product:BlApi.IProduct
                 };       
                 return product;
             }
+            catch(BO.IdDoesNotExistException m)
+            {
+                throw m;
+            }
             catch (Exception message)
             {
                 throw message;
@@ -96,6 +116,10 @@ internal class Product:BlApi.IProduct
         }
 
     }
+    /// <summary>
+    /// Adding a product
+    /// </summary>
+    /// <param name="product"></param>Product to add
     public void AddProduct(DO.Product product)
     {
         try
@@ -105,7 +129,15 @@ internal class Product:BlApi.IProduct
                 int id = dalList1.IProduct.Add(product);
                 return;
             }
-            throw new Exception("Cannot add the details are wrong");
+            throw new BO.InvalidVariableException();
+        }
+        catch(BO.InvalidVariableException m)
+        {
+            throw m;
+        }
+        catch(BO.IdAlreadyExistException m)
+        {
+            throw m;
         }
         catch (Exception message)
         {
@@ -128,8 +160,12 @@ internal class Product:BlApi.IProduct
                 update = dalList1.IProduct.Update(ref product);
             }
             if (update)
-                throw new Exception("Cannot update because the details are wrong");
+                throw new BO.InvalidVariableException();
             return;
+        }
+        catch(BO.InvalidVariableException m)
+        {
+            throw m;
         }
         catch(Exception message)
         {
@@ -144,18 +180,37 @@ internal class Product:BlApi.IProduct
     public void DeleteProduct(int ID)
     {
         if (ID < 0)
-            throw new Exception("The ID is invalid");
-        IEnumerable<DO.Order> orders = dalList1.IOrder.PrintAll();
-        foreach (DO.Order o in orders)
+            throw new BO.InvalidVariableException();
+        try
         {
-            IEnumerable<DO.OrderItem> orderItems = dalList1.IOrderItem.PrintAllByOrder(o.ID);
-            foreach (DO.OrderItem item in orderItems)
+            IEnumerable<DO.Order> orders = dalList1.IOrder.PrintAll();
+            foreach (DO.Order o in orders)
             {
-                if (item.ProductID == ID)
-                    throw new Exception("The product is in order");
+                IEnumerable<DO.OrderItem> orderItems = dalList1.IOrderItem.PrintAllByOrder(o.ID);
+                foreach (DO.OrderItem item in orderItems)
+                {
+                    if (item.ProductID == ID)
+                        throw new BO.CanNotDOActionException();
+                }
             }
+            if (!dalList1.IProduct.Delete(ID))
+                throw new BO.IdDoesNotExistException();
         }
-        if (!dalList1.IProduct.Delete(ID))
-            throw new Exception("The product is not in the store");
+        catch(BO.ListIsEmptyException m)
+        {
+            throw m;
+        }
+        catch (BO.CanNotDOActionException m)
+        {
+            throw m;
+        }
+        catch (BO.IdDoesNotExistException m)
+        {
+            throw m;
+        }
+        catch (Exception m)
+        {
+            throw m;
+        }
     }
 }
