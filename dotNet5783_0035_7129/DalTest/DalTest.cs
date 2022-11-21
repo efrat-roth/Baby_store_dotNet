@@ -174,7 +174,10 @@ Exit to exit the product manager");
                                 break;
                             }
                         case Enums.ProductEnum.Exit:
-                            break;
+                            {
+                                mainActions();
+                                break;
+                            }
                     }
 
                     Console.WriteLine(@"Enter
@@ -385,8 +388,11 @@ Exit to exit the program");
                                 break;
                             }
                         case Enums.OrderEnum.Exit:
+                            {
+                                mainActions();
+                                break;
 
-                            break;
+                            }
                     }
                     Console.WriteLine(@"Enter
 Adding to add an order
@@ -552,8 +558,12 @@ Exit to exit the program");
                                 break;
                             }
                             case Enums.OrderItemEnum.Exit:
+                            {
+                                mainActions();
                                 break;
-                            case Enums.OrderItemEnum.PrintByTwoId://Prints orderItem by two identifiers
+
+                            }
+                        case Enums.OrderItemEnum.PrintByTwoId://Prints orderItem by two identifiers
                                 {
                                 try
                                 {
@@ -641,14 +651,16 @@ Exit to exit the program");
                             {
                                 break;
                             }
-                            Console.WriteLine(
-                                             $@"Enter
+                          
+                    }
+                    Console.WriteLine(
+                                           $@"Enter
 product to manage the products
 order to manage the orders
 orderItem to manage the items in the order
 exit to exit the store");
-                            choice = Console.ReadLine();
-                    }
+                    choice = Console.ReadLine();
+
                 } while (choice != "exit");
             }
         }
