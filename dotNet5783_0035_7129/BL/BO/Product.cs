@@ -24,7 +24,7 @@ public class Product
     /// <summary>
     /// Category of product
     /// </summary>
-    public Enum Category { get; set; }
+    public Enums.Category Category { get; set; }
     /// <summary>
     /// Check if the product in stock
     /// </summary>
