@@ -157,22 +157,26 @@ internal class Cart:ICart
                 throw new Exception(" ");
 
             // if everything is correct ***        
-            DO.Order finalOrder = new DO.Order();
-            finalOrder.CustomerAdress = adress11;   //creates new order.
-            finalOrder.CustomerName = name11;
-            finalOrder.CustomerEmail = emailAdress;
-            finalOrder.OrderDate = DateTime.Now;
-            finalOrder.ShipDate = null;
-            finalOrder.DeliveryDate = null;
+            DO.Order finalOrder = new DO.Order
+            {
+                CustomerAdress = adress11,   //creates new order.
+                CustomerName = name11,
+                CustomerEmail = emailAdress,
+                OrderDate = DateTime.Now,
+                ShipDate = null,
+                DeliveryDate = null,
+            };
             int id = dalList1.IOrder.Add(finalOrder);   //adds the new order  
-            DO.OrderItem orderItem111 = new DO.OrderItem();
             foreach (BO.OrderItem o in finalCart.Items)  //insert the order items details to the order items list.
             {
-                orderItem111.ID = o.ID;
-                orderItem111.Amount = o.Amount;
-                orderItem111.OrderID = id;
-                orderItem111.Price = o.Price;
-                orderItem111.ProductID = o.ProductID;
+                DO.OrderItem orderItem111 = new DO.OrderItem
+                {
+                   ID = o.ID,
+                   Amount = o.Amount,
+                   OrderID = id,
+                   Price = o.Price,
+                   ProductID = o.ProductID,               
+                };
                 dalList1.IOrderItem.Add(orderItem111);
                 DO.Product p = dalList1.IProduct.PrintByID(o.ProductID);
                 p.InStock -= o.Amount;  //reduces the amount of product in stock.
