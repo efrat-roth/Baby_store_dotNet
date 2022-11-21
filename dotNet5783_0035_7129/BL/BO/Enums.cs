@@ -16,5 +16,6 @@ public class Enums
     /// Enum for the status of the order.
     /// </summary>
     public enum OrderStatus {ConfirmedOrder, DeliveredOrder, ArrivedOrder }
+    public enum 
 
 }
