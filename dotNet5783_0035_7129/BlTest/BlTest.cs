@@ -58,85 +58,126 @@ del to delete product from the store.");
                 {
                     case Enums.ProductEnum.getlp:   //asks for list of products
                         {
-                            List<ProductForList> lists = new List<ProductForList>();
-                            lists = bl.Product.GetListOfProduct();
-                            Console.WriteLine(lists);
+                            try
+                           {
+                                List<ProductForList> lists = new List<ProductForList>();
+                                lists = bl.Product.GetListOfProduct();
+                                Console.WriteLine(lists);
+                            }
+                            catch (Exception e)
+                            {
+
+                            }
                             break;
                         }
                     case Enums.ProductEnum.getpm:   //returns details of product
                         {
-                            Console.WriteLine("Enter id of product");
-                            int id = Console.Read();
-                            Product product = bl.Product.GetProductManager(id);
-                            Console.WriteLine(product);
+                            try
+                            {
+                                Console.WriteLine("Enter id of product");
+                                int id = Console.Read();
+                                Product product = bl.Product.GetProductManager(id);
+                                Console.WriteLine(product);
+                            }
+                            catch (Exception e)
+                            {
+
+                            }                           
                             break;
                         }
                     case Enums.ProductEnum.getpc:   //returns details of product
                         {
-                            Console.WriteLine("Enter id of product");
-                            int id = Console.Read();
-                            Product product = bl.Product.GetProductManager(id);
-                            Console.WriteLine(product);
+                            try
+                            {
+                                Console.WriteLine("Enter id of product");
+                                int id = Console.Read();
+                                Product product = bl.Product.GetProductManager(id);
+                                Console.WriteLine(product);
+                            }
+                            catch (Exception e)
+                            {
+
+                            }
                             break;
                         }
                     case Enums.ProductEnum.up:  //Updates product in the store.
                         {
-                            DO.Product product = new DO.Product();
-                            Console.WriteLine("Enter the id of product to update");
-                            int id = Console.Read();
-                            if (id <= 0)
-                                throw new InvalidVariableException();
-                            product.ID = id;
-                            Console.WriteLine("Enter the name of product to update");
-                            string name1 = Console.ReadLine();
-                            if (name1 == null)
-                                throw new InvalidVariableException();
-                            product.Name = name1;
-                            Console.WriteLine("Enter the price of product to update");
-                            double price1 = Console.Read();
-                            if (price1 < 0)
-                                throw new InvalidVariableException();
-                            product.Price = price1;
-                            Console.WriteLine("Enter the category of product to update");
-                            DO.Enums.Category category1 = (DO.Enums.Category)Console.Read();
-                            product.Category = category1;
-                            Console.WriteLine("Enter amount of products in stock");
-                            int inStock1 = Console.Read();
-                            if (inStock1 < 0)
-                                throw new InvalidVariableException();
-                            product.InStock = inStock1;
-                            bl.Product.UpdatingProductDetails(product);
-                            Console.WriteLine(product);
+                            try
+                            {
+                                DO.Product product = new DO.Product();
+                                Console.WriteLine("Enter the id of product to update");
+                                int id = Console.Read();
+                                if (id <= 0)
+                                    throw new InvalidVariableException();
+                                product.ID = id;
+                                Console.WriteLine("Enter the name of product to update");
+                                string name1 = Console.ReadLine();
+                                if (name1 == null)
+                                    throw new InvalidVariableException();
+                                product.Name = name1;
+                                Console.WriteLine("Enter the price of product to update");
+                                double price1 = Console.Read();
+                                if (price1 < 0)
+                                    throw new InvalidVariableException();
+                                product.Price = price1;
+                                Console.WriteLine("Enter the category of product to update");
+                                DO.Enums.Category category1 = (DO.Enums.Category)Console.Read();
+                                product.Category = category1;
+                                Console.WriteLine("Enter amount of products in stock");
+                                int inStock1 = Console.Read();
+                                if (inStock1 < 0)
+                                    throw new InvalidVariableException();
+                                product.InStock = inStock1;
+                                bl.Product.UpdatingProductDetails(product);
+                                Console.WriteLine(product);
+                            }
+                            catch (Exception e)
+                            {
 
+                            }
                             break;
                         }
                     case Enums.ProductEnum.add:   //Adding a product
                         {
-                            DO.Product p = new DO.Product();
-                            Console.WriteLine("Enter the id of product to add");
-                            int id1 = Console.Read();
-                            p.ID = id1;
-                            Console.WriteLine("Enter the name of product to add");
-                            string name1 = Console.ReadLine();
-                            p.Name = name1;
-                            Console.WriteLine("Enter the category of product to add");
-                            DO.Enums.Category category1 = (DO.Enums.Category)Console.Read();
-                            p.Category = category1;
-                            Console.WriteLine("Enter the price of product to add");
-                            double price1 = Console.Read();
-                            p.Price = price1;
-                            Console.WriteLine("Enter amount of products in stock");
-                            int inStock1 = Console.Read();
-                            p.InStock = inStock1;
-                            bl.Product.AddProduct(p);
-                            Console.WriteLine(p);
+                            try
+                            {
+                                DO.Product p = new DO.Product();
+                                Console.WriteLine("Enter the id of product to add");
+                                int id1 = Console.Read();
+                                p.ID = id1;
+                                Console.WriteLine("Enter the name of product to add");
+                                string name1 = Console.ReadLine();
+                                p.Name = name1;
+                                Console.WriteLine("Enter the category of product to add");
+                                DO.Enums.Category category1 = (DO.Enums.Category)Console.Read();
+                                p.Category = category1;
+                                Console.WriteLine("Enter the price of product to add");
+                                double price1 = Console.Read();
+                                p.Price = price1;
+                                Console.WriteLine("Enter amount of products in stock");
+                                int inStock1 = Console.Read();
+                                p.InStock = inStock1;
+                                bl.Product.AddProduct(p);
+                                Console.WriteLine(p);
+                            }
+                            catch (Exception e)
+                            {
+
+                            }
                             break;
                         }
                     case Enums.ProductEnum.del:  // deletes product from the store.
                         {
-                            Console.WriteLine("Enter id of product you want to delete");
-                            int id = Console.Read();
-                            bl.Product.DeleteProduct(id);
+                            try
+                            {
+                                Console.WriteLine("Enter id of product you want to delete");
+                                int id = Console.Read();
+                                bl.Product.DeleteProduct(id);
+                            }
+                            catch (Exception e)
+                            {
+
+                            }
                             break;
                         }
                     case Enums.ProductEnum.exit:   // exit the product functions area.
@@ -289,6 +330,7 @@ del to delete product from the store.");
                         }
                     case Enums.OrderEnum.Exit:
                         {
+                            mainActions();
                             break;
                         }
                 }
