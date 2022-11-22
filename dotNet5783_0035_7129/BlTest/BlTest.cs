@@ -167,6 +167,8 @@ del to delete product from the store.");
 0 to exit");
                     option = Console.Read();
                 }
+                string name = Console.ReadLine();
+                Enums.OrderEnum o = Enums.OrderEnum.Parse<Enums.OrderEnum>(name);
                
                 switch (option)
                 {
