@@ -194,7 +194,7 @@ namespace Dal
         /// <returns></returns>
         internal static int ProductIndex(string name)
         {
-            for (int i=0;i<products.Count;i++)
+            for (int i=0;i<products.Count();i++)
             {
                 if (products.ElementAt(i).Name == name)
                     return i;

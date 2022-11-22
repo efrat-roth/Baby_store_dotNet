@@ -2,6 +2,7 @@
 using BlApi;
 using BO;
 using System.Collections.Generic;
+using System;
 
 namespace BlTest;
 
@@ -41,22 +42,29 @@ internal class BlTest
 
         void manageProduct() //manages all the methods in product
         {
-            Enums.ProductEnum choice = Enums.ProductEnum.getlp;
-            while (choice != Enums.ProductEnum.exit)  //while the user wants to use the methods of product.
+            int choice1 =0;
+            while (choice1 != 7)  //while the user wants to use the methods of product.
             {
                 Console.WriteLine(
-                                       $@"Enter
-getlp to get the list of products.
-getpm to manager to get the details of product.
-getpc to customer to get details of product.
-add to add product to store.
-up to update product in the store.
-del to delete product from the store.");
-                string s= Console.ReadLine();
-                Enums.ProductEnum.TryParse(s,out choice);
-                switch (choice)
+                   $@"Enter
+1 to get the list of products.
+2 to manager to get the details of product.
+3 to customer to get details of product.
+4 to add product to store.
+5 to update product in the store.
+6 to delete product from the store.
+7 to exit product");
+
+                int.TryParse(Console.ReadLine(),out choice1);
+                while (choice1 < 1 | choice1 > 7)
                 {
-                    case Enums.ProductEnum.getlp:   //asks for list of products
+                    Console.WriteLine($@"Enter valid number");
+                    int.TryParse(Console.ReadLine(),out choice1);
+                }
+                
+                switch (choice1)
+                {
+                    case 1:   //asks for list of products
                         {
                             try
                            {
@@ -70,7 +78,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.ProductEnum.getpm:   //returns details of product
+                    case 2:   //returns details of product
                         {
                             try
                             {
@@ -85,7 +93,7 @@ del to delete product from the store.");
                             }                           
                             break;
                         }
-                    case Enums.ProductEnum.getpc:   //returns details of product
+                    case 3:   //returns details of product
                         {
                             try
                             {
@@ -100,7 +108,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.ProductEnum.up:  //Updates product in the store.
+                    case 4:  //Updates product in the store.
                         {
                             try
                             {
@@ -137,7 +145,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.ProductEnum.add:   //Adding a product
+                    case 5:   //Adding a product
                         {
                             try
                             {
@@ -166,7 +174,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.ProductEnum.del:  // deletes product from the store.
+                    case 6:  // deletes product from the store.
                         {
                             try
                             {
@@ -180,7 +188,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.ProductEnum.exit:   // exit the product functions area.
+                    case 7:   // exit the product functions area.
                         {
                             mainActions();
                             break;
@@ -192,28 +200,29 @@ del to delete product from the store.");
         }
         void manageOrder()
         {
-            int option = 1;
+            int option = 0;
 
-            while (option != 0)
+            while (option != 7)
             {
-                while (option > 0 & option < 7)
-                {
-                    Console.WriteLine($@"Enter
+                Console.WriteLine($@"Enter
 1 to get the all orders
 2 to get the details of order
 3 to update the delivery of order
 4 to update that order arrived
 5 to track after order
 6 to update order
-0 to exit");
-                    option = Console.Read();
+7 to exit");
+                int.TryParse(Console.ReadLine(), out option);
+                while (option < 1 & option > 7)
+                {
+                    Console.WriteLine($@"Enter valid number");
+                    int.TryParse(Console.ReadLine(), out option);
                 }
-                string name = Console.ReadLine();
-                Enums.OrderEnum o = Enums.OrderEnum.Parse<Enums.OrderEnum>(name);
+
                
                 switch (option)
                 {
-                    case Enums.OrderEnum.GetList://return the all orders in the store
+                    case 1://return the all orders in the store
                         {
                             try
                             {
@@ -230,7 +239,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.OrderEnum.Details://return details of order
+                    case 2://return details of order
                         {
                             Console.WriteLine("Enter m if yoy are mannager, and c for cstumer");
                             char identity = char.Parse(Console.ReadLine());
@@ -259,7 +268,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.OrderEnum.Delivered://update order as delivered
+                    case 3://update order as delivered
                         {
                             try
                             {
@@ -275,7 +284,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.OrderEnum.Arrived://update order as an arrived
+                    case 4://update order as an arrived
                         {
                             try
                             {
@@ -291,7 +300,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.OrderEnum.Tracking://track afetr an order
+                    case 5://track afetr an order
                         {
                             try
                             {
@@ -307,7 +316,7 @@ del to delete product from the store.");
                             }
                             break;
                         }
-                    case Enums.OrderEnum.Update://update amount of product in order
+                    case 6://update amount of product in order
                         {
                             try
                             {
@@ -328,7 +337,7 @@ del to delete product from the store.");
 
                             break;
                         }
-                    case Enums.OrderEnum.Exit:
+                    case 7:
                         {
                             mainActions();
                             break;
@@ -340,9 +349,9 @@ del to delete product from the store.");
         }
         void manageCart()
         {
-            Enums.CartEnum option = Enums.CartEnum.Update;//resets the variable
+            int option = 0;//resets the variable
 
-            while (option != Enums.CartEnum.Exit)
+            while (option != 4)
             {
                 Cart c = new Cart();//create new cart
                 try
@@ -354,13 +363,19 @@ del to delete product from the store.");
 
                 }
                 Console.WriteLine($@"Enter
-Add to add product to cart
-Update to update product amount
-Make to make an order");
-                option = (Enums.CartEnum)Console.Read();
+1 to add product to cart
+2 to update product amount
+3 to make an order
+4 to exit");
+                int.TryParse(Console.ReadLine(), out option);
+                while (option < 1 | option > 4)
+                {
+                    Console.WriteLine("Enter valid number");
+                    int.TryParse(Console.ReadLine(), out option);
+                }
                 switch (option)
                 {
-                    case Enums.CartEnum.Add://add product to the cart
+                    case 1://add product to the cart
                         {
                             try
                             {
@@ -374,7 +389,7 @@ Make to make an order");
                             break;
 
                         }
-                    case Enums.CartEnum.Update://update amount of product in cart
+                    case 2://update amount of product in cart
                         {
                             try
                             {
@@ -391,7 +406,7 @@ Make to make an order");
                             }
                             break;
                         }
-                    case Enums.CartEnum.Make://make an order by the cart
+                    case 3://make an order by the cart
                         {
                             try
                             {
@@ -404,7 +419,7 @@ Make to make an order");
                             }
                             break;
                         }
-                    case Enums.CartEnum.Exit://exit the actions on cart
+                    case 4://exit the actions on cart
                         {
                             mainActions();
                             break;
