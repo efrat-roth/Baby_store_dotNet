@@ -146,7 +146,10 @@ internal class Cart:ICart
                 if (c == '@')
                     isRight = true;
                 if (c == ' ')
+                {
                     isRight = false;
+                    break;
+                }
             }
             if (!isRight)
                 throw new BO.InvalidVariableException();
