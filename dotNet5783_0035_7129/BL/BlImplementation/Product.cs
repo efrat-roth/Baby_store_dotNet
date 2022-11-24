@@ -22,7 +22,7 @@ internal class Product:BlApi.IProduct
     {
         try
         {
-            IEnumerable<DO.Product> list = dalList1.IProduct.PrintAll();
+            IEnumerable<DO.Product> list = dalList1.Product.PrintAll();
             List<ProductForList> productList = new List<ProductForList>();
             foreach (DO.Product p in list)
             {
@@ -59,7 +59,7 @@ internal class Product:BlApi.IProduct
         {           
             try
             {
-                DO.Product p = dalList1.IProduct.PrintByID(ID);
+                DO.Product p = dalList1.Product.PrintByID(ID);
                 BO.Product product = new BO.Product
                 {
                     ID = p.ID,
@@ -93,7 +93,7 @@ internal class Product:BlApi.IProduct
         {          
             try
             {
-                DO.Product p = dalList1.IProduct.PrintByID(ID);
+                DO.Product p = dalList1.Product.PrintByID(ID);
                 bool inStock1 = false;
                 if(p.InStock>0)
                     inStock1 = true;
@@ -128,7 +128,7 @@ internal class Product:BlApi.IProduct
         {
             if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
             {
-                int id = dalList1.IProduct.Add(product);
+                int id = dalList1.Product.Add(product);
                 return;
             }
             throw new BO.InvalidVariableException();
@@ -159,7 +159,7 @@ internal class Product:BlApi.IProduct
             bool update = false;
             if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
             {
-                update = dalList1.IProduct.Update( product);
+                update = dalList1.Product.Update( product);
             }
             if (update)
                 throw new BO.InvalidVariableException();
@@ -185,17 +185,17 @@ internal class Product:BlApi.IProduct
             throw new BO.InvalidVariableException();
         try
         {
-            IEnumerable<DO.Order> orders = dalList1.IOrder.PrintAll();
+            IEnumerable<DO.Order> orders = dalList1.Order.PrintAll();
             foreach (DO.Order o in orders)
             {
-                IEnumerable<DO.OrderItem> orderItems = dalList1.IOrderItem.PrintAllByOrder(o.ID);
+                IEnumerable<DO.OrderItem> orderItems = dalList1.OrderItem.PrintAllByOrder(o.ID);
                 foreach (DO.OrderItem item in orderItems)
                 {
                     if (item.ProductID == ID)
                         throw new BO.CanNotDOActionException();
                 }
             }
-            if (!dalList1.IProduct.Delete(ID))
+            if (!dalList1.Product.Delete(ID))
                 throw new BO.IdDoesNotExistException();
         }
         catch(BO.ListIsEmptyException m)

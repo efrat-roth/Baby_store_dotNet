@@ -22,11 +22,11 @@ internal class Order:BlApi.IOrder
     {
         try
         {
-            IEnumerable<DO.Order> orders = dalList1.IOrder.PrintAll();
+            IEnumerable<DO.Order> orders = dalList1.Order.PrintAll();
             List<OrderForList> listOrders = new List<OrderForList>();
             foreach (DO.Order o in orders)
             {
-                IEnumerable<DO.OrderItem> orderItems = dalList1.IOrderItem.PrintAllByOrder(o.ID);
+                IEnumerable<DO.OrderItem> orderItems = dalList1.OrderItem.PrintAllByOrder(o.ID);
                 OrderForList OrderList = new OrderForList
                 {
                     ID = o.ID,
@@ -77,8 +77,8 @@ internal class Order:BlApi.IOrder
             throw new BO.InvalidVariableException();
         try
         {
-            DO.Order order1 = dalList1.IOrder.PrintByID(ID);//asked order
-            IEnumerable<DO.OrderItem> orderItems = dalList1.IOrderItem.PrintAllByOrder(ID);//List of orderItems of the order
+            DO.Order order1 = dalList1.Order.PrintByID(ID);//asked order
+            IEnumerable<DO.OrderItem> orderItems = dalList1.OrderItem.PrintAllByOrder(ID);//List of orderItems of the order
             BO.Order logicOrder = new BO.Order
             {
                 ID = order1.ID,
@@ -106,7 +106,7 @@ internal class Order:BlApi.IOrder
                 OrderItem OItem = new OrderItem
                 {
                     ID = OI.ID,
-                    Name = dalList1.IProduct.PrintByID(OI.ProductID).Name,
+                    Name = dalList1.Product.PrintByID(OI.ProductID).Name,
                     ProductID = OI.ProductID,
                     Price = OI.Price,
                     Amount = OI.Amount,
@@ -149,14 +149,14 @@ internal class Order:BlApi.IOrder
     {
         try
         {
-            DO.Order CheckOrder = dalList1.IOrder.PrintByID(IDOrder);
+            DO.Order CheckOrder = dalList1.Order.PrintByID(IDOrder);
             if (CheckOrder.ShipDate <= DateTime.Now)
             {
                 throw new Exception("The order was shiped already");
             }
             CheckOrder.ShipDate=DateTime.Now;
-            dalList1.IOrder.Update(CheckOrder);
-            IEnumerable<DO.OrderItem> items1 = dalList1.IOrderItem.PrintAllByOrder(IDOrder);
+            dalList1.Order.Update(CheckOrder);
+            IEnumerable<DO.OrderItem> items1 = dalList1.OrderItem.PrintAllByOrder(IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {
                 ID = IDOrder,
@@ -175,7 +175,7 @@ internal class Order:BlApi.IOrder
                     BO.OrderItem orderItem = new BO.OrderItem
                     {
                         ID = item.ID,
-                        Name = dalList1.IProduct.PrintByID(item.ProductID).Name,
+                        Name = dalList1.Product.PrintByID(item.ProductID).Name,
                         ProductID = item.ProductID,
                         Price = item.Price,
                         Amount = item.Amount,
@@ -205,14 +205,14 @@ internal class Order:BlApi.IOrder
     {
         try
         {
-            DO.Order CheckOrder = dalList1.IOrder.PrintByID(IDOrder);
+            DO.Order CheckOrder = dalList1.Order.PrintByID(IDOrder);
             if (CheckOrder.DeliveryDate <= DateTime.Now)
             {
                 throw new Exception("The order was arrived already");
             }
             CheckOrder.DeliveryDate= DateTime.Now;
-            dalList1.IOrder.Update(CheckOrder);
-            IEnumerable<DO.OrderItem> items1 = dalList1.IOrderItem.PrintAllByOrder(IDOrder);
+            dalList1.Order.Update(CheckOrder);
+            IEnumerable<DO.OrderItem> items1 = dalList1.OrderItem.PrintAllByOrder(IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {
                 ID = IDOrder,
@@ -231,7 +231,7 @@ internal class Order:BlApi.IOrder
                     BO.OrderItem orderItem = new BO.OrderItem
                     {
                         ID = item.ID,
-                        Name = dalList1.IProduct.PrintByID(item.ProductID).Name,
+                        Name = dalList1.Product.PrintByID(item.ProductID).Name,
                         ProductID = item.ProductID,
                         Price = item.Price,
                         Amount = item.Amount,
@@ -266,7 +266,7 @@ internal class Order:BlApi.IOrder
     {
         try
         {
-            DO.Order CheckOrder = dalList1.IOrder.PrintByID(IDOrder);
+            DO.Order CheckOrder = dalList1.Order.PrintByID(IDOrder);
             if (CheckOrder.DeliveryDate <= DateTime.Now)
             {
                 throw new Exception("The order was shiped already");
@@ -336,7 +336,7 @@ internal class Order:BlApi.IOrder
             throw new Exception("The ID is invalid");
         if (newAmount < 0)
             throw new Exception("The amount is invalid");
-        if (dalList1.IOrder.PrintByID(IDOrder).ShipDate <= DateTime.Now)
+        if (dalList1.Order.PrintByID(IDOrder).ShipDate <= DateTime.Now)
             throw new Exception("The Order was shiped already");
         try
         {
