@@ -155,7 +155,7 @@ internal class Order:BlApi.IOrder
                 throw new Exception("The order was shiped already");
             }
             CheckOrder.ShipDate=DateTime.Now;
-            _dal.Order.Update(CheckOrder);
+            _dal.Order.Update(t: CheckOrder);
             IEnumerable<DO.OrderItem> items1 = _dal.OrderItem.PrintAllByOrder(IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {
@@ -220,8 +220,8 @@ internal class Order:BlApi.IOrder
                 CustomerEmail = CheckOrder.CustomerEmail,
                 CustomerAdress = CheckOrder.CustomerAdress,
                 OrderDate = CheckOrder.OrderDate,
-                DeliveryDate = CheckOrder.DeliveryDate,
                 ShipDate = CheckOrder.ShipDate,
+                DeliveryDate = CheckOrder.DeliveryDate,
                 Status = Enums.OrderStatus.ArrivedOrder
             };
             foreach (DO.OrderItem item in items1)//Adding the relevant OrderItem to the items field of order
