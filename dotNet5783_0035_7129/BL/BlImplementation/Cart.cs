@@ -33,7 +33,7 @@ internal class Cart:ICart
             {
                 throw new BO.InvalidVariableException();
             }
-            DO.Product ProductInStore =dalList1.IProduct.PrintByID(id);  //variable for the product.            
+            DO.Product ProductInStore =dalList1.IProduct.PrintByID(id);  //variable for the product.
             foreach (OrderItem o  in finalCart.Items )   //Goes through all products order in the cart.
             {
                 if(o.ProductID == id)   //If the product is on order
@@ -142,8 +142,12 @@ internal class Cart:ICart
                 throw new BO.InvalidVariableException();
             bool isRight = false;
             foreach (char c in emailAdress)//checks if email is correct and has the @ in their.
+            {
                 if (c == '@')
                     isRight = true;
+                if (c == ' ')
+                    isRight = false;
+            }
             if (!isRight)
                 throw new BO.InvalidVariableException();
 
