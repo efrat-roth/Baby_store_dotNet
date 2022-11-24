@@ -12,9 +12,10 @@ namespace DalApi;
 [Serializable]
 public class IdDoesNotExistException : Exception
 {
-   public IdDoesNotExistException(string message= "The item is not in the database") : base(message) { }
-    override public string ToString() => $@"
-     The item is not in the database";
+    public override string Message => "The item is not in the database";
+
+    override public string ToString() => Message;
+
 
 }
 /// <summary>
@@ -23,9 +24,10 @@ public class IdDoesNotExistException : Exception
 [Serializable]
 public class IdAlreadyExistException : Exception
 {
-    public IdAlreadyExistException(string message= "The ID is exist already") : base(message) { }
-    override public string ToString() => $@"
-     The ID is exist already";
+    public override string Message => "The ID is exist already";
+
+    override public string ToString() => Message;
+
 
 }
 /// <summary>
@@ -35,9 +37,10 @@ public class IdAlreadyExistException : Exception
 [Serializable]
 public class ListIsEmptyException : Exception
 {
-    public ListIsEmptyException(string message= "The list is Empty") : base(message) { }
-    override public string ToString() => $@"
-     The list is Empty";
+    public override string Message => "The list is Empty";
+
+    override public string ToString() => Message;
+
 
 }
 /// <summary>
@@ -46,9 +49,8 @@ public class ListIsEmptyException : Exception
 [Serializable]
 public class InvalidVariableException : Exception
 {
-    public InvalidVariableException(string message= "The input is invalid") : base(message) { }
-    override public string ToString() => $@"
-     The input is invalid";
+    public override string Message => "The input is invalid";
+    override public string ToString() => Message;
 
 }
 

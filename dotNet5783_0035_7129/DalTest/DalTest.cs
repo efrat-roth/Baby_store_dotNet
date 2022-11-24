@@ -66,7 +66,7 @@ namespace DalTest
                                 try
                                 {
                                     Product p = inputProduct();
-                                    int i = dalList1.IProduct.Add(p);
+                                    int i = dalList1.Product.Add(p);
                                 }
                                 catch (InvalidVariableException m)
                                 {
@@ -92,7 +92,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of product");
                                     int id;
                                     id = Console.Read();
-                                    Product p = dalList1.IProduct.PrintByID(id);
+                                    Product p = dalList1.Product.PrintByID(id);
                                     Console.WriteLine(p);
                                     break;
                                 }
@@ -113,7 +113,7 @@ namespace DalTest
                                 try
                                 {
                                     IEnumerable<Product> productPrint;
-                                    productPrint = dalList1.IProduct.PrintAll();
+                                    productPrint = dalList1.Product.PrintAll();
                                     foreach (Product p in productPrint)
                                     {
                                         Console.WriteLine(p);
@@ -138,7 +138,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of product");
                                     int id;
                                     id = Console.Read();
-                                    bool answer = dalList1.IProduct.Delete(id);
+                                    bool answer = dalList1.Product.Delete(id);
                                     break;
                                 }
                                 catch (IdDoesNotExistException m)
@@ -159,7 +159,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of product");
                                     int id;
                                     id = Console.Read();
-                                    Product p = dalList1.IProduct.PrintByID(id);
+                                    Product p = dalList1.Product.PrintByID(id);
                                     Console.WriteLine("Do you want to change the name?, enter y for yes and n for no");
                                     string answer = Console.ReadLine();
                                     if (answer == "y")
@@ -193,7 +193,7 @@ namespace DalTest
                                         int inStock1 = Console.Read();
                                         p.InStock = inStock1;
                                     }
-                                    bool result = dalList1.IProduct.Update(p);
+                                    bool result = dalList1.Product.Update(p);
                                     break;
                                 }
                                 catch (IdDoesNotExistException m)
@@ -315,7 +315,7 @@ namespace DalTest
                                 try
                                 {
                                     Order order1 = inputOrder();
-                                    int i = dalList1.IOrder.Add(order1);
+                                    int i = dalList1.Order.Add(order1);
                                     break;
                                 }
                                 catch (InvalidVariableException message)
@@ -342,7 +342,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of order");
                                     int id;
                                     id = Console.Read();
-                                    Order p = dalList1.IOrder.PrintByID(id);
+                                    Order p = dalList1.Order.PrintByID(id);
                                     Console.WriteLine(value: p);
                                 }
                                 catch (IdDoesNotExistException m)
@@ -361,7 +361,7 @@ namespace DalTest
                                 try
                                 {
                                     IEnumerable<Order> orderPrint;
-                                    orderPrint = dalList1.IOrder.PrintAll();
+                                    orderPrint = dalList1.Order.PrintAll();
                                     foreach (Order p in orderPrint)
                                     {
                                         Console.WriteLine(value: p);
@@ -386,7 +386,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of order");
                                     int id;
                                     id = Console.Read();
-                                    bool answer = dalList1.IOrder.Delete(id);
+                                    bool answer = dalList1.Order.Delete(id);
                                     break;
                                 }
                                 catch (IdDoesNotExistException m)
@@ -409,7 +409,7 @@ namespace DalTest
                                     int id;
                                     id = Console.Read();
                                     Order p = new Order();
-                                    p = dalList1.IOrder.PrintByID(id);
+                                    p = dalList1.Order.PrintByID(id);
                                     Console.WriteLine("Do you want to change the customer name?, enter y for yes and n for no");
                                     string answer = Console.ReadLine();
                                     if (answer == "y")
@@ -494,7 +494,7 @@ namespace DalTest
                                         }
                                         p.DeliveryDate = DateTime.Parse(deliveryDate);
                                     }
-                                    bool answer12 = dalList1.IOrder.Update(p);
+                                    bool answer12 = dalList1.Order.Update(p);
                                     break;
                                 }
                                 catch (IdDoesNotExistException m)
@@ -573,7 +573,7 @@ namespace DalTest
                                 try
                                 {
                                     OrderItem p = inputOrderItem();
-                                    int i = dalList1.IOrderItem.Add(p);
+                                    int i = dalList1.OrderItem.Add(p);
                                     break;
                                 }
                                 catch (InvalidVariableException m)
@@ -598,7 +598,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of orderItem");
                                     int id;
                                     id = Console.Read();
-                                    OrderItem p = dalList1.IOrderItem.PrintByID(id);
+                                    OrderItem p = dalList1.OrderItem.PrintByID(id);
                                     Console.WriteLine(p);
                                     break;
                                 }
@@ -618,7 +618,7 @@ namespace DalTest
                                 try
                                 {
                                     IEnumerable<OrderItem> orderItemPrint;
-                                    orderItemPrint = dalList1.IOrderItem.PrintAll();
+                                    orderItemPrint = dalList1.OrderItem.PrintAll();
                                     foreach (OrderItem p in orderItemPrint)
                                     {
                                         Console.WriteLine(value: p);
@@ -643,7 +643,7 @@ namespace DalTest
                                     Console.WriteLine("Enter ID of orderItem");
                                     int id;
                                     id = Console.Read();
-                                    bool answer = dalList1.IOrderItem.Delete(id);
+                                    bool answer = dalList1.OrderItem.Delete(id);
                                     break;
                                 }
                                 catch (IdDoesNotExistException m)
@@ -665,7 +665,7 @@ namespace DalTest
                                     int id;
                                     id = Console.Read();
                                     OrderItem p = new OrderItem();
-                                    p = dalList1.IOrderItem.PrintByID(id);
+                                    p = dalList1.OrderItem.PrintByID(id);
                                     Console.WriteLine("Do you want to change the id of order?, enter y for yes and n for no");
                                     string answer = Console.ReadLine();
                                     if (answer == "y")
@@ -698,7 +698,7 @@ namespace DalTest
                                         int amount = Console.Read();
                                         p.Amount = amount;
                                     }
-                                    bool answer11 = dalList1.IOrderItem.Update(p);
+                                    bool answer11 = dalList1.OrderItem.Update(p);
                                     break;
                                 }
                                 catch (IdDoesNotExistException m)
@@ -724,7 +724,7 @@ namespace DalTest
                                     int id1 = Console.Read();
                                     Console.WriteLine("Enter product ID");
                                     int id2 = Console.Read();
-                                    OrderItem oi = dalList1.IOrderItem.PrintByTwoId(id2, id1);
+                                    OrderItem oi = dalList1.OrderItem.PrintByTwoId(id2, id1);
                                     Console.WriteLine(oi);
                                     break;
                                 }
@@ -746,7 +746,7 @@ namespace DalTest
                                     Console.WriteLine("Enter order ID");
                                     int id1 = Console.Read();
                                     IEnumerable<OrderItem> orderItemByOrderId;
-                                    orderItemByOrderId = dalList1.IOrderItem.PrintAllByOrder(id1);
+                                    orderItemByOrderId = dalList1.OrderItem.PrintAllByOrder(id1);
                                     foreach (OrderItem p in orderItemByOrderId)
                                     {
                                         Console.WriteLine(p);

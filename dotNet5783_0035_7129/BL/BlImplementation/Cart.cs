@@ -14,11 +14,11 @@ namespace BlImplementation;
 
 internal class Cart:ICart
 {
-    IDal dalList1 = new DalList();
+    IDal _dal = new DalList();
     /// <summary>
     /// A static variable for the each id product in the order.
     /// </summary>
-    static int randomIdForOrderItem = 0;
+    static int _randomIdForOrderItem = 0;
     /// <summary>
     /// The mothod adds new or existing product to the cart.
     /// </summary>
@@ -33,7 +33,7 @@ internal class Cart:ICart
             {
                 throw new BO.InvalidVariableException();
             }
-            DO.Product ProductInStore =dalList1.IProduct.PrintByID(id);  //variable for the product.
+            DO.Product ProductInStore =_dal.Product.PrintByID(id);  //variable for the product.            
             foreach (OrderItem o  in finalCart.Items )   //Goes through all products order in the cart.
             {
                 if(o.ProductID == id)   //If the product is on order
@@ -56,7 +56,7 @@ internal class Cart:ICart
             {
                 BO.OrderItem newProductInOrder = new BO.OrderItem
                 { 
-                    ID = randomIdForOrderItem++,
+                    ID = _randomIdForOrderItem++,
                     Price = ProductInStore.Price,
                     TotalPrice = ProductInStore.Price,
                     ProductID = id,
@@ -83,7 +83,7 @@ internal class Cart:ICart
     /// <exception cref="Exception"></exception>
     public BO.Cart UpdateProductAmount(BO.Cart finalCart, int id, int newAmount)
     {
-        DO.Product ProductInStore = dalList1.IProduct.PrintByID(id);  //variable for the product.            
+        DO.Product ProductInStore = _dal.Product.PrintByID(id);  //variable for the product.            
         foreach (OrderItem o in finalCart.Items)   //Goes through all products order in the cart.
         {
             if (o.ProductID == id)   //If the product is on order.
@@ -135,7 +135,7 @@ internal class Cart:ICart
     {
         try
         {
-            IEnumerable<DO.Product> ProductInStore = dalList1.IProduct.PrintAll();  //variable for the product.
+            IEnumerable<DO.Product> ProductInStore = _dal.Product.PrintAll();  //variable for the product.
 
             if (adress11 == null || name11 == null || emailAdress == null //checks if all the strings fields is correct.
                 || emailAdress[0] == '@' || emailAdress[emailAdress.Length - 1] == '@')
@@ -183,7 +183,7 @@ internal class Cart:ICart
                 ShipDate = null,
                 DeliveryDate = null,
             };
-            int id = dalList1.IOrder.Add(finalOrder);   //adds the new order  
+            int id = _dal.Order.Add(finalOrder);   //adds the new order  
             foreach (BO.OrderItem o in finalCart.Items)  //insert the order items details to the order items list.
             {
                 DO.OrderItem orderItem111 = new DO.OrderItem
@@ -194,10 +194,10 @@ internal class Cart:ICart
                    Price = o.Price,
                    ProductID = o.ProductID,               
                 };
-                dalList1.IOrderItem.Add(orderItem111);
-                DO.Product p = dalList1.IProduct.PrintByID(o.ProductID);
+                _dal.OrderItem.Add(orderItem111);
+                DO.Product p = _dal.Product.PrintByID(o.ProductID);
                 p.InStock -= o.Amount;  //reduces the amount of product in stock.
-                dalList1.IProduct.Update(p);
+                _dal.Product.Update(p);
 
             }
             return finalOrder;

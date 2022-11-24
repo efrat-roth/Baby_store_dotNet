@@ -12,7 +12,7 @@ namespace BlImplementation;
 
 internal class Product:BlApi.IProduct
 {
-    IDal dalList1 = new DalList();
+    IDal _dal = new DalList();
 
     /// <summary>
     /// The method asking for list of products
@@ -22,7 +22,7 @@ internal class Product:BlApi.IProduct
     {
         try
         {
-            IEnumerable<DO.Product> list = dalList1.IProduct.PrintAll();
+            IEnumerable<DO.Product> list = _dal.Product.PrintAll();
             List<ProductForList> productList = new List<ProductForList>();
             foreach (DO.Product p in list)
             {
@@ -59,7 +59,7 @@ internal class Product:BlApi.IProduct
         {           
             try
             {
-                DO.Product p = dalList1.IProduct.PrintByID(ID);
+                DO.Product p = _dal.Product.PrintByID(ID);
                 BO.Product product = new BO.Product
                 {
                     ID = p.ID,
@@ -84,8 +84,9 @@ internal class Product:BlApi.IProduct
     /// The method return details of product
     /// </summary>
     /// <param name="ID"></param>ID of product
+    /// <param name="cart"></param>cart of the customer
     /// <returns></returns>ProductItem
-    public ProductItem GetProductCustomer(int ID)
+    public ProductItem GetProductCustomer(int ID,BO.Cart cart)
     {
         if (ID < 0)
             throw new BO.InvalidVariableException();
@@ -93,15 +94,17 @@ internal class Product:BlApi.IProduct
         {          
             try
             {
-                DO.Product p = dalList1.IProduct.PrintByID(ID);
-                List<DO.OrderItem> item;
+                DO.Product p = _dal.Product.PrintByID(ID);
+                bool inStock1 = false;
+                if(p.InStock>0)
+                    inStock1 = true;
                 ProductItem product = new ProductItem
                 {
                     ID = p.ID,
                     Name = p.Name,
                     Price = p.Price,
                     Category = (Enums.Category)p.Category,
-                    InStock = p.InStock
+                    InStock = inStock1
                 };       
                 return product;
             }
@@ -126,7 +129,7 @@ internal class Product:BlApi.IProduct
         {
             if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
             {
-                int id = dalList1.IProduct.Add(product);
+                int id = _dal.Product.Add(product);
                 return;
             }
             throw new BO.InvalidVariableException();
@@ -157,7 +160,7 @@ internal class Product:BlApi.IProduct
             bool update = false;
             if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
             {
-                update = dalList1.IProduct.Update( product);
+                update = _dal.Product.Update( product);
             }
             if (update)
                 throw new BO.InvalidVariableException();
@@ -183,17 +186,17 @@ internal class Product:BlApi.IProduct
             throw new BO.InvalidVariableException();
         try
         {
-            IEnumerable<DO.Order> orders = dalList1.IOrder.PrintAll();
+            IEnumerable<DO.Order> orders = _dal.Order.PrintAll();
             foreach (DO.Order o in orders)
             {
-                IEnumerable<DO.OrderItem> orderItems = dalList1.IOrderItem.PrintAllByOrder(o.ID);
+                IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.PrintAllByOrder(o.ID);
                 foreach (DO.OrderItem item in orderItems)
                 {
                     if (item.ProductID == ID)
                         throw new BO.CanNotDOActionException();
                 }
             }
-            if (!dalList1.IProduct.Delete(ID))
+            if (!_dal.Product.Delete(ID))
                 throw new BO.IdDoesNotExistException();
         }
         catch(BO.ListIsEmptyException m)

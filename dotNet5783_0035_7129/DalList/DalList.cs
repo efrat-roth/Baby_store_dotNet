@@ -9,10 +9,10 @@ namespace Dal
 {
     sealed public class DalList : IDal
     {
-        public IOrder IOrder => new DalOrder();
+        public IOrder Order => new DalOrder();
 
-        public IProduct IProduct => new DalProduct();
-        public IOrderItem IOrderItem => new DalOrderItem();
+        public IProduct Product => new DalProduct();
+        public IOrderItem OrderItem => new DalOrderItem();
 
     }
 }

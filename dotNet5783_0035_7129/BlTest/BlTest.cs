@@ -3,6 +3,7 @@ using BlApi;
 using BO;
 using System.Collections.Generic;
 using System;
+using BlImplementation;
 
 namespace BlTest;
 
@@ -12,8 +13,8 @@ internal class BlTest
     static void Main(string[] args)
     {
 
-        IBl bl = new BL();
-
+        IBl bl = new Bl();
+        Cart c = new Cart();
         mainActions();
         Cart createCart()//create new cart by accept the values from the user
         {
@@ -29,7 +30,7 @@ internal class BlTest
                 throw new BO.InvalidVariableException();
             Console.WriteLine("Enter Customer Adress");
             String adress = Console.ReadLine();
-            Cart c = new Cart
+            Cart cart = new Cart
             {
                 CustomerName = name,
                 CustomerEmail = email,
@@ -37,7 +38,7 @@ internal class BlTest
                 TotalPrice = 0,
                 Items = new List<BO.OrderItem>()
             };
-            return c;
+            return cart;
         }
 
         void manageProduct() //manages all the methods in product
@@ -99,7 +100,7 @@ internal class BlTest
                             {
                                 Console.WriteLine("Enter id of product");
                                 int id = Console.Read();
-                                Product product = bl.Product.GetProductManager(id);
+                                ProductItem product = bl.Product.GetProductCustomer(id, c);
                                 Console.WriteLine(product);
                             }
                             catch (Exception e)
@@ -353,10 +354,9 @@ internal class BlTest
 
             while (option != 4)
             {
-                Cart c = new Cart();//create new cart
                 try
                 {
-                    c = createCart();
+                    c = createCart(); //create new cart
                 }
                 catch (Exception m)
                 {
