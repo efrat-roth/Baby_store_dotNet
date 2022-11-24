@@ -155,6 +155,7 @@ internal class Order:BlApi.IOrder
                 throw new Exception("The order was shiped already");
             }
             CheckOrder.ShipDate=DateTime.Now;
+            dalList1.IOrder.Update(CheckOrder);
             IEnumerable<DO.OrderItem> items1 = dalList1.IOrderItem.PrintAllByOrder(IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {
@@ -210,6 +211,7 @@ internal class Order:BlApi.IOrder
                 throw new Exception("The order was arrived already");
             }
             CheckOrder.DeliveryDate= DateTime.Now;
+            dalList1.IOrder.Update(CheckOrder);
             IEnumerable<DO.OrderItem> items1 = dalList1.IOrderItem.PrintAllByOrder(IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {

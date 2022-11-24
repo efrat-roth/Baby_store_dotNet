@@ -13,7 +13,7 @@ internal class BlTest
     {
 
         IBl bl = new BL();
-
+        Cart cart = new Cart();
         mainActions();
         Cart createCart()//create new cart by accept the values from the user
         {
@@ -99,7 +99,7 @@ internal class BlTest
                             {
                                 Console.WriteLine("Enter id of product");
                                 int id = Console.Read();
-                                Product product = bl.Product.GetProductManager(id);
+                                ProductItem product = bl.Product.GetProductCustomer(id, cart);
                                 Console.WriteLine(product);
                             }
                             catch (Exception e)
@@ -353,10 +353,9 @@ internal class BlTest
 
             while (option != 4)
             {
-                Cart c = new Cart();//create new cart
                 try
                 {
-                    c = createCart();
+                    cart = createCart(); //create new cart
                 }
                 catch (Exception m)
                 {
