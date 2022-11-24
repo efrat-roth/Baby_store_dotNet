@@ -25,9 +25,9 @@ public class ProductItem
     /// </summary>
     public Enums.Category Category { get; set; }
     /// <summary>
-    /// the amount of product in stock
+    ///If product in the store or not
     /// </summary>
-    public int InStock { get; set; }
+    public bool InStock { get; set; }
     /// <summary>
     /// The amount of the product in the cart
     /// </summary>

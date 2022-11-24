@@ -13,7 +13,7 @@ internal class BlTest
     {
 
         IBl bl = new BL();
-        Cart cart = new Cart();
+        Cart c = new Cart();
         mainActions();
         Cart createCart()//create new cart by accept the values from the user
         {
@@ -29,7 +29,7 @@ internal class BlTest
                 throw new BO.InvalidVariableException();
             Console.WriteLine("Enter Customer Adress");
             String adress = Console.ReadLine();
-            Cart c = new Cart
+            Cart cart = new Cart
             {
                 CustomerName = name,
                 CustomerEmail = email,
@@ -37,7 +37,7 @@ internal class BlTest
                 TotalPrice = 0,
                 Items = new List<BO.OrderItem>()
             };
-            return c;
+            return cart;
         }
 
         void manageProduct() //manages all the methods in product
@@ -99,7 +99,7 @@ internal class BlTest
                             {
                                 Console.WriteLine("Enter id of product");
                                 int id = Console.Read();
-                                ProductItem product = bl.Product.GetProductCustomer(id, cart);
+                                ProductItem product = bl.Product.GetProductCustomer(id, c);
                                 Console.WriteLine(product);
                             }
                             catch (Exception e)
@@ -355,7 +355,7 @@ internal class BlTest
             {
                 try
                 {
-                    cart = createCart(); //create new cart
+                    c = createCart(); //create new cart
                 }
                 catch (Exception m)
                 {

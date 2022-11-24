@@ -85,7 +85,7 @@ internal class Product:BlApi.IProduct
     /// </summary>
     /// <param name="ID"></param>ID of product
     /// <returns></returns>ProductItem
-    public ProductItem GetProductCustomer(int ID,Cart cart)
+    public ProductItem GetProductCustomer(int ID,BO.Cart cart)
     {
         if (ID < 0)
             throw new BO.InvalidVariableException();
@@ -94,13 +94,16 @@ internal class Product:BlApi.IProduct
             try
             {
                 DO.Product p = dalList1.IProduct.PrintByID(ID);
+                bool inStock1 = false;
+                if(p.InStock>0)
+                    inStock1 = true;
                 ProductItem product = new ProductItem
                 {
                     ID = p.ID,
                     Name = p.Name,
                     Price = p.Price,
                     Category = (Enums.Category)p.Category,
-                    InStock = p.InStock
+                    InStock = inStock1
                 };       
                 return product;
             }

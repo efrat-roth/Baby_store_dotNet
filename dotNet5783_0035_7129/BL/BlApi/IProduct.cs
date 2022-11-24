@@ -27,7 +27,7 @@ public interface IProduct
     /// </summary>
     /// <param name="ID"></param>ID of product
     /// <returns></returns>ProductItem
-    public ProductItem GetProductCustomer(int ID, Cart cart);
+    public ProductItem GetProductCustomer(int ID, BO.Cart cart);
     public void AddProduct(DO.Product product);
     /// <summary>
     /// Updates sproduct in the store.
