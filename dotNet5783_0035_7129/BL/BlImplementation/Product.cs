@@ -84,6 +84,7 @@ internal class Product:BlApi.IProduct
     /// The method return details of product
     /// </summary>
     /// <param name="ID"></param>ID of product
+    /// <param name="cart"></param>cart of the customer
     /// <returns></returns>ProductItem
     public ProductItem GetProductCustomer(int ID,BO.Cart cart)
     {

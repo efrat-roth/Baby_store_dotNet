@@ -18,7 +18,7 @@ internal class Cart:ICart
     /// <summary>
     /// A static variable for the each id product in the order.
     /// </summary>
-    static int randomIdForOrderItem = 0;
+    static int _randomIdForOrderItem = 0;
     /// <summary>
     /// The mothod adds new or existing product to the cart.
     /// </summary>
@@ -56,7 +56,7 @@ internal class Cart:ICart
             {
                 BO.OrderItem newProductInOrder = new BO.OrderItem
                 { 
-                    ID = randomIdForOrderItem++,
+                    ID = _randomIdForOrderItem++,
                     Price = ProductInStore.Price,
                     TotalPrice = ProductInStore.Price,
                     ProductID = id,
