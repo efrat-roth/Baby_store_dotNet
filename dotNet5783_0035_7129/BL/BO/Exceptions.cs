@@ -44,17 +44,62 @@ public class ListIsEmptyException : Exception
 [Serializable]
 public class InvalidVariableException : Exception
 {
-    public override string Message => "The input is invalid";
-    
+    public override string Message => "The input is invalid";   
     override public string ToString() => Message;
 
 }
+/// <summary>
+/// The action invalid
+/// </summary>
 public class CanNotDOActionException : Exception
 {
     public override string Message => "Can't do the action";
     override public string ToString() => Message;
-
-
 }
 
+/// <summary>
+/// Catch inner of add exception
+/// </summary>
+public class FailedAdd : Exception
+{
+    public FailedAdd(Exception inner) : base("Add failed ", inner) { }
+    public object Message { get; }
+    override public string ToString() => @$"{Message} - {this.InnerException}";
+}
+/// <summary>
+/// Catch inner of delete exception
+/// </summary>
+public class FailedDelete : Exception
+{
+    public FailedDelete(Exception inner) : base("Delete failed", inner) { }
+    public object Message { get; }
+    override public string ToString() => @$"{Message} - {this.InnerException}";
+}
+/// <summary>
+/// Catch inner of get exception
+/// </summary>
+public class FailedGet : Exception
+{
+    public FailedGet(Exception inner) : base("Get failed", inner) { }
+    public object Message { get; }
+    override public string ToString() => @$"{Message} - {this.InnerException}";
+}
+/// <summary>
+/// Catch inner of update exception
+/// </summary>
+public class FailedUpdate : Exception
+{
+    public FailedUpdate(Exception inner) : base("Update failed", inner) { }
+    public object Message { get; }
+    override public string ToString()=> @$"{Message} - {this.InnerException}";
 
+}
+/// <summary>
+/// Catch inner of get exception
+/// </summary>
+public class FailedGetAll: Exception
+{
+    public FailedGetAll(Exception inner) : base("Get all failed", inner) { }
+    public object Message { get; }
+    override public string ToString() => @$"{Message} - {this.InnerException}";
+}

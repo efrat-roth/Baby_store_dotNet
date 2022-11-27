@@ -30,6 +30,8 @@ internal class DalProduct:IProduct
     /// <returns></returns>IProduct
     public Product PrintByID(int id)
     {
+        if (id < 0)
+            throw new InvalidVariableException();
         foreach (Product p in products)
         {
             if (id == p.ID)
@@ -56,7 +58,8 @@ internal class DalProduct:IProduct
     /// </summary>
     /// <param name="id"></param>ID of the product to delete
     public bool Delete(int id)
-    {
+    {if (id < 0)
+            throw new InvalidVariableException();
         foreach (Product p in products)
         {
             if (id == p.ID)

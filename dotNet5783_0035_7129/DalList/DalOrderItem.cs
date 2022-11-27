@@ -32,6 +32,8 @@ internal class DalOrderItem:IOrderItem
     /// <returns></returns>IOrderItem
     public OrderItem PrintByID(int id)
     {
+        if (id < 0)
+            throw new InvalidVariableException();
         foreach (OrderItem oI in orderItems)
         {
             if (id == oI.ID)
@@ -60,7 +62,9 @@ internal class DalOrderItem:IOrderItem
     /// <returns></returns>True if the orderItem in the database, else returns false
     public bool Delete(int id)
     {
-        foreach(OrderItem oI in orderItems )
+        if (id < 0)
+            throw new InvalidVariableException();
+        foreach (OrderItem oI in orderItems )
         {
             if (oI.ID==id)
             {
@@ -77,7 +81,6 @@ internal class DalOrderItem:IOrderItem
     /// <returns></returns>True if the id is in the database, else returns false
     public bool Update(OrderItem oi)
     {
-
         foreach (OrderItem o in orderItems)
         {
             if (o.ID == oi.ID)
@@ -97,7 +100,9 @@ internal class DalOrderItem:IOrderItem
     /// <returns></returns>IOrderItem
     public OrderItem PrintByTwoId(int productID, int orderID)
     {
-        foreach(OrderItem oI in orderItems)
+        if (productID < 0||orderID<0)
+            throw new InvalidVariableException();
+        foreach (OrderItem oI in orderItems)
         {
             if (oI.OrderID==orderID)
             {
@@ -113,7 +118,9 @@ internal class DalOrderItem:IOrderItem
     /// <returns></returns>array of oderItem
     public IEnumerable<OrderItem> PrintAllByOrder(int idOrder)
     {
-       List<OrderItem> orderItemsByOrder=new List<OrderItem>();
+        if (idOrder < 0)
+            throw new InvalidVariableException();
+        List<OrderItem> orderItemsByOrder=new List<OrderItem>();
         for(int i=0;i<orderItems.Count();i++)
         {
             if(orderItems.ElementAt(i).OrderID==idOrder)

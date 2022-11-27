@@ -1,7 +1,5 @@
 ﻿using BlApi;
 using BO;
-using Dal;
-using DalApi;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -11,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BlImplementation;
 
-internal class Order:BlApi.IOrder
+internal class Order:IOrder
 {
-    IDal _dal = new DalList();
+    DalApi.IDal _dal = new Dal.DalList();
     /// <summary>
     /// The method returns details of orders
     /// </summary>
@@ -56,11 +54,11 @@ internal class Order:BlApi.IOrder
             }
             return listOrders;
         }
-        catch(BO.ListIsEmptyException m)
+        catch(FailedGetAll m)
         {
             throw m;
         }
-        catch(Exception m)
+        catch (FailedGet m)
         {
             throw m;
         }
@@ -73,8 +71,7 @@ internal class Order:BlApi.IOrder
     /// <exception cref="Exception"></exception>ID not exist
     public BO.Order GetDetailsOrderManager(int ID)
     {
-        if (ID < 0)
-            throw new BO.InvalidVariableException();
+
         try
         {
             DO.Order order1 = _dal.Order.PrintByID(ID);//asked order
@@ -117,15 +114,16 @@ internal class Order:BlApi.IOrder
             }
             return logicOrder;
         }
-        catch(BO.IdDoesNotExistException message)
+        catch(FailedGet message)
         {
             throw message;
         }
-        catch(BO.ListIsEmptyException m)
+
+        catch(FailedGetAll m)
         {
             throw m;
         }
-        catch(Exception m)
+        catch (FailedAdd m)
         {
             throw m;
         }
@@ -187,9 +185,11 @@ internal class Order:BlApi.IOrder
             }
             return ReturnOrder;
         }
-        catch(BO.IdDoesNotExistException m)
+        catch(FailedGet m)
         { throw m;  }
-        catch (BO.ListIsEmptyException m)
+        catch (FailedAdd m)
+        { throw m; }
+        catch(FailedGetAll m)
         { throw m; }
         catch (Exception message)
         {
@@ -243,13 +243,17 @@ internal class Order:BlApi.IOrder
             }
             return ReturnOrder;
         }
-        catch(BO.IdDoesNotExistException m)
+        catch(FailedGet m)
         {
             throw m;
         }
-        catch(BO.ListIsEmptyException m)
+        catch(FailedAdd m)
         {
             throw m;
+        }
+        catch (FailedGetAll message)
+        {
+            throw message;
         }
         catch (Exception message)
         {
@@ -311,7 +315,7 @@ internal class Order:BlApi.IOrder
             };
             return NewOrderTracking;
         }
-        catch(BO.IdDoesNotExistException m)
+        catch(FailedGet m)
         {
             throw m;
         }
@@ -331,15 +335,15 @@ internal class Order:BlApi.IOrder
     public BO.Order UpdateOrder(int IDOrder,int IDProduct, int  newAmount)
     {
         if (IDOrder < 0)
-            throw new Exception("The ID is invalid");
+            throw  new BO.InvalidVariableException();
         if (IDProduct < 0)
-            throw new Exception("The ID is invalid");
+            throw new BO.InvalidVariableException();
         if (newAmount < 0)
-            throw new Exception("The amount is invalid");
-        if (_dal.Order.PrintByID(IDOrder).ShipDate <= DateTime.Now)
-            throw new Exception("The Order was shiped already");
+            throw  new BO.InvalidVariableException();      
         try
         {
+            if (_dal.Order.PrintByID(IDOrder).ShipDate <= DateTime.Now)
+                throw new Exception("The Order was shiped already");
             BO.Order wantedOrder = GetDetailsOrderManager(IDOrder);
             foreach (OrderItem orderItem in wantedOrder.Items)
             {
@@ -353,18 +357,15 @@ internal class Order:BlApi.IOrder
             }
             return wantedOrder;
         }
-        catch (BO.IdDoesNotExistException message)
+        catch (FailedGet message)
         {
             throw message;
         }
-        catch(BO.InvalidVariableException m)
+        catch(BO.CanNotDOActionException m)
         {
             throw m;
         }
-        catch (BO.ListIsEmptyException m)
-        {
-            throw m;
-        }
+       
         catch (Exception message)
         {
             throw message;
