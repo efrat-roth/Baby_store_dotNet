@@ -1,7 +1,6 @@
 ﻿using BlApi;
 using BO;
-using Dal;
-using DalApi;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +13,7 @@ namespace BlImplementation;
 
 internal class Cart:ICart
 {
-    IDal _dal = new DalList();
+    DalApi.IDal _dal = new Dal.DalList();
     /// <summary>
     /// A static variable for the each id product in the order.
     /// </summary>
@@ -29,10 +28,7 @@ internal class Cart:ICart
     public BO.Cart AddProductToCart(BO.Cart finalCart, int id)
     {
         try
-        {   if(id<0)
-            {
-                throw new BO.InvalidVariableException();
-            }
+        { 
             DO.Product ProductInStore =_dal.Product.PrintByID(id);  //variable for the product.            
             foreach (OrderItem o  in finalCart.Items )   //Goes through all products order in the cart.
             {
@@ -47,7 +43,7 @@ internal class Cart:ICart
                     }
                     else
                     {
-                        throw new Exception("");
+                        throw new CanNotDOActionException();
                     }                     
                 }                            
             }
@@ -68,9 +64,11 @@ internal class Cart:ICart
                 finalCart.TotalPrice += newProductInOrder.Price;
                 return finalCart;
             }
-            throw new Exception("");
+            return finalCart;
         }
-        catch (Exception) { throw new Exception(" "); }       
+        catch (FailedGet m) { throw m; }
+        catch (FailedAdd m) { throw m; }
+
     }
 
     /// <summary>

@@ -32,6 +32,8 @@ internal class DalOrder : IOrder
     /// <returns></returns>IOrder
     public Order PrintByID(int id)
     {
+        if(id<0)
+            throw new InvalidVariableException();
         foreach (Order o in orders) 
         { 
             if (id == o.ID)
@@ -59,6 +61,8 @@ internal class DalOrder : IOrder
     /// <param name="id"></param>ID of the order to delete
     public bool Delete(int id)
     {
+        if (id < 0)
+            throw new InvalidVariableException();
         foreach (Order o in orders)
         {
             if(id == o.ID)
@@ -74,12 +78,18 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="p"></param>IOrder
     /// <returns></returns> True if the ID in the database, else return false
-    public bool Update(Order  p)
+    public bool Update(Order o)
     {
 
-        
-        return true;
-
-
+        foreach (Order order in orders)
+        {
+            if (order.ID == o.ID)
+            {
+                orders.Remove(order);
+                orders.Add(o);
+                return true;
+            }
+        };
+        return false;
     }
 }

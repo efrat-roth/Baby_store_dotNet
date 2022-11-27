@@ -1,7 +1,6 @@
 ﻿using BlApi;
 using BO;
-using Dal;
-using DalApi;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BlImplementation;
 
-internal class Product:BlApi.IProduct
+internal class Product:IProduct
 {
-    IDal _dal = new DalList();
+    DalApi.IDal _dal = new Dal.DalList();
 
     /// <summary>
     /// The method asking for list of products

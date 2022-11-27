@@ -6,14 +6,13 @@ namespace Dal
     internal static class DataSource
     {
         readonly static Random rnd = new Random();
-        internal static List<Product> products ;
+        internal static List<Product> products;
         internal static List<Order> orders;
         internal static List<OrderItem> orderItems;
         /// <summary>
         /// Constractor that initialize the item
         /// </summary>
         static DataSource() { Initialize(); }
-
         internal class Config
         {
             private static int countProductID = 100000;

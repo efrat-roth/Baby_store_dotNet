@@ -6,8 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using DalApi;
 
+
 using Dal;
 using DO;
+using System.Data;
+using System.Data.Common;
 
 namespace DalTest
 {
@@ -112,8 +115,7 @@ namespace DalTest
                             {
                                 try
                                 {
-                                    IEnumerable<Product> productPrint;
-                                    productPrint = dalList1.Product.PrintAll();
+                                    IEnumerable<Product> productPrint= dalList1.Product.PrintAll();
                                     foreach (Product p in productPrint)
                                     {
                                         Console.WriteLine(p);
@@ -362,10 +364,9 @@ namespace DalTest
                                 {
                                     IEnumerable<Order> orderPrint;
                                     orderPrint = dalList1.Order.PrintAll();
-                                    foreach (Order p in orderPrint)
+                                    foreach (Order o in orderPrint)
                                     {
-                                        Console.WriteLine(value: p);
-
+                                        Console.WriteLine(o);
                                     }
                                 }
                                 catch (ListIsEmptyException m)
