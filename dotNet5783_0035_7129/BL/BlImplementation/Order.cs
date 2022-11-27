@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,8 @@ internal class Order:IOrder
             List<OrderForList> listOrders = new List<OrderForList>();
             foreach (DO.Order o in orders)
             {
-                IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.PrintAllByOrder(o.ID);
+            
+                IEnumerable<DO.OrderItem> orderItems= _dal.OrderItem.PrintAllByOrder(o.ID);
                 OrderForList OrderList = new OrderForList
                 {
                     ID = o.ID,
@@ -47,7 +49,7 @@ internal class Order:IOrder
                 }
                 foreach (DO.OrderItem OI in orderItems)
                 {
-                    ++OrderList.AmountOfItems;
+                    OrderList.AmountOfItems+=1;
                     OrderList.TotalPrice += OI.Price;
                 }
                 listOrders.Add(OrderList);

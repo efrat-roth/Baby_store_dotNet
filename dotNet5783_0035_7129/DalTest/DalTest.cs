@@ -28,8 +28,8 @@ namespace DalTest
                 {
                     Product p = new Product();
                     Console.WriteLine("Enter the id of product to add");
-                    int id1 = Console.Read();
-                    p.ID = id1;
+                    int id1;
+                    int.TryParse(Console.ReadLine(), out id1); p.ID = id1;
                     Console.WriteLine("Enter the name of product to add");
                     string name1 = Console.ReadLine();
                     p.Name = name1;
@@ -37,10 +37,12 @@ namespace DalTest
                     Enums.Category category1 = (Enums.Category)Console.Read();
                     p.Category = category1;
                     Console.WriteLine("Enter the price of product to add");
-                    double price1 = Console.Read();
+                    double price1;
+                    double.TryParse(Console.ReadLine(), out price1);
                     p.Price = price1;
                     Console.WriteLine("Enter amount of products in stock");
-                    int inStock1 = Console.Read();
+                    int inStock1 ;
+                    int.TryParse(Console.ReadLine(), out inStock1);
                     p.InStock = inStock1;
                     return p;
                 }//input details of new product
@@ -93,9 +95,9 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter ID of product");
-                                    int id;
-                                    id = Console.Read();
-                                    Product p = dalList1.Product.PrintByID(id);
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(), out id1);
+                                    Product p = dalList1.Product.PrintByID(id1);
                                     Console.WriteLine(p);
                                     break;
                                 }
@@ -138,9 +140,9 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter ID of product");
-                                    int id;
-                                    id = Console.Read();
-                                    bool answer = dalList1.Product.Delete(id);
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(), out id1);
+                                    bool answer = dalList1.Product.Delete(id1);
                                     break;
                                 }
                                 catch (IdDoesNotExistException m)
@@ -159,9 +161,9 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter ID of product");
-                                    int id;
-                                    id = Console.Read();
-                                    Product p = dalList1.Product.PrintByID(id);
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(), out id1);
+                                    Product p = dalList1.Product.PrintByID(id1);
                                     Console.WriteLine("Do you want to change the name?, enter y for yes and n for no");
                                     string answer = Console.ReadLine();
                                     if (answer == "y")
@@ -184,7 +186,8 @@ namespace DalTest
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter price");
-                                        double price1 = Console.Read();
+                                        double price1 ;
+                                        double.TryParse(Console.ReadLine(), out price1);
                                         p.Price = price1;
                                     }
                                     Console.WriteLine("Do you want to change the in stock?, enter y for yes and n for no");
@@ -192,7 +195,8 @@ namespace DalTest
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter in stock?");
-                                        int inStock1 = Console.Read();
+                                        int inStock1;
+                                        int.TryParse(Console.ReadLine(), out inStock1);
                                         p.InStock = inStock1;
                                     }
                                     bool result = dalList1.Product.Update(p);
@@ -232,7 +236,8 @@ namespace DalTest
                 {
                     Order o = new Order();
                     Console.WriteLine("Enter the id of order to add");
-                    int id1 = Console.Read();
+                    int id1;
+                    int.TryParse(Console.ReadLine(), out id1);
                     o.ID = id1;
                     Console.WriteLine("Enter the name of costumer to add");
                     string name1 = Console.ReadLine();
@@ -292,9 +297,6 @@ namespace DalTest
 
                 }//input details of new order
                 int optionsOrder = 0;
-
-
-
                 while (optionsOrder != 6)
                 {
                     Console.WriteLine(@"Enter
@@ -342,9 +344,9 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter ID of order");
-                                    int id;
-                                    id = Console.Read();
-                                    Order p = dalList1.Order.PrintByID(id);
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(), out id1);
+                                    Order p = dalList1.Order.PrintByID(id1);
                                     Console.WriteLine(value: p);
                                 }
                                 catch (IdDoesNotExistException m)
@@ -373,11 +375,11 @@ namespace DalTest
                                 {
                                     Console.WriteLine(m);
                                 }
-                                catch (Exception m)
-                                {
-                                    Console.WriteLine(m);
-                                    break;
-                                }
+                                //catch (Exception m)
+                                //{
+                                //    Console.WriteLine(m);
+                                //    break;
+                                //}
                                 break;
                             }
                         case 4://Delete the order
@@ -385,9 +387,9 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter ID of order");
-                                    int id;
-                                    id = Console.Read();
-                                    bool answer = dalList1.Order.Delete(id);
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(), out id1);
+                                    bool answer = dalList1.Order.Delete(id1);
                                     break;
                                 }
                                 catch (IdDoesNotExistException m)
@@ -407,10 +409,10 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter ID of order");
-                                    int id;
-                                    id = Console.Read();
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(), out id1);
                                     Order p = new Order();
-                                    p = dalList1.Order.PrintByID(id);
+                                    p = dalList1.Order.PrintByID(id1);
                                     Console.WriteLine("Do you want to change the customer name?, enter y for yes and n for no");
                                     string answer = Console.ReadLine();
                                     if (answer == "y")
@@ -557,10 +559,9 @@ namespace DalTest
 7 to print all orderItem of order
 8 to exit the program");
                 int.TryParse(Console.ReadLine(), out optionsOrderItem);
-                while (optionsOrderItem < 1 | optionsOrderItem > 6)
+                while (optionsOrderItem < 1 | optionsOrderItem > 8)
                 {
                     Console.WriteLine(@"Enter valid number");
-                    Console.WriteLine("Enter valid number");
                     int.TryParse(Console.ReadLine(), out optionsOrderItem);
                     optionsOrderItem = Console.Read();
 
@@ -597,9 +598,9 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter ID of orderItem");
-                                    int id;
-                                    id = Console.Read();
-                                    OrderItem p = dalList1.OrderItem.PrintByID(id);
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(), out id1);
+                                    OrderItem p = dalList1.OrderItem.PrintByID(id1);
                                     Console.WriteLine(p);
                                     break;
                                 }
@@ -642,9 +643,9 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter ID of orderItem");
-                                    int id;
-                                    id = Console.Read();
-                                    bool answer = dalList1.OrderItem.Delete(id);
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(), out id1);
+                                    bool answer = dalList1.OrderItem.Delete(id1);
                                     break;
                                 }
                                 catch (IdDoesNotExistException m)
@@ -664,7 +665,7 @@ namespace DalTest
                                 {
                                     Console.WriteLine("Enter ID of orderItem");
                                     int id;
-                                    id = Console.Read();
+                                    int.TryParse(Console.ReadLine(), out id);
                                     OrderItem p = new OrderItem();
                                     p = dalList1.OrderItem.PrintByID(id);
                                     Console.WriteLine("Do you want to change the id of order?, enter y for yes and n for no");
@@ -672,15 +673,17 @@ namespace DalTest
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter ID order");
-                                        int orderID1 = Console.Read();
-                                        p.OrderID = orderID1;
+                                        int id1;
+                                        int.TryParse(Console.ReadLine(), out id1);
+                                        p.OrderID = id1;
                                     }
                                     Console.WriteLine("Do you want to change the id of product?, enter y for yes and n for no");
                                     string answer1 = Console.ReadLine();
                                     if (answer1 == "y")
                                     {
                                         Console.WriteLine("Enter ID product");
-                                        int productID1 = Console.Read();
+                                        int productID1;
+                                        int.TryParse(Console.ReadLine(), out productID1);
                                         p.ProductID = productID1;
                                     }
                                     Console.WriteLine("Do you want to change the price?, enter y for yes and n for no");
@@ -688,15 +691,17 @@ namespace DalTest
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter price");
-                                        double price1 = Console.Read();
-                                        p.Price = price1;
+                                        double price;
+                                        double.TryParse(Console.ReadLine(), out price);
+                                        p.Price = price;
                                     }
                                     Console.WriteLine("Do you want to change the amount?, enter y for yes and n for no");
                                     string answer3 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter amount");
-                                        int amount = Console.Read();
+                                        int amount;
+                                        int.TryParse(Console.ReadLine(), out amount);
                                         p.Amount = amount;
                                     }
                                     bool answer11 = dalList1.OrderItem.Update(p);
@@ -722,9 +727,11 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter order ID");
-                                    int id1 = Console.Read();
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(), out id1);
                                     Console.WriteLine("Enter product ID");
-                                    int id2 = Console.Read();
+                                    int id2;
+                                    int.TryParse(Console.ReadLine(), out id2);
                                     OrderItem oi = dalList1.OrderItem.PrintByTwoId(id2, id1);
                                     Console.WriteLine(oi);
                                     break;
@@ -745,9 +752,9 @@ namespace DalTest
                                 try
                                 {
                                     Console.WriteLine("Enter order ID");
-                                    int id1 = Console.Read();
-                                    IEnumerable<OrderItem> orderItemByOrderId;
-                                    orderItemByOrderId = dalList1.OrderItem.PrintAllByOrder(id1);
+                                    int id1;
+                                    int.TryParse(Console.ReadLine(),out id1);
+                                    IEnumerable<OrderItem> orderItemByOrderId = dalList1.OrderItem.PrintAllByOrder(id1);
                                     foreach (OrderItem p in orderItemByOrderId)
                                     {
                                         Console.WriteLine(p);
@@ -771,7 +778,24 @@ namespace DalTest
                                 break;
                             }
                     }
-        }
+                    Console.WriteLine(@"Enter
+1 to add an orderItem
+2 to print orderItem by input id of its
+3 to print the all list of the orderItem
+4 to update details of orderItem
+5 to delete an orderItem
+6 to print order by two ID
+7 to print all orderItem of order
+8 to exit the program");
+                    int.TryParse(Console.ReadLine(), out optionsOrderItem);
+                    while (optionsOrderItem < 1 | optionsOrderItem > 8)
+                    {
+                        Console.WriteLine(@"Enter valid number");
+                        int.TryParse(Console.ReadLine(), out optionsOrderItem);
+                        optionsOrderItem = Console.Read();
+
+                    }
+                }
 
 
             }//manages the orderItems

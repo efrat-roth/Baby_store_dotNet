@@ -40,7 +40,6 @@ internal class BlTest
             };
             return cart;
         }
-
         void manageProduct() //manages all the methods in product
         {
             int choice1 =0;
@@ -84,7 +83,8 @@ internal class BlTest
                             try
                             {
                                 Console.WriteLine("Enter id of product");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 Product product = bl.Product.GetProductManager(id);
                                 Console.WriteLine(product);
                             }
@@ -99,7 +99,8 @@ internal class BlTest
                             try
                             {
                                 Console.WriteLine("Enter id of product");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse( Console.ReadLine(),out id);
                                 ProductItem product = bl.Product.GetProductCustomer(id, c);
                                 Console.WriteLine(product);
                             }
@@ -115,7 +116,8 @@ internal class BlTest
                             {
                                 DO.Product product = new DO.Product();
                                 Console.WriteLine("Enter the id of product to update");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 if (id <= 0)
                                     throw new InvalidVariableException();
                                 product.ID = id;
@@ -125,7 +127,8 @@ internal class BlTest
                                     throw new InvalidVariableException();
                                 product.Name = name1;
                                 Console.WriteLine("Enter the price of product to update");
-                                double price1 = Console.Read();
+                                double price1;
+                                double.TryParse(Console.ReadLine(), out price1); 
                                 if (price1 < 0)
                                     throw new InvalidVariableException();
                                 product.Price = price1;
@@ -133,7 +136,8 @@ internal class BlTest
                                 DO.Enums.Category category1 = (DO.Enums.Category)Console.Read();
                                 product.Category = category1;
                                 Console.WriteLine("Enter amount of products in stock");
-                                int inStock1 = Console.Read();
+                                int inStock1;
+                                int.TryParse(Console.ReadLine(), out inStock1);
                                 if (inStock1 < 0)
                                     throw new InvalidVariableException();
                                 product.InStock = inStock1;
@@ -152,7 +156,8 @@ internal class BlTest
                             {
                                 DO.Product p = new DO.Product();
                                 Console.WriteLine("Enter the id of product to add");
-                                int id1 = Console.Read();
+                                int id1;
+                                int.TryParse(Console.ReadLine(), out id1);
                                 p.ID = id1;
                                 Console.WriteLine("Enter the name of product to add");
                                 string name1 = Console.ReadLine();
@@ -161,10 +166,12 @@ internal class BlTest
                                 DO.Enums.Category category1 = (DO.Enums.Category)Console.Read();
                                 p.Category = category1;
                                 Console.WriteLine("Enter the price of product to add");
-                                double price1 = Console.Read();
+                                double price1;
+                                double.TryParse(Console.ReadLine(), out price1);
                                 p.Price = price1;
                                 Console.WriteLine("Enter amount of products in stock");
-                                int inStock1 = Console.Read();
+                                int inStock1;
+                                int.TryParse(Console.ReadLine(), out inStock1); 
                                 p.InStock = inStock1;
                                 bl.Product.AddProduct(p);
                                 Console.WriteLine(p);
@@ -180,7 +187,8 @@ internal class BlTest
                             try
                             {
                                 Console.WriteLine("Enter id of product you want to delete");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 bl.Product.DeleteProduct(id);
                             }
                             catch (Exception e)
@@ -248,7 +256,8 @@ internal class BlTest
                             {
                                 BO.Order order = new BO.Order();
                                 Console.WriteLine("Enter the ID of Order");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 if (identity == 'm')//in case of maneger
                                 {
                                     order = bl.Order.GetDetailsOrderManager(id);
@@ -275,7 +284,8 @@ internal class BlTest
                             {
                                 BO.Order order = new BO.Order();
                                 Console.WriteLine("Enter ID of order to update");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 order = bl.Order.DeliveredOrder(id);
                                 Console.WriteLine(order);
                             }
@@ -291,7 +301,8 @@ internal class BlTest
                             {
                                 BO.Order order = new BO.Order();
                                 Console.WriteLine("Enter ID of order to update");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 order = bl.Order.ArrivedOrder(id);
                                 Console.WriteLine(order);
                             }
@@ -307,7 +318,8 @@ internal class BlTest
                             {
                                 BO.OrderTracking orderTrack = new BO.OrderTracking();
                                 Console.WriteLine("Enter ID of order to track");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 orderTrack = bl.Order.OrderTracking(id);
                                 Console.WriteLine(orderTrack);
                             }
@@ -323,11 +335,14 @@ internal class BlTest
                             {
                                 BO.Order order = new BO.Order();
                                 Console.WriteLine("Enter the ID of order");
-                                int idO = Console.Read();
+                                int idO;
+                                int.TryParse(Console.ReadLine(), out idO);
                                 Console.WriteLine("Enter the ID of product");
-                                int idP = Console.Read();
+                                int idP;
+                                int.TryParse(Console.ReadLine(), out idP);
                                 Console.WriteLine("Enter the new amount");
-                                int amount = Console.Read();
+                                int amount;
+                                int.TryParse(Console.ReadLine(), out amount);
                                 order = bl.Order.UpdateOrder(idO, idP, amount);
                                 Console.WriteLine(order);
                             }
@@ -380,7 +395,8 @@ internal class BlTest
                             try
                             {
                                 Console.WriteLine("Enter the ID of product");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 c = bl.Cart.AddProductToCart(c, id);
                                 Console.WriteLine(c);
                             }
@@ -394,9 +410,11 @@ internal class BlTest
                             try
                             {
                                 Console.WriteLine("Enter product ID");
-                                int id = Console.Read();
+                                int id;
+                                int.TryParse(Console.ReadLine(), out id);
                                 Console.WriteLine("Enter the new Amount");
-                                int amount = Console.Read();
+                                int amount;
+                                int.TryParse(Console.ReadLine(), out amount);
                                 c = bl.Cart.UpdateProductAmount(c, id, amount);
                                 Console.WriteLine(c);
                             }
@@ -427,8 +445,6 @@ internal class BlTest
                 }
             }
         }
-
-
         void mainActions()//The method ask the user to coose the main item by enim
         {
             string choice = "start";
@@ -469,13 +485,6 @@ exit to exit the store");
 
             } while (choice != "exit");
         }
-
-
-
-
-
-
-
 
     }
 }
