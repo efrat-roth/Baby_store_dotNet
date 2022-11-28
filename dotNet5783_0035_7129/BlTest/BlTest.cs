@@ -138,7 +138,7 @@ internal class BlTest
                                     throw new InvalidVariableException();
                                 product.Price = price1;
                                 Console.WriteLine("Enter the category of product to update");
-                                DO.Enums.Category category1 = (DO.Enums.Category)Console.Read();
+                                DO.Enums.Category category1 = DO.Enums.Category(typeof(Enum));
                                 product.Category = category1;
                                 Console.WriteLine("Enter amount of products in stock");
                                 int inStock1;
