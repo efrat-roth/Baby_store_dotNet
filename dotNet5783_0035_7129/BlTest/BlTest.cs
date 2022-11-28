@@ -4,6 +4,7 @@ using BO;
 using System.Collections.Generic;
 using System;
 using BlImplementation;
+using DO;
 
 namespace BlTest;
 
@@ -52,8 +53,8 @@ internal class BlTest
 1 to get the list of products.
 2 to manager to get the details of product.
 3 to customer to get details of product.
-4 to add product to store.
-5 to update product in the store.
+4 to update product to store.
+5 to add product in the store.
 6 to delete product from the store.
 7 to exit product");
 
@@ -90,7 +91,7 @@ internal class BlTest
                                 Console.WriteLine("Enter id of product");
                                 int id;
                                 int.TryParse(Console.ReadLine(), out id);
-                                Product product = bl.Product.GetProductManager(id);
+                                BO.Product product = bl.Product.GetProductManager(id);
                                 Console.WriteLine(product);
                             }
                             catch (Exception e)
@@ -138,8 +139,9 @@ internal class BlTest
                                     throw new InvalidVariableException();
                                 product.Price = price1;
                                 Console.WriteLine("Enter the category of product to update");
-                                DO.Enums.Category category1 = DO.Enums.Category(typeof(Enum));
-                                product.Category = category1;
+                                DO.Enums.Category category1;
+                                DO.Enums.Category.TryParse(Console.ReadLine(), out category1);
+                                product.Category = (DO.Enums.Category)category1;
                                 Console.WriteLine("Enter amount of products in stock");
                                 int inStock1;
                                 int.TryParse(Console.ReadLine(), out inStock1);
@@ -168,7 +170,9 @@ internal class BlTest
                                 string name1 = Console.ReadLine();
                                 p.Name = name1;
                                 Console.WriteLine("Enter the category of product to add");
-                                DO.Enums.Category category1 = (DO.Enums.Category)Console.Read();
+                                DO.Enums.Category category1 ;
+                                DO.Enums.Category.TryParse(Console.ReadLine(), out category1);
+                                p.Category = (DO.Enums.Category)category1;
                                 p.Category = category1;
                                 Console.WriteLine("Enter the price of product to add");
                                 double price1;
