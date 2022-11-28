@@ -56,9 +56,9 @@ internal class Order:IOrder
             }
             return listOrders;
         }
-        catch(FailedGetAll m)
+        catch(Exception inner)
         {
-            throw m;
+            throw new FailedGet(inner);
         }
         catch (FailedGet m)
         {
