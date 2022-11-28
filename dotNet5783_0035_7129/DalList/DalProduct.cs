@@ -47,10 +47,7 @@ internal class DalProduct:IProduct
     /// <returns></returns>The database of the all products
     public IEnumerable<Product> PrintAll()
     {
-        if(products.Count==0)
-        {
-            throw new ListIsEmptyException();
-        }
+       
         return products;
     }
     /// <summary>

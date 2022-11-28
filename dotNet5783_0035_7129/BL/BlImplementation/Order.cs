@@ -1,15 +1,17 @@
 ﻿using BlApi;
 using BO;
+using DalApi;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BlImplementation;
 
-internal class Order:IOrder
+internal class Order:BlApi.IOrder
 {
     DalApi.IDal _dal = new Dal.DalList();
     /// <summary>
@@ -24,7 +26,8 @@ internal class Order:IOrder
             List<OrderForList> listOrders = new List<OrderForList>();
             foreach (DO.Order o in orders)
             {
-                IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.PrintAllByOrder(o.ID);
+            
+                IEnumerable<DO.OrderItem> orderItems= _dal.OrderItem.PrintAllByOrder(o.ID);
                 OrderForList OrderList = new OrderForList
                 {
                     ID = o.ID,
@@ -47,21 +50,18 @@ internal class Order:IOrder
                 }
                 foreach (DO.OrderItem OI in orderItems)
                 {
-                    ++OrderList.AmountOfItems;
+                    OrderList.AmountOfItems+=1;
                     OrderList.TotalPrice += OI.Price;
                 }
                 listOrders.Add(OrderList);
             }
             return listOrders;
         }
-        catch(FailedGetAll m)
+        catch(Exception inner)
         {
-            throw m;
+            throw new FailedGet(inner);
         }
-        catch (FailedGet m)
-        {
-            throw m;
-        }
+        
     }
     /// <summary>
     /// The method gets details of order for manager
@@ -114,18 +114,9 @@ internal class Order:IOrder
             }
             return logicOrder;
         }
-        catch(FailedGet message)
+        catch (Exception inner)
         {
-            throw message;
-        }
-
-        catch(FailedGetAll m)
-        {
-            throw m;
-        }
-        catch (FailedAdd m)
-        {
-            throw m;
+            throw new FailedGet(inner);
         }
     }
     /// <summary>
@@ -185,16 +176,12 @@ internal class Order:IOrder
             }
             return ReturnOrder;
         }
-        catch(FailedGet m)
-        { throw m;  }
-        catch (FailedAdd m)
-        { throw m; }
-        catch(FailedGetAll m)
-        { throw m; }
-        catch (Exception message)
+        
+        catch ( Exception inner)
         {
-            throw message;
+            throw new FailedGet(inner);
         }
+        
     }
     /// <summary>
     /// The method updates the order as arrived order
@@ -211,7 +198,12 @@ internal class Order:IOrder
                 throw new Exception("The order was arrived already");
             }
             CheckOrder.DeliveryDate= DateTime.Now;
-            _dal.Order.Update(CheckOrder);
+            try
+            {
+                if (!(_dal.Order.Update(CheckOrder)))
+                    throw new CanNotDOActionException();
+            }
+            catch (Exception inner){throw new FailedUpdate(inner); }
             IEnumerable<DO.OrderItem> items1 = _dal.OrderItem.PrintAllByOrder(IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {
@@ -243,21 +235,9 @@ internal class Order:IOrder
             }
             return ReturnOrder;
         }
-        catch(FailedGet m)
+        catch (Exception inner)
         {
-            throw m;
-        }
-        catch(FailedAdd m)
-        {
-            throw m;
-        }
-        catch (FailedGetAll message)
-        {
-            throw message;
-        }
-        catch (Exception message)
-        {
-            throw message;
+            throw new FailedGet(inner);
         }
     }
     /// <summary>
@@ -315,13 +295,9 @@ internal class Order:IOrder
             };
             return NewOrderTracking;
         }
-        catch(FailedGet m)
+        catch (Exception inner)
         {
-            throw m;
-        }
-        catch( Exception m)
-        {
-            throw m;
+            throw new FailedGet(inner);
         }
     }
     /// <summary>
@@ -357,18 +333,10 @@ internal class Order:IOrder
             }
             return wantedOrder;
         }
-        catch (FailedGet message)
+        catch (Exception inner)
         {
-            throw message;
-        }
-        catch(BO.CanNotDOActionException m)
-        {
-            throw m;
+            throw new FailedGet(inner);
         }
        
-        catch (Exception message)
-        {
-            throw message;
-        }
     }
 }

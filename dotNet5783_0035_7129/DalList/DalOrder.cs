@@ -49,10 +49,7 @@ internal class DalOrder : IOrder
     /// <returns></returns>The database of the all orders
     public IEnumerable<Order> PrintAll()
     {
-        if (orders.Count() == 0)
-        {
-            throw new ListIsEmptyException();
-        }
+        
         return orders;
     }
     /// <summary>

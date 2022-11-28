@@ -101,5 +101,5 @@ public class FailedGetAll: Exception
 {
     public FailedGetAll(Exception inner) : base("Get all failed", inner) { }
     public object Message { get; }
-    override public string ToString() => @$"{Message} - {this.InnerException}";
+    override public string ToString() => @$"{Message} - {InnerException}";
 }

@@ -22,7 +22,7 @@ public class OrderTracking
     /// <summary>
     /// The list of status and created date of order
     /// </summary>
-    public IEnumerable<NodeDateStatus> ListDateStatus { get; set; }
+    public  IEnumerable<NodeDateStatus> ListDateStatus { get; set; }
     /// <summary>
     /// An information about status of order
     /// </summary>
@@ -30,5 +30,6 @@ public class OrderTracking
     public override string ToString() => $@"
        Order ID={ID},
        Status of order: {Status}
-       List of dates ans status: {ListDateStatus}";
+       List of dates ans status: {string.Join('\n', ListDateStatus)},
+";
 }
