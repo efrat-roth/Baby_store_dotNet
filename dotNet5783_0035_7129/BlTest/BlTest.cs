@@ -18,6 +18,8 @@ internal class BlTest
         mainActions();
         Cart createCart()//create new cart by accept the values from the user
         {
+            if (c == null)
+                c = new Cart();
             Console.WriteLine("Enter Customer Name");
             string name = Console.ReadLine();
             Console.WriteLine("Enter Customer Email");
@@ -70,11 +72,14 @@ internal class BlTest
                            {
                                 List<ProductForList> lists = new List<ProductForList>();
                                 lists = bl.Product.GetListOfProduct();
-                                Console.WriteLine(lists);
+                                foreach(BO.ProductForList p in lists)
+                                {
+                                    Console.WriteLine(p);
+                                }
                             }
                             catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
                             break;
                         }
@@ -90,8 +95,8 @@ internal class BlTest
                             }
                             catch (Exception e)
                             {
-
-                            }                           
+                                Console.WriteLine(e);
+                            }
                             break;
                         }
                     case 3:   //returns details of product
@@ -106,7 +111,7 @@ internal class BlTest
                             }
                             catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
                             break;
                         }
@@ -146,7 +151,7 @@ internal class BlTest
                             }
                             catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
                             break;
                         }
@@ -178,7 +183,7 @@ internal class BlTest
                             }
                             catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
                             break;
                         }
@@ -193,7 +198,7 @@ internal class BlTest
                             }
                             catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
                             break;
                         }
@@ -244,7 +249,7 @@ internal class BlTest
                             }
                             catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
                             break;
                         }
@@ -272,9 +277,9 @@ internal class BlTest
                                 }
                                 Console.WriteLine(order);//prints the order
                             }
-                            catch (Exception N)
+                            catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
                             break;
                         }
@@ -289,9 +294,9 @@ internal class BlTest
                                 order = bl.Order.DeliveredOrder(id);
                                 Console.WriteLine(order);
                             }
-                            catch (Exception n)
+                            catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
                             break;
                         }
@@ -306,9 +311,9 @@ internal class BlTest
                                 order = bl.Order.ArrivedOrder(id);
                                 Console.WriteLine(order);
                             }
-                            catch (Exception n)
+                            catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
                             break;
                         }
@@ -323,7 +328,7 @@ internal class BlTest
                                 orderTrack = bl.Order.OrderTracking(id);
                                 Console.WriteLine(orderTrack);
                             }
-                            catch (InvalidVariableException m)
+                            catch (Exception m)
                             {
                                 Console.WriteLine(m);
                             }
@@ -346,9 +351,9 @@ internal class BlTest
                                 order = bl.Order.UpdateOrder(idO, idP, amount);
                                 Console.WriteLine(order);
                             }
-                            catch (Exception n)
+                            catch (Exception e)
                             {
-
+                                Console.WriteLine(e);
                             }
 
                             break;
@@ -373,9 +378,11 @@ internal class BlTest
                 {
                     c = createCart(); //create new cart
                 }
-                catch (Exception m)
+                catch (Exception e)
                 {
-
+                    Console.WriteLine(e);
+                    Console.WriteLine("Enter details again");
+                    c = createCart();
                 }
                 Console.WriteLine($@"Enter
 1 to add product to cart
@@ -401,7 +408,9 @@ internal class BlTest
                                 Console.WriteLine(c);
                             }
                             catch (Exception m)
-                            { }
+                            {
+                                Console.WriteLine(m);
+                            }
                             break;
 
                         }
@@ -418,9 +427,9 @@ internal class BlTest
                                 c = bl.Cart.UpdateProductAmount(c, id, amount);
                                 Console.WriteLine(c);
                             }
-                            catch(Exception n)
+                            catch (Exception m)
                             {
-
+                                Console.WriteLine(m);
                             }
                             break;
                         }
@@ -431,9 +440,9 @@ internal class BlTest
                                 DO.Order order = bl.Cart.MakeOrder(c, c.CustomerAdress, c.CustomerName, c.CustomerEmail);
                                 Console.WriteLine(order);
                             }
-                            catch(Exception m)
+                            catch (Exception m)
                             {
-                                
+                                Console.WriteLine(m);
                             }
                             break;
                         }

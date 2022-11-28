@@ -146,7 +146,7 @@ namespace Dal
                 }
                 orders.Add(order);
             }
-
+            int y=countOrderID-100;
             for (int i = 0; i < 180; i++)
             {
                 Product product = new Product();
@@ -155,7 +155,7 @@ namespace Dal
                 orderItem.ID = nextCountOrderItemsID();
                 orderItem.ProductID = product.ID;
                 orderItem.Amount = rnd.Next(1, 11);
-                orderItem.OrderID = orders[rnd.Next(0, orders.Count())].ID;
+                orderItem.OrderID = (++y)%100;
                 orderItem.Price = orderItem.Amount * product.Price;
                 orderItems.Add(orderItem);
             }

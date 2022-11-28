@@ -1,6 +1,5 @@
 ﻿using BlApi;
 using BO;
-using DalApi;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -20,14 +19,16 @@ internal class Order:BlApi.IOrder
     /// <returns></returns>List of OrderForList
     public List<OrderForList> GetListOfOrders()
     {
-        try
-        {
             IEnumerable<DO.Order> orders = _dal.Order.PrintAll();
             List<OrderForList> listOrders = new List<OrderForList>();
             foreach (DO.Order o in orders)
             {
-            
-                IEnumerable<DO.OrderItem> orderItems= _dal.OrderItem.PrintAllByOrder(o.ID);
+            IEnumerable<DO.OrderItem> orderItems1;
+            try { orderItems1 = _dal.OrderItem.PrintAllByOrder(o.ID); }
+            catch(Exception inner)
+            {
+                throw new FailedGet(inner);
+            }
                 OrderForList OrderList = new OrderForList
                 {
                     ID = o.ID,
@@ -48,7 +49,7 @@ internal class Order:BlApi.IOrder
                 {
                     OrderList.Status = Enums.OrderStatus.ConfirmedOrder;
                 }
-                foreach (DO.OrderItem OI in orderItems)
+                foreach (DO.OrderItem OI in orderItems1)
                 {
                     OrderList.AmountOfItems+=1;
                     OrderList.TotalPrice += OI.Price;
@@ -56,11 +57,8 @@ internal class Order:BlApi.IOrder
                 listOrders.Add(OrderList);
             }
             return listOrders;
-        }
-        catch(Exception inner)
-        {
-            throw new FailedGet(inner);
-        }
+        
+
         
     }
     /// <summary>
@@ -72,10 +70,12 @@ internal class Order:BlApi.IOrder
     public BO.Order GetDetailsOrderManager(int ID)
     {
 
-        try
-        {
-            DO.Order order1 = _dal.Order.PrintByID(ID);//asked order
-            IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.PrintAllByOrder(ID);//List of orderItems of the order
+    DO.Order order1;
+        try { order1 = _dal.Order.PrintByID(ID); }//asked order
+        catch(Exception inner) { throw new FailedGet(inner); }
+        IEnumerable<DO.OrderItem> orderItems;
+        try { orderItems = _dal.OrderItem.PrintAllByOrder(ID); }//List of orderItems of the order
+        catch(Exception inner) { throw new FailedGet(inner); }
             BO.Order logicOrder = new BO.Order
             {
                 ID = order1.ID,
@@ -100,6 +100,8 @@ internal class Order:BlApi.IOrder
             }
             foreach (DO.OrderItem OI in orderItems)//resets the orderItems by the orderItems of the order in data layer
             {
+            try
+            {
                 OrderItem OItem = new OrderItem
                 {
                     ID = OI.ID,
@@ -112,12 +114,9 @@ internal class Order:BlApi.IOrder
                 logicOrder.Items.Add(OItem);
                 logicOrder.TotalPrice += OItem.TotalPrice;
             }
-            return logicOrder;
-        }
-        catch (Exception inner)
-        {
-            throw new FailedGet(inner);
-        }
+            catch(Exception inner) { throw new FailedGet(inner); }
+            }
+            return logicOrder;       
     }
     /// <summary>
     /// The method gets details of order for customer
@@ -136,16 +135,20 @@ internal class Order:BlApi.IOrder
     /// <returns></returns>BO.Order
     public BO.Order DeliveredOrder(int IDOrder)
     {
-        try
-        {
-            DO.Order CheckOrder = _dal.Order.PrintByID(IDOrder);
+
+        DO.Order CheckOrder;
+        try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
+        catch(Exception inner) { throw new FailedGet(inner); }
             if (CheckOrder.ShipDate <= DateTime.Now)
             {
                 throw new Exception("The order was shiped already");
             }
             CheckOrder.ShipDate=DateTime.Now;
-            _dal.Order.Update(t: CheckOrder);
-            IEnumerable<DO.OrderItem> items1 = _dal.OrderItem.PrintAllByOrder(IDOrder);
+        try { _dal.Order.Update(t: CheckOrder); }
+        catch (Exception inner) { throw new FailedUpdate(inner); }
+        IEnumerable<DO.OrderItem> items1;
+        try { items1 = _dal.OrderItem.PrintAllByOrder(IDOrder); }
+        catch(Exception inner) { throw new FailedGet(inner); }
             BO.Order ReturnOrder = new BO.Order
             {
                 ID = IDOrder,
@@ -161,6 +164,8 @@ internal class Order:BlApi.IOrder
             {
                 if (item.ID == IDOrder)
                 {
+                try
+                {
                     BO.OrderItem orderItem = new BO.OrderItem
                     {
                         ID = item.ID,
@@ -171,16 +176,13 @@ internal class Order:BlApi.IOrder
                         TotalPrice = item.Price * item.Amount,
                     };
                     ReturnOrder.Items.Add(orderItem);
+
+                }
+                catch (Exception inner) { throw new FailedGet(inner); }
                 }
 
             }
-            return ReturnOrder;
-        }
-        
-        catch ( Exception inner)
-        {
-            throw new FailedGet(inner);
-        }
+        return ReturnOrder;       
         
     }
     /// <summary>
@@ -190,9 +192,10 @@ internal class Order:BlApi.IOrder
     /// <returns></returns>BO.Order
     public BO.Order ArrivedOrder(int IDOrder)
     {
-        try
-        {
-            DO.Order CheckOrder = _dal.Order.PrintByID(IDOrder);
+
+        DO.Order CheckOrder;
+        try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
+        catch (Exception inner) { throw new FailedGet(inner); }
             if (CheckOrder.DeliveryDate <= DateTime.Now)
             {
                 throw new Exception("The order was arrived already");
@@ -220,6 +223,8 @@ internal class Order:BlApi.IOrder
             {
                 if (item.ID == IDOrder)
                 {
+                try
+                {
                     BO.OrderItem orderItem = new BO.OrderItem
                     {
                         ID = item.ID,
@@ -231,14 +236,12 @@ internal class Order:BlApi.IOrder
                     };
                     ReturnOrder.Items.Add(orderItem);
                 }
+                catch (Exception inner){throw new FailedGet(inner); }
+                }
 
             }
             return ReturnOrder;
-        }
-        catch (Exception inner)
-        {
-            throw new FailedGet(inner);
-        }
+        
     }
     /// <summary>
     /// The method track after an order
@@ -248,13 +251,10 @@ internal class Order:BlApi.IOrder
     /// <exception cref="Exception"></exception>The Order was shiped already
     public OrderTracking OrderTracking(int IDOrder)
     {
-        try
-        {
-            DO.Order CheckOrder = _dal.Order.PrintByID(IDOrder);
-            if (CheckOrder.DeliveryDate <= DateTime.Now)
-            {
-                throw new Exception("The order was shiped already");
-            }
+
+        DO.Order CheckOrder;
+        try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
+        catch (Exception inner){throw new FailedGet(inner); }
             IEnumerable<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
             Enums.OrderStatus status1 = new Enums.OrderStatus();
             if (CheckOrder.OrderDate <= DateTime.Now)
@@ -294,11 +294,6 @@ internal class Order:BlApi.IOrder
                 ListDateStatus = ListDateStatus1
             };
             return NewOrderTracking;
-        }
-        catch (Exception inner)
-        {
-            throw new FailedGet(inner);
-        }
     }
     /// <summary>
     /// The method update the amount of product in exist order
@@ -315,9 +310,12 @@ internal class Order:BlApi.IOrder
         if (IDProduct < 0)
             throw new BO.InvalidVariableException();
         if (newAmount < 0)
-            throw  new BO.InvalidVariableException();      
-        try
+            throw  new BO.InvalidVariableException();
+        try { _dal.Order.PrintByID(IDOrder); }
+        catch(Exception inner)
         {
+            throw new FailedGet(inner);
+        }
             if (_dal.Order.PrintByID(IDOrder).ShipDate <= DateTime.Now)
                 throw new Exception("The Order was shiped already");
             BO.Order wantedOrder = GetDetailsOrderManager(IDOrder);
@@ -331,12 +329,6 @@ internal class Order:BlApi.IOrder
                     wantedOrder.TotalPrice += orderItem.TotalPrice;//for calculate the new total price of the order
                 }
             }
-            return wantedOrder;
-        }
-        catch (Exception inner)
-        {
-            throw new FailedGet(inner);
-        }
-       
+            return wantedOrder;      
     }
 }
