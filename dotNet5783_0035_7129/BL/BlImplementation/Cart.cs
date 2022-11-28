@@ -27,9 +27,16 @@ internal class Cart:ICart
     /// <exception cref="Exception"></exception>
     public BO.Cart AddProductToCart(BO.Cart finalCart, int id)
     {
+        DO.Product ProductInStore;
         try
-        { 
-            DO.Product ProductInStore =_dal.Product.PrintByID(id);  //variable for the product.            
+        {
+            ProductInStore = _dal.Product.PrintByID(id);//variable for the product.
+        }   
+        catch(Exception inner)
+        {
+            throw new FailedGet(inner);
+        }
+                     
             foreach (OrderItem o  in finalCart.Items )   //Goes through all products order in the cart.
             {
                 if(o.ProductID == id)   //If the product is on order
@@ -41,14 +48,16 @@ internal class Cart:ICart
                         finalCart.TotalPrice += o.Price;
                         return finalCart;
                     }
+               
                     else
                     {
-                        throw new CanNotDOActionException();
-                    }                     
-                }                            
+                        throw new InvalidVariableException();
+                    }
+                
+                
+                }                           
             }
-            if (ProductInStore.InStock > 0)   //If the product is not on order and is in
-                                              //stock then it will be added to the cart.
+            if (ProductInStore.InStock > 0)   //If the product is not on order and is in                                              //stock then it will be added to the cart.
             {
                 BO.OrderItem newProductInOrder = new BO.OrderItem
                 { 
@@ -65,9 +74,8 @@ internal class Cart:ICart
                 return finalCart;
             }
             return finalCart;
-        }
-        catch (FailedGet m) { throw m; }
-        catch (FailedAdd m) { throw m; }
+        
+        
 
     }
 
@@ -81,26 +89,26 @@ internal class Cart:ICart
     /// <exception cref="Exception"></exception>
     public BO.Cart UpdateProductAmount(BO.Cart finalCart, int id, int newAmount)
     {
-        DO.Product ProductInStore = _dal.Product.PrintByID(id);  //variable for the product.            
+        DO.Product ProductInStore;
+        try { ProductInStore = _dal.Product.PrintByID(id); } //variable for the product.
+        catch(Exception inner) { throw new FailedGet(inner); }                                                               //
         foreach (OrderItem o in finalCart.Items)   //Goes through all products order in the cart.
         {
             if (o.ProductID == id)   //If the product is on order.
             {
                 if (o.Amount < newAmount)   //if the new amount is bigger.
                 {
-                    if (ProductInStore.InStock >= (newAmount-o.Amount))  //if there are enough products in stock
-                                                                        //it will change the amount of products 
-                                                                        //in the cart.
+                    if (ProductInStore.InStock >= (newAmount-o.Amount))  //if there are enough products in stock                                                                       //it will change the amount of products                                                                        //in the cart.
                     {
                         o.TotalPrice += o.Price * (newAmount - o.Amount);
                         finalCart.TotalPrice += o.Price * (newAmount - o.Amount);
                         o.Amount = newAmount;
                         return finalCart;
                     }
-                    throw new Exception(" ");
+                    throw new CanNotDOActionException();
                 }
-                else if (o.Amount > newAmount)//it will change the amount of products 
-                                              //in the cart.
+                else 
+                if (o.Amount > newAmount)//it will change the amount of products                                               //in the cart.
                 {
                     o.TotalPrice -= o.Price * (o.Amount - newAmount);
                     finalCart.TotalPrice -= o.Price * (o.Amount - newAmount);
@@ -117,8 +125,9 @@ internal class Cart:ICart
                 else if (o.Amount == newAmount)
                     return finalCart;
             }
+            
         }
-        throw new Exception(" ");
+        throw new CanNotDOActionException();
     }
     /// <summary>
     /// The method makes the order.
@@ -131,80 +140,82 @@ internal class Cart:ICart
 
     public DO.Order MakeOrder(BO.Cart finalCart, string adress11, string name11, string emailAdress)
     {
-        try
+        if(finalCart.Items.Count()==0)
         {
-            IEnumerable<DO.Product> ProductInStore = _dal.Product.PrintAll();  //variable for the product.
-
-            if (adress11 == null || name11 == null || emailAdress == null //checks if all the strings fields is correct.
+            throw new ListIsEmptyException();
+        }   
+        IEnumerable<DO.Product> ProductInStore = _dal.Product.PrintAll();  //variable for the product.
+        if (adress11 == null || name11 == null || emailAdress == null //checks if all the strings fields is correct.
                 || emailAdress[0] == '@' || emailAdress[emailAdress.Length - 1] == '@')
-                throw new BO.InvalidVariableException();
-            bool isRight = false;
-            foreach (char c in emailAdress)//checks if email is correct and has the @ in their.
-            {
-                if (c == '@')
-                    isRight = true;
-                if (c == ' ')
+            throw new BO.InvalidVariableException();
+        bool isRight = false;
+        foreach (char c in emailAdress)//checks if email is correct and has the @ in their.
+            if (c == '@')
+                isRight = true;
+            if (c == ' ')
                 {
                     isRight = false;
                     break;
                 }
-            }
-            if (!isRight)
+        if (!isRight)
+            throw new BO.InvalidVariableException();
+
+        bool ifExist = false;
+        foreach (OrderItem o in finalCart.Items)   //Goes through all products order in the cart.
+        {
+            if (o.Amount < 0)  //checks if the amount is positive.
                 throw new BO.InvalidVariableException();
 
-            bool ifExist = false;
-            foreach (OrderItem o in finalCart.Items)   //Goes through all products order in the cart.
+            foreach (DO.Product temporaryProduct in ProductInStore)  //goes througe all products in store.
             {
-                if (o.Amount < 0)  //checks if the amount is positive.
-                    throw new BO.InvalidVariableException();
-
-                foreach (DO.Product temporaryProduct in ProductInStore)  //goes througe all products in store.
+                if (o.ProductID == temporaryProduct.ID)  //checks if the product is exist.
                 {
-                    if (o.ProductID == temporaryProduct.ID)  //checks if the product is exist.
-                    {
-                        ifExist = true;
-                        if (o.Amount > temporaryProduct.InStock) //checks if there are products in stock.
-                            throw new Exception(" ");
-                    }
+                    ifExist = true;
+                    if (o.Amount > temporaryProduct.InStock) //checks if there are products in stock.
+                        throw new Exception(" ");
                 }
             }
-            if (!ifExist)
-                throw new Exception(" ");
-
-            // if everything is correct ***        
-            DO.Order finalOrder = new DO.Order
-            {
-                CustomerAdress = adress11,   //creates new order.
-                CustomerName = name11,
-                CustomerEmail = emailAdress,
-                OrderDate = DateTime.Now,
-                ShipDate = null,
-                DeliveryDate = null,
-            };
-            int id = _dal.Order.Add(finalOrder);   //adds the new order  
-            foreach (BO.OrderItem o in finalCart.Items)  //insert the order items details to the order items list.
-            {
-                DO.OrderItem orderItem111 = new DO.OrderItem
-                {
-                   ID = o.ID,
-                   Amount = o.Amount,
-                   OrderID = id,
-                   Price = o.Price,
-                   ProductID = o.ProductID,               
-                };
-                _dal.OrderItem.Add(orderItem111);
-                DO.Product p = _dal.Product.PrintByID(o.ProductID);
-                p.InStock -= o.Amount;  //reduces the amount of product in stock.
-                _dal.Product.Update(p);
-
-            }
-            return finalOrder;
         }
-        catch (Exception)
-        {
+        if (!ifExist)
             throw new Exception(" ");
+
+        // if everything is correct ***        
+        DO.Order finalOrder = new DO.Order
+        {
+            CustomerAdress = adress11,   //creates new order.
+            CustomerName = name11,
+            CustomerEmail = emailAdress,
+            OrderDate = DateTime.Now,
+            ShipDate = null,
+            DeliveryDate = null,
+        };
+        int id = 0;
+        try { id = _dal.Order.Add(finalOrder); } //adds the new order  
+        catch (Exception inner) { throw new FailedAdd(inner); }
+        foreach (BO.OrderItem o in finalCart.Items)  //insert the order items details to the order items list.
+        {
+            DO.OrderItem orderItem111 = new DO.OrderItem
+            {
+                ID = o.ID,
+                Amount = o.Amount,
+                OrderID = id,
+                Price = o.Price,
+                ProductID = o.ProductID,
+            };
+            try { _dal.OrderItem.Add(orderItem111); }
+            catch (Exception inner) { throw new FailedAdd(inner); }
+            DO.Product p;
+            try { p = _dal.Product.PrintByID(o.ProductID); }
+            catch (Exception inner) { throw new FailedGet(inner); }
+            p.InStock -= o.Amount;  //reduces the amount of product in stock.
+            try { _dal.Product.Update(p); }
+            catch (Exception inner) { throw new FailedUpdate(inner); }
+
         }
+        return finalOrder;
+    }
+        
         
 
-    }
+    
 }

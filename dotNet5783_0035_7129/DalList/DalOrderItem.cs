@@ -125,7 +125,6 @@ internal class DalOrderItem:IOrderItem
                 orderItemsByOrder.Add(orderItems.ElementAt(i)); 
             }
         }
-
         return orderItemsByOrder;
     }
 

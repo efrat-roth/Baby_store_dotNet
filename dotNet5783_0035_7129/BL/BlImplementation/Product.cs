@@ -19,8 +19,7 @@ internal class Product:IProduct
     /// <returns></returns>List<ProductForList>
     public List<ProductForList> GetListOfProduct()
     {
-        try
-        {
+        
             IEnumerable<DO.Product> list = _dal.Product.PrintAll();
             List<ProductForList> productList = new List<ProductForList>();
             foreach (DO.Product p in list)
@@ -35,15 +34,8 @@ internal class Product:IProduct
                 productList.Add(listProducts);
             }
             return productList;
-        }
-        catch(BO.ListIsEmptyException m)
-        {
-            throw m;
-        }
-        catch(Exception m)
-        {
-            throw m;
-        }
+        
+        
     }
     /// <summary>
     /// The method return details of product
@@ -51,11 +43,7 @@ internal class Product:IProduct
     /// <param name="ID"></param>id of product
     /// <returns></returns>Product
     public BO.Product GetProductManager(int ID)
-    {
-        if (ID < 0)
-            throw new BO.InvalidVariableException();
-        else
-        {           
+    {          
             try
             {
                 DO.Product p = _dal.Product.PrintByID(ID);
@@ -69,15 +57,11 @@ internal class Product:IProduct
                 };
                 return product;
             }
-            catch(BO.IdDoesNotExistException m)
+            catch(Exception inner)
             {
-                throw m;
+                throw new FailedGet(inner);
             }
-            catch (Exception message)
-            {
-                throw message;
-            }
-        }
+        
     }
     /// <summary>
     /// The method return details of product
@@ -87,36 +71,27 @@ internal class Product:IProduct
     /// <returns></returns>ProductItem
     public ProductItem GetProductCustomer(int ID,BO.Cart cart)
     {
-        if (ID < 0)
-            throw new BO.InvalidVariableException();
-        else
-        {          
-            try
-            {
-                DO.Product p = _dal.Product.PrintByID(ID);
-                bool inStock1 = false;
-                if(p.InStock>0)
-                    inStock1 = true;
-                ProductItem product = new ProductItem
-                {
-                    ID = p.ID,
-                    Name = p.Name,
-                    Price = p.Price,
-                    Category = (Enums.Category)p.Category,
-                    InStock = inStock1
-                };       
-                return product;
-            }
-            catch(BO.IdDoesNotExistException m)
-            {
-                throw m;
-            }
-            catch (Exception message)
-            {
-                throw message;
-            }
-        }
 
+        try
+        {
+            DO.Product p = _dal.Product.PrintByID(ID);
+            bool inStock1 = false;
+            if (p.InStock > 0)
+                inStock1 = true;
+            ProductItem product = new ProductItem
+            {
+                ID = p.ID,
+                Name = p.Name,
+                Price = p.Price,
+                Category = (Enums.Category)p.Category,
+                InStock = inStock1
+            };
+            return product;
+        }
+        catch (Exception inner)
+        {
+            throw new FailedGet(inner);
+        }
     }
     /// <summary>
     /// Adding a product
@@ -124,27 +99,17 @@ internal class Product:IProduct
     /// <param name="product"></param>Product to add
     public void AddProduct(DO.Product product)
     {
-        try
-        {
+       
             if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
             {
-                int id = _dal.Product.Add(product);
-                return;
+            try { int id = _dal.Product.Add(product); }
+            catch (Exception inner)
+            {
+                throw new FailedAdd(inner);
+            }
+            return;
             }
             throw new BO.InvalidVariableException();
-        }
-        catch(BO.InvalidVariableException m)
-        {
-            throw m;
-        }
-        catch(BO.IdAlreadyExistException m)
-        {
-            throw m;
-        }
-        catch (Exception message)
-        {
-            throw message;
-        }
     }
     /// <summary>
     /// Updates product in the store.
@@ -154,8 +119,7 @@ internal class Product:IProduct
 
     public void UpdatingProductDetails(DO.Product product)
     {
-        try
-        {
+
             bool update = false;
             if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
             {
@@ -164,15 +128,6 @@ internal class Product:IProduct
             if (update)
                 throw new BO.InvalidVariableException();
             return;
-        }
-        catch(BO.InvalidVariableException m)
-        {
-            throw m;
-        }
-        catch(Exception message)
-        {
-            throw message;
-        }
     }
     /// <summary>
     /// The method delete product from the store
@@ -181,38 +136,30 @@ internal class Product:IProduct
     /// <exception cref="Exception"></exception>
     public void DeleteProduct(int ID)
     {
-        if (ID < 0)
-            throw new BO.InvalidVariableException();
-        try
-        {
+
             IEnumerable<DO.Order> orders = _dal.Order.PrintAll();
             foreach (DO.Order o in orders)
             {
-                IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.PrintAllByOrder(o.ID);
-                foreach (DO.OrderItem item in orderItems)
-                {
-                    if (item.ProductID == ID)
-                        throw new BO.CanNotDOActionException();
-                }
+
+            IEnumerable<DO.OrderItem> orderItems;
+            try { orderItems = _dal.OrderItem.PrintAllByOrder(o.ID); }
+            catch (Exception inner)
+            {
+                throw new FailedGet(inner);
             }
-            if (!_dal.Product.Delete(ID))
+            foreach (DO.OrderItem item in orderItems)
+            {
+                 if (item.ProductID == ID)
+                    throw new BO.CanNotDOActionException();
+            }
+            
+        
+        }
+            
+             if (!_dal.Product.Delete(ID))
                 throw new BO.IdDoesNotExistException();
-        }
-        catch(BO.ListIsEmptyException m)
-        {
-            throw m;
-        }
-        catch (BO.CanNotDOActionException m)
-        {
-            throw m;
-        }
-        catch (BO.IdDoesNotExistException m)
-        {
-            throw m;
-        }
-        catch (Exception m)
-        {
-            throw m;
-        }
+        
+       
+
     }
 }
