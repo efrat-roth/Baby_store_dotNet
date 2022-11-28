@@ -100,14 +100,14 @@ internal class Product:IProduct
     public void AddProduct(DO.Product product)
     {
        
-            if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
+            if (product.ID > 100000 && product.Name != null && product.Price > 0 && product.InStock >= 0)
             {
-            try { int id = _dal.Product.Add(product); }
-            catch (Exception inner)
-            {
+               try { int id = _dal.Product.Add(product); }
+               catch (Exception inner)
+               {
                 throw new FailedAdd(inner);
-            }
-            return;
+               }
+               return;
             }
             throw new BO.InvalidVariableException();
     }
@@ -121,11 +121,11 @@ internal class Product:IProduct
     {
 
             bool update = false;
-            if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock >= 0)
+            if (product.ID > 100000 && product.Name.GetType!= null && product.Price > 0 && product.InStock >= 0)
             {
                 update = _dal.Product.Update( product);
             }
-            if (update)
+            if (!update)
                 throw new BO.InvalidVariableException();
             return;
     }

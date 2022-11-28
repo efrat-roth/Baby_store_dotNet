@@ -4,6 +4,7 @@ using BO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,10 +15,6 @@ namespace BlImplementation;
 internal class Cart:ICart
 {
     DalApi.IDal _dal = new Dal.DalList();
-    /// <summary>
-    /// A static variable for the each id product in the order.
-    /// </summary>
-    static int _randomIdForOrderItem = 0;
     /// <summary>
     /// The mothod adds new or existing product to the cart.
     /// </summary>
@@ -39,7 +36,7 @@ internal class Cart:ICart
                      
             foreach (OrderItem o  in finalCart.Items )   //Goes through all products order in the cart.
             {
-                if(o.ProductID == id)   //If the product is on order
+                if(o.ProductID == id)   //If the product is in order
                 {
                     if(ProductInStore.InStock > 0)   //If the product is in stock then it will add to the cart.
                     {
@@ -57,11 +54,11 @@ internal class Cart:ICart
                 
                 }                           
             }
-            if (ProductInStore.InStock > 0)   //If the product is not on order and is in                                              //stock then it will be added to the cart.
+            if (ProductInStore.InStock > 0)   //If the product is not on order and is in the store                                             //stock then it will be added to the cart.
             {
                 BO.OrderItem newProductInOrder = new BO.OrderItem
                 { 
-                    ID = _randomIdForOrderItem++,
+                    ID = _dal.OrderItem.PrintAll().Last().ID+1,
                     Price = ProductInStore.Price,
                     TotalPrice = ProductInStore.Price,
                     ProductID = id,
@@ -73,7 +70,7 @@ internal class Cart:ICart
                 finalCart.TotalPrice += newProductInOrder.Price;
                 return finalCart;
             }
-            return finalCart;
+            throw new CanNotDOActionException();
         
         
 
@@ -184,15 +181,15 @@ internal class Cart:ICart
         // if everything is correct ***        
         DO.Order finalOrder = new DO.Order
         {
+            ID= _dal.Order.PrintAll().Last().ID + 1,
             CustomerAdress = adress11,   //creates new order.
             CustomerName = name11,
             CustomerEmail = emailAdress,
             OrderDate = DateTime.Now,
-            ShipDate = null,
-            DeliveryDate = null,
+            DeliveredDate = null,
+            ArrivedDate = null,
         };
-        int id = 0;
-        try { id = _dal.Order.Add(finalOrder); } //adds the new order  
+        try { _dal.Order.Add(finalOrder); } //adds the new order  
         catch (Exception inner) { throw new FailedAdd(inner); }
         foreach (BO.OrderItem o in finalCart.Items)  //insert the order items details to the order items list.
         {
@@ -200,7 +197,7 @@ internal class Cart:ICart
             {
                 ID = o.ID,
                 Amount = o.Amount,
-                OrderID = id,
+                OrderID = finalOrder.ID,
                 Price = o.Price,
                 ProductID = o.ProductID,
             };

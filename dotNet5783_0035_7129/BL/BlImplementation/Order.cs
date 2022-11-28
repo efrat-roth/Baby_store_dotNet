@@ -37,11 +37,11 @@ internal class Order:BlApi.IOrder
                     TotalPrice = 0
                 };
 
-                if (o.DeliveryDate < DateTime.Now)
+                if (o.ArrivedDate < DateTime.Now)
                 {
                     OrderList.Status = Enums.OrderStatus.ArrivedOrder;
                 }
-                if (o.ShipDate < DateTime.Now)
+                if (o.DeliveredDate < DateTime.Now)
                 {
                     OrderList.Status = Enums.OrderStatus.DeliveredOrder;
                 }
@@ -83,14 +83,15 @@ internal class Order:BlApi.IOrder
                 CustomerEmail = order1.CustomerEmail,
                 CustomerAdress = order1.CustomerAdress,
                 OrderDate = order1.OrderDate,
-                ShipDate = order1.ShipDate,
-                DeliveryDate = order1.DeliveryDate,
+                ShipDate = order1.DeliveredDate,
+                DeliveryDate = order1.ArrivedDate,
+                Items=new List<OrderItem>()
             };//Resets the field of item to return
-            if (order1.DeliveryDate < DateTime.Today)
+            if (order1.ArrivedDate < DateTime.Today)
             {
                 logicOrder.Status = Enums.OrderStatus.ArrivedOrder;
             }
-            if (order1.ShipDate < DateTime.Today)
+            if (order1.DeliveredDate < DateTime.Today)
             {
                 logicOrder.Status = Enums.OrderStatus.DeliveredOrder;
             }
@@ -139,30 +140,31 @@ internal class Order:BlApi.IOrder
         DO.Order CheckOrder;
         try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
         catch(Exception inner) { throw new FailedGet(inner); }
-            if (CheckOrder.ShipDate <= DateTime.Now)
+            if (CheckOrder.DeliveredDate <= DateTime.Now)
             {
-                throw new Exception("The order was shiped already");
+                throw new CanNotDOActionException();
             }
-            CheckOrder.ShipDate=DateTime.Now;
+            CheckOrder.DeliveredDate=DateTime.Now;
         try { _dal.Order.Update(t: CheckOrder); }
         catch (Exception inner) { throw new FailedUpdate(inner); }
         IEnumerable<DO.OrderItem> items1;
         try { items1 = _dal.OrderItem.PrintAllByOrder(IDOrder); }
         catch(Exception inner) { throw new FailedGet(inner); }
-            BO.Order ReturnOrder = new BO.Order
-            {
-                ID = IDOrder,
-                CustomerName = CheckOrder.CustomerName,
-                CustomerEmail = CheckOrder.CustomerEmail,
-                CustomerAdress = CheckOrder.CustomerAdress,
-                OrderDate = CheckOrder.OrderDate,
-                DeliveryDate = CheckOrder.DeliveryDate,
-                ShipDate = CheckOrder.ShipDate,
-                Status = Enums.OrderStatus.DeliveredOrder,
+        BO.Order ReturnOrder = new BO.Order
+        {
+            ID = IDOrder,
+            CustomerName = CheckOrder.CustomerName,
+            CustomerEmail = CheckOrder.CustomerEmail,
+            CustomerAdress = CheckOrder.CustomerAdress,
+            OrderDate = CheckOrder.OrderDate,
+            DeliveryDate = CheckOrder.ArrivedDate,
+            ShipDate = CheckOrder.DeliveredDate,
+            Status = Enums.OrderStatus.DeliveredOrder,
+            Items = new List<OrderItem>(),
             };
             foreach (DO.OrderItem item in items1)//Adding the relevant OrderItem to the items field of order
             {
-                if (item.ID == IDOrder)
+                if (item.OrderID == IDOrder)
                 {
                 try
                 {
@@ -196,17 +198,15 @@ internal class Order:BlApi.IOrder
         DO.Order CheckOrder=new DO.Order();
         try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
         catch (Exception inner) { throw new FailedGet(inner); }
-            if (CheckOrder.DeliveryDate <= DateTime.Now)
+            if (CheckOrder.ArrivedDate <= DateTime.Now)
             {
-                throw new Exception("The order was arrived already");
+                 throw new CanNotDOActionException();
             }
-            CheckOrder.DeliveryDate= DateTime.Now;
-            try
-            {
+            CheckOrder.ArrivedDate= DateTime.Now;
+
                 if (!(_dal.Order.Update(CheckOrder)))
                     throw new CanNotDOActionException();
-            }
-            catch (Exception inner){throw new FailedUpdate(inner); }
+
             IEnumerable<DO.OrderItem> items1 = _dal.OrderItem.PrintAllByOrder(IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {
@@ -215,9 +215,10 @@ internal class Order:BlApi.IOrder
                 CustomerEmail = CheckOrder.CustomerEmail,
                 CustomerAdress = CheckOrder.CustomerAdress,
                 OrderDate = CheckOrder.OrderDate,
-                ShipDate = CheckOrder.ShipDate,
-                DeliveryDate = CheckOrder.DeliveryDate,
-                Status = Enums.OrderStatus.ArrivedOrder
+                ShipDate = CheckOrder.DeliveredDate,
+                DeliveryDate = CheckOrder.ArrivedDate,
+                Status = Enums.OrderStatus.ArrivedOrder,
+                Items = new List<OrderItem>(),
             };
             foreach (DO.OrderItem item in items1)//Adding the relevant OrderItem to the items field of order
             {
@@ -255,7 +256,7 @@ internal class Order:BlApi.IOrder
         DO.Order CheckOrder=new DO.Order();
         try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
         catch (Exception inner){throw new FailedGet(inner); }
-            IEnumerable<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
+            List<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
             Enums.OrderStatus status1 = new Enums.OrderStatus();
             if (CheckOrder.OrderDate <= DateTime.Now)
             {
@@ -264,27 +265,27 @@ internal class Order:BlApi.IOrder
                     Date = CheckOrder.OrderDate,
                     status = "The order was created"
                 };
-                ListDateStatus1.Append(newNode);
+                ListDateStatus1.Add(newNode);
                 status1 = Enums.OrderStatus.ConfirmedOrder;
             }
-            if (CheckOrder.ShipDate <= DateTime.Now)
+            if (CheckOrder.DeliveredDate <= DateTime.Now)
             {
                 NodeDateStatus newNode1 = new NodeDateStatus
                 {
                     Date = CheckOrder.OrderDate,
                     status = "The order was delivered"
                 };
-                ListDateStatus1.Append(newNode1);
+                ListDateStatus1.Add(newNode1);
                 status1 = Enums.OrderStatus.DeliveredOrder;
             }
-            if (CheckOrder.DeliveryDate <= DateTime.Now)
+            if (CheckOrder.ArrivedDate <= DateTime.Now)
             {
                 NodeDateStatus newNode2 = new NodeDateStatus
                 {
                     Date = CheckOrder.OrderDate,
                     status = "The order was arrived"
                 };
-                ListDateStatus1.Append(newNode2);
+                ListDateStatus1.Add(newNode2);
                 status1 = Enums.OrderStatus.ArrivedOrder;
             }
             OrderTracking NewOrderTracking = new OrderTracking
@@ -316,8 +317,8 @@ internal class Order:BlApi.IOrder
         {
             throw new FailedGet(inner);
         }
-            if (_dal.Order.PrintByID(IDOrder).ShipDate <= DateTime.Now)
-                throw new Exception("The Order was shiped already");
+            if (_dal.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Now)
+                throw new CanNotDOActionException();
             BO.Order wantedOrder = GetDetailsOrderManager(IDOrder);
             foreach (OrderItem orderItem in wantedOrder.Items)
             {

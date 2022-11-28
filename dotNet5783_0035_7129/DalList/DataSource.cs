@@ -132,17 +132,17 @@ namespace Dal
                 order.OrderDate = DateTime.Now.AddMinutes(rnd.Next(-100, -10));
                 if (rnd.Next(0, 100) > 20)
                 {
-                    order.ShipDate = order.OrderDate.AddMinutes(rnd.Next(10, 100));
+                    order.DeliveredDate = order.OrderDate.AddMinutes(rnd.Next(10, 100));
                     if (rnd.Next(0, 100) > 40)
-                        order.DeliveryDate = order.ShipDate.Value.AddDays(rnd.Next(1, 4));
+                        order.ArrivedDate = order.DeliveredDate.Value.AddDays(rnd.Next(1, 4));
                     else
-                        order.DeliveryDate = DateTime.MinValue;
+                        order.ArrivedDate = DateTime.MinValue;
                 }
 
                 else
                 {
-                    order.ShipDate = DateTime.MinValue;
-                    order.DeliveryDate = DateTime.MinValue;
+                    order.DeliveredDate = DateTime.MinValue;
+                    order.ArrivedDate = DateTime.MinValue;
                 }
                 orders.Add(order);
             }

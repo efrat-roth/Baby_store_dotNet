@@ -277,7 +277,7 @@ namespace DalTest
                     {
                         throw new InvalidVariableException();
                     }
-                    o.ShipDate = DateTime.Parse(shipDate);
+                    o.DeliveredDate = DateTime.Parse(shipDate);
                     Console.WriteLine("Enter delivery date in ######:for day,month,year format");
                     string deliveryDate = Console.ReadLine();
                     if (int.Parse(deliveryDate) / 10000 < 1 | int.Parse(deliveryDate) / 1000 > 30)
@@ -292,7 +292,7 @@ namespace DalTest
                     {
                         throw new InvalidVariableException();
                     }
-                    o.DeliveryDate = DateTime.Parse(deliveryDate);
+                    o.ArrivedDate = DateTime.Parse(deliveryDate);
                     return o;
 
                 }//input details of new order
@@ -475,7 +475,7 @@ namespace DalTest
                                         {
                                             throw new InvalidVariableException();
                                         }
-                                        p.ShipDate = DateTime.Parse(shipDate);
+                                        p.DeliveredDate = DateTime.Parse(shipDate);
                                     }
                                     Console.WriteLine("Do you want to change the delivery date?, enter y for yes and n for no");
                                     string answer5 = Console.ReadLine();
@@ -495,7 +495,7 @@ namespace DalTest
                                         {
                                             throw new InvalidVariableException();
                                         }
-                                        p.DeliveryDate = DateTime.Parse(deliveryDate);
+                                        p.ArrivedDate = DateTime.Parse(deliveryDate);
                                     }
                                     bool answer12 = dalList1.Order.Update(p);
                                     break;

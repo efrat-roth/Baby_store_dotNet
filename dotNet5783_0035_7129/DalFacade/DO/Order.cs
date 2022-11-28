@@ -32,11 +32,11 @@ public struct Order
     /// <summary>
     /// The date of the ship day.
     /// </summary>
-    public DateTime? ShipDate { get; set; }
+    public DateTime? DeliveredDate { get; set; }
     /// <summary>
     /// The date of the delivery day
     /// </summary>
-    public DateTime? DeliveryDate { get; set; }
+    public DateTime? ArrivedDate { get; set; }
     /// <summary>
     /// The order information.
     /// </summary>
@@ -46,7 +46,7 @@ public struct Order
        Customer name: {CustomerName}
        Customer email: {CustomerEmail}
        Date of order: {OrderDate}
-       Date of ship: {ShipDate}
-       Date of delivery: {DeliveryDate}";
+       Date of ship: {DeliveredDate}
+       Date of delivery: {ArrivedDate}";
 
 }
