@@ -150,13 +150,15 @@ internal class Cart:ICart
             throw new BO.InvalidVariableException();
         bool isRight = false;
         foreach (char c in emailAdress)//checks if email is correct and has the @ in their.
+        {
             if (c == '@')
                 isRight = true;
             if (c == ' ')
-                {
-                    isRight = false;
-                    break;
-                }
+            {
+                isRight = false;
+                break;
+            }
+        }
         if (!isRight)
             throw new BO.InvalidVariableException();
 
