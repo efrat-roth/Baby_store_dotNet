@@ -193,7 +193,7 @@ internal class Order:BlApi.IOrder
     public BO.Order ArrivedOrder(int IDOrder)
     {
 
-        DO.Order CheckOrder;
+        DO.Order CheckOrder=new DO.Order();
         try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
         catch (Exception inner) { throw new FailedGet(inner); }
             if (CheckOrder.DeliveryDate <= DateTime.Now)
@@ -252,7 +252,7 @@ internal class Order:BlApi.IOrder
     public OrderTracking OrderTracking(int IDOrder)
     {
 
-        DO.Order CheckOrder;
+        DO.Order CheckOrder=new DO.Order();
         try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
         catch (Exception inner){throw new FailedGet(inner); }
             IEnumerable<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
