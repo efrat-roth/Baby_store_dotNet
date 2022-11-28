@@ -49,10 +49,7 @@ internal class DalOrderItem:IOrderItem
     /// <returns></returns>Returns the all database of IOrderItem
     public IEnumerable<OrderItem> PrintAll()
     {
-        if(orders.Count()==0)
-        {
-            throw new ListIsEmptyException();
-        }
+       
         return orderItems;
     }
     /// <summary>
@@ -128,10 +125,7 @@ internal class DalOrderItem:IOrderItem
                 orderItemsByOrder.Add(orderItems.ElementAt(i)); 
             }
         }
-        if(orderItemsByOrder.Count<=0)
-        {
-            throw new ListIsEmptyException();
-        }
+
         return orderItemsByOrder;
     }
 
