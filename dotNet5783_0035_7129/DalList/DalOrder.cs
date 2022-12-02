@@ -18,7 +18,7 @@ internal class DalOrder : IOrder
         {
             if (p.ID == o.ID)
             {
-                throw new DalApi.IdAlreadyExistException();
+                throw new DO.IdAlreadyExistException();
             }
         };
 

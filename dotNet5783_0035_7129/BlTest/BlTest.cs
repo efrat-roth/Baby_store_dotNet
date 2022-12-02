@@ -125,7 +125,7 @@ internal class BlTest
                                 int id;                              
                                 int.TryParse(Console.ReadLine(), out id);
                                 if (id <= 0)
-                                    throw new InvalidVariableException();
+                                    throw new BO.InvalidVariableException();
                                 product.ID = id;
                                 Console.WriteLine("Enter the category of product to update");
                                 DO.Enums.Category category1;
@@ -134,20 +134,20 @@ internal class BlTest
                                 Console.WriteLine("Enter the name of product to update");
                                 string name1 = Console.ReadLine();
                                 if (name1 == null)
-                                    throw new InvalidVariableException();
+                                    throw new BO.InvalidVariableException();
                                 product.Name = name1;
                                 Console.WriteLine("Enter the price of product to update");
                                 double price1;
                                 double.TryParse(Console.ReadLine(), out price1); 
                                 if (price1 < 0)
-                                    throw new InvalidVariableException();
+                                    throw new BO.InvalidVariableException();
                                 product.Price = price1;
                              
                                 Console.WriteLine("Enter amount of products in stock");
                                 int inStock1;
                                 int.TryParse(Console.ReadLine(), out inStock1);
                                 if (inStock1 < 0)
-                                    throw new InvalidVariableException();
+                                    throw new BO.InvalidVariableException();
                                 product.InStock = inStock1;
                                 bl.Product.UpdatingProductDetails(product);
                                 Console.WriteLine(product);
@@ -167,7 +167,7 @@ internal class BlTest
                                 int id1;
                                 int.TryParse(Console.ReadLine(), out id1);
                                 if(id1<100000)
-                                    throw new InvalidVariableException();
+                                    throw new BO.InvalidVariableException();
                                 p.ID = id1;
                                 Console.WriteLine("Enter the name of product to add");
                                 string name1 = Console.ReadLine();
@@ -280,7 +280,7 @@ internal class BlTest
                                 }
                                 else//in case that the input is invalid(not m or c
                                 {
-                                    throw new InvalidVariableException();
+                                    throw new BO.InvalidVariableException();
                                 }
                                 Console.WriteLine(order);//prints the order
                             }
