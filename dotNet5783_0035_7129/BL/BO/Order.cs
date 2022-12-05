@@ -15,15 +15,15 @@ public class Order
     /// <summary>
     /// The name of the customer.
     /// </summary>
-    public string CustomerName { get; set; }
+    public string? CustomerName { get; set; }
     /// <summary>
     /// The email adress of the customer.
     /// </summary>
-    public string CustomerEmail { get; set; }
+    public string? CustomerEmail { get; set; }
     /// <summary>
     /// The adress of the customer.
     /// </summary>
-    public string CustomerAdress { get; set; }
+    public string? CustomerAdress { get; set; }
     /// <summary>
     /// The date of the order.
     /// </summary>
@@ -31,7 +31,7 @@ public class Order
     /// <summary>
     /// The status of the order.
     /// </summary>
-    public Enums.OrderStatus Status { get; set; }
+    public Enums.OrderStatus? Status { get; set; }
     /// <summary>
     /// The ship date.
     /// </summary>
@@ -43,7 +43,7 @@ public class Order
     /// <summary>
     ///  The list of the order details.
     /// </summary>
-    public List<OrderItem> Items { get; set; }
+    public List<OrderItem?>? Items { get; set; }
     /// <summary>
     ///  The total price of the order.
     /// </summary>

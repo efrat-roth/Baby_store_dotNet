@@ -11,11 +11,11 @@ public class NodeDateStatus
     /// <summary>
     /// The date of creating order
     /// </summary>
-    public DateTime Date { get; set; }
+    public DateTime? Date { get; set; }
     /// <summary>
     /// The status of Order
     /// </summary>
-    public string status { get; set; }
+    public string? status { get; set; }
     /// <summary>
     /// print details of the class
     /// </summary>

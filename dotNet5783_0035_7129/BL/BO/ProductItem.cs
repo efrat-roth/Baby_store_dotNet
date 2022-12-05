@@ -15,7 +15,7 @@ public class ProductItem
     /// <summary>
     ///Name of product
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
     /// <summary>
     /// Price of product
     /// </summary>
@@ -23,7 +23,7 @@ public class ProductItem
     /// <summary>
     /// Category of product
     /// </summary>
-    public Enums.Category Category { get; set; }
+    public Enums.Category? Category { get; set; }
     /// <summary>
     ///If product in the store or not
     /// </summary>

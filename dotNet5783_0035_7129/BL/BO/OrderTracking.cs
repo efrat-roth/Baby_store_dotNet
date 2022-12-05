@@ -18,11 +18,11 @@ public class OrderTracking
     /// <summary>
     /// What is the status of the order
     /// </summary>
-    public Enums.OrderStatus Status { get; set; }
+    public Enums.OrderStatus? Status { get; set; }
     /// <summary>
     /// The list of status and created date of order
     /// </summary>
-    public  IEnumerable<NodeDateStatus> ListDateStatus { get; set; }
+    public  IEnumerable<NodeDateStatus?>? ListDateStatus { get; set; }
     /// <summary>
     /// An information about status of order
     /// </summary>
