@@ -19,7 +19,6 @@ namespace DalTest
         static void Main(string[] args)
         {
             IDal dalList1 = new DalList();
-            Order orders = new Order();
             mainActions();
             void manageProduct()
             {
@@ -31,7 +30,7 @@ namespace DalTest
                     int id1;
                     int.TryParse(Console.ReadLine(), out id1); p.ID = id1;
                     Console.WriteLine("Enter the name of product to add");
-                    string name1 = Console.ReadLine();
+                    string? name1 = Console.ReadLine()??throw new InvalidVariableException();
                     p.Name = name1;
                     Console.WriteLine("Enter the category of product to add");
                     Enums.Category category1 = (Enums.Category)Console.Read();
@@ -117,8 +116,8 @@ namespace DalTest
                             {
                                 try
                                 {
-                                    IEnumerable<Product> productPrint= dalList1.Product.PrintAll();
-                                    foreach (Product p in productPrint)
+                                    IEnumerable<Product?> productPrint= dalList1.Product.PrintAll();
+                                    foreach (Product? p in productPrint)
                                     {
                                         Console.WriteLine(p);
                                     }
@@ -165,24 +164,25 @@ namespace DalTest
                                     int.TryParse(Console.ReadLine(), out id1);
                                     Product p = dalList1.Product.PrintByID(id1);
                                     Console.WriteLine("Do you want to change the name?, enter y for yes and n for no");
-                                    string answer = Console.ReadLine();
+                                    string? answer = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter name");
-                                        string name1 = Console.ReadLine();
+                                        string? name1 = Console.ReadLine()??throw new InvalidVariableException();
                                         p.Name = name1;
                                     }
 
                                     Console.WriteLine("Do you want to change the category?, enter y for yes and n for no");
-                                    string answer1 = Console.ReadLine();
+                                    string? answer1 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter category");
-                                        Enums.Category category1 = (Enums.Category)Console.Read();
+                                        Enums.Category category1;
+                                        Enums.Category.TryParse(Console.ReadLine(),out category1);
                                         p.Category = category1;
                                     }
                                     Console.WriteLine("Do you want to change the price?, enter y for yes and n for no");
-                                    string answer2 = Console.ReadLine();
+                                    string? answer2 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter price");
@@ -191,7 +191,7 @@ namespace DalTest
                                         p.Price = price1;
                                     }
                                     Console.WriteLine("Do you want to change the in stock?, enter y for yes and n for no");
-                                    string answer3 = Console.ReadLine();
+                                    string? answer3 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter in stock?");
@@ -240,16 +240,16 @@ namespace DalTest
                     int.TryParse(Console.ReadLine(), out id1);
                     o.ID = id1;
                     Console.WriteLine("Enter the name of costumer to add");
-                    string name1 = Console.ReadLine();
+                    string? name1 = Console.ReadLine();
                     o.CustomerName = name1;
                     Console.WriteLine("Enter the email of costumer to add");
-                    string email1 = Console.ReadLine();
+                    string? email1 = Console.ReadLine();
                     o.CustomerEmail = email1;
                     Console.WriteLine("Enter the adress of costumer to add");
-                    string adress1 = Console.ReadLine();
+                    string? adress1 = Console.ReadLine();
                     o.CustomerAdress = adress1;
                     Console.WriteLine("Enter order date in ######:for day,month,year format");
-                    string orderDate = Console.ReadLine();
+                    string? orderDate = Console.ReadLine();
                     if (int.Parse(orderDate) / 10000 < 1 | int.Parse(orderDate) / 1000 > 30)
                     {
                         throw new InvalidVariableException();
@@ -264,7 +264,7 @@ namespace DalTest
                     }
                     o.OrderDate = DateTime.Parse(orderDate);
                     Console.WriteLine("Enter ship date in ######:for day,month,year format");
-                    string shipDate = Console.ReadLine();
+                    string? shipDate = Console.ReadLine();
                     if (int.Parse(shipDate) / 10000 < 1 | int.Parse(shipDate) / 1000 > 30)
                     {
                         throw new InvalidVariableException();
@@ -279,7 +279,7 @@ namespace DalTest
                     }
                     o.DeliveredDate = DateTime.Parse(shipDate);
                     Console.WriteLine("Enter delivery date in ######:for day,month,year format");
-                    string deliveryDate = Console.ReadLine();
+                    string? deliveryDate = Console.ReadLine();
                     if (int.Parse(deliveryDate) / 10000 < 1 | int.Parse(deliveryDate) / 1000 > 30)
                     {
                         throw new InvalidVariableException();
@@ -364,9 +364,9 @@ namespace DalTest
                             {
                                 try
                                 {
-                                    IEnumerable<Order> orderPrint;
+                                    IEnumerable<Order?> orderPrint=new List<Order?>();
                                     orderPrint = dalList1.Order.PrintAll();
-                                    foreach (Order o in orderPrint)
+                                    foreach (Order? o in orderPrint)
                                     {
                                         Console.WriteLine(o);
                                     }
@@ -414,35 +414,35 @@ namespace DalTest
                                     Order p = new Order();
                                     p = dalList1.Order.PrintByID(id1);
                                     Console.WriteLine("Do you want to change the customer name?, enter y for yes and n for no");
-                                    string answer = Console.ReadLine();
+                                    string? answer = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter customer name");
-                                        string costumerName = Console.ReadLine();
+                                        string? costumerName = Console.ReadLine();
                                         p.CustomerName = costumerName;
                                     }
                                     Console.WriteLine("Do you want to change the email of the costumer ?, enter y for yes and n for no");
-                                    string answer1 = Console.ReadLine();
+                                    string? answer1 = Console.ReadLine();
                                     if (answer1 == "y")
                                     {
                                         Console.WriteLine("Enter email customer");
-                                        string customerEmail = Console.ReadLine();
+                                        string? customerEmail = Console.ReadLine();
                                         p.CustomerEmail = customerEmail;
                                     }
                                     Console.WriteLine("Do you want to change the customer adress?, enter y for yes and n for no");
-                                    string answer2 = Console.ReadLine();
+                                    string? answer2 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter customer adress");
-                                        string adress1 = Console.ReadLine();
+                                        string? adress1 = Console.ReadLine();
                                         p.CustomerAdress = adress1;
                                     }
                                     Console.WriteLine("Do you want to change the order date?, enter y for yes and n for no");
-                                    string answer3 = Console.ReadLine();
+                                    string? answer3 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter order date in ######:for day,month,year format");
-                                        string orderDate = Console.ReadLine();
+                                        string? orderDate = Console.ReadLine();
                                         if (int.Parse(orderDate) / 10000 < 1 | int.Parse(orderDate) / 1000 > 30)
                                         {
                                             throw new InvalidVariableException();
@@ -458,11 +458,11 @@ namespace DalTest
                                         p.OrderDate = DateTime.Parse(orderDate);
                                     }
                                     Console.WriteLine("Do you want to change the ship date?, enter y for yes and n for no");
-                                    string answer4 = Console.ReadLine();
+                                    string? answer4 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter ship date in ######:for day,month,year format");
-                                        string shipDate = Console.ReadLine();
+                                        string? shipDate = Console.ReadLine();
                                         if (int.Parse(shipDate) / 10000 < 1 | int.Parse(shipDate) / 1000 > 30)
                                         {
                                             throw new InvalidVariableException();
@@ -478,11 +478,11 @@ namespace DalTest
                                         p.DeliveredDate = DateTime.Parse(shipDate);
                                     }
                                     Console.WriteLine("Do you want to change the delivery date?, enter y for yes and n for no");
-                                    string answer5 = Console.ReadLine();
+                                    string? answer5 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter delivery date in ######:for day,month,year format");
-                                        string deliveryDate = Console.ReadLine();
+                                        string? deliveryDate = Console.ReadLine();
                                         if (int.Parse(deliveryDate) / 10000 < 1 | int.Parse(deliveryDate) / 1000 > 30)
                                         {
                                             throw new InvalidVariableException();
@@ -619,9 +619,9 @@ namespace DalTest
                             {
                                 try
                                 {
-                                    IEnumerable<OrderItem> orderItemPrint;
+                                    IEnumerable<OrderItem?> orderItemPrint;
                                     orderItemPrint = dalList1.OrderItem.PrintAll();
-                                    foreach (OrderItem p in orderItemPrint)
+                                    foreach (OrderItem? p in orderItemPrint)
                                     {
                                         Console.WriteLine(value: p);
                                     }
@@ -669,7 +669,7 @@ namespace DalTest
                                     OrderItem p = new OrderItem();
                                     p = dalList1.OrderItem.PrintByID(id);
                                     Console.WriteLine("Do you want to change the id of order?, enter y for yes and n for no");
-                                    string answer = Console.ReadLine();
+                                    string? answer = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter ID order");
@@ -678,7 +678,7 @@ namespace DalTest
                                         p.OrderID = id1;
                                     }
                                     Console.WriteLine("Do you want to change the id of product?, enter y for yes and n for no");
-                                    string answer1 = Console.ReadLine();
+                                    string? answer1 = Console.ReadLine();
                                     if (answer1 == "y")
                                     {
                                         Console.WriteLine("Enter ID product");
@@ -687,7 +687,7 @@ namespace DalTest
                                         p.ProductID = productID1;
                                     }
                                     Console.WriteLine("Do you want to change the price?, enter y for yes and n for no");
-                                    string answer2 = Console.ReadLine();
+                                    string? answer2 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter price");
@@ -696,7 +696,7 @@ namespace DalTest
                                         p.Price = price;
                                     }
                                     Console.WriteLine("Do you want to change the amount?, enter y for yes and n for no");
-                                    string answer3 = Console.ReadLine();
+                                    string? answer3 = Console.ReadLine();
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter amount");
@@ -754,8 +754,8 @@ namespace DalTest
                                     Console.WriteLine("Enter order ID");
                                     int id1;
                                     int.TryParse(Console.ReadLine(),out id1);
-                                    IEnumerable<OrderItem> orderItemByOrderId = dalList1.OrderItem.PrintAllByOrder(id1);
-                                    foreach (OrderItem p in orderItemByOrderId)
+                                    IEnumerable<OrderItem?> orderItemByOrderId = dalList1.OrderItem.PrintAllByOrder(id1);
+                                    foreach (OrderItem? p in orderItemByOrderId)
                                     {
                                         Console.WriteLine(p);
                                     }
@@ -836,7 +836,7 @@ product to manage the products
 order to manage the orders
 orderItem to manage the items in the order
 exit to exit the store");
-                        choice = Console.ReadLine();
+                        choice = Console.ReadLine()??throw new InvalidVariableException();
 
                     } while (choice != "exit");
                 }

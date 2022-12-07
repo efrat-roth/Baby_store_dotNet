@@ -32,13 +32,13 @@ internal class DalOrderItem:IOrderItem
     /// </summary>
     /// <param name="id"></param>integer-ID of the IOrderItem
     /// <returns></returns>IOrderItem
-    public OrderItem? PrintByID(int id)
+    public OrderItem PrintByID(int id)
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (OrderItem? oI in orderItems)
+        foreach (OrderItem oI in orderItems)
         {
-            if (id == oI?.ID)
+            if (id == oI.ID)
             {
                 return oI;
             }
@@ -97,15 +97,15 @@ internal class DalOrderItem:IOrderItem
     /// <param name="productID"></param>Integer variable
     /// <param name="orderID"></param>Integer variable
     /// <returns></returns>IOrderItem
-    public OrderItem? PrintByTwoId(int productID, int orderID)
+    public OrderItem PrintByTwoId(int productID, int orderID)
     {
         if (productID < 0||orderID<0)
             throw new InvalidVariableException();
-        foreach (OrderItem? oI in orderItems)
+        foreach (OrderItem oI in orderItems)
         {
-            if (oI?.OrderID==orderID)
+            if (oI.OrderID==orderID)
             {
-                if (oI?.ProductID == productID)
+                if (oI.ProductID == productID)
                     return oI;
             }
         }

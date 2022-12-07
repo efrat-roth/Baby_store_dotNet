@@ -136,13 +136,13 @@ namespace Dal
                     if (rnd.Next(0, 100) > 40)
                         order.ArrivedDate = order.DeliveredDate?.AddDays(rnd.Next(1, 4));
                     else
-                        order.ArrivedDate = DateTime.MinValue;
+                        order.ArrivedDate = null;
                 }
 
                 else
                 {
-                    order.DeliveredDate = DateTime.MinValue;
-                    order.ArrivedDate = DateTime.MinValue;
+                    order.DeliveredDate = null;
+                    order.ArrivedDate=null;
                 }
                 orders.Add(order);
             }

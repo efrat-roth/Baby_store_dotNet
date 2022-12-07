@@ -4,7 +4,7 @@ using BO;
 using System.Collections.Generic;
 using System;
 using BlImplementation;
-using DO;
+using System.Data;
 
 namespace BlTest;
 
@@ -19,12 +19,11 @@ internal class BlTest
         mainActions();
         Cart createCart()//create new cart by accept the values from the user
         {
-            if (c == null)
-                c = new Cart();
+            c ??= new Cart();
             Console.WriteLine("Enter Customer Name");
-            string name = Console.ReadLine();
+            string? name = Console.ReadLine()?? throw new BO.InvalidVariableException();
             Console.WriteLine("Enter Customer Email");
-            string email = Console.ReadLine();
+            string? email = Console.ReadLine()??throw new BO.InvalidVariableException();
             bool isRight = false;
             foreach (char d in email)//checks if email is correct and has the @ in their.
                 if (d == '@')
@@ -32,14 +31,14 @@ internal class BlTest
             if (!isRight)
                 throw new BO.InvalidVariableException();
             Console.WriteLine("Enter Customer Adress");
-            String adress = Console.ReadLine();
+            string? adress = Console.ReadLine()?? throw new BO.InvalidVariableException();
             Cart cart = new Cart
             {
                 CustomerName = name,
                 CustomerEmail = email,
                 CustomerAdress = adress,
                 TotalPrice = 0,
-                Items = new List<BO.OrderItem>()
+                Items = new List<BO.OrderItem?>()
             };
             return cart;
         }
@@ -70,10 +69,10 @@ internal class BlTest
                     case 1:   //asks for list of products
                         {
                             try
-                           {
-                                List<ProductForList> lists = new List<ProductForList>();
+                            {
+                                List<ProductForList?> lists = new List<ProductForList?>();
                                 lists = bl.Product.GetListOfProduct();
-                                foreach(BO.ProductForList p in lists)
+                                foreach(ProductForList? p in lists)
                                 {
                                     Console.WriteLine(p);
                                 }
@@ -132,9 +131,7 @@ internal class BlTest
                                 DO.Enums.Category.TryParse(Console.ReadLine(), out category1);
                                 product.Category = (DO.Enums.Category)category1;
                                 Console.WriteLine("Enter the name of product to update");
-                                string name1 = Console.ReadLine();
-                                if (name1 == null)
-                                    throw new BO.InvalidVariableException();
+                                string? name1 = Console.ReadLine() ?? throw new BO.InvalidVariableException();
                                 product.Name = name1;
                                 Console.WriteLine("Enter the price of product to update");
                                 double price1;
@@ -170,7 +167,7 @@ internal class BlTest
                                     throw new BO.InvalidVariableException();
                                 p.ID = id1;
                                 Console.WriteLine("Enter the name of product to add");
-                                string name1 = Console.ReadLine();
+                                string? name1 = Console.ReadLine()??throw new BO.InvalidVariableException();
                                 p.Name = name1;
                                 Console.WriteLine("Enter the category of product to add");
                                 DO.Enums.Category category1 ;
@@ -247,9 +244,9 @@ internal class BlTest
                         {
                             try
                             {
-                                List<OrderForList> list = new List<OrderForList>();
+                                List<OrderForList?> list = new List<OrderForList?>();
                                 list = bl.Order.GetListOfOrders();
-                                foreach (OrderForList order in list)//print the all orderItem
+                                foreach (OrderForList? order in list)//print the all orderItem
                                 {
                                     Console.WriteLine(order);
                                 }
@@ -263,7 +260,7 @@ internal class BlTest
                     case 2://return details of order
                         {
                             Console.WriteLine("Enter m if yoy are mannager, and c for cstumer");
-                            char identity = char.Parse(Console.ReadLine());
+                            char identity = char.Parse(Console.ReadLine() ?? throw new BO.InvalidVariableException());
                             try
                             {
                                 BO.Order order = new BO.Order();
@@ -380,13 +377,13 @@ internal class BlTest
             int option = 0;//resets the variable
             try
             {
+                c = new Cart();
                 c = createCart(); //create new cart
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                c = null;
-                Console.WriteLine("Enter th details again");
+                Console.WriteLine("Enter the details again");
                 manageCart();
             }
             while (option != 4)
@@ -445,7 +442,7 @@ internal class BlTest
                         {
                             try
                             {
-                                DO.Order order = bl.Cart.MakeOrder(c, c.CustomerAdress, c.CustomerName, c.CustomerEmail);
+                                DO.Order order = bl.Cart.MakeOrder(c, c.CustomerAdress!, c.CustomerName!, c.CustomerEmail!);
                                 Console.WriteLine(order);
                             }
                             catch (Exception m)
@@ -498,7 +495,7 @@ product to manage the products
 order to manage the orders
 cart to manage the items in the cart
 exit to exit the store");
-                choice = Console.ReadLine();
+                choice = Console.ReadLine()??throw new BO.InvalidVariableException();
 
             } while (choice != "exit");
         }

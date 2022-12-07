@@ -14,6 +14,7 @@ internal class DalOrder : IOrder
     /// <returns></returns>The ID of the new order
     public int Add(Order? p)
     {
+        
         foreach (Order? o in orders)
         {
             if (p?.ID == o?.ID)
@@ -30,13 +31,13 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="id"></param>integer
     /// <returns></returns>IOrder
-    public Order? PrintByID(int id)
+    public Order PrintByID(int id)
     {
         if(id<0)
             throw new InvalidVariableException();
-        foreach (Order? o in orders) 
+        foreach (Order o in orders) 
         { 
-            if (id == o?.ID)
+            if (id == o.ID)
             {
                 return o;
             }
