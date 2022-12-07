@@ -11,17 +11,18 @@ internal class DalProduct:IProduct
     /// </summary>
     /// <param name="p"></param>
     /// <returns></returns>The ID of the new product
-    public int Add(Product p)
+    public int Add(Product? p)
     {
-        foreach(Product product in products)
+        foreach(Product? product in products)
         {
-            if (p.ID == product.ID)
+            if (p?.ID == product?.ID)
             {
                 throw new IdAlreadyExistException();
             }
         };
+        int y = p?.ID ?? throw new InvalidVariableException();
         products.Add(p);
-        return p.ID;
+        return y;
     }
     /// <summary>
     /// Return IProduct by its ID
@@ -45,7 +46,7 @@ internal class DalProduct:IProduct
     /// Return the all products
     /// </summary>
     /// <returns></returns>The database of the all products
-    public IEnumerable<Product> PrintAll()
+    public IEnumerable<Product?> PrintAll()
     {
        
         return products;
@@ -58,9 +59,9 @@ internal class DalProduct:IProduct
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (Product p in products)
+        foreach (Product? p in products)
         {
-            if (id == p.ID)
+            if (id == p?.ID)
             {
                 products.Remove(p);
                 return true;
@@ -73,12 +74,12 @@ internal class DalProduct:IProduct
     /// </summary>
     /// <param name="p"></param>IProduct
     /// <returns></returns> True if the ID in the database, else return false
-    public bool Update( Product p)
+    public bool Update( Product? p)
     {
        
-        foreach (Product product in products)
+        foreach (Product? product in products)
         {
-            if (product.ID == p.ID)
+            if (product?.ID == p?.ID)
             {
                 products.Remove(product);
                 products.Add(p);

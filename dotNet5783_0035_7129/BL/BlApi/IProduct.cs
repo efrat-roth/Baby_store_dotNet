@@ -15,7 +15,7 @@ public interface IProduct
     /// The method asking for list of products
     /// </summary>
     /// <returns></returns>List<ProductForList>
-    public List<ProductForList> GetListOfProduct();
+    public List<ProductForList?> GetListOfProduct();
     /// <summary>
     /// The method return details of product
     /// </summary>

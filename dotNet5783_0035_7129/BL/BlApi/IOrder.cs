@@ -15,7 +15,7 @@ public interface IOrder
     /// The method returns details of orders
     /// </summary>
     /// <returns></returns>List of OrderForList
-    public List<OrderForList> GetListOfOrders();
+    public List<OrderForList?> GetListOfOrders();
     /// <summary>
     /// The method gets details of order for manager
     /// </summary>

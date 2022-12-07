@@ -6,9 +6,9 @@ namespace Dal
     internal static class DataSource
     {
         readonly static Random rnd = new Random();
-        internal static List<Product> products=new List<Product>();
-        internal static List<Order> orders=new List<Order>();
-        internal static List<OrderItem> orderItems=new List<OrderItem>();
+        internal static List<Product?> products=new List<Product?>();
+        internal static List<Order?> orders=new List<Order?>();
+        internal static List<OrderItem?> orderItems=new List<OrderItem?>();
         /// <summary>
         /// Constracto
         /// r that initialize the item
@@ -151,7 +151,7 @@ namespace Dal
             {
                 Product product = new Product();
                 OrderItem orderItem = new OrderItem();
-                product = products[rnd.Next(0, products.Count())];
+                product = (Product)products[rnd.Next(0, products.Count())];
                 orderItem.ID = nextCountOrderItemsID();
                 orderItem.ProductID = product.ID;
                 orderItem.Amount = rnd.Next(1, 11);
@@ -169,7 +169,7 @@ namespace Dal
         {
             for (int i = 0; i < products.Count(); i++)
             {
-                if (products.ElementAt(i).Name == name)
+                if (products.ElementAt(i)?.Name == name)
                     return i;
             }
             return -1;
