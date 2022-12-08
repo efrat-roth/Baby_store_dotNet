@@ -37,7 +37,15 @@ public interface ICrud <T> where T : struct
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="ID"></param>
+    /// <param name="func"></param>
     /// <returns></returns>
-    IEnumerable<T?> PrintAll(); 
+   T? PrintByCondition(Func<T?, bool>? func);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    IEnumerable<T?> PrintAll(Func<T?,bool>? func=null); 
+
 
 }

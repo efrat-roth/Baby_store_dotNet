@@ -138,14 +138,14 @@ internal class Product:IProduct
         foreach (DO.Order o in orders)
         {
             IEnumerable<DO.OrderItem?> orderItems=new List<DO.OrderItem?>();
-            try { orderItems = _dal.OrderItem.PrintAllByOrder(o.ID); }
+            try { orderItems = _dal.OrderItem.PrintAll(o=>o?.ID==ID); }
             catch (Exception inner)
             {
                 throw new FailedGet(inner);
             }
-            foreach (DO.OrderItem item in orderItems)
+            foreach (DO.OrderItem? item in orderItems)
             {
-                    if (item.ProductID == ID)
+                    if (item?.ProductID == ID)
                     throw new BO.CanNotDOActionException();
             }           
         

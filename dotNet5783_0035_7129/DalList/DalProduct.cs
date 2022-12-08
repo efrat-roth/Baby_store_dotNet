@@ -43,13 +43,29 @@ internal class DalProduct:IProduct
         throw new IdDoesNotExistException();
     }
     /// <summary>
+    /// Return a specific product that matches the condition.
+    /// </summary>
+    /// <param name="func"></param>
+    /// <returns></returns>Product?
+    public Product? PrintByCondition(Func<Product?, bool>? func)
+    {
+        func = func ?? throw new InvalidVariableException();
+        Product? o = products.First<Product?>(i => func(i));
+        return o;
+    }
+    /// <summary>
     /// Return the all products
     /// </summary>
     /// <returns></returns>The database of the all products
-    public IEnumerable<Product?> PrintAll()
+    public IEnumerable<Product?> PrintAll(Func<Product?, bool>? func = null)
     {
-       
-        return products;
+        if (func == null)
+        {
+            return products;
+        }
+
+        IEnumerable<Product?> o = products.Where(i => func(i)).ToList<Product?>();
+        return o;
     }
     /// <summary>
     /// Delete a product from the database by its ID

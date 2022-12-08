@@ -19,48 +19,47 @@ internal class Order:BlApi.IOrder
     /// <returns></returns>List of OrderForList
     public List<OrderForList?> GetListOfOrders()
     {
-            IEnumerable<DO.Order?> orders = _dal.Order.PrintAll()??throw new ListIsEmptyException();
-            List<OrderForList?> listOrders = new List<OrderForList?>();
-            foreach (DO.Order o in orders)
+        IEnumerable<DO.Order?> orders = _dal.Order.PrintAll()??throw new ListIsEmptyException();
+        List<OrderForList?> listOrders = new List<OrderForList?>();
+        foreach (DO.Order o in orders)
+        {
+            IEnumerable<DO.OrderItem?> orderItems1=new List<DO.OrderItem?>();
+            try { orderItems1 = _dal.OrderItem.PrintAll(oi=>oi?.ID==o.ID); }
+            catch(Exception inner)
             {
-                IEnumerable<DO.OrderItem?> orderItems1=new List<DO.OrderItem?>();
-                try { orderItems1 = _dal.OrderItem.PrintAllByOrder(o.ID); }
-                catch(Exception inner)
-                {
-                    throw new FailedGet(inner);
-                }
-                OrderForList OrderList = new OrderForList
-                {
-                    ID = o.ID,
-                    CustomerName = o.CustomerName,
-                    AmountOfItems = 0,
-                    TotalPrice = 0
-                };
-
-                if (o.ArrivedDate < DateTime.Now)
-                {
-                    OrderList.Status = Enums.OrderStatus.ArrivedOrder;
-                }
-                if (o.DeliveredDate < DateTime.Now)
-                {
-                    OrderList.Status = Enums.OrderStatus.DeliveredOrder;
-                }
-                if (o.OrderDate < DateTime.Now)
-                {
-                    OrderList.Status = Enums.OrderStatus.ConfirmedOrder;
-                }
-                foreach (DO.OrderItem OI in orderItems1)
-                {
-                    OrderList.AmountOfItems+=1;
-                    OrderList.TotalPrice += OI.Price;
-                }
-                listOrders.Add(OrderList);
+                throw new FailedGet(inner);
             }
-            return listOrders;
-        
+            OrderForList OrderList = new OrderForList
+            {
+                ID = o.ID,
+                CustomerName = o.CustomerName,
+                AmountOfItems = 0,
+                TotalPrice = 0
+            };
 
-        
+            if (o.ArrivedDate < DateTime.Now)
+            {
+                OrderList.Status = Enums.OrderStatus.ArrivedOrder;
+            }
+            if (o.DeliveredDate < DateTime.Now)
+            {
+                OrderList.Status = Enums.OrderStatus.DeliveredOrder;
+            }
+            if (o.OrderDate < DateTime.Now)
+            {
+                OrderList.Status = Enums.OrderStatus.ConfirmedOrder;
+            }
+            foreach (DO.OrderItem OI in orderItems1)
+            {
+                OrderList.AmountOfItems+=1;
+                OrderList.TotalPrice += OI.Price;
+            }
+            listOrders.Add(OrderList);
+        }
+        return listOrders;      
     }
+
+
     /// <summary>
     /// The method gets details of order for manager
     /// </summary>
@@ -73,7 +72,7 @@ internal class Order:BlApi.IOrder
         try { order1 = _dal.Order.PrintByID(ID); }//asked order
         catch(Exception inner) { throw new FailedGet(inner); }
         IEnumerable<DO.OrderItem?> orderItems=new List<DO.OrderItem?>();
-        try { orderItems = _dal.OrderItem.PrintAllByOrder(ID); }//List of orderItems of the order
+        try { orderItems = _dal.OrderItem.PrintAll(oi=>oi?.ID==ID); }//List of orderItems of the order
         catch(Exception inner) { throw new FailedGet(inner); }
         BO.Order logicOrder = new BO.Order
         {
@@ -118,6 +117,8 @@ internal class Order:BlApi.IOrder
             }
             return logicOrder;       
     }
+
+
     /// <summary>
     /// The method gets details of order for customer
     /// </summary>
@@ -128,6 +129,8 @@ internal class Order:BlApi.IOrder
     {
         return GetDetailsOrderManager(ID);
     }
+
+
     /// <summary>
     /// The method updates the order as delivered order
     /// </summary>
@@ -147,7 +150,7 @@ internal class Order:BlApi.IOrder
         try { _dal.Order.Update(t: CheckOrder); }
         catch (Exception inner) { throw new FailedUpdate(inner); }
         IEnumerable<DO.OrderItem?> items1=new List<DO.OrderItem?>();
-        try { items1 = _dal.OrderItem.PrintAllByOrder(IDOrder); }
+        try { items1 = _dal.OrderItem.PrintAll(oi=>oi?.ID==IDOrder); }
         catch(Exception inner) { throw new FailedGet(inner); }
         BO.Order ReturnOrder = new BO.Order
         {
@@ -186,6 +189,8 @@ internal class Order:BlApi.IOrder
         return ReturnOrder;       
         
     }
+
+
     /// <summary>
     /// The method updates the order as arrived order
     /// </summary>
@@ -206,8 +211,7 @@ internal class Order:BlApi.IOrder
                 if (!(_dal.Order.Update(CheckOrder)))
                     throw new CanNotDOActionException();
 
-            IEnumerable<DO.OrderItem?> items1 = _dal.OrderItem.PrintAllByOrder(IDOrder)
-                                                                  ??new List<DO.OrderItem?>();
+        IEnumerable<DO.OrderItem?> items1 = _dal.OrderItem.PrintAll(items1 => items1?.ID == IDOrder);
             BO.Order ReturnOrder = new BO.Order
             {
                 ID = IDOrder,
@@ -244,6 +248,8 @@ internal class Order:BlApi.IOrder
             return ReturnOrder;
         
     }
+
+
     /// <summary>
     /// The method track after an order
     /// </summary>
@@ -296,6 +302,8 @@ internal class Order:BlApi.IOrder
             };
             return NewOrderTracking;
     }
+
+    
     /// <summary>
     /// The method update the amount of product in exist order
     /// </summary>

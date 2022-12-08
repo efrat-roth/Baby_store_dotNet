@@ -1,4 +1,5 @@
-﻿using DalApi;
+﻿using System.Reflection.Metadata.Ecma335;
+using DalApi;
 using DO;
 using static Dal.DataSource;
 
@@ -46,13 +47,29 @@ internal class DalOrderItem:IOrderItem
         throw new IdDoesNotExistException();
     }
     /// <summary>
+    /// Return a specific orderItem that matches the condition.
+    /// </summary>
+    /// <param name="func"></param>
+    /// <returns></returns>OrderItem?
+    public OrderItem? PrintByCondition(Func<OrderItem?, bool>? func)
+    {
+        func =func??throw new InvalidVariableException();
+        OrderItem? o = orderItems.First<OrderItem?>(i => func(i ));
+        return o;
+    }
+    /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>Returns the all database of IOrderItem
-    public IEnumerable<OrderItem?> PrintAll()
+    public IEnumerable<OrderItem?> PrintAll(Func<OrderItem?, bool>? func = null)
     {
-       
-        return orderItems;
+        if (func == null)
+        {
+            return orderItems;
+        }
+
+        IEnumerable<OrderItem?> o = orderItems.Where(i => func(i)).ToList<OrderItem?>();
+        return o;
     }
     /// <summary>
     /// Delete an orderItem by its ID
@@ -91,43 +108,44 @@ internal class DalOrderItem:IOrderItem
         };
         return false;
     }
-    /// <summary>
-    /// Return IOrderItem by the id of the order and the ID of the IProduct
-    /// </summary>
-    /// <param name="productID"></param>Integer variable
-    /// <param name="orderID"></param>Integer variable
-    /// <returns></returns>IOrderItem
-    public OrderItem PrintByTwoId(int productID, int orderID)
-    {
-        if (productID < 0||orderID<0)
-            throw new InvalidVariableException();
-        foreach (OrderItem oI in orderItems)
-        {
-            if (oI.OrderID==orderID)
-            {
-                if (oI.ProductID == productID)
-                    return oI;
-            }
-        }
-        throw new IdDoesNotExistException();
-    }
-    /// <summary>
-    /// Return array of orderItem that include the ID
-    /// </summary>
-    /// <returns></returns>array of oderItem
-    public IEnumerable<OrderItem?> PrintAllByOrder(int idOrder)
-    {
-        if (idOrder < 0)
-            throw new InvalidVariableException();
-        List<OrderItem?> orderItemsByOrder=new List<OrderItem?>();
-        for(int i=0;i<orderItems.Count();i++)
-        {
-            if(orderItems.ElementAt(i)?.OrderID==idOrder)
-            {
-                orderItemsByOrder.Add(orderItems.ElementAt(i)); 
-            }
-        }
-        return orderItemsByOrder;
-    }
+    ///// <summary>
+    ///// Return IOrderItem by the id of the order and the ID of the IProduct
+    ///// </summary>
+    ///// <param name="productID"></param>Integer variable
+    ///// <param name="orderID"></param>Integer variable
+    ///// <returns></returns>IOrderItem
+    //public OrderItem PrintByTwoId(int productID, int orderID)
+    //{
+    //    if (productID < 0||orderID<0)
+    //        throw new InvalidVariableException();
+    //    orderItems = orderItems ?? throw new ListIsEmptyException();
+    //    foreach (OrderItem oI in orderItems)
+    //    {
+    //        if (oI.OrderID==orderID)
+    //        {
+    //            if (oI.ProductID == productID)
+    //                return oI;
+    //        }
+    //    }
+    //    throw new IdDoesNotExistException();
+    //}
+    ///// <summary>
+    ///// Return array of orderItem that include the ID
+    ///// </summary>
+    ///// <returns></returns>array of oderItem
+    //public IEnumerable<OrderItem?> PrintAllByOrder(int ID)
+    //{
+    //    if (idOrder < 0)
+    //        throw new InvalidVariableException();
+    //    List<OrderItem?> orderItemsByOrder=new List<OrderItem?>();
+    //    for(int i=0;i<orderItems.Count();i++)
+    //    {
+    //        if(orderItems.ElementAt(i)?.OrderID==idOrder)
+    //        {
+    //            orderItemsByOrder.Add(orderItems.ElementAt(i)); 
+    //        }
+    //    }
+    //    return orderItemsByOrder;
+    //}
 
 }
