@@ -26,7 +26,7 @@ public struct Order
     /// </summary>
     public string CustomerAdress { get; set; }
     /// <summary>
-    /// The  date the order was created.
+    /// The  date the  order was created.
     /// </summary>
     public DateTime OrderDate { get; set; }
     /// <summary>
