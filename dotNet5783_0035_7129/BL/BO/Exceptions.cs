@@ -63,7 +63,7 @@ public class CanNotDOActionException : Exception
 public class FailedAdd : Exception
 {
     public FailedAdd(Exception inner) : base("Add failed ", inner) { }
-    public object Message { get; }
+    public  object?  Message { get; }
     override public string ToString() => @$"{Message} - {this.InnerException}";
 }
 /// <summary>
@@ -72,7 +72,7 @@ public class FailedAdd : Exception
 public class FailedDelete : Exception
 {
     public FailedDelete(Exception inner) : base("Delete failed", inner) { }
-    public object Message { get; }
+    public object? Message { get; }
     override public string ToString() => @$"{Message} - {this.InnerException}";
 }
 /// <summary>
@@ -81,7 +81,7 @@ public class FailedDelete : Exception
 public class FailedGet : Exception
 {
     public FailedGet(Exception inner) : base("Get failed", inner) { }
-    public object Message { get; }
+    public object? Message { get; }
     override public string ToString() => @$"{Message} - {this.InnerException}";
 }
 /// <summary>
@@ -90,7 +90,7 @@ public class FailedGet : Exception
 public class FailedUpdate : Exception
 {
     public FailedUpdate(Exception inner) : base("Update failed", inner) { }
-    public object Message { get; }
+    public object? Message { get; }
     override public string ToString()=> @$"{Message} - {this.InnerException}";
 
 }
@@ -100,6 +100,6 @@ public class FailedUpdate : Exception
 public class FailedGetAll: Exception
 {
     public FailedGetAll(Exception inner) : base("Get all failed", inner) { }
-    public object Message { get; }
+    public object? Message { get; }
     override public string ToString() => @$"{Message} - {InnerException}";
 }

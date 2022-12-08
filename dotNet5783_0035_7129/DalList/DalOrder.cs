@@ -12,18 +12,19 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="p"></param>
     /// <returns></returns>The ID of the new order
-    public int Add(Order p)
+    public int Add(Order? p)
     {
-        foreach (Order o in orders)
+        
+        foreach (Order? o in orders)
         {
-            if (p.ID == o.ID)
+            if (p?.ID == o?.ID)
             {
-                throw new DalApi.IdAlreadyExistException();
+                throw new DO.IdAlreadyExistException();
             }
         };
-
+        int y = p?.ID ?? throw new InvalidVariableException();
         orders.Add(p);
-        return p.ID;
+        return y;
     }
     /// <summary>
     /// Return order by its ID
@@ -47,7 +48,7 @@ internal class DalOrder : IOrder
     /// Print The all orders
     /// </summary>
     /// <returns></returns>The database of the all orders
-    public IEnumerable<Order> PrintAll()
+    public IEnumerable<Order?> PrintAll()
     {
         
         return orders;
@@ -60,9 +61,9 @@ internal class DalOrder : IOrder
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (Order o in orders)
+        foreach (Order? o in orders)
         {
-            if(id == o.ID)
+            if(id == o?.ID)
             {
                 orders.Remove(o);
                 return true;
@@ -75,12 +76,12 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="p"></param>IOrder
     /// <returns></returns> True if the ID in the database, else return false
-    public bool Update(Order o)
+    public bool Update(Order? o)
     {
 
-        foreach (Order order in orders)
+        foreach (Order? order in orders)
         {
-            if (order.ID == o.ID)
+            if (order?.ID == o?.ID)
             {
                 orders.Remove(order);
                 orders.Add(o);

@@ -15,11 +15,11 @@ public struct Product
     /// <summary>
     /// Uniqe name for each product.
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
     /// <summary>
     /// The category of the product.
     /// </summary>
-    public Enums.Category Category { get; set; }
+    public Enums.Category? Category { get; set; }
     /// <summary>
     /// Uniqe price for each product.
     /// </summary>

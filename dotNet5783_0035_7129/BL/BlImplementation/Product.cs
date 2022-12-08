@@ -17,25 +17,23 @@ internal class Product:IProduct
     /// The method asking for list of products
     /// </summary>
     /// <returns></returns>List<ProductForList>
-    public List<ProductForList> GetListOfProduct()
-    {
-        
-            IEnumerable<DO.Product> list = _dal.Product.PrintAll();
-            List<ProductForList> productList = new List<ProductForList>();
+    public List<ProductForList?> GetListOfProduct()
+    { 
+        IEnumerable<DO.Product?> list = _dal.Product.PrintAll()??new List<DO.Product?>();
+        List<ProductForList?> productList = new List<ProductForList?>();
             foreach (DO.Product p in list)
+        {
+            ProductForList listProducts = new ProductForList
             {
-                ProductForList listProducts = new ProductForList
-                {
-                    ID = p.ID,
-                    Name = p.Name,
-                    Price = p.Price,
-                    Category = (Enums.Category)p.Category
-                };
-                productList.Add(listProducts);
-            }
-            return productList;
-        
-        
+                ID = p.ID,
+                Name = p.Name,
+                Price = p.Price,
+
+                Category = (Enums.Category?)p.Category
+            };
+            productList.Add(listProducts);
+        }
+        return productList;    
     }
     /// <summary>
     /// The method return details of product
@@ -52,7 +50,7 @@ internal class Product:IProduct
                     ID = p.ID,
                     Name = p.Name,
                     Price = p.Price,
-                    Category = (Enums.Category)p.Category,
+                    Category = (Enums.Category?)p.Category,
                     InStock = p.InStock
                 };
                 return product;
@@ -83,7 +81,7 @@ internal class Product:IProduct
                 ID = p.ID,
                 Name = p.Name,
                 Price = p.Price,
-                Category = (Enums.Category)p.Category,
+                Category = (Enums.Category?)p.Category,
                 InStock = inStock1
             };
             return product;
@@ -121,7 +119,7 @@ internal class Product:IProduct
     {
 
             bool update = false;
-            if (product.ID > 100000 && product.Name.GetType!= null && product.Price > 0 && product.InStock >= 0)
+            if (product.ID > 100000  && product.Price > 0 && product.InStock >= 0)
             {
                 update = _dal.Product.Update( product);
             }
@@ -136,12 +134,10 @@ internal class Product:IProduct
     /// <exception cref="Exception"></exception>
     public void DeleteProduct(int ID)
     {
-
-            IEnumerable<DO.Order> orders = _dal.Order.PrintAll();
-            foreach (DO.Order o in orders)
-            {
-
-            IEnumerable<DO.OrderItem> orderItems;
+        IEnumerable<DO.Order?> orders = _dal.Order.PrintAll()??new List<DO.Order?>();
+        foreach (DO.Order o in orders)
+        {
+            IEnumerable<DO.OrderItem?> orderItems=new List<DO.OrderItem?>();
             try { orderItems = _dal.OrderItem.PrintAllByOrder(o.ID); }
             catch (Exception inner)
             {
@@ -149,17 +145,12 @@ internal class Product:IProduct
             }
             foreach (DO.OrderItem item in orderItems)
             {
-                 if (item.ProductID == ID)
+                    if (item.ProductID == ID)
                     throw new BO.CanNotDOActionException();
-            }
-            
+            }           
         
         }
-            
-             if (!_dal.Product.Delete(ID))
-                throw new BO.IdDoesNotExistException();
-        
-       
-
+        if (!_dal.Product.Delete(ID))
+            throw new BO.IdDoesNotExistException();       
     }
 }

@@ -8,20 +8,20 @@ using DO;
 
 namespace DalApi;
 
-public interface ICrud <T>
+public interface ICrud <T> where T : struct
 {
     /// <summary>
     /// 
     /// </summary>
     /// <param name="t"></param>
     /// <returns></returns>
-   int Add(T t);
+   int Add(T? t);
     /// <summary>
     /// 
     /// </summary>
     /// <param name="t"></param>
     /// <returns></returns>
-   bool Update( T t);
+   bool Update( T? t);
     /// <summary>
     /// 
     /// </summary>
@@ -38,6 +38,6 @@ public interface ICrud <T>
     /// 
     /// </summary>
     /// <returns></returns>
-    IEnumerable<T> PrintAll(); 
+    IEnumerable<T?> PrintAll(); 
 
 }

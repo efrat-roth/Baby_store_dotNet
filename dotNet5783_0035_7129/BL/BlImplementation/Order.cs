@@ -17,18 +17,18 @@ internal class Order:BlApi.IOrder
     /// The method returns details of orders
     /// </summary>
     /// <returns></returns>List of OrderForList
-    public List<OrderForList> GetListOfOrders()
+    public List<OrderForList?> GetListOfOrders()
     {
-            IEnumerable<DO.Order> orders = _dal.Order.PrintAll();
-            List<OrderForList> listOrders = new List<OrderForList>();
+            IEnumerable<DO.Order?> orders = _dal.Order.PrintAll()??throw new ListIsEmptyException();
+            List<OrderForList?> listOrders = new List<OrderForList?>();
             foreach (DO.Order o in orders)
             {
-            IEnumerable<DO.OrderItem> orderItems1;
-            try { orderItems1 = _dal.OrderItem.PrintAllByOrder(o.ID); }
-            catch(Exception inner)
-            {
-                throw new FailedGet(inner);
-            }
+                IEnumerable<DO.OrderItem?> orderItems1=new List<DO.OrderItem?>();
+                try { orderItems1 = _dal.OrderItem.PrintAllByOrder(o.ID); }
+                catch(Exception inner)
+                {
+                    throw new FailedGet(inner);
+                }
                 OrderForList OrderList = new OrderForList
                 {
                     ID = o.ID,
@@ -69,36 +69,35 @@ internal class Order:BlApi.IOrder
     /// <exception cref="Exception"></exception>ID not exist
     public BO.Order GetDetailsOrderManager(int ID)
     {
-
-    DO.Order order1;
+        DO.Order order1=new DO.Order();
         try { order1 = _dal.Order.PrintByID(ID); }//asked order
         catch(Exception inner) { throw new FailedGet(inner); }
-        IEnumerable<DO.OrderItem> orderItems;
+        IEnumerable<DO.OrderItem?> orderItems=new List<DO.OrderItem?>();
         try { orderItems = _dal.OrderItem.PrintAllByOrder(ID); }//List of orderItems of the order
         catch(Exception inner) { throw new FailedGet(inner); }
-            BO.Order logicOrder = new BO.Order
-            {
-                ID = order1.ID,
-                CustomerName = order1.CustomerName,
-                CustomerEmail = order1.CustomerEmail,
-                CustomerAdress = order1.CustomerAdress,
-                OrderDate = order1.OrderDate,
-                ShipDate = order1.DeliveredDate,
-                DeliveryDate = order1.ArrivedDate,
-                Items=new List<OrderItem>()
-            };//Resets the field of item to return
-            if (order1.ArrivedDate < DateTime.Today)
-            {
-                logicOrder.Status = Enums.OrderStatus.ArrivedOrder;
-            }
-            if (order1.DeliveredDate < DateTime.Today)
-            {
-                logicOrder.Status = Enums.OrderStatus.DeliveredOrder;
-            }
-            if (order1.OrderDate < DateTime.Today)
-            {
-                logicOrder.Status = Enums.OrderStatus.ConfirmedOrder;
-            }
+        BO.Order logicOrder = new BO.Order
+        {
+            ID = order1.ID,
+            CustomerName = order1.CustomerName,
+            CustomerEmail = order1.CustomerEmail,
+            CustomerAdress = order1.CustomerAdress,
+            OrderDate = order1.OrderDate,
+            ShipDate = order1.DeliveredDate,
+            DeliveryDate = order1.ArrivedDate,
+            Items=new List<OrderItem?>()
+        };//Resets the field of item to return
+        if (order1.ArrivedDate < DateTime.Today)
+        {
+            logicOrder.Status = Enums.OrderStatus.ArrivedOrder;
+        }
+        if (order1.DeliveredDate < DateTime.Today)
+        {
+            logicOrder.Status = Enums.OrderStatus.DeliveredOrder;
+        }
+        if (order1.OrderDate < DateTime.Today)
+        {
+            logicOrder.Status = Enums.OrderStatus.ConfirmedOrder;
+        }
             foreach (DO.OrderItem OI in orderItems)//resets the orderItems by the orderItems of the order in data layer
             {
             try
@@ -147,7 +146,7 @@ internal class Order:BlApi.IOrder
             CheckOrder.DeliveredDate=DateTime.Now;
         try { _dal.Order.Update(t: CheckOrder); }
         catch (Exception inner) { throw new FailedUpdate(inner); }
-        IEnumerable<DO.OrderItem> items1;
+        IEnumerable<DO.OrderItem?> items1=new List<DO.OrderItem?>();
         try { items1 = _dal.OrderItem.PrintAllByOrder(IDOrder); }
         catch(Exception inner) { throw new FailedGet(inner); }
         BO.Order ReturnOrder = new BO.Order
@@ -160,7 +159,7 @@ internal class Order:BlApi.IOrder
             DeliveryDate = CheckOrder.ArrivedDate,
             ShipDate = CheckOrder.DeliveredDate,
             Status = Enums.OrderStatus.DeliveredOrder,
-            Items = new List<OrderItem>(),
+            Items = new List<OrderItem?>(),
             };
             foreach (DO.OrderItem item in items1)//Adding the relevant OrderItem to the items field of order
             {
@@ -207,7 +206,8 @@ internal class Order:BlApi.IOrder
                 if (!(_dal.Order.Update(CheckOrder)))
                     throw new CanNotDOActionException();
 
-            IEnumerable<DO.OrderItem> items1 = _dal.OrderItem.PrintAllByOrder(IDOrder);
+            IEnumerable<DO.OrderItem?> items1 = _dal.OrderItem.PrintAllByOrder(IDOrder)
+                                                                  ??new List<DO.OrderItem?>();
             BO.Order ReturnOrder = new BO.Order
             {
                 ID = IDOrder,
@@ -218,7 +218,7 @@ internal class Order:BlApi.IOrder
                 ShipDate = CheckOrder.DeliveredDate,
                 DeliveryDate = CheckOrder.ArrivedDate,
                 Status = Enums.OrderStatus.ArrivedOrder,
-                Items = new List<OrderItem>(),
+                Items = new List<OrderItem?>(),
             };
             foreach (DO.OrderItem item in items1)//Adding the relevant OrderItem to the items field of order
             {
@@ -317,12 +317,12 @@ internal class Order:BlApi.IOrder
         {
             throw new FailedGet(inner);
         }
-            if (_dal.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Now)
-                throw new CanNotDOActionException();
-            BO.Order wantedOrder = GetDetailsOrderManager(IDOrder);
-            foreach (OrderItem orderItem in wantedOrder.Items)
+        if (_dal.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Now)
+            throw new CanNotDOActionException();
+        BO.Order wantedOrder = GetDetailsOrderManager(IDOrder);
+            foreach (OrderItem? orderItem in wantedOrder.Items!)
             {
-                if (orderItem.ProductID == IDProduct)
+                if (orderItem?.ProductID == IDProduct)
                 {
                     wantedOrder.TotalPrice -= orderItem.TotalPrice;//for calculate the new total price of the order
                     orderItem.Amount = newAmount;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DO;
 
-namespace DalApi;
+namespace DO;
+
 /// <summary>
 /// Throwing an error problem. There is no ID as requested.
 /// </summary>
@@ -53,5 +53,3 @@ public class InvalidVariableException : Exception
     override public string ToString() => Message;
 
 }
-
-

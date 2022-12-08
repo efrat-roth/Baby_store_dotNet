@@ -14,7 +14,7 @@ namespace stage0
         private static void Welcome0035()
         {
             Console.WriteLine("Enter your name: ");
-            string name = Console.ReadLine();
+            string? name = Console.ReadLine();
             Console.Write(name);
             Console.Write(", welcome to my first consle application");
         }

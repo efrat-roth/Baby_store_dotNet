@@ -15,7 +15,7 @@ public interface IOrderItem: ICrud<OrderItem>
     /// </summary>
     /// <param name="idOrder"></param>
     /// <returns></returns>
-    IEnumerable<OrderItem> PrintAllByOrder(int idOrder);
+    IEnumerable<OrderItem?> PrintAllByOrder(int idOrder);
     /// <summary>
     /// 
     /// </summary>
