@@ -19,7 +19,7 @@ public struct Product
     /// <summary>
     /// The category of the product.
     /// </summary>
-    public Enums.Category? Category { get; set; }
+    public Category? category { get; set; }
     /// <summary>
     /// Uniqe price for each product.
     /// </summary>
@@ -34,7 +34,7 @@ public struct Product
     /// <returns></returns>
     public override string ToString() => $@"
        Product ID={ID}: {Name}, 
-       category - {Category}
+       category - {category}
        Price: {Price}
        Amount in stock: {InStock}";
 

@@ -39,15 +39,15 @@ internal class Order:BlApi.IOrder
 
             if (o.ArrivedDate < DateTime.Now)
             {
-                OrderList.Status = Enums.OrderStatus.ArrivedOrder;
+                OrderList.Status = OrderStatus.ArrivedOrder;
             }
             if (o.DeliveredDate < DateTime.Now)
             {
-                OrderList.Status = Enums.OrderStatus.DeliveredOrder;
+                OrderList.Status = OrderStatus.DeliveredOrder;
             }
             if (o.OrderDate < DateTime.Now)
             {
-                OrderList.Status = Enums.OrderStatus.ConfirmedOrder;
+                OrderList.Status = OrderStatus.ConfirmedOrder;
             }
             foreach (DO.OrderItem OI in orderItems1)
             {
@@ -87,15 +87,15 @@ internal class Order:BlApi.IOrder
         };//Resets the field of item to return
         if (order1.ArrivedDate < DateTime.Today)
         {
-            logicOrder.Status = Enums.OrderStatus.ArrivedOrder;
+            logicOrder.Status = OrderStatus.ArrivedOrder;
         }
         if (order1.DeliveredDate < DateTime.Today)
         {
-            logicOrder.Status = Enums.OrderStatus.DeliveredOrder;
+            logicOrder.Status = OrderStatus.DeliveredOrder;
         }
         if (order1.OrderDate < DateTime.Today)
         {
-            logicOrder.Status = Enums.OrderStatus.ConfirmedOrder;
+            logicOrder.Status = OrderStatus.ConfirmedOrder;
         }
             foreach (DO.OrderItem OI in orderItems)//resets the orderItems by the orderItems of the order in data layer
             {
@@ -161,7 +161,7 @@ internal class Order:BlApi.IOrder
             OrderDate = CheckOrder.OrderDate,
             DeliveryDate = CheckOrder.ArrivedDate,
             ShipDate = CheckOrder.DeliveredDate,
-            Status = Enums.OrderStatus.DeliveredOrder,
+            Status = OrderStatus.DeliveredOrder,
             Items = new List<OrderItem?>(),
             };
             foreach (DO.OrderItem item in items1)//Adding the relevant OrderItem to the items field of order
@@ -221,7 +221,7 @@ internal class Order:BlApi.IOrder
                 OrderDate = CheckOrder.OrderDate,
                 ShipDate = CheckOrder.DeliveredDate,
                 DeliveryDate = CheckOrder.ArrivedDate,
-                Status = Enums.OrderStatus.ArrivedOrder,
+                Status = OrderStatus.ArrivedOrder,
                 Items = new List<OrderItem?>(),
             };
             foreach (DO.OrderItem item in items1)//Adding the relevant OrderItem to the items field of order
@@ -263,7 +263,7 @@ internal class Order:BlApi.IOrder
         try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
         catch (Exception inner){throw new FailedGet(inner); }
             List<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
-            Enums.OrderStatus status1 = new Enums.OrderStatus();
+            OrderStatus status1 = new OrderStatus();
             if (CheckOrder.OrderDate <= DateTime.Now)
             {
                 NodeDateStatus newNode = new NodeDateStatus
@@ -272,7 +272,7 @@ internal class Order:BlApi.IOrder
                     status = "The order was created"
                 };
                 ListDateStatus1.Add(newNode);
-                status1 = Enums.OrderStatus.ConfirmedOrder;
+                status1 = OrderStatus.ConfirmedOrder;
             }
             if (CheckOrder.DeliveredDate <= DateTime.Now)
             {
@@ -282,7 +282,7 @@ internal class Order:BlApi.IOrder
                     status = "The order was delivered"
                 };
                 ListDateStatus1.Add(newNode1);
-                status1 = Enums.OrderStatus.DeliveredOrder;
+                status1 = OrderStatus.DeliveredOrder;
             }
             if (CheckOrder.ArrivedDate <= DateTime.Now)
             {
@@ -292,7 +292,7 @@ internal class Order:BlApi.IOrder
                     status = "The order was arrived"
                 };
                 ListDateStatus1.Add(newNode2);
-                status1 = Enums.OrderStatus.ArrivedOrder;
+                status1 = OrderStatus.ArrivedOrder;
             }
             OrderTracking NewOrderTracking = new OrderTracking
             {

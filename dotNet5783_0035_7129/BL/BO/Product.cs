@@ -22,9 +22,9 @@ public class Product
     /// </summary>
     public double Price { get; set; }
     /// <summary>
-    /// Category of product
+    /// category of product
     /// </summary>
-    public Enums.Category? Category { get; set; }
+    public Category? category { get; set; }
     /// <summary>
     /// Check if the product in stock
     /// </summary>
@@ -35,7 +35,7 @@ public class Product
     /// <returns></returns> string
     public override string ToString() => $@"
        Product ID={ID}: {Name}, 
-       category - {Category},
+       category - {category},
        Price: {Price},
        Amount in stock: {InStock}";
 }

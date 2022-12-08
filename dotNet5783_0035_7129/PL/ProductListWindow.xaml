@@ -18,8 +18,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <Label Content="Category:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="26" Width="145"/>
-            <ComboBox x:Name="CategorySelector" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="Filter_SelectionChanged">
+            <Label Content="Category:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16"  />
+            <ComboBox x:Name="CategorySelector" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="CategroyFilter">
                 <ComboBox.Background>
                     <LinearGradientBrush EndPoint="0,1">
                         <GradientStop Color="#FFF0F0F0"/>
@@ -28,13 +28,14 @@
                 </ComboBox.Background>
             </ComboBox>
         </Grid>
-        <ListView x:Name="ProductsListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFBE6F4" FontSize="16">
+        <ListView x:Name="ProductsListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFBE6F4" FontSize="12">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-
+        <Button x:Name="btnAdd" Content="Add new product"  Grid.Row="2"
+                HorizontalAlignment="Right" Margin="5" Padding="5" />
     </Grid>
 </Window>

@@ -29,17 +29,17 @@ namespace Dal
             {
                 int index = 0;
                 Product product = new Product();
-                product.Category = (Enums.Category)rnd.Next(0, 6);
+                product.category = (Category)rnd.Next(0, 6);
 
                 if (rnd.Next(0, 100) > 5)
                     product.InStock = rnd.Next(100, 250);
                 else
                     product.InStock = 0;
 
-                switch (product.Category)
+                switch (product.category)
                 {
-                    case Enums.Category.Clothes:
-                        product.Name = "" + (Enums.ClothesType)rnd.Next(0, 5);
+                    case Category.Clothes:
+                        product.Name = "" + (ClothesType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -50,8 +50,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Enums.Category.Bottles:
-                        product.Name = "" + (Enums.BottlesType)rnd.Next(0, 5);
+                    case Category.Bottles:
+                        product.Name = "" + (BottlesType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -62,8 +62,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Enums.Category.Toys:
-                        product.Name = "" + (Enums.ToysType)rnd.Next(0, 5);
+                    case Category.Toys:
+                        product.Name = "" + (ToysType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -74,8 +74,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Enums.Category.Socks:
-                        product.Name = "" + (Enums.SocksType)rnd.Next(0, 5);
+                    case Category.Socks:
+                        product.Name = "" + (SocksType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -86,8 +86,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Enums.Category.Accessories:
-                        product.Name = "" + (Enums.AccessoriesType)rnd.Next(0, 5);
+                    case Category.Accessories:
+                        product.Name = "" + (AccessoriesType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {
@@ -98,8 +98,8 @@ namespace Dal
                             i--;
                         break;
 
-                    case Enums.Category.BabyCarriages:
-                        product.Name = "" + (Enums.BabyCarriagesType)rnd.Next(0, 5);
+                    case Category.BabyCarriages:
+                        product.Name = "" + (BabyCarriagesType)rnd.Next(0, 5);
                         index = ProductIndex(product.Name);
                         if (index == -1)
                         {

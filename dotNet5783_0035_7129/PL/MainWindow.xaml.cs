@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BlApi;
+using BlImplementation;
+
+
 
 namespace PL
 {
@@ -20,9 +24,21 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        IBl bl = new Bl();
         public MainWindow()
         {
             InitializeComponent();
+        }
+        /// <summary>
+        /// Show the list view window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowProductList(object sender, RoutedEventArgs e)
+        {
+            ProductListWindow productListWin = new ProductListWindow(bl);
+            productListWin.Show();
+            
         }
     }
 }

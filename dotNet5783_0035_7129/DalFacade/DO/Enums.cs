@@ -1,9 +1,9 @@
-﻿namespace DO;
+﻿namespace DO
 /// <summary>
 /// struct for enums of the store.
 /// </summary>
 
-public struct Enums
+
 {
     /// <summary>
     /// Enum for the options of the orders

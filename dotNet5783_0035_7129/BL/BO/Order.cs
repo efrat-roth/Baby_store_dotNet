@@ -31,7 +31,7 @@ public class Order
     /// <summary>
     /// The status of the order.
     /// </summary>
-    public Enums.OrderStatus? Status { get; set; }
+    public OrderStatus? Status { get; set; }
     /// <summary>
     /// The ship date.
     /// </summary>

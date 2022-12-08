@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DO.Enums;
 using System.Xml.Linq;
 
 namespace BO;
@@ -18,7 +17,7 @@ public class OrderTracking
     /// <summary>
     /// What is the status of the order
     /// </summary>
-    public Enums.OrderStatus? Status { get; set; }
+    public OrderStatus? Status { get; set; }
     /// <summary>
     /// The list of status and created date of order
     /// </summary>

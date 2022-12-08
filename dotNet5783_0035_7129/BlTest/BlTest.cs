@@ -129,7 +129,7 @@ internal class BlTest
                                 Console.WriteLine("Enter the category of product to update");
                                 DO.Enums.Category category1;
                                 DO.Enums.Category.TryParse(Console.ReadLine(), out category1);
-                                product.Category = (DO.Enums.Category)category1;
+                                product.category = (DO.Enums.Category)category1;
                                 Console.WriteLine("Enter the name of product to update");
                                 string? name1 = Console.ReadLine() ?? throw new BO.InvalidVariableException();
                                 product.Name = name1;
@@ -172,8 +172,8 @@ internal class BlTest
                                 Console.WriteLine("Enter the category of product to add");
                                 DO.Enums.Category category1 ;
                                 DO.Enums.Category.TryParse(Console.ReadLine(), out category1);
-                                p.Category = (DO.Enums.Category)category1;
-                                p.Category = category1;
+                                p.category = (DO.Enums.Category)category1;
+                                p.category = category1;
                                 Console.WriteLine("Enter the price of product to add");
                                 double price1;
                                 double.TryParse(Console.ReadLine(), out price1);

@@ -11,22 +11,45 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
+using BlImplementation;
+using BO;
 
 namespace PL
 {
+    public enum Category { Clothes, Bottles, Toys, Socks, Accessories, BabyCarriages,AllProducts }
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
     /// </summary>
     public partial class ProductListWindow : Window
     {
-        public ProductListWindow()
+        IBl bl;
+        public ProductListWindow(IBl bl1)
         {
             InitializeComponent();
+            bl = bl1;
+            ProductsListView.ItemsSource = bl.Product.GetListOfProduct();
+            CategorySelector.ItemsSource =Enum.GetValues(typeof(Category));
+            
         }
-
-        private void Filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// Filter the list view by Category
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CategroyFilter(object sender, SelectionChangedEventArgs e)
         {
-
+            if(CategorySelector.SelectedItem.Equals(Category.AllProducts))
+            {
+                ProductsListView.ItemsSource= bl.Product.GetListOfProduct();
+                return;
+            }
+            ProductsListView.ItemsSource=bl.Product.GetProductByCategory(p=>p!.category==(BO.Category)CategorySelector.SelectedItem);
+        }
+        private void btnAdd(object sender, RoutedEventArgs e)
+        {
+            ProductWindow p = new ProductWindow();
+            p.Show();
         }
     }
 }
