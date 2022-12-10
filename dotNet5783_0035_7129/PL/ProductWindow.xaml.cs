@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -19,9 +20,11 @@ namespace PL
     /// </summary>
     public partial class ProductWindow : Window
     {
-        public ProductWindow()
+            IBl bl;
+        public ProductWindow(IBl bl1)
         {
             InitializeComponent();
+            bl = bl1;
         }
     }
 }

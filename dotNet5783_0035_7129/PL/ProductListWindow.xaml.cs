@@ -46,9 +46,9 @@ namespace PL
             }
             ProductsListView.ItemsSource=bl.Product.GetProductByCategory(p=>p!.category==(BO.Category)CategorySelector.SelectedItem);
         }
-        private void btnAdd(object sender, RoutedEventArgs e)
+        private void AddProduct(object sender, RoutedEventArgs e)
         {
-            ProductWindow p = new ProductWindow();
+            ProductWindow p = new ProductWindow(bl);
             p.Show();
         }
     }

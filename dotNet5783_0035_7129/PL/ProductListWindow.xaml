@@ -36,6 +36,6 @@
             </ListView.View>
         </ListView>
         <Button x:Name="btnAdd" Content="Add new product"  Grid.Row="2"
-                HorizontalAlignment="Right" Margin="5" Padding="5" />
+                HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProduct"  />
     </Grid>
 </Window>
