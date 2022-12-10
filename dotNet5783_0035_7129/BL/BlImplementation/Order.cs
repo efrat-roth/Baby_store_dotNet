@@ -142,11 +142,11 @@ internal class Order:BlApi.IOrder
         DO.Order CheckOrder;
         try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
         catch(Exception inner) { throw new FailedGet(inner); }
-            if (CheckOrder.DeliveredDate <= DateTime.Now)
-            {
-                throw new CanNotDOActionException();
-            }
-            CheckOrder.DeliveredDate=DateTime.Now;
+        if (CheckOrder.DeliveredDate <= DateTime.Now)
+        {
+            throw new CanNotDOActionException();
+        }
+        CheckOrder.DeliveredDate=DateTime.Now;
         try { _dal.Order.Update(t: CheckOrder); }
         catch (Exception inner) { throw new FailedUpdate(inner); }
         IEnumerable<DO.OrderItem?> items1=new List<DO.OrderItem?>();

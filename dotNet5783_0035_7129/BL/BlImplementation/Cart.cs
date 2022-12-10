@@ -32,8 +32,8 @@ internal class Cart:ICart
         catch(Exception inner)
         {
             throw new FailedGet(inner);
-        }                 
-        foreach (OrderItem? o  in finalCart.Items )//Goes through all products order in the cart.
+        }
+        foreach (OrderItem? o in finalCart.Items ?? )  //Goes through all products order in the cart.
         {
             if(o?.ProductID == id)   //If the product is in order
             {
@@ -51,12 +51,12 @@ internal class Cart:ICart
                 }      
             }                           
         }
-        DO.OrderItem oi1 = _dal.OrderItem.PrintAll().Last() ?? throw new ListIsEmptyException();
+        DO.OrderItem oi1 = _dal.OrderItem.PrintAll().Last()??throw new InvalidVariableException();
         if (ProductInStore.InStock > 0)   //If the product is not on order and is in the store                                             //stock then it will be added to the cart.
         {
             BO.OrderItem newProductInOrder = new BO.OrderItem
             { 
-                ID = oi1.ID+1,
+                ID = oi1.ID,
                 Price = ProductInStore.Price,
                 TotalPrice = ProductInStore.Price,
                 ProductID = id,

@@ -28,7 +28,7 @@
     /// <summary>
     /// Enum for the types of the bottles
     /// </summary>
-    public enum BottlesType { LargeBottle, MediumBottle, SmaalBottle, ThreeBottle, DysneyBottle }
+    public enum BottlesType { LargeBottle, MediumBottle, SmallBottle, ThreeBottle, DysneyBottle }
     /// <summary>
     /// Enum for the types of the toys
     /// </summary>

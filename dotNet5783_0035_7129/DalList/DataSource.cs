@@ -151,7 +151,7 @@ namespace Dal
             {
                 Product product = new Product();
                 OrderItem orderItem = new OrderItem();
-                product = (Product)products[rnd.Next(0, products.Count())];
+                product = (Product)products[rnd.Next(0, products.Count())]!;
                 orderItem.ID = nextCountOrderItemsID();
                 orderItem.ProductID = product.ID;
                 orderItem.Amount = rnd.Next(1, 11);

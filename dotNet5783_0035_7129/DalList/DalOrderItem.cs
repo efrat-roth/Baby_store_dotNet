@@ -37,11 +37,11 @@ internal class DalOrderItem:IOrderItem
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (OrderItem oI in orderItems)
+        foreach (OrderItem? oI in orderItems)
         {
-            if (id == oI.ID)
+            if (id == oI?.ID)
             {
-                return oI;
+                return oI??throw new InvalidVariableException();
             }
         };
         throw new IdDoesNotExistException();

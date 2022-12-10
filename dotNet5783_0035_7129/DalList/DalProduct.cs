@@ -33,11 +33,11 @@ internal class DalProduct:IProduct
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (Product p in products)
+        foreach (Product? p in products)
         {
-            if (id == p.ID)
+            if (id == p?.ID)
             {
-                return p;
+                return p??throw new InvalidVariableException();
             }
         };
         throw new IdDoesNotExistException();

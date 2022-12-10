@@ -36,11 +36,11 @@ internal class DalOrder : IOrder
     {
         if(id<0)
             throw new InvalidVariableException();
-        foreach (Order o in orders) 
+        foreach (Order? o in orders) 
         { 
-            if (id == o.ID)
+            if (id == o?.ID)
             {
-                return o;
+                return o??throw new InvalidVariableException();
             }
         };   
         throw new IdDoesNotExistException();
@@ -96,7 +96,6 @@ internal class DalOrder : IOrder
     /// <returns></returns> True if the ID in the database, else return false
     public bool Update(Order? o)
     {
-
         foreach (Order? order in orders)
         {
             if (order?.ID == o?.ID)
