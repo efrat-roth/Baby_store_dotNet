@@ -92,7 +92,6 @@ internal class DalProduct:IProduct
     /// <returns></returns> True if the ID in the database, else return false
     public bool Update( Product? p)
     {
-       
         foreach (Product? product in products)
         {
             if (product?.ID == p?.ID)

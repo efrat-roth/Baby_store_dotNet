@@ -25,7 +25,7 @@ internal class Product : IProduct
         {
             ProductForList listProducts = new ProductForList
             {
-                ID = p.ID,
+                ID = p.ID  ,
                 Name = p.Name,
                 Price = p.Price,
 
@@ -34,7 +34,9 @@ internal class Product : IProduct
             productList.Add(listProducts);
         }
         return productList;
+       
     }
+
     /// <summary>
     /// The method return details of product
     /// </summary>
@@ -61,6 +63,7 @@ internal class Product : IProduct
         }
 
     }
+
     /// <summary>
     /// The method return details of product
     /// </summary>
@@ -91,16 +94,27 @@ internal class Product : IProduct
             throw new FailedGet(inner);
         }
     }
+
     /// <summary>
     /// Adding a product
     /// </summary>
     /// <param name="product"></param>Product to add
-    public void AddProduct(DO.Product product)
+    public void AddProduct(BO.Product product)
     {
 
         if (product.ID > 100000 && product.Name != null && product.Price > 0 && product.InStock >= 0)
         {
-            try { int id = _dal.Product.Add(product); }
+            try {
+
+                DO.Product p = new DO.Product {
+                ID=product.ID,
+                Name=product.Name,
+                category=(DO.Category)product.category!,
+                Price=product.Price,
+                InStock=product.InStock
+                };
+                int id = _dal.Product.Add(p);
+            }
             catch (Exception inner)
             {
                 throw new FailedAdd(inner);
@@ -109,24 +123,34 @@ internal class Product : IProduct
         }
         throw new BO.InvalidVariableException();
     }
+
     /// <summary>
     /// Updates product in the store.
     /// </summary>
     /// <param name="product"></param>
     /// <exception cref="Exception"></exception>
 
-    public void UpdatingProductDetails(DO.Product product)
+    public void UpdatingProductDetails(BO.Product product)
     {
 
         bool update = false;
         if (product.ID > 100000 && product.Price > 0 && product.InStock >= 0)
         {
-            update = _dal.Product.Update(product);
+            DO.Product p = new DO.Product
+            {
+                ID = product.ID,
+                Name = product.Name,
+                category = (DO.Category)product.category!,
+                Price = product.Price,
+                InStock = product.InStock
+            };
+            update = _dal.Product.Update(p);
         }
         if (!update)
             throw new BO.InvalidVariableException();
         return;
     }
+
     /// <summary>
     /// The method delete product from the store
     /// </summary>
@@ -153,12 +177,13 @@ internal class Product : IProduct
         if (!_dal.Product.Delete(ID))
             throw new BO.IdDoesNotExistException();
     }
+
     /// <summary>
     /// return a list of products by filtering them
     /// </summary>
     /// <param name="c"></param>category of the product
     /// <returns></returns>list of the products
-    public List<BO.Product?>? GetProductByCategory(Func<BO.Product?,bool>f)
+    public List<BO.ProductForList?>? GetProductByCondition(Func<BO.Product?,bool>f)
     {
         IEnumerable<DO.Product?> product = _dal.Product.PrintAll() ?? new List<DO.Product?>();
         List<BO.Product?>? newProducts = new List<BO.Product?>();
@@ -176,6 +201,5 @@ internal class Product : IProduct
         }
         newProducts = newProducts.Where(p => f(p)).ToList();
         return newProducts;
-
     }
 }

@@ -29,14 +29,14 @@ public interface IProduct
     /// <param name="cart"></param>cart of the customer
     /// <returns></returns>ProductItem
     public ProductItem GetProductCustomer(int ID, BO.Cart cart);
-    public void AddProduct(DO.Product product);
+    public void AddProduct(BO.Product product);
     /// <summary>
     /// Updates sproduct in the store.
     /// </summary>
     /// <param name="product"></param>
     /// <exception cref="Exception"></exception>
 
-    public void UpdatingProductDetails(DO.Product product);
+    public void UpdatingProductDetails(BO.Product product);
     /// <summary>
     /// The method delete product from the store
     /// </summary>
@@ -48,7 +48,7 @@ public interface IProduct
     /// </summary>
     /// <param name="c"></param>category of the product
     /// <returns></returns>list of the products
-    public List<BO.Product?>? GetProductByCategory(Func<BO.Product?, bool> f);
+    public List<BO.ProductForList?>? GetProductByCondition(Func<BO.Product?, bool> f);
 
 }
 

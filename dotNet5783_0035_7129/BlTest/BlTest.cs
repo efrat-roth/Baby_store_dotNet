@@ -119,7 +119,7 @@ internal class BlTest
                         {
                             try
                             {
-                                DO.Product product = new DO.Product();
+                                BO.Product product = new BO.Product();
                                 Console.WriteLine("Enter the id of product to update");
                                 int id;                              
                                 int.TryParse(Console.ReadLine(), out id);
@@ -129,7 +129,7 @@ internal class BlTest
                                 Console.WriteLine("Enter the category of product to update");
                                 DO.Category category1;
                                 DO.Category.TryParse(Console.ReadLine(), out category1);
-                                product.category = (DO.Category)category1;
+                                product.category = (BO.Category)category1;
                                 Console.WriteLine("Enter the name of product to update");
                                 string? name1 = Console.ReadLine() ?? throw new BO.InvalidVariableException();
                                 product.Name = name1;
@@ -159,7 +159,7 @@ internal class BlTest
                         {
                             try
                             {
-                                DO.Product p = new DO.Product();
+                                BO.Product p = new BO.Product();
                                 Console.WriteLine("Enter the id of product to add");
                                 int id1;
                                 int.TryParse(Console.ReadLine(), out id1);
@@ -170,9 +170,9 @@ internal class BlTest
                                 string? name1 = Console.ReadLine()??throw new BO.InvalidVariableException();
                                 p.Name = name1;
                                 Console.WriteLine("Enter the category of product to add");
-                                DO.Category category1 ;
-                                DO.Category.TryParse(Console.ReadLine(), out category1);
-                                p.category = (DO.Category)category1;
+                                BO.Category category1 ;
+                                BO.Category.TryParse(Console.ReadLine(), out category1);
+                                p.category = (BO.Category)category1;
                                 p.category = category1;
                                 Console.WriteLine("Enter the price of product to add");
                                 double price1;

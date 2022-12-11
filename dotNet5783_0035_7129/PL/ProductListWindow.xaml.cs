@@ -44,19 +44,22 @@ namespace PL
                 ProductsListView.ItemsSource= bl.Product.GetListOfProduct();
                 return;
             }
-            ProductsListView.ItemsSource=bl.Product.GetProductByCategory(p=>p!.category==(BO.Category)CategorySelector.SelectedItem);
+            ProductsListView.ItemsSource=bl.Product.GetProductByCondition(p=>p!.category==(BO.Category)CategorySelector.SelectedItem);
         }
         private void AddProduct(object sender, RoutedEventArgs e)
         {
             ProductWindow p = new ProductWindow(bl);
             p.Show();
+            ProductsListView.ItemsSource = bl.Product.GetListOfProduct();
         }
 
         private void UpdateProduct(object sender, MouseButtonEventArgs e)
         {
-            DO.Product p = (DO.Product)ProductsListView.SelectedItem;            
-            UpdateProductWindow updateProduct = new UpdateProductWindow(bl, p);
+            BO.ProductForList productForList= (BO.ProductForList)ProductsListView.SelectedItem;        
+            ProductWindow updateProduct =new ProductWindow(bl, productForList);
             updateProduct.Show();
+            ProductsListView.ItemsSource =bl.Product.GetListOfProduct();
+
         }
     }
 }

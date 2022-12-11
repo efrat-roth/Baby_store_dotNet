@@ -9,14 +9,20 @@
     <Grid>
         <TextBox x:Name="EnterID" HorizontalAlignment="Left" Margin="437,43,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120" PreviewKeyDown="IdIsNumber" />
         <Label x:Name="IDxamel" Content="Enter ID of product" HorizontalAlignment="Left" Margin="220,39,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="Namexamel" Content="Enter the name of the product" HorizontalAlignment="Left" Margin="220,89,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="Categoryxamel" Content="choose the category of product" HorizontalAlignment="Left" Margin="223,130,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="EnterName" HorizontalAlignment="Left" Margin="437,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="NameIsString"/>
-        <ComboBox x:Name="ChooseCategory" HorizontalAlignment="Left" Margin="437,130,0,0" VerticalAlignment="Top" Width="120" Text="Choose category of product "/>
-        <Label x:Name="Pricexamel" Content="Enter the price of product" HorizontalAlignment="Left" Margin="223,174,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="EnterPrice" HorizontalAlignment="Left" Margin="437,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="PriceIsNumber"/>
-        <Label x:Name="InStockxamel" Content="Enter the amount of product in stock" HorizontalAlignment="Left" Margin="220,217,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="EnterInStock" HorizontalAlignment="Left" Margin="437,221,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewKeyDown="InStockIsNumber"/>
-        <Button x:Name="AddProductxamel" Content="Add the new product to the store" HorizontalAlignment="Left" Margin="323,281,0,0" VerticalAlignment="Top" Click="AddProducts" />
+        <Label x:Name="Namexamel" Content="Enter the name of the product" HorizontalAlignment="Left" Margin="220,99,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Categoryxamel" Content="choose the category of product" HorizontalAlignment="Left" Margin="220,169,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="EnterName" HorizontalAlignment="Left" Margin="437,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <ComboBox x:Name="ChooseCategory" HorizontalAlignment="Left" Margin="437,166,0,0" VerticalAlignment="Top" Width="120" Text="Choose category of product "/>
+        <Label x:Name="Pricexamel" Content="Enter the price of product" HorizontalAlignment="Left" Margin="220,238,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="EnterPrice" HorizontalAlignment="Left" Margin="437,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="PriceIsNumber"/>
+        <Label x:Name="InStockxamel" Content="Enter the amount of product in stock" HorizontalAlignment="Left" Margin="220,306,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="EnterInStock" HorizontalAlignment="Left" Margin="437,306,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewKeyDown="InStockIsNumber"/>
+        <Button x:Name="AddProductxamel" Content="Add the new product to the store" HorizontalAlignment="Left" Margin="276,382,0,0" VerticalAlignment="Top" Click="AddProducts"/>
+        <Button x:Name="UpdateProductxamel" Content="Update the product in the store" HorizontalAlignment="Left" Margin="276,377,0,0" VerticalAlignment="Top" Click="UpdateProducts" />
+        <Label x:Name="showName" Content="" HorizontalAlignment="Left" Margin="578,99,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="showID" Content="" HorizontalAlignment="Left" Margin="427,34,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="showCategory" Content="" HorizontalAlignment="Left" Margin="583,164,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="showPrice" Content="" HorizontalAlignment="Left" Margin="588,230,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="showInStock" Content="" HorizontalAlignment="Left" Margin="583,306,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

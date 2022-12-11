@@ -108,44 +108,6 @@ internal class DalOrderItem:IOrderItem
         };
         return false;
     }
-    ///// <summary>
-    ///// Return IOrderItem by the id of the order and the ID of the IProduct
-    ///// </summary>
-    ///// <param name="productID"></param>Integer variable
-    ///// <param name="orderID"></param>Integer variable
-    ///// <returns></returns>IOrderItem
-    //public OrderItem PrintByTwoId(int productID, int orderID)
-    //{
-    //    if (productID < 0||orderID<0)
-    //        throw new InvalidVariableException();
-    //    orderItems = orderItems ?? throw new ListIsEmptyException();
-    //    foreach (OrderItem oI in orderItems)
-    //    {
-    //        if (oI.OrderID==orderID)
-    //        {
-    //            if (oI.ProductID == productID)
-    //                return oI;
-    //        }
-    //    }
-    //    throw new IdDoesNotExistException();
-    //}
-    ///// <summary>
-    ///// Return array of orderItem that include the ID
-    ///// </summary>
-    ///// <returns></returns>array of oderItem
-    //public IEnumerable<OrderItem?> PrintAllByOrder(int ID)
-    //{
-    //    if (idOrder < 0)
-    //        throw new InvalidVariableException();
-    //    List<OrderItem?> orderItemsByOrder=new List<OrderItem?>();
-    //    for(int i=0;i<orderItems.Count();i++)
-    //    {
-    //        if(orderItems.ElementAt(i)?.OrderID==idOrder)
-    //        {
-    //            orderItemsByOrder.Add(orderItems.ElementAt(i)); 
-    //        }
-    //    }
-    //    return orderItemsByOrder;
-    //}
+    
 
 }
