@@ -48,7 +48,7 @@ public interface IProduct
     /// </summary>
     /// <param name="c"></param>category of the product
     /// <returns></returns>list of the products
-    public List<BO.ProductForList?>? GetProductByCondition(Func<BO.Product?, bool> f);
+    public List<BO.ProductForList?>? GetProductByCondition(Func<BO.ProductForList?, bool> f);
 
 }
 

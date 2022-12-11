@@ -102,7 +102,7 @@ internal class Product : IProduct
     public void AddProduct(BO.Product product)
     {
 
-        if (product.ID > 100000 && product.Name != null && product.Price > 0 && product.InStock >= 0)
+        if (product.ID >= 100000 && product.Name != null && product.Price > 0 && product.InStock >= 0)
         {
             try {
 
@@ -134,7 +134,7 @@ internal class Product : IProduct
     {
 
         bool update = false;
-        if (product.ID > 100000 && product.Price > 0 && product.InStock >= 0)
+        if (product.ID >= 100000 && product.Price > 0 && product.InStock >= 0)
         {
             DO.Product p = new DO.Product
             {
@@ -183,19 +183,19 @@ internal class Product : IProduct
     /// </summary>
     /// <param name="c"></param>category of the product
     /// <returns></returns>list of the products
-    public List<BO.ProductForList?>? GetProductByCondition(Func<BO.Product?,bool>f)
+    public List<BO.ProductForList?>? GetProductByCondition(Func<BO.ProductForList?,bool>f)
     {
         IEnumerable<DO.Product?> product = _dal.Product.PrintAll() ?? new List<DO.Product?>();
-        List<BO.Product?>? newProducts = new List<BO.Product?>();
+        List<BO.ProductForList?>? newProducts = new List<BO.ProductForList?>();
         foreach (DO.Product o in product)
         {
-            BO.Product p = new BO.Product
+            BO.ProductForList p = new BO.ProductForList
             {
                 ID = o.ID,
                 Name = o.Name,
                 Price = o.Price,
-                category = (BO.Category?)o.category,
-                InStock = o.InStock,
+                Category = (BO.Category?)o.category,
+               
             };
             newProducts.Add(p);
         }

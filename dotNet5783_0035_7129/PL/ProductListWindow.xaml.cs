@@ -44,7 +44,7 @@ namespace PL
                 ProductsListView.ItemsSource= bl.Product.GetListOfProduct();
                 return;
             }
-            ProductsListView.ItemsSource=bl.Product.GetProductByCondition(p=>p!.category==(BO.Category)CategorySelector.SelectedItem);
+            ProductsListView.ItemsSource=bl.Product.GetProductByCondition(p=>p!.Category==(BO.Category)CategorySelector.SelectedItem);
         }
         private void AddProduct(object sender, RoutedEventArgs e)
         {
