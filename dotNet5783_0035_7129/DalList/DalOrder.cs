@@ -72,7 +72,7 @@ internal class DalOrder : IOrder
         return false;
     }
     /// <summary>
-    /// Update details of order
+    /// Update  details of order
     /// </summary>
     /// <param name="p"></param>IOrder
     /// <returns></returns> True if the ID in the database, else return false
