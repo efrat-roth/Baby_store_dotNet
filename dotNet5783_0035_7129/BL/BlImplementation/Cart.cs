@@ -33,7 +33,7 @@ internal class Cart:ICart
         {
             throw new FailedGet(inner);
         }
-        foreach (OrderItem? o in finalCart.Items ?? )  //Goes through all products order in the cart.
+        foreach (OrderItem? o in finalCart.Items )  //Goes through all products order in the cart.
         {
             if(o?.ProductID == id)   //If the product is in order
             {
