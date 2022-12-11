@@ -33,8 +33,9 @@ namespace DalTest
                     string? name1 = Console.ReadLine()??throw new InvalidVariableException();
                     p.Name = name1;
                     Console.WriteLine("Enter the category of product to add");
-                    Enums.Category category1 = (Enums.Category)Console.Read();
-                    p.Category = category1;
+                    Category category1;
+                    Category.TryParse(Console.ReadLine(), out category1);
+                    p.category = category1;
                     Console.WriteLine("Enter the price of product to add");
                     double price1;
                     double.TryParse(Console.ReadLine(), out price1);
@@ -177,9 +178,9 @@ namespace DalTest
                                     if (answer == "y")
                                     {
                                         Console.WriteLine("Enter category");
-                                        Enums.Category category1;
-                                        Enums.Category.TryParse(Console.ReadLine(),out category1);
-                                        p.Category = category1;
+                                        Category category1;
+                                        Category.TryParse(Console.ReadLine(),out category1);
+                                        p.category = category1;
                                     }
                                     Console.WriteLine("Do you want to change the price?, enter y for yes and n for no");
                                     string? answer2 = Console.ReadLine();
@@ -249,7 +250,7 @@ namespace DalTest
                     string? adress1 = Console.ReadLine();
                     o.CustomerAdress = adress1;
                     Console.WriteLine("Enter order date in ######:for day,month,year format");
-                    string? orderDate = Console.ReadLine();
+                    string? orderDate = Console.ReadLine()??throw new InvalidVariableException();
                     if (int.Parse(orderDate) / 10000 < 1 | int.Parse(orderDate) / 1000 > 30)
                     {
                         throw new InvalidVariableException();
@@ -264,7 +265,7 @@ namespace DalTest
                     }
                     o.OrderDate = DateTime.Parse(orderDate);
                     Console.WriteLine("Enter ship date in ######:for day,month,year format");
-                    string? shipDate = Console.ReadLine();
+                    string? shipDate = Console.ReadLine()??throw new InvalidVariableException();
                     if (int.Parse(shipDate) / 10000 < 1 | int.Parse(shipDate) / 1000 > 30)
                     {
                         throw new InvalidVariableException();
@@ -279,7 +280,7 @@ namespace DalTest
                     }
                     o.DeliveredDate = DateTime.Parse(shipDate);
                     Console.WriteLine("Enter delivery date in ######:for day,month,year format");
-                    string? deliveryDate = Console.ReadLine();
+                    string? deliveryDate = Console.ReadLine()?? throw new InvalidVariableException();
                     if (int.Parse(deliveryDate) / 10000 < 1 | int.Parse(deliveryDate) / 1000 > 30)
                     {
                         throw new InvalidVariableException();
@@ -732,7 +733,13 @@ namespace DalTest
                                     Console.WriteLine("Enter product ID");
                                     int id2;
                                     int.TryParse(Console.ReadLine(), out id2);
-                                    OrderItem oi = dalList1.OrderItem.PrintByTwoId(id2, id1);
+                                    bool o(OrderItem? m)
+                                    {
+                                        return m?.ID == id1;
+                                    }
+                                    Func<OrderItem?, bool>? func = o;
+                                    OrderItem? oi=
+                                    dalList1.OrderItem.PrintByCondition(oi => oi?.OrderID == id1&&oi?.ProductID==id2);
                                     Console.WriteLine(oi);
                                     break;
                                 }
@@ -754,7 +761,8 @@ namespace DalTest
                                     Console.WriteLine("Enter order ID");
                                     int id1;
                                     int.TryParse(Console.ReadLine(),out id1);
-                                    IEnumerable<OrderItem?> orderItemByOrderId = dalList1.OrderItem.PrintAllByOrder(id1);
+                                    IEnumerable<OrderItem?> orderItemByOrderId =
+                                        dalList1.OrderItem.PrintAll(oi=>oi?.ID==id1);
                                     foreach (OrderItem? p in orderItemByOrderId)
                                     {
                                         Console.WriteLine(p);

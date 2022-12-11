@@ -1,9 +1,9 @@
-﻿namespace DO;
+﻿namespace DO
 /// <summary>
 /// struct for enums of the store.
 /// </summary>
 
-public struct Enums
+
 {
     /// <summary>
     /// Enum for the options of the orders
@@ -28,7 +28,7 @@ public struct Enums
     /// <summary>
     /// Enum for the types of the bottles
     /// </summary>
-    public enum BottlesType { LargeBottle, MediumBottle, SmaalBottle, ThreeBottle, DysneyBottle }
+    public enum BottlesType { LargeBottle, MediumBottle, SmallBottle, ThreeBottle, DysneyBottle }
     /// <summary>
     /// Enum for the types of the toys
     /// </summary>

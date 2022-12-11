@@ -43,6 +43,12 @@ public interface IProduct
     /// <param name="ID"></param>Integer
     /// <exception cref="Exception"></exception>
     public void DeleteProduct(int ID);
+    /// <summary>
+    /// return a list of products by filtering them
+    /// </summary>
+    /// <param name="c"></param>category of the product
+    /// <returns></returns>list of the products
+    public List<BO.Product?>? GetProductByCategory(Func<BO.Product?, bool> f);
 
 }
 

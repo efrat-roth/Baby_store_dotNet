@@ -21,9 +21,9 @@ public class ProductItem
     /// </summary>
     public double Price { get; set; }
     /// <summary>
-    /// Category of product
+    /// category of product
     /// </summary>
-    public Enums.Category? Category { get; set; }
+    public Category? Category { get; set; }
     /// <summary>
     ///If product in the store or not
     /// </summary>

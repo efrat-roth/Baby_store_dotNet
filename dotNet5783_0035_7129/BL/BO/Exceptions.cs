@@ -63,7 +63,7 @@ public class CanNotDOActionException : Exception
 public class FailedAdd : Exception
 {
     public FailedAdd(Exception inner) : base("Add failed ", inner) { }
-    public  object?  Message { get; }
+    public  object? Message { get; }
     override public string ToString() => @$"{Message} - {this.InnerException}";
 }
 /// <summary>

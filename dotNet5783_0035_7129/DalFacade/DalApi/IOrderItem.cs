@@ -10,19 +10,19 @@ namespace DalApi;
 
 public interface IOrderItem: ICrud<OrderItem>
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="idOrder"></param>
-    /// <returns></returns>
-    IEnumerable<OrderItem?> PrintAllByOrder(int idOrder);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="productID"></param>
-    /// <param name="orderID"></param>
-    /// <returns></returns>
-    OrderItem PrintByTwoId(int productID, int orderID);
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    ///// <param name="idOrder"></param>
+    ///// <returns></returns>
+    //IEnumerable<OrderItem?> PrintAllByOrder(int idOrder);
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    ///// <param name="productID"></param>
+    ///// <param name="orderID"></param>
+    ///// <returns></returns>
+    //OrderItem PrintByTwoId(int productID, int orderID);
   
 }
 

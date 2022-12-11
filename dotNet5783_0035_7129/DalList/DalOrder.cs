@@ -3,6 +3,7 @@ using DO;
 using static Dal.DataSource;
 using DalApi;
 
+
 namespace Dal;
 
 internal class DalOrder : IOrder
@@ -35,23 +36,40 @@ internal class DalOrder : IOrder
     {
         if(id<0)
             throw new InvalidVariableException();
-        foreach (Order o in orders) 
+        foreach (Order? o in orders) 
         { 
-            if (id == o.ID)
+            if (id == o?.ID)
             {
-                return o;
+                return o??throw new InvalidVariableException();
             }
         };   
         throw new IdDoesNotExistException();
     }
     /// <summary>
+    /// Return a specific order that matches the condition.
+    /// </summary>
+    /// <param name="func"></param>
+    /// <returns></returns>Order?
+    public Order? PrintByCondition(Func<Order?, bool>? func)
+    {
+        func = func ?? throw new InvalidVariableException();
+        Order? o = orders.First<Order?>(i => func(i));
+        return o;
+    }
+
+    /// <summary>
     /// Print The all orders
     /// </summary>
     /// <returns></returns>The database of the all orders
-    public IEnumerable<Order?> PrintAll()
+    public IEnumerable<Order?> PrintAll(Func<Order?, bool>? func = null)
     {
-        
-        return orders;
+        if(func==null)
+        {
+            return orders;
+        }
+       
+        IEnumerable<Order?> o = orders.Where(i => func( i)).ToList<Order?>();
+        return o;
     }
     /// <summary>
     /// Delete a order from the database by its ID
@@ -78,7 +96,6 @@ internal class DalOrder : IOrder
     /// <returns></returns> True if the ID in the database, else return false
     public bool Update(Order? o)
     {
-
         foreach (Order? order in orders)
         {
             if (order?.ID == o?.ID)

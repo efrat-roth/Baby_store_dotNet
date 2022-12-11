@@ -21,9 +21,9 @@ public class ProductForList
     /// </summary>
     public double Price { get; set; }
     /// <summary>
-    /// Category of product
+    /// category of product
     /// </summary>
-    public Enums.Category? Category { get; set; }
+    public Category? Category { get; set; }
     /// <summary>
     /// The information about the product for the list of the products
     /// </summary>
