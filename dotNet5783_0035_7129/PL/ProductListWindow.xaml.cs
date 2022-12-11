@@ -51,5 +51,12 @@ namespace PL
             ProductWindow p = new ProductWindow(bl);
             p.Show();
         }
+
+        private void UpdateProduct(object sender, MouseButtonEventArgs e)
+        {
+            DO.Product p = (DO.Product)ProductsListView.SelectedItem;            
+            UpdateProductWindow updateProduct = new UpdateProductWindow(bl, p);
+            updateProduct.Show();
+        }
     }
 }
