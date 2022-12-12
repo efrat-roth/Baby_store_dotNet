@@ -28,9 +28,9 @@ public class ProductForList
     /// The information about the product for the list of the products
     /// </summary>
     /// <returns></returns>string
-    public override string ToString() => $@"
-       Product ID={ID}: {Name}, 
-       category - {Category}
-       Price: {Price}";
+    public override string ToString() 
+    {
+        return Tools.ToStringProperty(this);
+    }
 
 }

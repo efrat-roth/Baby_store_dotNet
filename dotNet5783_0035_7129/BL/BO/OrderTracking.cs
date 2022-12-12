@@ -26,9 +26,9 @@ public class OrderTracking
     /// An information about status of order
     /// </summary>
     /// <returns></returns>string
-    public override string ToString() => $@"
-       Order ID={ID},
-       Status of order: {Status}
-       List of dates ans status: {string.Join('\n', ListDateStatus??=new List<NodeDateStatus>())}
-";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
+
 }

@@ -20,8 +20,9 @@ public class NodeDateStatus
     /// print details of the class
     /// </summary>
     /// <returns></returns>string
-    public override string ToString() => $@"
-        Order Date: {Date},
-        Order Status: {status}";
-    
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
+
 }

@@ -33,9 +33,8 @@ public class Product
     /// The product information.
     /// </summary>
     /// <returns></returns> string
-    public override string ToString() => $@"
-       Product ID={ID}: {Name}, 
-       category - {category},
-       Price: {Price},
-       Amount in stock: {InStock}";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
 }

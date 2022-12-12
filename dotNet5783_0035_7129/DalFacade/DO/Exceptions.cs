@@ -53,3 +53,14 @@ public class InvalidVariableException : Exception
     override public string ToString() => Message;
 
 }
+
+/// <summary>
+/// Throwing an error problem. There is a nullable object
+/// </summary>
+[Serializable]
+public class ObgectNullableException : Exception
+{
+    public override string Message => "An item is nullable";
+
+    override public string ToString() => Message;
+}

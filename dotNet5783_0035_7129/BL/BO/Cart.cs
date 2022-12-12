@@ -34,11 +34,9 @@ public class Cart
     /// Prints all the details of the Cart.
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-       Customer Name={CustomerName}, 
-       Customer Email - {CustomerEmail},
-       Customer Adress: {CustomerAdress},
-       Order Details: {string.Join('\n', Items??new List<OrderItem?>())},
-       Total Price:{TotalPrice}";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
 
 }

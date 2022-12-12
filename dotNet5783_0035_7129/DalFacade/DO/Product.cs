@@ -32,11 +32,10 @@ public struct Product
     /// The product information.
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-       Product ID={ID}: {Name}, 
-       category - {category}
-       Price: {Price}
-       Amount in stock: {InStock}";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
 
 
 }

@@ -32,12 +32,11 @@ public struct OrderItem
     /// The order item information.
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-       ID: {ID},
-       Product ID: {ProductID}, 
-       Order ID: {OrderID},
-       Price: {Price},
-       Amount in order: {Amount}";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
+
 
 }
 

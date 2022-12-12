@@ -36,12 +36,8 @@ public class OrderItem
     /// Prints all the details of the items in order.
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-       Id: {ID},
-       Name: {Name},
-       Product ID: {ProductID},
-       Price: {Price},
-       Amount: {Amount},
-       Total Price:{TotalPrice}";
-
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
 }

@@ -36,10 +36,8 @@ public class ProductItem
     /// The information about the product for the list of the products
     /// </summary>
     /// <returns></returns>string
-    public override string ToString() => $@"
-       Product ID={ID}: {Name}, 
-       category - {Category},
-       Price: {Price},
-       The amount in stock: {InStock},
-       Amount in the cart: {AmountInCart}";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
 }

@@ -32,11 +32,9 @@ public class OrderForList
     /// Prints all the details of the list of the order.
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-       Id: {ID}
-       Customer Name={CustomerName}, 
-       Order Status: {Status},
-       Amount Of Items:{AmountOfItems},
-       Total Price:{TotalPrice}";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
 
 }

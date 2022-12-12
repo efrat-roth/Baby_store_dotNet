@@ -41,12 +41,10 @@ public struct Order
     /// The order information.
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-       Order ID: {ID}, 
-       Customer name: {CustomerName}
-       Customer email: {CustomerEmail}
-       Date of order: {OrderDate}
-       Date of ship: {DeliveredDate}
-       Date of delivery: {ArrivedDate}";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
+
 
 }

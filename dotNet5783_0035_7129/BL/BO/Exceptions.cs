@@ -56,8 +56,9 @@ public class CanNotDOActionException : Exception
     public override string Message => "Can't do the action";
     override public string ToString() => Message;
 }
+
 /// <summary>
-/// Throwing an error problem. There is no ID as requested.
+/// Throwing an error problem. There is a nullable object
 /// </summary>
 [Serializable]
 public class ObgectNullableException : Exception
@@ -73,7 +74,6 @@ public class ObgectNullableException : Exception
 public class FailedAdd : Exception
 {
     public FailedAdd(Exception inner) : base("Add failed ", inner) { }
-    public  object? Message { get; }
     override public string ToString() => @$"{Message} - {this.InnerException}";
 }
 /// <summary>
@@ -82,7 +82,6 @@ public class FailedAdd : Exception
 public class FailedDelete : Exception
 {
     public FailedDelete(Exception inner) : base("Delete failed", inner) { }
-    public object? Message { get; }
     override public string ToString() => @$"{Message} - {this.InnerException}";
 }
 /// <summary>
@@ -91,7 +90,6 @@ public class FailedDelete : Exception
 public class FailedGet : Exception
 {
     public FailedGet(Exception inner) : base("Get failed", inner) { }
-    public object? Message { get; }
     override public string ToString() => @$"{Message} - {this.InnerException}";
 }
 /// <summary>
@@ -100,7 +98,6 @@ public class FailedGet : Exception
 public class FailedUpdate : Exception
 {
     public FailedUpdate(Exception inner) : base("Update failed", inner) { }
-    public object? Message { get; }
     override public string ToString()=> @$"{Message} - {this.InnerException}";
 
 }
@@ -110,6 +107,5 @@ public class FailedUpdate : Exception
 public class FailedGetAll: Exception
 {
     public FailedGetAll(Exception inner) : base("Get all failed", inner) { }
-    public object? Message { get; }
     override public string ToString() => @$"{Message} - {InnerException}";
 }

@@ -52,15 +52,8 @@ public class Order
     /// Prints all the details of the order.
     /// </summary>
     /// <returns></returns>details of the order
-    public override string ToString() => $@"
-       Id: {ID}
-       Customer Name={CustomerName}, 
-       Customer Email = {CustomerEmail},
-       Customer Adress= {CustomerAdress},
-       Order Date: {OrderDate},
-       Order Status: {Status},
-       Ship Date:{ShipDate},
-       Delivery Date:{DeliveryDate},
-       Order details:{string.Join('\n', Items!)},
-       Total Price:{TotalPrice}";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
 }

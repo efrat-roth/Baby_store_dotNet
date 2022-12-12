@@ -202,4 +202,5 @@ internal class Product : IProduct
         newProducts = newProducts.Where(p => f(p)).ToList();
         return newProducts;
     }
+    
 }
