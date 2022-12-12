@@ -44,10 +44,10 @@ namespace PL
             EnterID.Visibility=Visibility.Collapsed;
             IDxamel.Content = "The id of the product is:";
             showID.Content = p.ID;
-            showName.Content = "The old is: "+p.Name;
-            showCategory.Content = "The old is: "+ p.Category;
-            showPrice.Content = "The old is: "+ p.Price;
-            showInStock.Content = "The old is: "+ _bl.Product.GetProductManager(p.ID).InStock;
+            showName.Content = "The current is: "+p.Name;
+            showCategory.Content = "The current is: "+ p.Category;
+            showPrice.Content = "The current is: "+ p.Price;
+            showInStock.Content = "The current is: "+ _bl.Product.GetProductManager(p.ID).InStock;
         }
         private void AddProducts(object sender, RoutedEventArgs e)
         {
@@ -58,23 +58,15 @@ namespace PL
                 messageBoxResult = MessageBox.Show("one or more of the required data is missed");
                 return;
             }
-            DO.Product product = new DO.Product
-            {
-                ID=int.Parse(EnterID.Text),
-                Name=EnterName.Text,
-                category=(DO.Category)ChooseCategory.SelectedItem,
-                Price=double.Parse(EnterPrice.Text),
-                InStock=int.Parse(EnterInStock.Text)
-            };
             try 
             {
                 BO.Product p = new BO.Product
                 {
-                    ID = product.ID,
-                    Name = product.Name,
-                    category = (BO.Category)product.category!,
-                    Price = product.Price,
-                    InStock = _bl.Product.GetProductManager(product.ID).InStock,
+                    ID = int.Parse(EnterID.Text),
+                    Name = EnterName.Text,
+                    category = (BO.Category)ChooseCategory.SelectedItem!,
+                    Price = double.Parse(EnterPrice.Text),
+                    InStock = int.Parse(EnterInStock.Text),
                 };
                 _bl.Product.AddProduct(p);
                 messageBoxResult = MessageBox.Show("The product has been successfully added");
