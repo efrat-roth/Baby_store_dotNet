@@ -61,6 +61,6 @@ public class Order
        Order Status: {Status},
        Ship Date:{ShipDate},
        Delivery Date:{DeliveryDate},
-       Order details:{string.Join('\n', Items)},
+       Order details:{string.Join('\n', Items!)},
        Total Price:{TotalPrice}";
 }

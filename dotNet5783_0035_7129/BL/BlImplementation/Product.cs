@@ -21,15 +21,14 @@ internal class Product : IProduct
     {
         IEnumerable<DO.Product?> list = _dal.Product.PrintAll() ?? new List<DO.Product?>();
         List<ProductForList?> productList = new List<ProductForList?>();
-        foreach (DO.Product p in list)
+        foreach (DO.Product? p in list)
         {
             ProductForList listProducts = new ProductForList
             {
-                ID = p.ID  ,
-                Name = p.Name,
-                Price = p.Price,
-
-                Category = (Category?)p.category
+                ID = p?.ID??throw new ObgectNullableException(),
+                Name = p?.Name,
+                Price = p?.Price?? throw new ObgectNullableException(),
+                Category = (Category?)p?.category
             };
             productList.Add(listProducts);
         }
@@ -159,7 +158,7 @@ internal class Product : IProduct
     public void DeleteProduct(int ID)
     {
         IEnumerable<DO.Order?> orders = _dal.Order.PrintAll() ?? new List<DO.Order?>();
-        foreach (DO.Order o in orders)
+        foreach (DO.Order? o in orders)
         {
             IEnumerable<DO.OrderItem?> orderItems = new List<DO.OrderItem?>();
             try { orderItems = _dal.OrderItem.PrintAll(o => o?.ID == ID); }
@@ -187,15 +186,15 @@ internal class Product : IProduct
     {
         IEnumerable<DO.Product?> product = _dal.Product.PrintAll() ?? new List<DO.Product?>();
         List<BO.ProductForList?>? newProducts = new List<BO.ProductForList?>();
-        foreach (DO.Product o in product)
+        foreach (DO.Product? o in product)
         {
             
             BO.ProductForList p = new BO.ProductForList
             {
-                ID = o.ID,
-                Name = o.Name,
-                Price = o.Price,
-                Category = (BO.Category?)o.category,
+                ID = o?.ID??throw new ObgectNullableException(),
+                Name = o?.Name,
+                Price = o?.Price??throw new ObgectNullableException(),
+                Category = (BO.Category?)o?.category,
                
             };
             newProducts.Add(p);

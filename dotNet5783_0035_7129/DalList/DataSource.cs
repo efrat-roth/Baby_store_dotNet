@@ -19,7 +19,7 @@ namespace Dal
         private static int countOrderItemsID = 1;
 
         /// <summary>
-        /// Intializes the arrays of the items
+        /// Intializes the lists of the items
         /// </summary>
 
         internal static void Initialize()

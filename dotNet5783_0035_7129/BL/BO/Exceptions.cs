@@ -56,6 +56,16 @@ public class CanNotDOActionException : Exception
     public override string Message => "Can't do the action";
     override public string ToString() => Message;
 }
+/// <summary>
+/// Throwing an error problem. There is no ID as requested.
+/// </summary>
+[Serializable]
+public class ObgectNullableException : Exception
+{
+    public override string Message => "An item is nullable";
+
+    override public string ToString() => Message;
+}
 
 /// <summary>
 /// Catch inner of add exception

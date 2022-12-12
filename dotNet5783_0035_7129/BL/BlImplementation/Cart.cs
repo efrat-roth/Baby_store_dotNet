@@ -33,7 +33,7 @@ internal class Cart:ICart
         {
             throw new FailedGet(inner);
         }
-        foreach (OrderItem? o in finalCart.Items )  //Goes through all products order in the cart.
+        foreach (OrderItem? o in finalCart.Items ??=new List<OrderItem?>() )  //Goes through all products order in the cart.
         {
             if(o?.ProductID == id)   //If the product is in order
             {
@@ -84,7 +84,7 @@ internal class Cart:ICart
         DO.Product ProductInStore;
         try { ProductInStore = _dal.Product.PrintByID(id); } //variable for the product.
         catch(Exception inner) { throw new FailedGet(inner); }                                                               //
-        foreach (OrderItem? o in finalCart.Items)   //Goes through all products order in the cart.
+        foreach (OrderItem? o in finalCart.Items ??= new List<OrderItem?>())   //Goes through all products order in the cart.
         {
             if (o?.ProductID == id)   //If the product is on order.
             {
@@ -155,17 +155,17 @@ internal class Cart:ICart
             throw new BO.InvalidVariableException();
 
         bool ifExist = false;
-        foreach (OrderItem? o in finalCart.Items)   //Goes through all products order in the cart.
+        foreach (OrderItem? o in finalCart.Items ??= new List<OrderItem?>())   //Goes through all products order in the cart.
         {
             if (o?.Amount < 0)  //checks if the amount is positive.
                 throw new BO.InvalidVariableException();
 
             foreach (DO.Product? temporaryProduct in ProductInStore)  //goes througe all products in store.
             {
-                if (o.ProductID == temporaryProduct?.ID)  //checks if the product is exist.
+                if (o?.ProductID == temporaryProduct?.ID)  //checks if the product is exist.
                 {
                     ifExist = true;
-                    if (o.Amount > temporaryProduct?.InStock) //checks if there are products in stock.
+                    if (o?.Amount > temporaryProduct?.InStock) //checks if there are products in stock.
                         throw new Exception(" ");
                 }
             }

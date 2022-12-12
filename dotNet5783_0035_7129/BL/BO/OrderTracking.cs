@@ -29,6 +29,6 @@ public class OrderTracking
     public override string ToString() => $@"
        Order ID={ID},
        Status of order: {Status}
-       List of dates ans status: {string.Join('\n', ListDateStatus)},
+       List of dates ans status: {string.Join('\n', ListDateStatus??=new List<NodeDateStatus>())}
 ";
 }
