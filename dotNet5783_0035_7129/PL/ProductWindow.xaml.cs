@@ -27,21 +27,33 @@ namespace PL
     {
         IBl _bl;
         BO.ProductForList product=new BO.ProductForList();
+        /// <summary>
+        /// Constractor for adding product
+        /// </summary>
+        /// <param name="bl1"></param>The contract with the logic layer
         public ProductWindow(IBl bl1)
         {
             InitializeComponent();
             _bl = bl1;
             ChooseCategory.ItemsSource=Enum.GetValues(typeof(BO.Category));
-            UpdateProductxamel.Visibility=Visibility.Collapsed;
+            UpdateProductxamel.Visibility=Visibility.Collapsed;//Hides the update button
         }
+
+        /// <summary>
+        /// Constractor for update product
+        /// </summary>
+        /// <param name="bl1"></param>The contract with the logic layer
+        /// <param name="p"></param>The product to update
         public ProductWindow(IBl bl1 ,BO.ProductForList p)
         {
             InitializeComponent();
             _bl = bl1;
             ChooseCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
             product = p;
-            AddProductxamel.Visibility = Visibility.Collapsed;
-            EnterID.Visibility=Visibility.Collapsed;
+            AddProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
+            EnterID.Visibility=Visibility.Collapsed;//Hides the possibility to change ID
+
+            ///The details of the current product:
             IDxamel.Content = "The id of the product is:";
             showID.Content = p.ID;
             showName.Content = "The current is: "+p.Name;
@@ -49,18 +61,24 @@ namespace PL
             showPrice.Content = "The current is: "+ p.Price;
             showInStock.Content = "The current is: "+ _bl.Product.GetProductManager(p.ID).InStock;
         }
+
+        /// <summary>
+        /// Add product
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddProducts(object sender, RoutedEventArgs e)
         {
             MessageBoxResult messageBoxResult;
             if (EnterInStock.Text.Length == 0 || EnterID.Text.Length == 0 || EnterName.Text.Length == 0
                 || EnterPrice.Text.Length == 0 || ChooseCategory.SelectedItem==null)
-            {
+            {//Input integrity check in case the uset didn't input the all details
                 messageBoxResult = MessageBox.Show("one or more of the required data is missed");
                 return;
             }
             try 
             {
-                BO.Product p = new BO.Product
+                BO.Product p = new BO.Product//The product to add
                 {
                     ID = int.Parse(EnterID.Text),
                     Name = EnterName.Text,
@@ -68,7 +86,7 @@ namespace PL
                     Price = double.Parse(EnterPrice.Text),
                     InStock = int.Parse(EnterInStock.Text),
                 };
-                _bl.Product.AddProduct(p);
+                _bl.Product.AddProduct(p);//Add the product
                 messageBoxResult = MessageBox.Show("The product has been successfully added");
                 this.Close();
             }
@@ -76,16 +94,23 @@ namespace PL
             catch (Exception ex) { messageBoxResult = MessageBox.Show(ex.ToString()); }
         }
 
+        /// <summary>
+        /// Update a product
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateProducts(object sender, RoutedEventArgs e)
         {
             MessageBoxResult messageBoxResult;
             int inStock1=_bl.Product.GetProductManager(product.ID).InStock;
             if (EnterInStock.Text.Length == 0 && EnterName.Text.Length == 0
                && EnterPrice.Text.Length == 0 && ChooseCategory.SelectedItem == null)
-            {
+            {//Input integrity check in case the uset didn't input the all details
                 messageBoxResult = MessageBox.Show("The product has not been updated");
                 return;
             }
+
+            //check wether the fields to update
             if (EnterInStock.Text.Length != 0)
                 inStock1 = int.Parse(EnterInStock.Text);
 
@@ -100,7 +125,7 @@ namespace PL
 
             try
             {
-                BO.Product p= new BO.Product
+                BO.Product p= new BO.Product//The updating product
                 {
                     ID = product.ID,
                     Name = product.Name,
@@ -108,7 +133,7 @@ namespace PL
                     category = (BO.Category)product.Category!,
                     InStock = inStock1,
                 };
-                _bl.Product.UpdatingProductDetails(p);
+                _bl.Product.UpdatingProductDetails(p);//Update the product
                 messageBoxResult = MessageBox.Show("The product has been successfuly updated"); 
                 this.Close();
             }
@@ -116,6 +141,11 @@ namespace PL
             { messageBoxResult = MessageBox.Show(ex.ToString()); }
         }
 
+        /// <summary>
+        /// Check the values of InStock field, in order to get valid input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InStockIsNumber(object sender, KeyEventArgs e)
         {
             TextBox? text = sender as TextBox;
@@ -130,6 +160,12 @@ namespace PL
 
         }
 
+        /// <summary>
+        ///  Check the values of price field, in order to get valid input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
         private void PriceIsNumber(object sender, KeyEventArgs e)
         {
             TextBox? text = sender as TextBox;
@@ -143,7 +179,11 @@ namespace PL
             return;
 
         }
-
+        /// <summary>
+        ///  Check the values of ID field, in order to get valid input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IdIsNumber(object sender, KeyEventArgs e)
         {
             TextBox? text = sender as TextBox;

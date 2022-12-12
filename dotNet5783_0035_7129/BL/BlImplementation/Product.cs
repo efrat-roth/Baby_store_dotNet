@@ -189,6 +189,7 @@ internal class Product : IProduct
         List<BO.ProductForList?>? newProducts = new List<BO.ProductForList?>();
         foreach (DO.Product o in product)
         {
+            
             BO.ProductForList p = new BO.ProductForList
             {
                 ID = o.ID,
