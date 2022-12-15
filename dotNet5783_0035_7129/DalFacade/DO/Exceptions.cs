@@ -64,3 +64,13 @@ public class ObgectNullableException : Exception
 
     override public string ToString() => Message;
 }
+/// <summary>
+/// 
+/// </summary>
+[Serializable]
+public class DalConfigException : Exception
+{
+    public DalConfigException(string msg) : base(msg) { }
+    public DalConfigException(string msg, Exception ex) : base(msg, ex) { }
+}
+

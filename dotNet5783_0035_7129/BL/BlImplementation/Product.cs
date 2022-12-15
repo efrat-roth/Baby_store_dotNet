@@ -11,15 +11,14 @@ namespace BlImplementation;
 
 internal class Product : IProduct
 {
-    DalApi.IDal _dal = new Dal.DalList();
-
+    DalApi.IDal? _dal = DalApi.Factory.Get();
     /// <summary>
     /// The method asking for list of products
     /// </summary>
     /// <returns></returns>List<ProductForList>
     public List<ProductForList?> GetListOfProduct()
     {
-        IEnumerable<DO.Product?> list = _dal.Product.PrintAll() ?? new List<DO.Product?>();
+        IEnumerable<DO.Product?> list = _dal?.Product.PrintAll() ?? new List<DO.Product?>();
         List<ProductForList?> productList = new List<ProductForList?>();
         foreach (DO.Product? p in list)
         {
@@ -45,7 +44,7 @@ internal class Product : IProduct
     {
         try
         {
-            DO.Product p = _dal.Product.PrintByID(ID);
+            DO.Product p = _dal?.Product.PrintByID(ID) ?? throw new ObgectNullableException();
             BO.Product product = new BO.Product
             {
                 ID = p.ID,
@@ -74,7 +73,7 @@ internal class Product : IProduct
 
         try
         {
-            DO.Product p = _dal.Product.PrintByID(ID);
+            DO.Product p = _dal?.Product.PrintByID(ID) ?? throw new ObgectNullableException();
             bool inStock1 = false;
             if (p.InStock > 0)
                 inStock1 = true;
@@ -112,7 +111,7 @@ internal class Product : IProduct
                 Price=product.Price,
                 InStock=product.InStock
                 };
-                int id = _dal.Product.Add(p);
+                int id = _dal?.Product.Add(p) ?? throw new ObgectNullableException();
             }
             catch (Exception inner)
             {
@@ -143,7 +142,7 @@ internal class Product : IProduct
                 Price = product.Price,
                 InStock = product.InStock
             };
-            update = _dal.Product.Update(p);
+            update = _dal?.Product.Update(p) ?? throw new ObgectNullableException();
         }
         if (!update)
             throw new BO.InvalidVariableException();
@@ -157,11 +156,11 @@ internal class Product : IProduct
     /// <exception cref="Exception"></exception>
     public void DeleteProduct(int ID)
     {
-        IEnumerable<DO.Order?> orders = _dal.Order.PrintAll() ?? new List<DO.Order?>();
+        IEnumerable<DO.Order?> orders = _dal?.Order.PrintAll() ?? new List<DO.Order?>();
         foreach (DO.Order? o in orders)
         {
             IEnumerable<DO.OrderItem?> orderItems = new List<DO.OrderItem?>();
-            try { orderItems = _dal.OrderItem.PrintAll(o => o?.ID == ID); }
+            try { orderItems = _dal?.OrderItem.PrintAll(o => o?.ID == ID) ?? throw new ObgectNullableException(); }
             catch (Exception inner)
             {
                 throw new FailedGet(inner);
@@ -173,7 +172,7 @@ internal class Product : IProduct
             }
 
         }
-        if (!_dal.Product.Delete(ID))
+        if (!_dal?.Product.Delete(ID) ?? throw new ObgectNullableException())
             throw new BO.IdDoesNotExistException();
     }
 
@@ -184,7 +183,7 @@ internal class Product : IProduct
     /// <returns></returns>list of the products
     public List<BO.ProductForList?>? GetProductByCondition(Func<BO.ProductForList?,bool>f)
     {
-        IEnumerable<DO.Product?> product = _dal.Product.PrintAll() ?? new List<DO.Product?>();
+        IEnumerable<DO.Product?> product = _dal?.Product.PrintAll() ?? new List<DO.Product?>();
         List<BO.ProductForList?>? newProducts = new List<BO.ProductForList?>();
         foreach (DO.Product? o in product)
         {

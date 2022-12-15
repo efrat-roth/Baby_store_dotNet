@@ -12,14 +12,14 @@ namespace BlImplementation;
 
 internal class Order:BlApi.IOrder
 {
-    DalApi.IDal _dal = new Dal.DalList();
+    DalApi.IDal? _dal = DalApi.Factory.Get();
     /// <summary>
     /// The method returns details of orders
     /// </summary>
     /// <returns></returns>List of OrderForList
     public List<OrderForList?> GetListOfOrders()
     {
-        IEnumerable<DO.Order?> orders = _dal.Order.PrintAll()??throw new ListIsEmptyException();
+        IEnumerable<DO.Order?> orders = _dal?.Order.PrintAll()??throw new ObgectNullableException();
         List<OrderForList?> listOrders = new List<OrderForList?>();
         foreach (DO.Order? o in orders)
         {
@@ -69,7 +69,7 @@ internal class Order:BlApi.IOrder
     public BO.Order GetDetailsOrderManager(int ID)
     {
         DO.Order order1=new DO.Order();
-        try { order1 = _dal.Order.PrintByID(ID); }//asked order
+        try { order1 = _dal?.Order.PrintByID(ID) ?? throw new ObgectNullableException(); }//asked order
         catch(Exception inner) { throw new FailedGet(inner); }
         IEnumerable<DO.OrderItem?> orderItems=new List<DO.OrderItem?>();
         try { orderItems = _dal.OrderItem.PrintAll(oi=>oi?.ID==ID); }//List of orderItems of the order
@@ -140,7 +140,7 @@ internal class Order:BlApi.IOrder
     {
 
         DO.Order CheckOrder;
-        try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
+        try { CheckOrder = _dal?.Order.PrintByID(IDOrder) ?? throw new ObgectNullableException(); }
         catch(Exception inner) { throw new FailedGet(inner); }
         if (CheckOrder.DeliveredDate <= DateTime.Now)
         {
@@ -200,7 +200,7 @@ internal class Order:BlApi.IOrder
     {
 
         DO.Order CheckOrder=new DO.Order();
-        try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
+        try { CheckOrder = _dal?.Order.PrintByID(IDOrder) ?? throw new ObgectNullableException(); }
         catch (Exception inner) { throw new FailedGet(inner); }
             if (CheckOrder.ArrivedDate <= DateTime.Now)
             {
@@ -260,7 +260,7 @@ internal class Order:BlApi.IOrder
     {
 
         DO.Order CheckOrder=new DO.Order();
-        try { CheckOrder = _dal.Order.PrintByID(IDOrder); }
+        try { CheckOrder = _dal?.Order.PrintByID(IDOrder) ?? throw new ObgectNullableException(); }
         catch (Exception inner){throw new FailedGet(inner); }
             List<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
             OrderStatus status1 = new OrderStatus();
@@ -320,12 +320,12 @@ internal class Order:BlApi.IOrder
             throw new BO.InvalidVariableException();
         if (newAmount < 0)
             throw  new BO.InvalidVariableException();
-        try { _dal.Order.PrintByID(IDOrder); }
+        try { _dal?.Order.PrintByID(IDOrder); }
         catch(Exception inner)
         {
             throw new FailedGet(inner);
         }
-        if (_dal.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Now)
+        if (_dal?.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Now)
             throw new CanNotDOActionException();
         BO.Order wantedOrder = GetDetailsOrderManager(IDOrder);
             foreach (OrderItem? orderItem in wantedOrder.Items!)

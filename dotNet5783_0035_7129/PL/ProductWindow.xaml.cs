@@ -12,11 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using BlApi;
-using BlImplementation;
-using BO;
-using Dal;
-using DalApi;
+
 
 namespace PL
 {
@@ -25,13 +21,13 @@ namespace PL
     /// </summary>
     public partial class ProductWindow : Window
     {
-        IBl _bl;
-        BO.ProductForList product=new BO.ProductForList();
+        BlApi.IBl? _bl ;
+        readonly BO.ProductForList  product=new BO.ProductForList();
         /// <summary>
         /// Constractor for adding product
         /// </summary>
         /// <param name="bl1"></param>The contract with the logic layer
-        public ProductWindow(IBl bl1)
+        public ProductWindow(BlApi.IBl bl1)
         {
             InitializeComponent();
             _bl = bl1;
@@ -44,7 +40,7 @@ namespace PL
         /// </summary>
         /// <param name="bl1"></param>The contract with the logic layer
         /// <param name="p"></param>The product to update
-        public ProductWindow(IBl bl1 ,BO.ProductForList p)
+        public ProductWindow(BlApi.IBl bl1 ,BO.ProductForList p)
         {
             InitializeComponent();
             _bl = bl1;
@@ -69,11 +65,10 @@ namespace PL
         /// <param name="e"></param>
         private void AddProducts(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult;
             if (EnterInStock.Text.Length == 0 || EnterID.Text.Length == 0 || EnterName.Text.Length == 0
                 || EnterPrice.Text.Length == 0 || ChooseCategory.SelectedItem==null)
             {//Input integrity check in case the uset didn't input the all details
-                messageBoxResult = MessageBox.Show("one or more of the required data is missed");
+                MessageBox.Show("one or more of the required data is missed");
                 return;
             }
             try 
@@ -86,12 +81,12 @@ namespace PL
                     Price = double.Parse(EnterPrice.Text),
                     InStock = int.Parse(EnterInStock.Text),
                 };
-                _bl.Product.AddProduct(p);//Add the product
-                messageBoxResult = MessageBox.Show("The product has been successfully added");
+                _bl?.Product.AddProduct(p);//Add the product
+                 MessageBox.Show("The product has been successfully added");
                 this.Close();
             }
 
-            catch (Exception ex) { messageBoxResult = MessageBox.Show(ex.ToString()); }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
 
         /// <summary>
@@ -102,11 +97,11 @@ namespace PL
         private void UpdateProducts(object sender, RoutedEventArgs e)
         {
             MessageBoxResult messageBoxResult;
-            int inStock1=_bl.Product.GetProductManager(product.ID).InStock;
+            int inStock1=_bl?.Product.GetProductManager(product.ID).InStock ?? throw new BO.ObgectNullableException();
             if (EnterInStock.Text.Length == 0 && EnterName.Text.Length == 0
                && EnterPrice.Text.Length == 0 && ChooseCategory.SelectedItem == null)
             {//Input integrity check in case the uset didn't input the all details
-                messageBoxResult = MessageBox.Show("The product has not been updated");
+                MessageBox.Show("The product has not been updated");
                 return;
             }
 
@@ -138,7 +133,7 @@ namespace PL
                 this.Close();
             }
             catch (Exception ex)
-            { messageBoxResult = MessageBox.Show(ex.ToString()); }
+            { MessageBox.Show(ex.ToString()); }
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ internal class BlTest
     static void Main(string[] args)
     {
 
-        IBl bl = new Bl();
+        BlApi.IBl? bl = BlApi.Factory.Get();
         Cart c = new Cart();
         mainActions();
         Cart createCart()//create new cart by accept the values from the user
@@ -71,7 +71,7 @@ internal class BlTest
                             try
                             {
                                 List<ProductForList?> lists = new List<ProductForList?>();
-                                lists = bl.Product.GetListOfProduct();
+                                lists = bl?.Product.GetListOfProduct() ?? throw new ObgectNullableException();
                                 foreach(ProductForList? p in lists)
                                 {
                                     Console.WriteLine(p);
@@ -90,7 +90,7 @@ internal class BlTest
                                 Console.WriteLine("Enter id of product");
                                 int id;
                                 int.TryParse(Console.ReadLine(), out id);
-                                BO.Product product = bl.Product.GetProductManager(id);
+                                BO.Product product = bl?.Product.GetProductManager(id) ?? throw new ObgectNullableException();
                                 Console.WriteLine(product);
                             }
                             catch (Exception e)
@@ -106,7 +106,7 @@ internal class BlTest
                                 Console.WriteLine("Enter id of product");
                                 int id;
                                 int.TryParse( Console.ReadLine(),out id);
-                                ProductItem product = bl.Product.GetProductCustomer(id, c);
+                                ProductItem product = bl?.Product.GetProductCustomer(id, c) ?? throw new ObgectNullableException();
                                 Console.WriteLine(product);
                             }
                             catch (Exception e)
@@ -146,7 +146,7 @@ internal class BlTest
                                 if (inStock1 < 0)
                                     throw new BO.InvalidVariableException();
                                 product.InStock = inStock1;
-                                bl.Product.UpdatingProductDetails(product);
+                                bl?.Product.UpdatingProductDetails(product);
                                 Console.WriteLine(product);
                             }
                             catch (Exception e)
@@ -182,7 +182,7 @@ internal class BlTest
                                 int inStock1;
                                 int.TryParse(Console.ReadLine(), out inStock1); 
                                 p.InStock = inStock1;
-                                bl.Product.AddProduct(p);
+                                bl?.Product.AddProduct(p);
                                 Console.WriteLine(p);
                             }
                             catch (Exception e)
@@ -198,7 +198,7 @@ internal class BlTest
                                 Console.WriteLine("Enter id of product you want to delete");
                                 int id;
                                 int.TryParse(Console.ReadLine(), out id);
-                                bl.Product.DeleteProduct(id);
+                                bl?.Product.DeleteProduct(id);
                             }
                             catch (Exception e)
                             {
@@ -245,7 +245,7 @@ internal class BlTest
                             try
                             {
                                 List<OrderForList?> list = new List<OrderForList?>();
-                                list = bl.Order.GetListOfOrders();
+                                list = bl?.Order.GetListOfOrders() ?? throw new ObgectNullableException();
                                 foreach (OrderForList? order in list)//print the all orderItem
                                 {
                                     Console.WriteLine(order);
@@ -269,11 +269,11 @@ internal class BlTest
                                 int.TryParse(Console.ReadLine(), out id);
                                 if (identity == 'm')//in case of maneger
                                 {
-                                    order = bl.Order.GetDetailsOrderManager(id);
+                                    order = bl?.Order.GetDetailsOrderManager(id) ?? throw new ObgectNullableException();
                                 }
                                 else if (identity == 'c')//in case of customer
                                 {
-                                    order = bl.Order.GetDetailsOrderCustomer(id);
+                                    order = bl?.Order.GetDetailsOrderCustomer(id) ?? throw new ObgectNullableException();
                                 }
                                 else//in case that the input is invalid(not m or c
                                 {
@@ -295,7 +295,7 @@ internal class BlTest
                                 Console.WriteLine("Enter ID of order to update");
                                 int id;
                                 int.TryParse(Console.ReadLine(), out id);
-                                order = bl.Order.DeliveredOrder(id);
+                                order = bl?.Order.DeliveredOrder(id) ?? throw new ObgectNullableException();
                                 Console.WriteLine(order);
                             }
                             catch (Exception e)
@@ -312,7 +312,7 @@ internal class BlTest
                                 Console.WriteLine("Enter ID of order to update");
                                 int id;
                                 int.TryParse(Console.ReadLine(), out id);
-                                order = bl.Order.ArrivedOrder(id);
+                                order = bl?.Order.ArrivedOrder(id) ?? throw new ObgectNullableException();
                                 Console.WriteLine(order);
                             }
                             catch (Exception e)
@@ -329,7 +329,7 @@ internal class BlTest
                                 Console.WriteLine("Enter ID of order to track");
                                 int id;
                                 int.TryParse(Console.ReadLine(), out id);
-                                orderTrack = bl.Order.OrderTracking(id);
+                                orderTrack = bl?.Order.OrderTracking(id) ?? throw new ObgectNullableException();
                                 Console.WriteLine(orderTrack);
                             }
                             catch (Exception m)
@@ -352,7 +352,7 @@ internal class BlTest
                                 Console.WriteLine("Enter the new amount");
                                 int amount;
                                 int.TryParse(Console.ReadLine(), out amount);
-                                order = bl.Order.UpdateOrder(idO, idP, amount);
+                                order = bl?.Order.UpdateOrder(idO, idP, amount) ?? throw new ObgectNullableException();
                                 Console.WriteLine(order);
                             }
                             catch (Exception e)
@@ -409,7 +409,7 @@ internal class BlTest
                                 Console.WriteLine("Enter the ID of product");
                                 int id;
                                 int.TryParse(Console.ReadLine(), out id);
-                                c = bl.Cart.AddProductToCart(c, id);
+                                c = bl?.Cart.AddProductToCart(c, id) ?? throw new ObgectNullableException();
                                 Console.WriteLine(c);
                             }
                             catch (Exception m)
@@ -429,7 +429,7 @@ internal class BlTest
                                 Console.WriteLine("Enter the new Amount");
                                 int amount;
                                 int.TryParse(Console.ReadLine(), out amount);
-                                c = bl.Cart.UpdateProductAmount(c, id, amount);
+                                c = bl?.Cart.UpdateProductAmount(c, id, amount) ?? throw new ObgectNullableException();
                                 Console.WriteLine(c);
                             }
                             catch (Exception m)
@@ -442,7 +442,7 @@ internal class BlTest
                         {
                             try
                             {
-                                DO.Order order = bl.Cart.MakeOrder(c, c.CustomerAdress!, c.CustomerName!, c.CustomerEmail!);
+                                DO.Order order = bl?.Cart.MakeOrder(c, c.CustomerAdress!, c.CustomerName!, c.CustomerEmail!) ?? throw new ObgectNullableException();
                                 Console.WriteLine(order);
                             }
                             catch (Exception m)

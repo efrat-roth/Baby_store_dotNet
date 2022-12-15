@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BO;
-using Dal;
 using DalApi;
 
 namespace BlApi;

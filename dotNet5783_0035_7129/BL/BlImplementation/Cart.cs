@@ -14,7 +14,7 @@ namespace BlImplementation;
 
 internal class Cart:ICart
 {
-    DalApi.IDal _dal = new Dal.DalList();
+    DalApi.IDal? _dal = DalApi.Factory.Get();
     /// <summary>
     /// The mothod adds new or existing product to the cart.
     /// </summary>
@@ -27,7 +27,7 @@ internal class Cart:ICart
         DO.Product ProductInStore;
         try
         {
-            ProductInStore = _dal.Product.PrintByID(id);//variable for the product.
+            ProductInStore = _dal?.Product.PrintByID(id) ?? throw new ObgectNullableException();//variable for the product.
         }   
         catch(Exception inner)
         {
@@ -82,7 +82,7 @@ internal class Cart:ICart
     public BO.Cart UpdateProductAmount(BO.Cart finalCart, int id, int newAmount)
     {
         DO.Product ProductInStore;
-        try { ProductInStore = _dal.Product.PrintByID(id); } //variable for the product.
+        try { ProductInStore = _dal?.Product.PrintByID(id)?? throw new ObgectNullableException(); } //variable for the product.
         catch(Exception inner) { throw new FailedGet(inner); }                                                               //
         foreach (OrderItem? o in finalCart.Items ??= new List<OrderItem?>())   //Goes through all products order in the cart.
         {
@@ -136,7 +136,7 @@ internal class Cart:ICart
         {
             throw new ListIsEmptyException();
         }   
-        IEnumerable<DO.Product?> ProductInStore = _dal.Product.PrintAll();  //variable for the product.
+        IEnumerable<DO.Product?> ProductInStore = _dal?.Product.PrintAll() ?? throw new ObgectNullableException();  //variable for the product.
         if (adress11 == null || name11 == null || emailAdress == null //checks if all the strings fields is correct.
                 || emailAdress[0] == '@' || emailAdress[emailAdress.Length - 1] == '@')
             throw new BO.InvalidVariableException();
