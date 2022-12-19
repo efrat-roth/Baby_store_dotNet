@@ -126,7 +126,7 @@ internal class BlTest
                                 if (id <= 0)
                                     throw new BO.InvalidVariableException();
                                 product.ID = id;
-                                Console.WriteLine("Enter the category of product to update");
+                                Console.WriteLine("Enter the Category of product to update");
                                 DO.Category category1;
                                 DO.Category.TryParse(Console.ReadLine(), out category1);
                                 product.category = (BO.Category)category1;
@@ -169,7 +169,7 @@ internal class BlTest
                                 Console.WriteLine("Enter the name of product to add");
                                 string? name1 = Console.ReadLine()??throw new BO.InvalidVariableException();
                                 p.Name = name1;
-                                Console.WriteLine("Enter the category of product to add");
+                                Console.WriteLine("Enter the Category of product to add");
                                 BO.Category category1 ;
                                 BO.Category.TryParse(Console.ReadLine(), out category1);
                                 p.category = (BO.Category)category1;

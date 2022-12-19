@@ -29,14 +29,14 @@ namespace Dal
             {
                 int index = 0;
                 Product product = new Product();
-                product.category = (Category)rnd.Next(0, 6);
+                product.Category = (Category)rnd.Next(0, 6);
 
                 if (rnd.Next(0, 100) > 5)
                     product.InStock = rnd.Next(100, 250);
                 else
                     product.InStock = 0;
 
-                switch (product.category)
+                switch (product.Category)
                 {
                     case Category.Clothes:
                         product.Name = "" + (ClothesType)rnd.Next(0, 5);

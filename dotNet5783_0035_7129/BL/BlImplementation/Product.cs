@@ -1,4 +1,5 @@
-﻿using BlApi;
+﻿using AutoMapper;
+using BlApi;
 using BO;
 using Dal;
 using System;
@@ -27,7 +28,7 @@ internal class Product : IProduct
                 ID = p?.ID??throw new ObgectNullableException(),
                 Name = p?.Name,
                 Price = p?.Price?? throw new ObgectNullableException(),
-                Category = (Category?)p?.category
+                Category = (Category?)p?.Category
             };
             productList.Add(listProducts);
         }
@@ -50,7 +51,7 @@ internal class Product : IProduct
                 ID = p.ID,
                 Name = p.Name,
                 Price = p.Price,
-                category = (Category?)p.category,
+                category = (Category?)p.Category,
                 InStock = p.InStock
             };
             return product;
@@ -82,7 +83,7 @@ internal class Product : IProduct
                 ID = p.ID,
                 Name = p.Name,
                 Price = p.Price,
-                Category = (Category?)p.category,
+                Category = (Category?)p.Category,
                 InStock = inStock1
             };
             return product;
@@ -107,7 +108,7 @@ internal class Product : IProduct
                 DO.Product p = new DO.Product {
                 ID=product.ID,
                 Name=product.Name,
-                category=(DO.Category)product.category!,
+                Category=(DO.Category)product.category!,
                 Price=product.Price,
                 InStock=product.InStock
                 };
@@ -138,7 +139,7 @@ internal class Product : IProduct
             {
                 ID = product.ID,
                 Name = product.Name,
-                category = (DO.Category)product.category!,
+                Category = (DO.Category)product.category!,
                 Price = product.Price,
                 InStock = product.InStock
             };
@@ -179,7 +180,7 @@ internal class Product : IProduct
     /// <summary>
     /// return a list of products by filtering them
     /// </summary>
-    /// <param name="c"></param>category of the product
+    /// <param name="c"></param>Category of the product
     /// <returns></returns>list of the products
     public List<BO.ProductForList?>? GetProductByCondition(Func<BO.ProductForList?,bool>f)
     {
@@ -193,7 +194,7 @@ internal class Product : IProduct
                 ID = o?.ID??throw new ObgectNullableException(),
                 Name = o?.Name,
                 Price = o?.Price??throw new ObgectNullableException(),
-                Category = (BO.Category?)o?.category,
+                Category = (BO.Category?)o?.Category,
                
             };
             newProducts.Add(p);
@@ -201,5 +202,13 @@ internal class Product : IProduct
         newProducts = newProducts.Where(p => f(p)).ToList();
         return newProducts;
     }
-    
+    //public DO.Product convertProduct(BO.Product p)
+    //{
+    //    var config = new MapperConfiguration(cfg => cfg.CreateMap<BO.Product, DO.Product>());
+    //    var mapper = config.CreateMapper();
+    //    DO.Product product = mapper.Map<DO.Product>(p);
+    //    return product;
+    //}
+
+
 }

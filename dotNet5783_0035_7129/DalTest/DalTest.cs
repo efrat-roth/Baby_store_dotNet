@@ -32,10 +32,10 @@ namespace DalTest
                     Console.WriteLine("Enter the name of product to add");
                     string? name1 = Console.ReadLine()??throw new InvalidVariableException();
                     p.Name = name1;
-                    Console.WriteLine("Enter the category of product to add");
+                    Console.WriteLine("Enter the Category of product to add");
                     Category category1;
                     Category.TryParse(Console.ReadLine(), out category1);
-                    p.category = category1;
+                    p.Category = category1;
                     Console.WriteLine("Enter the price of product to add");
                     double price1;
                     double.TryParse(Console.ReadLine(), out price1);
@@ -173,14 +173,14 @@ namespace DalTest
                                         p.Name = name1;
                                     }
 
-                                    Console.WriteLine("Do you want to change the category?, enter y for yes and n for no");
+                                    Console.WriteLine("Do you want to change the Category?, enter y for yes and n for no");
                                     string? answer1 = Console.ReadLine();
                                     if (answer == "y")
                                     {
-                                        Console.WriteLine("Enter category");
+                                        Console.WriteLine("Enter Category");
                                         Category category1;
                                         Category.TryParse(Console.ReadLine(),out category1);
-                                        p.category = category1;
+                                        p.Category = category1;
                                     }
                                     Console.WriteLine("Do you want to change the price?, enter y for yes and n for no");
                                     string? answer2 = Console.ReadLine();

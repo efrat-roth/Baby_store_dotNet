@@ -21,7 +21,7 @@ public class ProductForList
     /// </summary>
     public double Price { get; set; }
     /// <summary>
-    /// category of product
+    /// Category of product
     /// </summary>
     public Category? Category { get; set; }
     /// <summary>

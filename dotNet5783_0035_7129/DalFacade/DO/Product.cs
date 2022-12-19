@@ -17,9 +17,9 @@ public struct Product
     /// </summary>
     public string? Name { get; set; }
     /// <summary>
-    /// The category of the product.
+    /// The Category of the product.
     /// </summary>
-    public Category? category { get; set; }
+    public Category? Category { get; set; }
     /// <summary>
     /// Uniqe price for each product.
     /// </summary>

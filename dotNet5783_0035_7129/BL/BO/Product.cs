@@ -22,7 +22,7 @@ public class Product
     /// </summary>
     public double Price { get; set; }
     /// <summary>
-    /// category of product
+    /// Category of product
     /// </summary>
     public Category? category { get; set; }
     /// <summary>
