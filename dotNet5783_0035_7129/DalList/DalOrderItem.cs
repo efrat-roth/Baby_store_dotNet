@@ -16,17 +16,15 @@ internal class DalOrderItem:IOrderItem
     /// <exception cref="Exception"></exception>
     public int Add(OrderItem? oi)
     {
-        foreach (OrderItem? oI in orderItems)
+        bool exist = orderItems.Exists(orderI => orderI?.ID == oi?.ID);
+        if (exist)
         {
-            if (oi?.ID == oI?.ID)
-            {
-                throw new IdAlreadyExistException();
-            };
+            throw new IdAlreadyExistException();
         }
-        int y = oi?.ID ?? throw new InvalidVariableException();
+        int y =oi?.ID ?? throw new InvalidVariableException();
         orderItems.Add(oi);
-
         return y;
+
     }
     /// <summary>
     /// Returns IOrderItem by its ID
@@ -37,14 +35,8 @@ internal class DalOrderItem:IOrderItem
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (OrderItem? oI in orderItems)
-        {
-            if (id == oI?.ID)
-            {
-                return oI??throw new InvalidVariableException();
-            }
-        };
-        throw new IdDoesNotExistException();
+        OrderItem? oi = orderItems.FirstOrDefault(OI => OI?.ID == id);
+        return oi ?? throw new IdDoesNotExistException();
     }
     /// <summary>
     /// Return a specific orderItem that matches the condition.
@@ -54,7 +46,7 @@ internal class DalOrderItem:IOrderItem
     public OrderItem? PrintByCondition(Func<OrderItem?, bool>? func)
     {
         func =func??throw new InvalidVariableException();
-        OrderItem? o = orderItems.First<OrderItem?>(i => func(i ));
+        OrderItem? o = orderItems.FirstOrDefault(i => func(i ))??throw new IdDoesNotExistException();
         return o;
     }
     /// <summary>
@@ -68,7 +60,7 @@ internal class DalOrderItem:IOrderItem
             return orderItems;
         }
 
-        IEnumerable<OrderItem?> o = orderItems.Where(i => func(i)).ToList<OrderItem?>();
+        IEnumerable<OrderItem?> o = orderItems.Where(i => func(i)).ToList();
         return o;
     }
     /// <summary>
@@ -80,15 +72,9 @@ internal class DalOrderItem:IOrderItem
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (OrderItem? oI in orderItems )
-        {
-            if (oI?.ID==id)
-            {
-                orderItems.Remove(oI);
-                return true;
-            }
-        }
-        return false;
+        OrderItem? oi = orderItems.FirstOrDefault(oi => oi?.ID == id) ?? throw new IdDoesNotExistException(); ;
+        orderItems.Remove(oi);
+        return true;
     }
     /// <summary>
     /// Update the details of an orderItem
@@ -97,16 +83,10 @@ internal class DalOrderItem:IOrderItem
     /// <returns></returns>True if the id is in the database, else returns false
     public bool Update(OrderItem? oi)
     {
-        foreach (OrderItem? o in orderItems)
-        {
-            if (o?.ID == oi?.ID)
-            {
-                orderItems.Remove(o);
-                orderItems.Add(oi);
-                return true;
-            }
-        };
-        return false;
+        OrderItem? orderItem = orderItems.FirstOrDefault(OI => OI?.ID == oi?.ID) ?? throw new IdDoesNotExistException(); ;
+        orderItems.Remove(oi);
+        orderItems.Add(orderItem);
+        return true;
     }
     
 

@@ -24,7 +24,7 @@ internal class Order:BlApi.IOrder
         foreach (DO.Order? o in orders)
         {
             IEnumerable<DO.OrderItem?> orderItems1=new List<DO.OrderItem?>();
-            try { orderItems1 = _dal.OrderItem.PrintAll(oi=>oi?.ID==o?.ID); }
+            try { orderItems1 = _dal.OrderItem.PrintAll( oi=>oi?.ID==o?.ID); }
             catch(Exception inner)
             {
                 throw new FailedGet(inner);

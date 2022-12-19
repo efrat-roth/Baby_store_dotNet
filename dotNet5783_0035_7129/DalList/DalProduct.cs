@@ -1,4 +1,6 @@
-﻿using DalApi;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography;
+using DalApi;
 using DO;
 using static Dal.DataSource;
 
@@ -13,13 +15,11 @@ internal class DalProduct:IProduct
     /// <returns></returns>The ID of the new product
     public int Add(Product? p)
     {
-        foreach(Product? product in products)
+        bool exist = products.Exists(product=>p?.ID==product?.ID);
+        if (exist)
         {
-            if (p?.ID == product?.ID)
-            {
-                throw new IdAlreadyExistException();
-            }
-        };
+            throw new IdAlreadyExistException();
+        }
         int y = p?.ID ?? throw new InvalidVariableException();
         products.Add(p);
         return y;
@@ -33,14 +33,8 @@ internal class DalProduct:IProduct
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (Product? p in products)
-        {
-            if (id == p?.ID)
-            {
-                return p??throw new InvalidVariableException();
-            }
-        };
-        throw new IdDoesNotExistException();
+        Product? p = products.FirstOrDefault(p => p?.ID == id);
+        return p?? throw new IdDoesNotExistException();
     }
     /// <summary>
     /// Return a specific product that matches the condition.
@@ -50,8 +44,8 @@ internal class DalProduct:IProduct
     public Product? PrintByCondition(Func<Product?, bool>? func)
     {
         func = func ?? throw new InvalidVariableException();
-        Product? o = products.First<Product?>(i => func(i));
-        return o;
+        Product? o = products.FirstOrDefault(i => func(i));
+        return o??throw new IdDoesNotExistException();
     }
     /// <summary>
     /// Return the all products
@@ -63,8 +57,7 @@ internal class DalProduct:IProduct
         {
             return products;
         }
-
-        IEnumerable<Product?> o = products.Where(i => func(i)).ToList<Product?>();
+        IEnumerable<Product?> o = products.Where(i => func(i)).ToList();
         return o;
     }
     /// <summary>
@@ -75,15 +68,9 @@ internal class DalProduct:IProduct
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (Product? p in products)
-        {
-            if (id == p?.ID)
-            {
-                products.Remove(p);
-                return true;
-            }
-        };
-        return false;
+        Product? p = products.FirstOrDefault(p => p?.ID == id)?? throw new IdDoesNotExistException(); ;
+        products.Remove(p);
+        return true;
     }
     /// <summary>
     /// Update details of product
@@ -92,16 +79,10 @@ internal class DalProduct:IProduct
     /// <returns></returns> True if the ID in the database, else return false
     public bool Update( Product? p)
     {
-        foreach (Product? product in products)
-        {
-            if (product?.ID == p?.ID)
-            {
-                products.Remove(product);
-                products.Add(p);
-                return true;
-            }
-        };
-        return false;
+        Product? product = products.FirstOrDefault(product => product?.ID == p?.ID) ?? throw new IdDoesNotExistException(); ;
+        products.Remove(p);
+        products.Add(p);
+        return true;
     }   
     
 }

@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DO;
-
-public static class Tools
+public class ToolsHelp
 {
     /// <summary>
     /// To string for all classes
@@ -24,7 +17,7 @@ public static class Tools
             if (item.GetValue(t, null) is IEnumerable<object>)
             {
                 IEnumerable<object?>? list = (IEnumerable<object?>?)item.GetValue(t, null);
-                string s = string.Join(" ", list ?? throw new ObgectNullableException());
+                string s = string.Join(" ", list ?? throw new DO.ObgectNullableException());
                 str += s;
             }
             else
@@ -34,5 +27,19 @@ public static class Tools
 
         }
         return str + "\n";
+    }
+    /// <summary>
+    /// converts two types of objects
+    /// </summary>
+    /// <typeparam name="S"></typeparam>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="p"></param>
+    /// <returns></returns>
+    public static T convertObject<S, T>(this S p)
+    {
+        var config = new MapperConfiguration(cfg => cfg.CreateMap<S, T>());
+        var mapper = config.CreateMapper();
+        T target = mapper.Map<T>(p);
+        return target;
     }
 }

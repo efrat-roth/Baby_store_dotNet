@@ -13,19 +13,17 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="p"></param>
     /// <returns></returns>The ID of the new order
-    public int Add(Order? p)
+    public int Add(Order? o)
     {
-        
-        foreach (Order? o in orders)
+
+        bool exist = orders.Exists(order => order?.ID == o?.ID);
+        if (exist)
         {
-            if (p?.ID == o?.ID)
-            {
-                throw new DO.IdAlreadyExistException();
-            }
-        };
-        int y = p?.ID ?? throw new InvalidVariableException();
-        orders.Add(p);
-        return y;
+            throw new IdAlreadyExistException();
+        }
+        int y = o?.ID ?? throw new InvalidVariableException();
+        orders.Add(o);
+        return y; ;
     }
     /// <summary>
     /// Return order by its ID
@@ -36,14 +34,8 @@ internal class DalOrder : IOrder
     {
         if(id<0)
             throw new InvalidVariableException();
-        foreach (Order? o in orders) 
-        { 
-            if (id == o?.ID)
-            {
-                return o??throw new InvalidVariableException();
-            }
-        };   
-        throw new IdDoesNotExistException();
+        Order? o = orders.FirstOrDefault(o => o?.ID == id);
+        return o ?? throw new IdDoesNotExistException();
     }
     /// <summary>
     /// Return a specific order that matches the condition.
@@ -53,7 +45,7 @@ internal class DalOrder : IOrder
     public Order? PrintByCondition(Func<Order?, bool>? func)
     {
         func = func ?? throw new InvalidVariableException();
-        Order? o = orders.First<Order?>(i => func(i));
+        Order? o = orders.FirstOrDefault(i => func(i))??throw new IdDoesNotExistException();
         return o;
     }
 
@@ -66,8 +58,7 @@ internal class DalOrder : IOrder
         if(func==null)
         {
             return orders;
-        }
-       
+        }      
         IEnumerable<Order?> o = orders.Where(i => func( i)).ToList<Order?>();
         return o;
     }
@@ -79,15 +70,9 @@ internal class DalOrder : IOrder
     {
         if (id < 0)
             throw new InvalidVariableException();
-        foreach (Order? o in orders)
-        {
-            if(id == o?.ID)
-            {
-                orders.Remove(o);
-                return true;
-            }
-        };
-        return false;
+        Order? o = orders.FirstOrDefault(o => o?.ID == id) ?? throw new IdDoesNotExistException(); ;
+        orders.Remove(o);
+        return true;
     }
     /// <summary>
     /// Update  details of order
@@ -96,15 +81,9 @@ internal class DalOrder : IOrder
     /// <returns></returns> True if the ID in the database, else return false
     public bool Update(Order? o)
     {
-        foreach (Order? order in orders)
-        {
-            if (order?.ID == o?.ID)
-            {
-                orders.Remove(order);
-                orders.Add(o);
-                return true;
-            }
-        };
-        return false;
+        Order? order = orders.FirstOrDefault(order => order?.ID == o?.ID) ?? throw new IdDoesNotExistException(); ;
+        orders.Remove(o);
+        orders.Add(order);
+        return true;
     }
 }

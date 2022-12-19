@@ -34,7 +34,7 @@ public struct Product
     /// <returns></returns>
     public override string ToString()
     {
-        return Tools.ToStringProperty(this);
+        return Tools.ToolsDo.ToStringProperty(this);
     }
 
 
