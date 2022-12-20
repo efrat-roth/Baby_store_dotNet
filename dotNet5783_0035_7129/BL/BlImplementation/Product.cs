@@ -2,7 +2,6 @@
 using BlApi;
 using BO;
 using Dal;
-using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -88,7 +87,7 @@ internal class Product : IProduct
                 Name = p.Name,
                 Price = p.Price
             };
-            BO.OrderItem? oi = cart?.Items?.FirstOrDefault(p => p.ProductID == product.ID);
+            BO.OrderItem? oi = cart?.Items?.FirstOrDefault(p => p?.ProductID == product.ID);
             if(oi != null)
             {
                 product.AmountInCart = oi.Amount;
