@@ -1,7 +1,5 @@
 ﻿using BlApi;
 using BO;
-using DalApi;
-using DO;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -145,7 +143,8 @@ internal class Order:BlApi.IOrder
         }
         catch (Exception inner) { throw new FailedGet(inner); }
         logicOrder.Items = orderItems1.ToList();//put the all orderItems in the item field of logicOrder
-        logicOrder.TotalPrice=logicOrder.Items.Sum(o => o.TotalPrice);//Sum the all price of all orderItems
+        logicOrder.TotalPrice=logicOrder.Items.Sum(o => o?.TotalPrice??throw new ObgectNullableException());
+        //Sum the all price of all orderItems
         return logicOrder;     
     }
 
