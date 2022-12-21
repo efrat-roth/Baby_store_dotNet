@@ -1,11 +1,15 @@
 ﻿using BlApi;
 using BO;
+using DalApi;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BlImplementation;
@@ -20,45 +24,72 @@ internal class Order:BlApi.IOrder
     public List<OrderForList?> GetListOfOrders()
     {
         IEnumerable<DO.Order?> orders = _dal?.Order.PrintAll()??throw new ObgectNullableException();
-        List<OrderForList?> listOrders = new List<OrderForList?>();
-        foreach (DO.Order? o in orders)
+        IEnumerable<IGrouping<int?, IEnumerable<DO.OrderItem?>>> orderItemsByID;
+        try
         {
-            IEnumerable<DO.OrderItem?> orderItems1=new List<DO.OrderItem?>();
-            try { orderItems1 = _dal.OrderItem.PrintAll( oi=>oi?.ID==o?.ID); }
-            catch(Exception inner)
-            {
-                throw new FailedGet(inner);
-            }
-            OrderForList OrderList = new OrderForList
-            {
-                ID = o?.ID ?? throw new ObgectNullableException(),
-                CustomerName = o?.CustomerName,
-                AmountOfItems = 0,
-                TotalPrice = 0
-            };
-
-            if (o?.ArrivedDate < DateTime.Now)
-            {
-                OrderList.Status = OrderStatus.ArrivedOrder;
-            }
-            if (o?.DeliveredDate < DateTime.Now)
-            {
-                OrderList.Status = OrderStatus.DeliveredOrder;
-            }
-            if (o?.OrderDate < DateTime.Now)
-            {
-                OrderList.Status = OrderStatus.ConfirmedOrder;
-            }
-            foreach (DO.OrderItem? OI in orderItems1)
-            {
-                OrderList.AmountOfItems+=1;
-                OrderList.TotalPrice += OI?.Price ?? throw new ObgectNullableException();
-            }
-            listOrders.Add(OrderList);
+            orderItemsByID = from o in orders//Divide the orderItems to groups by the orders
+                             group _dal.OrderItem.PrintAll() by o?.ID into groupOi
+                             select groupOi;
         }
-        return listOrders;      
-    }
+        catch (Exception inner)
+        {
+            throw new FailedGet(inner);
+        }
+        IEnumerable<OrderForList?> ordersArrivedReturn = from g in orderItemsByID
+                                                             /*create a new order to return of arrived orders for each group of orderItems */
+                                                         let o = _dal.Order.PrintByID(g.Key ?? throw new ObgectNullableException())
+                                                         //gets the details of the order that has ths same id of the group
+                                                         where o.ArrivedDate < DateTime.Now
+                                                         let orderReturn = new OrderForList()
+                                                         {
+                                                             ID = o.ID,
+                                                             CustomerName = o.CustomerName,
+                                                             Status = OrderStatus.ArrivedOrder,
+                                                             AmountOfItems = g.Count(),//gets the amount of order items of this group
+                                                             TotalPrice = g.Sum(
+                                                                IenumItem => IenumItem.Sum
+                                                                (oi => oi?.Price))
+                                                                 ?? throw new ObgectNullableException()//sum the prices of all orderitems in the order
+                                                         }
+                                                         select orderReturn;
+        IEnumerable<OrderForList?> ordersDeliveredReturn = from g in orderItemsByID
+                                                               /*create a new order to return of Deliveed orders for each group of orderItems */
+                                                           let o = _dal.Order.PrintByID(g.Key ?? throw new ObgectNullableException())
+                                                           //gets the details of the order that has ths same id of the group
+                                                           where o.DeliveredDate < DateTime.Now
+                                                           let orderReturn = new OrderForList()
+                                                           {
+                                                               ID = o.ID,
+                                                               CustomerName = o.CustomerName,
+                                                               Status = OrderStatus.DeliveredOrder,
+                                                               AmountOfItems = g.Count(),//gets the amount of order items of this group
+                                                               TotalPrice = g.Sum(
+                                                                  IenumItem => IenumItem.Sum
+                                                                  (oi => oi?.Price))
+                                                                   ?? throw new ObgectNullableException()//sum the prices of all orderitems in the order
+                                                           }
+                                                           select orderReturn;
+        IEnumerable<OrderForList?> ordersOrderedReturn = from g in orderItemsByID
+                                                             /*create a new order to return of ordered orders for each group of orderItems */
+                                                         let o = _dal.Order.PrintByID(g.Key ?? throw new ObgectNullableException())
+                                                         //gets the details of the order that has ths same id of the group
+                                                         where o.OrderDate < DateTime.Now
+                                                         let orderReturn = new OrderForList()
+                                                         {
+                                                             ID = o.ID,
+                                                             CustomerName = o.CustomerName,
+                                                             Status = OrderStatus.ConfirmedOrder,
+                                                             AmountOfItems = g.Count(),//gets the amount of order items of this group
+                                                             TotalPrice = g.Sum(
+                                                                IenumItem => IenumItem.Sum
+                                                                (oi => oi?.Price))
+                                                                 ?? throw new ObgectNullableException()//sum the prices of all orderitems in the order
+                                                         }
+                                                         select orderReturn;
 
+        return ordersOrderedReturn.Union(ordersArrivedReturn.Union(ordersDeliveredReturn)).ToList();    
+    //return the union of the all groups
+    }
 
     /// <summary>
     /// The method gets details of order for manager
@@ -97,25 +128,25 @@ internal class Order:BlApi.IOrder
         {
             logicOrder.Status = OrderStatus.ConfirmedOrder;
         }
-            foreach (DO.OrderItem? OI in orderItems)//resets the orderItems by the orderItems of the order in data layer
-            {
-            try
-            {
-                OrderItem OItem = new OrderItem
-                {
-                    ID = OI?.ID ?? throw new ObgectNullableException(),
-                    Name = _dal.Product.PrintByID(OI?.ProductID ?? throw new ObgectNullableException()).Name,
-                    ProductID = OI?.ProductID ?? throw new ObgectNullableException(),
-                    Price = OI?.Price ?? throw new ObgectNullableException(),
-                    Amount = OI?.Amount ?? throw new ObgectNullableException(),
-                    TotalPrice = OI?.Price * OI?.Amount ?? throw new ObgectNullableException()
-                };
-                logicOrder.Items.Add(OItem);
-                logicOrder.TotalPrice += OItem.TotalPrice;
-            }
-            catch(Exception inner) { throw new FailedGet(inner); }
-            }
-            return logicOrder;       
+        IEnumerable<OrderItem?> orderItems1;
+        try
+        {
+            orderItems1 = from OI in orderItems//For each orderItem convert to BO from DO
+                          let OItem = new OrderItem()
+                          {
+                              ID = OI?.ID ?? throw new ObgectNullableException(),
+                              Name = _dal.Product.PrintByID(OI?.ProductID ?? throw new ObgectNullableException()).Name,
+                              ProductID = OI?.ProductID ?? throw new ObgectNullableException(),
+                              Price = OI?.Price ?? throw new ObgectNullableException(),
+                              Amount = OI?.Amount ?? throw new ObgectNullableException(),
+                              TotalPrice = OI?.Price * OI?.Amount ?? throw new ObgectNullableException()
+                          }
+                          select OItem;
+        }
+        catch (Exception inner) { throw new FailedGet(inner); }
+        logicOrder.Items = orderItems1.ToList();//put the all orderItems in the item field of logicOrder
+        logicOrder.TotalPrice=logicOrder.Items.Sum(o => o.TotalPrice);//Sum the all price of all orderItems
+        return logicOrder;     
     }
 
 
@@ -142,17 +173,17 @@ internal class Order:BlApi.IOrder
         DO.Order CheckOrder;
         try { CheckOrder = _dal?.Order.PrintByID(IDOrder) ?? throw new ObgectNullableException(); }
         catch(Exception inner) { throw new FailedGet(inner); }
-        if (CheckOrder.DeliveredDate <= DateTime.Now)
+        if (CheckOrder.DeliveredDate <= DateTime.Now)//If the order delivered already
         {
             throw new CanNotDOActionException();
         }
-        CheckOrder.DeliveredDate=DateTime.Now;
-        try { _dal.Order.Update(t: CheckOrder); }
+        CheckOrder.DeliveredDate=DateTime.Now;//resets the field to now
+        try { _dal.Order.Update(t: CheckOrder); }//update the order in the database
         catch (Exception inner) { throw new FailedUpdate(inner); }
         IEnumerable<DO.OrderItem?> items1=new List<DO.OrderItem?>();
-        try { items1 = _dal.OrderItem.PrintAll(oi=>oi?.ID==IDOrder); }
+        try { items1 = _dal.OrderItem.PrintAll(oi=>oi?.ID==IDOrder); }//gets the all orderItems of the order
         catch(Exception inner) { throw new FailedGet(inner); }
-        BO.Order ReturnOrder = new BO.Order
+        BO.Order ReturnOrder = new BO.Order//create BO order
         {
             ID = IDOrder,
             CustomerName = CheckOrder.CustomerName,
@@ -163,33 +194,26 @@ internal class Order:BlApi.IOrder
             ShipDate = CheckOrder.DeliveredDate,
             Status = OrderStatus.DeliveredOrder,
             Items = new List<OrderItem?>(),
-            };
-            foreach (DO.OrderItem? item in items1)//Adding the relevant OrderItem to the items field of order
-            {
-                if (item?.OrderID == IDOrder)
-                {
-                try
-                {
-                    BO.OrderItem orderItem = new BO.OrderItem
-                    {
-                        ID = item?.ID??throw new ObgectNullableException(),
-                        Name = _dal.Product.PrintByID(item?.ProductID ?? throw new ObgectNullableException()).Name,
-                        ProductID = item?.ProductID ?? throw new ObgectNullableException(),
-                        Price = item?.Price ?? throw new ObgectNullableException(),
-                        Amount = item?.Amount ?? throw new ObgectNullableException(),
-                        TotalPrice = item?.Price * item?.Amount ?? throw new ObgectNullableException(),
-                    };
-                    ReturnOrder.Items.Add(orderItem);
-
-                }
-                catch (Exception inner) { throw new FailedGet(inner); }
-                }
-
-            }
-        return ReturnOrder;       
-        
+        };
+        IEnumerable<OrderItem?> convertedOrderItems;
+        try
+        {
+            convertedOrderItems = from item in items1//convert the all orderItems to BO
+                                  let orderItem = new BO.OrderItem
+                                  {
+                                      ID = item?.ID ?? throw new ObgectNullableException(),
+                                      Name = _dal.Product.PrintByID(item?.ProductID ?? throw new ObgectNullableException()).Name,
+                                      ProductID = item?.ProductID ?? throw new ObgectNullableException(),
+                                      Price = item?.Price ?? throw new ObgectNullableException(),
+                                      Amount = item?.Amount ?? throw new ObgectNullableException(),
+                                      TotalPrice = item?.Price * item?.Amount ?? throw new ObgectNullableException(),
+                                  }
+                                  select orderItem;
+        }
+        catch (Exception inner) { throw new FailedGet(inner); }
+        ReturnOrder.Items = convertedOrderItems.ToList();
+        return ReturnOrder;          
     }
-
 
     /// <summary>
     /// The method updates the order as arrived order
@@ -224,31 +248,25 @@ internal class Order:BlApi.IOrder
                 Status = OrderStatus.ArrivedOrder,
                 Items = new List<OrderItem?>(),
             };
-            foreach (DO.OrderItem? item in items1)//Adding the relevant OrderItem to the items field of order
-            {
-                if (item?.ID == IDOrder)
-                {
-                try
-                {
-                    BO.OrderItem orderItem = new BO.OrderItem
-                    {
-                        ID = item?.ID ?? throw new ObgectNullableException(),
-                        Name = _dal.Product.PrintByID(item?.ProductID ?? throw new ObgectNullableException()).Name,
-                        ProductID = item?.ProductID ?? throw new ObgectNullableException(),
-                        Price = item?.Price ?? throw new ObgectNullableException(),
-                        Amount = item?.Amount ?? throw new ObgectNullableException(),
-                        TotalPrice = item?.Price * item?.Amount ?? throw new ObgectNullableException(),
-                    };
-                    ReturnOrder.Items.Add(orderItem);
-                }
-                catch (Exception inner){throw new FailedGet(inner); }
-                }
-
-            }
-            return ReturnOrder;
-        
+        IEnumerable<OrderItem?> convertedOrderItems;
+        try
+        {
+            convertedOrderItems = from item in items1//convert the all orderItems to BO
+                                  let orderItem = new BO.OrderItem
+                                  {
+                                      ID = item?.ID ?? throw new ObgectNullableException(),
+                                      Name = _dal.Product.PrintByID(item?.ProductID ?? throw new ObgectNullableException()).Name,
+                                      ProductID = item?.ProductID ?? throw new ObgectNullableException(),
+                                      Price = item?.Price ?? throw new ObgectNullableException(),
+                                      Amount = item?.Amount ?? throw new ObgectNullableException(),
+                                      TotalPrice = item?.Price * item?.Amount ?? throw new ObgectNullableException(),
+                                  }
+                                  select orderItem;
+        }
+        catch (Exception inner) { throw new FailedGet(inner); }
+        ReturnOrder.Items = convertedOrderItems.ToList();
+        return ReturnOrder;        
     }
-
 
     /// <summary>
     /// The method track after an order
@@ -327,17 +345,12 @@ internal class Order:BlApi.IOrder
         }
         if (_dal?.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Now)
             throw new CanNotDOActionException();
-        BO.Order wantedOrder = GetDetailsOrderManager(IDOrder);
-            foreach (OrderItem? orderItem in wantedOrder.Items!)
-            {
-                if (orderItem?.ProductID == IDProduct)
-                {
-                    wantedOrder.TotalPrice -= orderItem.TotalPrice;//for calculate the new total price of the order
-                    orderItem.Amount = newAmount;
-                    orderItem.TotalPrice = newAmount * orderItem.Price;
-                    wantedOrder.TotalPrice += orderItem.TotalPrice;//for calculate the new total price of the order
-                }
-            }
-            return wantedOrder;      
+        BO.Order? wantedOrder = GetDetailsOrderManager(IDOrder);
+        BO.OrderItem? oi = wantedOrder?.Items?.FirstOrDefault(oi => oi?.ProductID == IDProduct);
+        wantedOrder!.TotalPrice -= oi!.TotalPrice;//for calculate the new total price of the order
+        oi.Amount = newAmount;
+        oi.TotalPrice = newAmount * oi.Price;
+        wantedOrder.TotalPrice += oi.TotalPrice;//for calculate the new total price of the order
+        return wantedOrder;    
     }
 }
