@@ -21,6 +21,8 @@ internal class DalProduct:IProduct
             throw new IdAlreadyExistException();
         }
         int y = p?.ID ?? throw new InvalidVariableException();
+        if (y < 100000)
+            throw new InvalidVariableException();
         products.Add(p);
         return y;
     }
@@ -66,7 +68,7 @@ internal class DalProduct:IProduct
     /// <param name="id"></param>ID of the product to delete
     public bool Delete(int id)
     {
-        if (id < 0)
+        if (id < 100000)
             throw new InvalidVariableException();
         Product? p = products.FirstOrDefault(p => p?.ID == id)?? throw new IdDoesNotExistException(); ;
         products.Remove(p);
