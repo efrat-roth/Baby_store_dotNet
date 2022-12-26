@@ -162,7 +162,8 @@ internal class BlTest
                                 BO.Product p = new BO.Product();
                                 Console.WriteLine("Enter the id of product to add");
                                 int id1;
-                                int.TryParse(Console.ReadLine(), out id1);
+                                if(!int.TryParse(Console.ReadLine(), out id1))
+                                    throw new BO.InvalidVariableException();
                                 if(id1<100000)
                                     throw new BO.InvalidVariableException();
                                 p.ID = id1;
@@ -171,16 +172,19 @@ internal class BlTest
                                 p.Name = name1;
                                 Console.WriteLine("Enter the Category of product to add");
                                 BO.Category category1 ;
-                                BO.Category.TryParse(Console.ReadLine(), out category1);
+                                if(!BO.Category.TryParse(Console.ReadLine(), out category1))
+                                    throw new BO.InvalidVariableException();
                                 p.category = (BO.Category)category1;
                                 p.category = category1;
                                 Console.WriteLine("Enter the price of product to add");
                                 double price1;
-                                double.TryParse(Console.ReadLine(), out price1);
+                                if(!double.TryParse(Console.ReadLine(), out price1))
+                                    throw new BO.InvalidVariableException();
                                 p.Price = price1;
                                 Console.WriteLine("Enter amount of products in stock");
                                 int inStock1;
-                                int.TryParse(Console.ReadLine(), out inStock1); 
+                                if(!int.TryParse(Console.ReadLine(), out inStock1))
+                                    throw new BO.InvalidVariableException();
                                 p.InStock = inStock1;
                                 bl?.Product.AddProduct(p);
                                 Console.WriteLine(p);

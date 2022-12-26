@@ -26,14 +26,14 @@ internal class Product : IProduct
         catch(Exception inner) { throw new FailedGet(inner); }
         IEnumerable<ProductForList?> productList;
         productList = from product in list//for each product, convert ot to the wanted type
-                      let productForList =new ProductForList()
+                      orderby product?.ID
+                      select new ProductForList()
                       {
-                          ID=product?.ID??throw new BO.ObgectNullableException(),
-                          Name=product?.Name,
-                          Category =(BO.Category?)product?.Category,
-                          Price=product?.Price ?? throw new BO.ObgectNullableException()
-                      }
-                      select productForList;
+                          ID = product?.ID ?? throw new BO.ObgectNullableException(),
+                          Name = product?.Name,
+                          Category = (BO.Category?)product?.Category,
+                          Price = product?.Price ?? throw new BO.ObgectNullableException()
+                      };
         return productList.ToList();
 
     }
@@ -138,22 +138,28 @@ internal class Product : IProduct
 
     public void UpdatingProductDetails(BO.Product product)
     {
-
-        bool update = false;
-        if (product.ID >= 100000 && product.Price > 0 && product.InStock >= 0)//if the details are OK.
+        try
         {
-            DO.Product p = new DO.Product//convet to DO type
+            bool update = false;
+            if (product.ID >= 100000 && product.Price > 0 && product.InStock >= 0)//if the details are OK.
             {
-                ID = product.ID,
-                Name = product.Name,
-                Category = (DO.Category)product.category!,
-                Price = product.Price,
-                InStock = product.InStock
-            };
-            update = _dal?.Product.Update(p) ?? throw new BO.ObgectNullableException();//update the product
+                DO.Product p = new DO.Product//convet to DO type
+                {
+                    ID = product.ID,
+                    Name = product.Name,
+                    Category = (DO.Category)product.category!,
+                    Price = product.Price,
+                    InStock = product.InStock
+                };
+                update = _dal?.Product.Update(p) ?? throw new BO.ObgectNullableException();//update the product
+            }
+            if (!update)
+                throw new BO.InvalidVariableException();
         }
-        if (!update)
-            throw new BO.InvalidVariableException();
+        catch(Exception inner)
+        {
+            throw new FailedUpdate(inner);
+        }
         return;
     }
 
@@ -185,17 +191,17 @@ internal class Product : IProduct
     public List<BO.ProductForList?>? GetProductByCondition(Func<BO.ProductForList?,bool>f)
     {
         IEnumerable<DO.Product?> Allproduct = _dal?.Product.PrintAll() ?? new List<DO.Product?>();//gets the all products
-        IEnumerable<ProductForList?>? newProducts = from p in Allproduct                 //convert the product to ProductForList
-                                                    let pForList = new ProductForList()
+        IEnumerable<ProductForList?>? newProducts = from p in Allproduct     //convert the product to ProductForList
+                                                    select new ProductForList()
                                                     {
                                                         ID = p?.ID ?? throw new BO.ObgectNullableException(),
                                                         Name = p?.Name,
                                                         Price = p?.Price ?? throw new BO.ObgectNullableException(),
                                                         Category = (BO.Category?)p?.Category,
-                                                    }
-                                                    select pForList;
+                                                    };
+                                                    
 
-        newProducts = newProducts.Where(p =>f(p)).ToList();//filters the products by the condition
+        newProducts = newProducts.Where(p =>f(p));//filters the products by the condition
         return newProducts.ToList();
     }
     

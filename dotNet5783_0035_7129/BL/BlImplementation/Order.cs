@@ -22,66 +22,55 @@ internal class Order:BlApi.IOrder
     public List<OrderForList?> GetListOfOrders()
     {
         IEnumerable<DO.Order?> orders = _dal?.Order.PrintAll()??throw new ObgectNullableException();
-        IEnumerable<IGrouping<int?, IEnumerable<DO.OrderItem?>>> orderItemsByID;
-        try
-        {
-            orderItemsByID = from o in orders//Divide the orderItems to groups by the orders
-                             group _dal.OrderItem.PrintAll() by o?.ID into groupOi
-                             select groupOi;
-        }
-        catch (Exception inner)
-        {
-            throw new FailedGet(inner);
-        }
-        IEnumerable<OrderForList?> ordersArrivedReturn = from g in orderItemsByID
-                                                             /*create a new order to return of arrived orders for each group of orderItems */
-                                                         let o = _dal.Order.PrintByID(g.Key ?? throw new ObgectNullableException())
-                                                         //gets the details of the order that has ths same id of the group
-                                                         where o.ArrivedDate < DateTime.Now
+        IEnumerable<OrderForList?> ordersOrderedReturn = from o in orders
+                                                             /*create a new order to return of ordered orders for each group of orderItems */
+                                                         where o?.OrderDate < DateTime.Now
                                                          let orderReturn = new OrderForList()
                                                          {
-                                                             ID = o.ID,
-                                                             CustomerName = o.CustomerName,
-                                                             Status = OrderStatus.ArrivedOrder,
-                                                             AmountOfItems = g.Count(),//gets the amount of order items of this group
-                                                             TotalPrice = g.Sum(
-                                                                IenumItem => IenumItem.Sum
-                                                                (oi => oi?.Price))
-                                                                 ?? throw new ObgectNullableException()//sum the prices of all orderitems in the order
+                                                             ID = o?.ID ?? throw new ObgectNullableException(),
+                                                             CustomerName = o?.CustomerName ?? throw new ObgectNullableException(),
+                                                             Status=OrderStatus.ConfirmedOrder,
+                                                             AmountOfItems = (from oi in _dal?.OrderItem.PrintAll() ?? throw new ObgectNullableException()
+                                                                              where oi?.OrderID == o?.ID
+                                                                              select oi).Count(),//sum the orderItems of order
+                                                             TotalPrice= (from oi in _dal?.OrderItem.PrintAll() ?? throw new ObgectNullableException()
+                                                                          where oi?.OrderID == o?.ID
+                                                                          select oi).Sum(oi=>oi?.Price)??throw new ObgectNullableException()//sum the prices of all orderitems in the order
+
                                                          }
                                                          select orderReturn;
-        IEnumerable<OrderForList?> ordersDeliveredReturn = from g in orderItemsByID
-                                                               /*create a new order to return of Deliveed orders for each group of orderItems */
-                                                           let o = _dal.Order.PrintByID(g.Key ?? throw new ObgectNullableException())
-                                                           //gets the details of the order that has ths same id of the group
-                                                           where o.DeliveredDate < DateTime.Now
+        IEnumerable<OrderForList?> ordersDeliveredReturn = from o in orders
+                                                               /*create a new order to return of ordered orders for each group of orderItems */
+                                                           where o?.DeliveredDate < DateTime.Now
                                                            let orderReturn = new OrderForList()
                                                            {
-                                                               ID = o.ID,
-                                                               CustomerName = o.CustomerName,
-                                                               Status = OrderStatus.DeliveredOrder,
-                                                               AmountOfItems = g.Count(),//gets the amount of order items of this group
-                                                               TotalPrice = g.Sum(
-                                                                  IenumItem => IenumItem.Sum
-                                                                  (oi => oi?.Price))
-                                                                   ?? throw new ObgectNullableException()//sum the prices of all orderitems in the order
+                                                               ID = o?.ID ?? throw new ObgectNullableException(),
+                                                               CustomerName = o?.CustomerName ?? throw new ObgectNullableException(),
+                                                               Status=OrderStatus.DeliveredOrder,
+                                                               AmountOfItems = (from oi in _dal?.OrderItem.PrintAll() ?? throw new ObgectNullableException()
+                                                                                where oi?.OrderID == o?.ID
+                                                                                select oi).Count(),//sum the orderItems of order
+                                                               TotalPrice = (from oi in _dal?.OrderItem.PrintAll() ?? throw new ObgectNullableException()
+                                                                             where oi?.OrderID == o?.ID
+                                                                             select oi).Sum(oi => oi?.Price) ?? throw new ObgectNullableException()//sum the prices of all orderitems in the order
+
                                                            }
                                                            select orderReturn;
-        IEnumerable<OrderForList?> ordersOrderedReturn = from g in orderItemsByID
+        IEnumerable<OrderForList?> ordersArrivedReturn = from o in orders
                                                              /*create a new order to return of ordered orders for each group of orderItems */
-                                                         let o = _dal.Order.PrintByID(g.Key ?? throw new ObgectNullableException())
-                                                         //gets the details of the order that has ths same id of the group
-                                                         where o.OrderDate < DateTime.Now
+                                                         where o?.ArrivedDate < DateTime.Now
                                                          let orderReturn = new OrderForList()
                                                          {
-                                                             ID = o.ID,
-                                                             CustomerName = o.CustomerName,
-                                                             Status = OrderStatus.ConfirmedOrder,
-                                                             AmountOfItems = g.Count(),//gets the amount of order items of this group
-                                                             TotalPrice = g.Sum(
-                                                                IenumItem => IenumItem.Sum
-                                                                (oi => oi?.Price))
-                                                                 ?? throw new ObgectNullableException()//sum the prices of all orderitems in the order
+                                                             ID = o?.ID ?? throw new ObgectNullableException(),
+                                                             CustomerName = o?.CustomerName ?? throw new ObgectNullableException(),
+                                                             Status = OrderStatus.ArrivedOrder,
+                                                             AmountOfItems = (from oi in _dal?.OrderItem.PrintAll() ?? throw new ObgectNullableException()
+                                                                              where oi?.OrderID == o?.ID
+                                                                              select oi).Count(),//sum the orderItems of order
+                                                             TotalPrice = (from oi in _dal?.OrderItem.PrintAll() ?? throw new ObgectNullableException()
+                                                                           where oi?.OrderID == o?.ID
+                                                                           select oi).Sum(oi => oi?.Price) ?? throw new ObgectNullableException()//sum the prices of all orderitems in the order
+
                                                          }
                                                          select orderReturn;
 
