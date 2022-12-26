@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{31D3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{68CDE052-F72D-406C-8D40-6A227B9BC82D}"
 	ProjectSection(SolutionItems) = preProject
-		..\xml\dal-config.xml = ..\xml\dal-config.xml
+		xml\dal-config.xml = xml\dal-config.xml
 	EndProjectSection
 EndProject
 Global
@@ -64,9 +64,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{148FB8C8-4973-4A8E-A209-9BA1788EA45E} = {8AE59BA0-261F-4904-819B-B6A4AC7BB98E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BD8DC9F-C15F-4D53-84F4-1F4595730E2C}

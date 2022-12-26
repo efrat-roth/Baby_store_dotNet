@@ -23,6 +23,7 @@ internal class DalOrder : IOrder
         }
         int y = o?.ID ?? throw new InvalidVariableException();
         orders.Add(o);
+
         return y; ;
     }
     /// <summary>
