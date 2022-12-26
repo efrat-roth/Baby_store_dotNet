@@ -32,7 +32,7 @@ namespace PL
             InitializeComponent();
             _bl = bl1;
             ChooseCategory.ItemsSource=Enum.GetValues(typeof(BO.Category));
-            UpdateProductxamel.Visibility=Visibility.Collapsed;//Hides the update button
+
         }
 
         /// <summary>
@@ -47,7 +47,6 @@ namespace PL
             ChooseCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
             product = p;
             AddProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
-            EnterID.Visibility=Visibility.Collapsed;//Hides the possibility to change ID
 
             ///The details of the current product:
             IDxamel.Content = "The id of the product is:";
