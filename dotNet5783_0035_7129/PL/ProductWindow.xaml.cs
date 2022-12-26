@@ -15,33 +15,8 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 
 
-namespace ValueConverterDemo
-{
-    /// <summary>
-    /// Class for convert visiblity property and event
-    /// </summary>
-    public class NotBooleanToVisibilityConverter : IValueConverter
-    {
-        //convert from source property type to target property type
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            bool boolValue = (bool)value;
-            if (boolValue)
-            {
-                return Visibility.Hidden; //Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
-        }
-        //convert from target property type to source property type
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-}
+
+
 
 namespace PL
 {

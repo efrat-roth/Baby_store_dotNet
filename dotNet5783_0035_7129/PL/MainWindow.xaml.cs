@@ -30,15 +30,41 @@ namespace PL
             InitializeComponent();
         }
         /// <summary>
-        /// Show the list view window
+        /// Show the admin window
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ShowProductList(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
         {
-            ProductListWindow productListWin = new ProductListWindow(bl ?? throw new BO.ObgectNullableException());
-            productListWin.Show();
+            Admin admin = new Admin(bl ?? throw new BO.ObgectNullableException());
+            admin.Show();
             
+        }
+
+        /// <summary>
+        /// Show the new order window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="BO.ObgectNullableException"></exception>
+        private void ShowNewOrder(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
+        {
+            NewOrder newOrder = new NewOrder(bl ?? throw new BO.ObgectNullableException());
+            newOrder.Show();
+
+        }
+
+        /// <summary>
+        /// Show the track order window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="BO.ObgectNullableException"></exception>
+        private void ShowTrackOrder(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
+        {
+            TrackOrder track = new TrackOrder(bl ?? throw new BO.ObgectNullableException());
+            track.Show();
+
         }
     }
 }
