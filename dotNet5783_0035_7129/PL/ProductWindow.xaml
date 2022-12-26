@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:PL"        mc:Ignorable="d"
         Title="ProductWindow" Height="450" Width="800">
+
     <Grid>
         <TextBox x:Name="EnterID" HorizontalAlignment="Left" Margin="437,43,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120" PreviewKeyDown="IdIsNumber" />
         <Label x:Name="IDxamel" Content="Enter ID of product" HorizontalAlignment="Left" Margin="220,39,0,0" VerticalAlignment="Top"/>
@@ -17,8 +17,8 @@
         <TextBox x:Name="EnterPrice" HorizontalAlignment="Left" Margin="437,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="PriceIsNumber"/>
         <Label x:Name="InStockxamel" Content="Enter the amount of product in stock" HorizontalAlignment="Left" Margin="220,306,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="EnterInStock" HorizontalAlignment="Left" Margin="437,306,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewKeyDown="InStockIsNumber"/>
-        <Button x:Name="AddProductxamel" Content="Add the new product to the store" IsEnabled="{Binding ElementName=AddProduct, Path=IsChecked}" HorizontalAlignment="Left" Margin="276,382,0,0" VerticalAlignment="Top" Click="AddProducts"/>
-        <Button x:Name="UpdateProductxamel" Content="Update the product in the store" IsEnabled="{Binding ElementName=UpdateProduct, Path=IsChecked}" HorizontalAlignment="Left" Margin="276,377,0,0" VerticalAlignment="Top" Click="UpdateProducts" />
+        <Button x:Name="AddProductxamel" Content="Add the new product to the store"   HorizontalAlignment="Left" Margin="276,382,0,0" VerticalAlignment="Top" Click="AddProducts"/>
+        <Button x:Name="UpdateProductxamel" Content="Update the product in the store"  HorizontalAlignment="Left" Margin="276,377,0,0" VerticalAlignment="Top" Click="UpdateProducts" />
         <Label x:Name="showName" Content="" HorizontalAlignment="Left" Margin="578,99,0,0" VerticalAlignment="Top"/>
         <Label x:Name="showID" Content="" HorizontalAlignment="Left" Margin="427,34,0,0" VerticalAlignment="Top"/>
         <Label x:Name="showCategory" Content="" HorizontalAlignment="Left" Margin="583,164,0,0" VerticalAlignment="Top"/>
