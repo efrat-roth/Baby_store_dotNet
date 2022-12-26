@@ -9,13 +9,12 @@
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	<RootNamespace />	  <OutputPath>$(SolutionDir)\bin\</OutputPath>
+	<RootNamespace />	 
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	  
-    <RootNamespace />
-    <BaseOutputPath> $(SolutionDir)\bin\</BaseOutputPath>
+
+
   </PropertyGroup>
 
   <ItemGroup>

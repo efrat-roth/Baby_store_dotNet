@@ -79,10 +79,10 @@ internal class DalProduct:IProduct
     /// </summary>
     /// <param name="p"></param>IProduct
     /// <returns></returns> True if the ID in the database, else return false
-    public bool Update(Product? p)
+    public bool Update( Product? p)
     {
         Product? product = products.FirstOrDefault(product => product?.ID == p?.ID) ?? throw new IdDoesNotExistException(); ;
-        products.Remove(product);
+        products.Remove(p);
         products.Add(p);
         return true;
     }   

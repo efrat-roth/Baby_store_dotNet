@@ -84,8 +84,8 @@ internal class DalOrderItem:IOrderItem
     public bool Update(OrderItem? oi)
     {
         OrderItem? orderItem = orderItems.FirstOrDefault(OI => OI?.ID == oi?.ID) ?? throw new IdDoesNotExistException(); ;
-        orderItems.Remove(orderItem);
-        orderItems.Add(oi);
+        orderItems.Remove(oi);
+        orderItems.Add(orderItem);
         return true;
     }
     

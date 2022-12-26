@@ -23,6 +23,7 @@ internal class DalOrder : IOrder
         }
         int y = o?.ID ?? throw new InvalidVariableException();
         orders.Add(o);
+
         return y; ;
     }
     /// <summary>
@@ -82,8 +83,8 @@ internal class DalOrder : IOrder
     public bool Update(Order? o)
     {
         Order? order = orders.FirstOrDefault(order => order?.ID == o?.ID) ?? throw new IdDoesNotExistException(); ;
-        orders.Remove(order);
-        orders.Add(o);
+        orders.Remove(o);
+        orders.Add(order);
         return true;
     }
 }
