@@ -20,7 +20,7 @@
         <TextBox x:Name="EnterInStock" HorizontalAlignment="Left" Margin="437,306,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewKeyDown="InStockIsNumber"/>
         <Button x:Name="AddProductxamel" Content="Add the new product to the store"   HorizontalAlignment="Left" Margin="276,382,0,0" VerticalAlignment="Top" Click="AddProducts"/>
         <Button x:Name="UpdateProductxamel" Content="Update the product in the store"  HorizontalAlignment="Left" Margin="276,377,0,0" VerticalAlignment="Top" Click="UpdateProducts" />
-        <Label x:Name="showCurrent" Content="The current is:" HorizontalAlignment="Left" Margin="593,38,0,368" FontSize="16"/>
+        <Label x:Name="showCurrent" Content="The current is:" HorizontalAlignment="Left" Margin="593,38,0,368"/>
         <Label x:Name="showName" Content="{Binding Name}" HorizontalAlignment="Left" Margin="578,99,0,0" VerticalAlignment="Top"/>
         <Label x:Name="showID" Content="{Binding ID}" HorizontalAlignment="Left" Margin="427,34,0,0" VerticalAlignment="Top"/>
         <Label x:Name="showCategory" Content="{Binding Category}" HorizontalAlignment="Left" Margin="583,164,0,0" VerticalAlignment="Top"/>
