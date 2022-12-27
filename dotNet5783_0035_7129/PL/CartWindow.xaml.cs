@@ -15,15 +15,13 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for TrackOrder.xaml
+    /// Interaction logic for CartWindow.xaml
     /// </summary>
-    public partial class TrackOrder : Window
+    public partial class CartWindow : Window
     {
-        BlApi.IBl? _bl;
-        public TrackOrder(BlApi.IBl bl1)
+        public CartWindow()
         {
             InitializeComponent();
-            _bl = bl1;
         }
     }
 }

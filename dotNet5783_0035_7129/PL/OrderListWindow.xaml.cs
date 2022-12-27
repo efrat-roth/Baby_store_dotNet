@@ -27,7 +27,7 @@ namespace PL
         {
             InitializeComponent();
             _bl = bl;
-            ObservableCollection<OrderForList> ordersList = new ObservableCollection<OrderForList>(_bl?.Order.GetListOfOrders());//convert to observel in order to update the details 
+            ObservableCollection<OrderForList> ordersList = new ObservableCollection<OrderForList>(_bl!.Order.GetListOfOrders());//convert to observel in order to update the details 
             OrdersListView.ItemsSource = ordersList;
             DataContext= ordersList;
         }

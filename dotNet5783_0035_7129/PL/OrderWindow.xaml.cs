@@ -64,8 +64,9 @@ namespace PL
                 OrderDetailsRows.DataContext = order;
 
             }
+        
 
-            private void UpdateProducts(object sender, RoutedEventArgs e)
+        private void UpdateProducts(object sender, RoutedEventArgs e)
             {
                 try
                 {

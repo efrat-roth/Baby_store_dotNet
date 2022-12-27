@@ -62,7 +62,7 @@ namespace PL
         /// <exception cref="BO.ObgectNullableException"></exception>
         private void ShowTrackOrder(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
         {
-            TrackOrder track = new TrackOrder(bl ?? throw new BO.ObgectNullableException());
+            OrderTrackingWindow track = new OrderTrackingWindow(bl ?? throw new BO.ObgectNullableException());
             track.Show();
 
         }
