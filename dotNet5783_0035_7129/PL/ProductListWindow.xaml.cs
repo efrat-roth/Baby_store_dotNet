@@ -21,12 +21,12 @@ namespace PL
     /// </summary>
     public partial class ProductListWindow : Window
     {
-        BlApi.IBl? bl ;
+        BlApi.IBl? _bl ;
         public ProductListWindow(BlApi.IBl bl1)//constractor
         {
             InitializeComponent();
-            bl = bl1;
-            ProductsListView.ItemsSource = bl.Product.GetListOfProduct();//Resets the list by products in the store
+            _bl = bl1;
+            ProductsListView.ItemsSource = _bl.Product.GetListOfProduct();//Resets the list by products in the store
             CategorySelector.ItemsSource =Enum.GetValues(typeof(Category));//Input the only possible categories
             
         }
@@ -39,10 +39,10 @@ namespace PL
         {
             if(CategorySelector.SelectedItem.Equals(Category.AllProducts))//If the uset want to see the all products
             {
-                ProductsListView.ItemsSource= bl?.Product.GetListOfProduct();
+                ProductsListView.ItemsSource= _bl?.Product.GetListOfProduct();
                 return;
             }
-            ProductsListView.ItemsSource=bl?.Product.GetProductByCondition(p=>p!.Category==(BO.Category)CategorySelector.SelectedItem);
+            ProductsListView.ItemsSource=_bl?.Product.GetProductByCondition(p=>p!.Category==(BO.Category)CategorySelector.SelectedItem);
         }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace PL
         /// <param name="e"></param>
         private void AddProduct(object sender, RoutedEventArgs e)
         {
-            ProductWindow p = new ProductWindow(bl ?? throw new BO.ObgectNullableException());
+            ProductWindow p = new ProductWindow(_bl ?? throw new BO.ObgectNullableException());
             p.Show();
-            ProductsListView.ItemsSource = bl.Product.GetListOfProduct();//after the adding, show the new list
+            ProductsListView.ItemsSource = _bl.Product.GetListOfProduct();//after the adding, show the new list
         }
 
         /// <summary>
@@ -65,9 +65,9 @@ namespace PL
         private void UpdateProduct(object sender, MouseButtonEventArgs e)
         {
             BO.ProductForList productForList= (BO.ProductForList)ProductsListView.SelectedItem;        
-            ProductWindow updateProduct =new ProductWindow(bl ?? throw new BO.ObgectNullableException(), productForList);
+            ProductWindow updateProduct =new ProductWindow(_bl ?? throw new BO.ObgectNullableException(), productForList);
             updateProduct.Show();
-            ProductsListView.ItemsSource =bl.Product.GetListOfProduct();//after the updating, show the new list
+            ProductsListView.ItemsSource =_bl.Product.GetListOfProduct();//after the updating, show the new list
 
         }
     }

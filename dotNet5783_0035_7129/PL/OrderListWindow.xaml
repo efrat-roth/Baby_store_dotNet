@@ -23,7 +23,9 @@
             </ListView.View>
         </ListView>
         <Label x:Name="btnAdd" Content="To Update an order, click twice on the order"  Grid.Row="2"
-                HorizontalAlignment="Center" Padding="5" />
+                HorizontalAlignment="Right" Padding="5" />
+        <Button x:Name="btnBack" Content="Return to admin window"  Grid.Row="2"
+                HorizontalAlignment="Left" Padding="5" Click="ReturnAdmin" />
 
     </Grid>
 </Window>

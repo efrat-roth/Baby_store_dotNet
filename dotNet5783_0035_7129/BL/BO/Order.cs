@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,10 +30,6 @@ public class Order
     /// </summary>
     public DateTime? OrderDate { get; set; }
     /// <summary>
-    /// The status of the order.
-    /// </summary>
-    public OrderStatus? Status { get; set; }
-    /// <summary>
     /// The ship date.
     /// </summary>
     public DateTime? ShipDate { get; set; }
@@ -40,6 +37,10 @@ public class Order
     /// The delivery date.
     /// </summary>
     public DateTime? DeliveryDate { get; set; }
+    /// <summary>
+    /// The status of the order.
+    /// </summary>
+    public OrderStatus? Status { get; set; }
     /// <summary>
     ///  The list of the order details.
     /// </summary>

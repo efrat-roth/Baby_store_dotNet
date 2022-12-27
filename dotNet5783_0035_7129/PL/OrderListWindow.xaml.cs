@@ -24,9 +24,24 @@ namespace PL
         {
             InitializeComponent();
             _bl = bl;
-            OrdersListView.ItemsSource = bl?.Order.GetListOfOrders();
+            OrdersListView.ItemsSource = _bl?.Order.GetListOfOrders();
         }
 
-       
+        private void UpdateOrder(object sender, MouseButtonEventArgs e)
+        {
+            OrderWindow orderWindow = new OrderWindow(_bl??throw new BO.ObgectNullableException(), (BO.OrderForList)OrdersListView.SelectedItem);
+            orderWindow.Show();
+            OrdersListView.ItemsSource = _bl?.Order.GetListOfOrders();
+        }
+
+        /// <summary>
+        /// return to admin window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReturnAdmin(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

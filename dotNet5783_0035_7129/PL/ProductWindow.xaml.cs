@@ -53,6 +53,7 @@ namespace PL
             product = p;
             AddProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
             ///The details of the current product:
+            EnterID.Visibility = Visibility.Collapsed;
             IDxamel.Content = "The id of the product is:";
             showID.Content = p.ID;
             showName.Content = "The current is: "+p.Name;
