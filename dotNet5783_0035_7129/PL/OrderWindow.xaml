@@ -4,18 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-
         mc:Ignorable="d"
         Title="OrderWindow" Height="640" Width="800">
 
     <Grid x:Name="MainGrid" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="0,101,0,0" >
-            <Grid x:Name="OrderDetailsRows">
+        <StackPanel Grid.Row="0"  >
+
+            <Grid x:Name="OrderDetailsRows" Height="231" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -24,7 +24,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -42,27 +42,28 @@
                 <Label x:Name="showStatus" Content="{Binding Status}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3"/>
                 <Label x:Name="showAmount" Content="{Binding AmountOfItems}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4"/>
                 <Label x:Name="showPrice" Content="{Binding Price}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="5"/>
+                <Label x:Name="CheckUpdate"  Content="Put v in the sqare if you want to update the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="6"/>
+                <CheckBox x:Name="WantToUpdate" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1"/>
             </Grid>
 
         </StackPanel>
-        <StackPanel Grid.Column="1" Margin="0,273,0,261">
+        <StackPanel Grid.Row="1" >
             <Grid x:Name="UpdateGrid" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="379*"/>
+                    <ColumnDefinition Width="421*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
                 </Grid.RowDefinitions>
-                <Label x:Name="ChooseProduct" Content="Enter the id of product to update" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
-                <TextBox x:Name="GetProduct"  HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="0" PreviewKeyDown="IdIsNumber"/>
-                <Label x:Name="newAmount" Content="Enter the new amount to update" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
-                <TextBox x:Name="amountContent"  HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" PreviewKeyDown="amountIsNumber"/>
-                <Button x:Name="UpdateProductxamel" Content="Update the product in the store"  HorizontalAlignment="Left" Click="UpdateProducts" Grid.Column="1" Grid.Row="2"/>
+                <Label x:Name="ChooseProduct" Content="Enter the id of product to update" HorizontalAlignment="Center" Grid.Row="0" Margin="0,0,0,26" Width="184" Grid.Column="0"/>
+                <TextBox x:Name="GetProduct" Grid.Column="1" Grid.Row="0" PreviewKeyDown="IdIsNumber" Margin="0,0,0,26"/>
+                <Label x:Name="newAmount" Content="Enter the new amount to update" HorizontalAlignment="Center" Margin="0,14,0,20"  Width="184" Grid.Row="1" Grid.Column="0"/>
+                <TextBox x:Name="amountContent" Grid.Column="1" PreviewKeyDown="amountIsNumber" Margin="0,14,0,20" Grid.Row="1" />
+                <Button x:Name="UpdateProductxamel" Content="Update the product in the store"  HorizontalAlignment="Left" Click="UpdateProducts" Grid.Column="1" Grid.Row="2"  Width="172"/>
             </Grid>
         </StackPanel>
     </Grid>
