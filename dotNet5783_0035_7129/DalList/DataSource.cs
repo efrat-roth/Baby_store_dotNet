@@ -6,7 +6,7 @@ namespace Dal
     internal static class DataSource
     {
         readonly static Random rnd = new Random();
-        internal static List<Product?> products=new List<Product?>();
+        internal static  List<Product?> products=new List<Product?>();
         internal static List<Order?> orders=new List<Order?>();
         internal static List<OrderItem?> orderItems=new List<OrderItem?>();
         /// <summary>

@@ -20,13 +20,14 @@ using System.Xml.Linq;
 
 namespace PL
 {
+    
     /// <summary>
     /// Interaction logic for ProductWindow.xaml
     /// </summary>
     public partial class ProductWindow : Window
     {
         BlApi.IBl? _bl ;
-        readonly BO.ProductForList  product=new BO.ProductForList();
+        BO.ProductForList  product=new BO.ProductForList();
         /// <summary>
         /// Constractor for adding product
         /// </summary>
@@ -54,12 +55,16 @@ namespace PL
             AddProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
             ///The details of the current product:
             EnterID.Visibility = Visibility.Collapsed;
-            IDxamel.Content = "The id of the product is:";
-            showID.Content = p.ID;
-            showName.Content = "The current is: "+p.Name;
-            showCategory.Content = "The current is: "+ p.Category;
-            showPrice.Content = "The current is: "+ p.Price;
-            showInStock.Content = "The current is: "+ _bl.Product.GetProductManager(p.ID).InStock;
+            OrderDataBiding.Product pToPrint = new OrderDataBiding.Product()
+            {
+                ID = p.ID,
+                Price = p.Price,
+                Name = p.Name,
+                Amount = _bl.Product.GetProductManager(p.ID).InStock,
+                Category = p.Category,
+            };
+            MainGrid.DataContext=pToPrint;//resets the value to be the product
+            
         }
 
         /// <summary>

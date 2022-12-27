@@ -15,7 +15,7 @@
         <Label Content="Orders:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16" Grid.Row="0" />
 
         <ListView x:Name="OrdersListView"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5  }" 
-                  Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateOrder" >
+                  Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateOrder" ItemsSource="{Binding}" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

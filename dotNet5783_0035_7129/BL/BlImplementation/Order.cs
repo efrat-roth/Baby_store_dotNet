@@ -345,11 +345,12 @@ internal class Order:BlApi.IOrder
         if (_dal?.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Now)
             throw new CanNotDOActionException();
         BO.Order? wantedOrder = GetDetailsOrderManager(IDOrder);
-        BO.OrderItem? oi = wantedOrder?.Items?.FirstOrDefault(oi => oi?.ProductID == IDProduct);
+        BO.OrderItem? oi = wantedOrder?.Items?.FirstOrDefault(oi => oi?.ProductID == IDProduct)??throw new InvalidVariableException();
         wantedOrder!.TotalPrice -= oi!.TotalPrice;//for calculate the new total price of the order
         oi.Amount = newAmount;
         oi.TotalPrice = newAmount * oi.Price;
         wantedOrder.TotalPrice += oi.TotalPrice;//for calculate the new total price of the order
         return wantedOrder;    
     }
+
 }

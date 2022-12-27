@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-using DalApi;
 using Tools;
 
 namespace PL
@@ -39,6 +39,7 @@ namespace PL
                 Status = (BO.OrderStatus?)o.Status
             };
             order = order1;
+            OrderDetailsRows.DataContext = order;
 
         }
 
@@ -58,9 +59,13 @@ namespace PL
                 MessageBox.Show("The order has been successfuly updated");
                 this.Close();
             }
-            catch(Exception inner)
+            catch(CanNotDOActionException inner)
             {
-                MessageBox.Show(inner.ToString());
+                MessageBox.Show("The order is already shiped");
+            }
+            catch (InvalidVariableException inner)
+            {
+                MessageBox.Show("The details are invalid, or the product is not in the order, please check again");
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using BO;
+using Tools;
+using AutoMapper;
 
 namespace PL
 {
@@ -22,11 +25,15 @@ namespace PL
     public partial class ProductListWindow : Window
     {
         BlApi.IBl? _bl ;
+        
         public ProductListWindow(BlApi.IBl bl1)//constractor
         {
             InitializeComponent();
             _bl = bl1;
-            ProductsListView.ItemsSource = _bl.Product.GetListOfProduct();//Resets the list by products in the store
+            ObservableCollection<ProductForList> ProductsList = //convert to observel in order to update the details
+            new ObservableCollection<ProductForList>(_bl.Product.GetListOfProduct());
+            ProductsListView.ItemsSource = ProductsList;
+            DataContext = ProductsList;//Resets the list by products in the store
             CategorySelector.ItemsSource =Enum.GetValues(typeof(Category));//Input the only possible categories
             
         }
@@ -54,7 +61,6 @@ namespace PL
         {
             ProductWindow p = new ProductWindow(_bl ?? throw new BO.ObgectNullableException());
             p.Show();
-            ProductsListView.ItemsSource = _bl.Product.GetListOfProduct();//after the adding, show the new list
         }
 
         /// <summary>
@@ -67,7 +73,6 @@ namespace PL
             BO.ProductForList productForList= (BO.ProductForList)ProductsListView.SelectedItem;        
             ProductWindow updateProduct =new ProductWindow(_bl ?? throw new BO.ObgectNullableException(), productForList);
             updateProduct.Show();
-            ProductsListView.ItemsSource =_bl.Product.GetListOfProduct();//after the updating, show the new list
 
         }
     }

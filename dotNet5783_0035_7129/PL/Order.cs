@@ -13,9 +13,10 @@ namespace OrderDataBiding
         /// <summary>
         /// The id of the order.
         /// </summary>
+        public int ID { get => (int)GetValue(IDProperty); set => SetValue(IDProperty, value); }
+
         public static readonly DependencyProperty IDProperty =
             DependencyProperty.Register(nameof(ID), typeof(int), typeof(Order));
-        public int ID { get => (int)GetValue(IDProperty); set => SetValue(IDProperty, value); }
         /// <summary>
         /// The name of the customer.
         /// </summary>

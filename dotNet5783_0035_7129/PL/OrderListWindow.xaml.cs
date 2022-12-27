@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
+using Tools;
 
 namespace PL
 {
@@ -24,14 +27,15 @@ namespace PL
         {
             InitializeComponent();
             _bl = bl;
-            OrdersListView.ItemsSource = _bl?.Order.GetListOfOrders();
+            ObservableCollection<OrderForList> ordersList = new ObservableCollection<OrderForList>(_bl?.Order.GetListOfOrders());//convert to observel in order to update the details 
+            OrdersListView.ItemsSource = ordersList;
+            DataContext= ordersList;
         }
 
         private void UpdateOrder(object sender, MouseButtonEventArgs e)
         {
             OrderWindow orderWindow = new OrderWindow(_bl??throw new BO.ObgectNullableException(), (BO.OrderForList)OrdersListView.SelectedItem);
             orderWindow.Show();
-            OrdersListView.ItemsSource = _bl?.Order.GetListOfOrders();
         }
 
         /// <summary>

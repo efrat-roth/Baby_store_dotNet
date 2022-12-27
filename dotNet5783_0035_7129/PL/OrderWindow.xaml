@@ -4,14 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-        xmlns:local1="clr-namespace:OrderDataBiding"
 
         mc:Ignorable="d"
         Title="OrderWindow" Height="640" Width="800">
-    <Window.Resources>
-        <DataTemplate x:Key="OneOrderTemplate" DataType="local1:Order">
-        </DataTemplate>
-    </Window.Resources>
+
     <Grid x:Name="MainGrid" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -41,12 +37,11 @@
                 <Label x:Name="Statusxamel" Content="The Status of the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="3"/>
                 <Label x:Name="Amountxamel" Content="The amount of items in the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="4"/>
                 <Label x:Name="Pricexamel" Content="The total price of the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5"/>
-                <Label x:Name="showID" ContentTemplate="{Binding OneOrderTemplate}" Content="{Binding IDProperty}"  HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
-                <Label x:Name="showName" ContentTemplate="{Binding Name}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2"/>
-                <Label x:Name="showStatus" ContentTemplate="{Binding Status}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3"/>
-                <Label x:Name="showAmount" ContentTemplate="{Binding AmountOfItems}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4"/>
-                <Label x:Name="showPrice" ContentTemplate="{Binding Price}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="5"/>
-
+                <Label x:Name="showID"  Content="{Binding  ID}"  HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
+                <Label x:Name="showName" Content="{Binding Name}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2"/>
+                <Label x:Name="showStatus" Content="{Binding Status}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3"/>
+                <Label x:Name="showAmount" Content="{Binding AmountOfItems}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4"/>
+                <Label x:Name="showPrice" Content="{Binding Price}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="5"/>
             </Grid>
 
         </StackPanel>

@@ -29,7 +29,7 @@
             </ComboBox>
         </Grid>
         <ListView x:Name="ProductsListView"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5 }" 
-                  Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateProduct">
+                  Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateProduct" ItemsSource="{Binding}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

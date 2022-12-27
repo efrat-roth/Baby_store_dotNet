@@ -82,7 +82,7 @@ internal class DalProduct:IProduct
     public bool Update( Product? p)
     {
         Product? product = products.FirstOrDefault(product => product?.ID == p?.ID) ?? throw new IdDoesNotExistException(); ;
-        products.Remove(p);
+        products.Remove(product);
         products.Add(p);
         return true;
     }   

@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ProductWindow" Height="450" Width="800">
+    <Grid x:Name="MainGrid">
 
-    <Grid>
         <TextBox x:Name="EnterID" HorizontalAlignment="Left" Margin="437,43,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120" PreviewKeyDown="IdIsNumber" />
         <Label x:Name="IDxamel" Content="Enter ID of product" HorizontalAlignment="Left" Margin="220,39,0,0" VerticalAlignment="Top"/>
         <Label x:Name="Namexamel" Content="Enter the name of the product" HorizontalAlignment="Left" Margin="220,99,0,0" VerticalAlignment="Top"/>
@@ -20,10 +20,11 @@
         <TextBox x:Name="EnterInStock" HorizontalAlignment="Left" Margin="437,306,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewKeyDown="InStockIsNumber"/>
         <Button x:Name="AddProductxamel" Content="Add the new product to the store"   HorizontalAlignment="Left" Margin="276,382,0,0" VerticalAlignment="Top" Click="AddProducts"/>
         <Button x:Name="UpdateProductxamel" Content="Update the product in the store"  HorizontalAlignment="Left" Margin="276,377,0,0" VerticalAlignment="Top" Click="UpdateProducts" />
-        <Label x:Name="showName" Content="" HorizontalAlignment="Left" Margin="578,99,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="showID" Content="" HorizontalAlignment="Left" Margin="427,34,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="showCategory" Content="" HorizontalAlignment="Left" Margin="583,164,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="showPrice" Content="" HorizontalAlignment="Left" Margin="588,230,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="showInStock" Content="" HorizontalAlignment="Left" Margin="583,306,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="showCurrent" Content="The current is:" HorizontalAlignment="Left" Margin="593,38,0,368" FontSize="16"/>
+        <Label x:Name="showName" Content="{Binding Name}" HorizontalAlignment="Left" Margin="578,99,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="showID" Content="{Binding ID}" HorizontalAlignment="Left" Margin="427,34,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="showCategory" Content="{Binding Category}" HorizontalAlignment="Left" Margin="583,164,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="showPrice" Content="{Binding Price}" HorizontalAlignment="Left" Margin="588,230,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="showInStock" Content="{Binding Amount}" HorizontalAlignment="Left" Margin="583,306,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
