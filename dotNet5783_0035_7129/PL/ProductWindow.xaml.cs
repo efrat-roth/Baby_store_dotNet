@@ -39,7 +39,6 @@ namespace PL
             ChooseCategory.ItemsSource=Enum.GetValues(typeof(BO.Category));
             UpdateProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
             showCurrent.Visibility = Visibility.Collapsed;
-
         }
 
         /// <summary>
