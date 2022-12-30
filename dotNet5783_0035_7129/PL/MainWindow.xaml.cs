@@ -37,7 +37,7 @@ namespace PL
         private void ShowProductList(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
         {
             Admin admin = new Admin(bl ?? throw new BO.ObgectNullableException());
-            admin.Show();
+            admin.ShowDialog();
             
         }
 
@@ -50,7 +50,7 @@ namespace PL
         private void ShowNewOrder(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
         {
             NewOrder newOrder = new NewOrder(bl ?? throw new BO.ObgectNullableException());
-            newOrder.Show();
+            newOrder.ShowDialog();
 
         }
 
@@ -63,7 +63,7 @@ namespace PL
         private void ShowTrackOrder(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
         {
             OrderTrackingWindow track = new OrderTrackingWindow(bl ?? throw new BO.ObgectNullableException());
-            track.Show();
+            track.ShowDialog();
 
         }
     }

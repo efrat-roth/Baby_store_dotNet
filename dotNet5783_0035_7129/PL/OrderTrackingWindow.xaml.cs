@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
+using OrderTrackingDataBiding;
 
 namespace PL
 {
@@ -37,17 +38,17 @@ namespace PL
                 {
                     MainGrid.DataContext=null;
                 }
-                    if (IDInput.Text.Length != 0)
-                   {
+                else
+                {
                     order = _bl?.Order.GetDetailsOrderManager(int.Parse(IDInput.Text));
-
                     OrderTrackingDataBiding.OrderTracking orderToTrack = new OrderTrackingDataBiding.OrderTracking()
                     {
                         ID = _bl?.Order.OrderTracking(order?.ID?? throw new BO.ObgectNullableException()).ID ?? throw new BO.ObgectNullableException(),
-                        Status = _bl?.Order.OrderTracking(order.ID).Status ?? throw new BO.ObgectNullableException(),
-                        ListDateStatus=new ObservableCollection<BO.NodeDateStatus?>(_bl?.Order.OrderTracking(order.ID).ListDateStatus)
-                    };
-                    statusNodes.ItemsSource = orderToTrack.ListDateStatus;
+                        Status = (BO.OrderStatus?)_bl?.Order.GetDetailsOrderManager(order.ID).Status ,
+                        ListDateStatus= new ObservableCollection<NodeDateStatus?>(_bl.Order.OrderTracking(order.ID).ListDateStatus)
+                };
+                   
+                    statusNodes.DataContext = orderToTrack.ListDateStatus;
                     MainGrid.DataContext = orderToTrack;
 
                 }
@@ -61,7 +62,7 @@ namespace PL
     private void ShowOrder(object sender, RoutedEventArgs e)
         {
             try
-            {
+            {                                   
                 OrderForList o = new OrderForList()//convert to orderForList in order to send to order window
                 {
                     ID = order?.ID??throw new BO.ObgectNullableException(),
@@ -71,9 +72,9 @@ namespace PL
                     TotalPrice = order.TotalPrice
                 };
                 OrderWindow orderWindow = new OrderWindow(_bl, o);
-                orderWindow.WantToUpdate.Visibility = Visibility.Collapsed;//cant update order
                 orderWindow.CheckUpdate.Visibility = Visibility.Collapsed;
-                orderWindow.Show();
+                orderWindow.WantToUpdate.Visibility = Visibility.Collapsed;
+                orderWindow.ShowDialog();
             }
             catch(FailedGet g) { MessageBox.Show(g.ToString()); }
         }
@@ -95,5 +96,7 @@ namespace PL
             return;
 
         }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -18,29 +19,9 @@ using Tools;
 
 
 
+
 namespace PL
-{
-    public class NotBooleanToVisibilityConverter : IValueConverter
-    {
-        //convert from source property type to target property type
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            bool boolValue = (bool)value;
-            if (boolValue)
-            {
-                return Visibility.Hidden; //Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
-        }
-        //convert from target property type to source property type
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+{      
         /// <summary>
         /// Interaction logic for OrderWindow.xaml
         /// </summary>
@@ -58,39 +39,64 @@ namespace PL
                     Price = o.TotalPrice,
                     Name = o.CustomerName,
                     AmountOfItems = o.AmountOfItems,
-                    Status = (BO.OrderStatus?)o.Status
+                    Status = (BO.OrderStatus?)o.Status,
+                    Email=_bl.Order.GetDetailsOrderManager(o.ID).CustomerEmail,
+                    Adress=_bl.Order.GetDetailsOrderManager(o.ID).CustomerAdress,
+                    OrderDate= _bl.Order.GetDetailsOrderManager(o.ID).OrderDate,
+                    ShipDate=_bl.Order.GetDetailsOrderManager(o.ID).ShipDate,
+                    DeliveryDate= _bl.Order.GetDetailsOrderManager(o.ID).DeliveryDate,                    
                 };
+                showItems.DataContext= new ObservableCollection<BO.OrderItem?>(_bl.Order.GetDetailsOrderManager(o.ID).Items);
                 order = order1;
                 OrderDetailsRows.DataContext = order;
-
             }
-        
+
 
         private void UpdateProducts(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                try
+                if (GetProduct.Text.Length == 0 && amountContent.Text.Length == 0 && updateShiped.IsChecked == false && updateDelivery.IsChecked == false)
+                {//Input integrity check in case the uset didn't input the all details
+                    MessageBox.Show("please input at least one detail to update");
+                    return;
+                }
+                if ((GetProduct.Text.Length > 0 && amountContent.Text.Length == 0) || (GetProduct.Text.Length == 0 && amountContent.Text.Length > 0))
                 {
-                    if (GetProduct.Text.Length == 0 || amountContent.Text.Length == 0)
-                    {//Input integrity check in case the uset didn't input the all details
-                        MessageBox.Show("Not all the details are typed");
-                        return;
-                    }
+                    MessageBox.Show("The amount of product is depended on ID product input, you habe to fill both, or neither");
+                    return;
+                }
+                if (GetProduct.Text.Length > 0 && amountContent.Text.Length > 0)
+                {
                     int idProduct, amount;
                     int.TryParse(GetProduct.Text, out idProduct);
                     int.TryParse(amountContent.Text, out amount);
                     _bl?.Order.UpdateOrder(order.ID, idProduct, amount);
-                    MessageBox.Show("The order has been successfuly updated");
-                    this.Close();
                 }
-                catch (CanNotDOActionException inner)
+                BO.Order order1=new BO.Order();
+                if (updateShiped.IsChecked == true)
                 {
-                    MessageBox.Show("The order is already shiped");
+                    order1 = _bl?.Order.DeliveredOrder(order.ID);
+                    
                 }
-                catch (InvalidVariableException inner)
-                {
-                    MessageBox.Show("The details are invalid, or the product is not in the order, please check again");
-                }
+                if (updateDelivery.IsChecked == true)
+                   order1= _bl?.Order.ArrivedOrder(order.ID);
+                MessageBox.Show("The order has been successfuly updated");
+                this.Close();
             }
+            catch (CanNotDOActionException inner)
+            {
+                MessageBox.Show("The order is already shiped or arrived, can't change the date and the product details");
+            }
+            catch (InvalidVariableException inner)
+            {
+                MessageBox.Show("The details are invalid, or the product is not in the order, please check again");
+            }
+            catch (FailedGet inner)
+            {
+                MessageBox.Show("The order wasn't found");
+            }
+        }
 
             /// <summary>
             ///  Check the values of ID field, in order to get valid input
@@ -129,6 +135,8 @@ namespace PL
                 return;
 
             }
-        }
+
+
+    }
     
 }

@@ -26,38 +26,37 @@ internal class Cart:ICart
     /// <exception cref="Exception"></exception>
     public BO.Cart AddProductToCart(BO.Cart finalCart, int id)
     {
-        DO.Product ProductInStore=new DO.Product();
+        DO.Product? ProductInStore=new DO.Product();
         try
         {
-            ProductInStore = _dal?.Product.PrintByID(id) ?? throw new ObgectNullableException();//variable for the product.
+            ProductInStore = _dal?.Product.PrintByID(id);//variable for the product.
         }   
         catch(Exception inner)
         {
             throw new FailedGet(inner);
         }
-        BO.OrderItem? orderItem = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id)??new OrderItem();
-        if (orderItem == null)
+        BO.OrderItem? orderItem = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id);
+        if (orderItem==null)
         {
-            DO.OrderItem oi1 = _dal.OrderItem.PrintAll().Last() ?? throw new InvalidVariableException();
-            if (ProductInStore.InStock > 0)   //If the product is not on order and is in the store.
+            DO.OrderItem oi1 = _dal?.OrderItem.PrintAll().Last() ?? throw new InvalidVariableException();
+            if (ProductInStore?.InStock > 0)   //If the product is not on order and is in the store.
             {
                 BO.OrderItem newProductInOrder = new BO.OrderItem
                 {
                     ID = oi1.ID,
-                    Price = ProductInStore.Price,
-                    TotalPrice = ProductInStore.Price,
+                    Price = ProductInStore?.Price??throw new ObgectNullableException(),
+                    TotalPrice = ProductInStore?.Price??throw new ObgectNullableException(),
                     ProductID = id,
-                    Name = ProductInStore.Name,
+                    Name = ProductInStore?.Name,
                     Amount = 1,
                 };
-
                 finalCart?.Items?.Add(newProductInOrder);
                 finalCart!.TotalPrice += newProductInOrder.Price;
                 return finalCart;
             }
         }
         finalCart?.Items?.Remove(orderItem);
-        if (ProductInStore.InStock > 0)
+        if (ProductInStore?.InStock > 0)
         {
             orderItem!.Amount++;
             orderItem.TotalPrice += orderItem.TotalPrice;
@@ -83,13 +82,13 @@ internal class Cart:ICart
     /// <exception cref="Exception"></exception>
     public BO.Cart UpdateProductAmount(BO.Cart finalCart, int id, int newAmount)
     {
-        DO.Product ProductInStore;
-        try { ProductInStore = _dal?.Product.PrintByID(id)?? throw new ObgectNullableException(); } //variable for the product.
+        DO.Product? ProductInStore;
+        try { ProductInStore = _dal?.Product.PrintByID(id); } //Variable for the product.
         catch(Exception inner) { throw new FailedGet(inner); }
         OrderItem? orderItemOfProduct = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id);
-        if (orderItemOfProduct?.Amount < newAmount)   //if the new amount is bigger.
+        if (orderItemOfProduct?.Amount < newAmount)   //If the new amount is bigger.
         {
-            if (ProductInStore.InStock >= (newAmount - orderItemOfProduct.Amount))  //if there are enough products in stock                                                                       //it will change the amount of products                                                                        //in the cart.
+            if (ProductInStore?.InStock >= (newAmount - orderItemOfProduct.Amount))  //If there are enough products in stock                                                                       //it will change the amount of products                                                                        //in the cart.
             {
                 orderItemOfProduct.TotalPrice += orderItemOfProduct.Price * (newAmount - orderItemOfProduct.Amount);
                 finalCart!.TotalPrice += orderItemOfProduct.Price * (newAmount - orderItemOfProduct.Amount);
@@ -99,14 +98,14 @@ internal class Cart:ICart
             throw new CanNotDOActionException();
         }
         else
-        if (orderItemOfProduct?.Amount > newAmount)//it will change the amount of products in the cart.
+        if (orderItemOfProduct?.Amount > newAmount)//It will change the amount of products in the cart.
         {
             orderItemOfProduct.TotalPrice -= orderItemOfProduct.Price * (orderItemOfProduct.Amount - newAmount);
             finalCart!.TotalPrice -= orderItemOfProduct.Price * (orderItemOfProduct.Amount - newAmount);
             orderItemOfProduct.Amount = newAmount;
             return finalCart;
         }
-        else if (newAmount == 0)//it will change the amount of products 
+        else if (newAmount == 0)//It will change the amount of products 
                                 //in the cart.
         {
             finalCart!.TotalPrice -= orderItemOfProduct!.TotalPrice;

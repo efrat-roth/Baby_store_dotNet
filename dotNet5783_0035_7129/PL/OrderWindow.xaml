@@ -3,67 +3,96 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:local="clr-namespace:ValueConverterDemo"
         mc:Ignorable="d"
         Title="OrderWindow" Height="640" Width="800">
+    <Window.Resources>
+        <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter"/>
+    </Window.Resources>
 
     <Grid x:Name="MainGrid" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0"  >
 
-            <Grid x:Name="OrderDetailsRows" Height="231" >
+            <Grid x:Name="OrderDetailsRows" Height="439" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="Title" Content="The details of " HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" FontSize="24" />
-                <Label x:Name="Title2" Content="order " HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" FontSize="24" />
-                <Label x:Name="IDxamel" Content="The ID of order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1" />
-                <Label x:Name="Namexamel" Content="The name of the customer" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="2" />
-                <Label x:Name="Statusxamel" Content="The Status of the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="3"/>
-                <Label x:Name="Amountxamel" Content="The amount of items in the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="4"/>
-                <Label x:Name="Pricexamel" Content="The total price of the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5"/>
+                <Label x:Name="Title" Content="The details of " HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" FontSize="24" Margin="0,0,0,17" Grid.RowSpan="2" />
+                <Label x:Name="Title2" Content="order " HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" FontSize="24" Margin="0,0,0,17" Grid.RowSpan="2" />
+                <Label x:Name="IDxamel" Content="The ID of order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" />
+                <Label x:Name="Namexamel" Content="The name of the customer" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" />
+                <Label x:Name="Emailxamel" Content="The email of the customer" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3" />
+                <Label x:Name="Adressxamel" Content="The adress of the customer" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4" />
+                <Label x:Name="OrderDatexamel" Content="The order date of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="5" />
+                <Label x:Name="ShipDatexamel" Content="The ship date of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="6" />
+                <Label x:Name="DeliveryDatexamel" Content="The delivery date of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="7" />
+                <Label x:Name="Statusxamel" Content="The Status of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="8"/>
+                <Label x:Name="Amountxamel" Content="The amount of items in the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="9"/>
+                <Label x:Name="Pricexamel" Content="The total price of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="10"/>
+                <Label x:Name="Itemsxamel" Content="The products of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="11"/>
                 <Label x:Name="showID"  Content="{Binding  ID}"  HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
                 <Label x:Name="showName" Content="{Binding Name}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2"/>
-                <Label x:Name="showStatus" Content="{Binding Status}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3"/>
-                <Label x:Name="showAmount" Content="{Binding AmountOfItems}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4"/>
-                <Label x:Name="showPrice" Content="{Binding Price}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="5"/>
-                <Label x:Name="CheckUpdate"  Content="Put v in the sqare if you want to update the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="6"/>
-                <CheckBox x:Name="WantToUpdate" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1"/>
+                <Label x:Name="showMail" Content="{Binding Mail}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3"/>
+                <Label x:Name="showAdress" Content="{Binding Adress}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4"/>
+                <Label x:Name="showOrderDate" Content="{Binding OrderDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="5"/>
+                <Label x:Name="showShipDate" Content="{Binding ShipDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="6"/>
+                <Label x:Name="showDeliveryDate" Content="{Binding DeliveryDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="7"/>
+                <Label x:Name="showStatus" Content="{Binding Status}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="8"/>
+                <Label x:Name="showAmount" Content="{Binding AmountOfItems}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="9"/>
+                <Label x:Name="showPrice" Content="{Binding Price}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="10"/>
+                <ListView x:Name="showItems" ItemsSource="{Binding }" Grid.Column="1" Grid.Row="11"   d:ItemsSource="{d:SampleData ItemCount=1 }"/>
+                <Label x:Name="CheckUpdate"  Content="Put v in the sqare if you want to update the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="12"/>
+                <CheckBox x:Name="WantToUpdate" HorizontalAlignment="Center" Grid.Row="12" Grid.Column="1" IsChecked="False"/>
             </Grid>
 
         </StackPanel>
-        <StackPanel Grid.Row="1" >
+        <StackPanel Grid.Row="1" Visibility="{Binding Path= IsChecked, ElementName=WantToUpdate,Converter={StaticResource notBooleanToVisibilityConverter}}" >
             <Grid x:Name="UpdateGrid" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="379*"/>
-                    <ColumnDefinition Width="421*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
 
                 </Grid.RowDefinitions>
-                <Label x:Name="ChooseProduct" Content="Enter the id of product to update" HorizontalAlignment="Center" Grid.Row="0" Margin="0,0,0,26" Width="184" Grid.Column="0"/>
-                <TextBox x:Name="GetProduct" Grid.Column="1" Grid.Row="0" PreviewKeyDown="IdIsNumber" Margin="0,0,0,26"/>
-                <Label x:Name="newAmount" Content="Enter the new amount to update" HorizontalAlignment="Center" Margin="0,14,0,20"  Width="184" Grid.Row="1" Grid.Column="0"/>
-                <TextBox x:Name="amountContent" Grid.Column="1" PreviewKeyDown="amountIsNumber" Margin="0,14,0,20" Grid.Row="1" />
-                <Button x:Name="UpdateProductxamel" Content="Update the product in the store"  HorizontalAlignment="Left" Click="UpdateProducts" Grid.Column="1" Grid.Row="2"  Width="172"/>
+                <Label x:Name="ChooseProduct"  Content="Enter the id of product to update" HorizontalAlignment="Center" Grid.Row="0"  Grid.Column="0"/>
+                <TextBox x:Name="GetProduct"   Grid.Column="1" Grid.Row="0" PreviewKeyDown="IdIsNumber" HorizontalAlignment="Left" Width="108" />
+                <Label x:Name="newAmount"  Content="Enter the new amount to update" HorizontalAlignment="Center"   Grid.Row="1" Grid.Column="0"/>
+                <Label x:Name="shiped"  Content="Enter v to update order as shiped" HorizontalAlignment="Center"   Grid.Row="2" Grid.Column="0"/>
+                <Label x:Name="delivered"  Content="Enter v to update order as delivered" HorizontalAlignment="Center"   Grid.Row="3" Grid.Column="0"/>
+
+                <TextBox x:Name="amountContent"  Grid.Column="1" PreviewKeyDown="amountIsNumber"  Grid.Row="1" HorizontalAlignment="Left"  Width="108"/>
+                <CheckBox x:Name="updateShiped"  Grid.Column="1"   Grid.Row="2" HorizontalAlignment="Left"  Width="108"/>
+                <CheckBox x:Name="updateDelivery"  Grid.Column="1"   Grid.Row="3" HorizontalAlignment="Left"  Width="108"/>
+
+                <Button x:Name="UpdateProductxamel"  Content="Update the order"  HorizontalAlignment="Left" Click="UpdateProducts" Grid.Column="1" Grid.Row="4"  Width="172"/>
             </Grid>
         </StackPanel>
     </Grid>

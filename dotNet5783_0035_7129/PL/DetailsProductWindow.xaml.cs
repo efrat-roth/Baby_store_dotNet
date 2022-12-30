@@ -19,9 +19,9 @@ namespace PL
     /// </summary>
     public partial class DetailsProductWindow : Window
     {
-        Product Product = new Product();
+        ProductDataBiding.ProductItem Product = new ProductDataBiding.ProductItem();
         BlApi.IBl? _bl;
-        public DetailsProductWindow(BlApi.IBl? bl, Product p)
+        public DetailsProductWindow(BlApi.IBl? bl, ProductDataBiding.ProductItem p)
         {
             InitializeComponent();
             _bl = bl;

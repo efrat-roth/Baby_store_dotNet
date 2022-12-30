@@ -30,11 +30,10 @@ namespace PL
         {
             InitializeComponent();
             _bl = bl1;
-            ObservableCollection<ProductForList> ProductsList = //convert to observel in order to update the details
-            new ObservableCollection<ProductForList>(_bl.Product.GetListOfProduct());
-            ProductsListView.ItemsSource = ProductsList;
+            ObservableCollection<ProductForList?> ProductsList = //convert to observel in order to update the details
+            new ObservableCollection<ProductForList?>(_bl.Product.GetListOfProduct());
             DataContext = ProductsList;//Resets the list by products in the store
-            CategorySelector.ItemsSource =Enum.GetValues(typeof(Category));//Input the only possible categories
+            CategorySelector.DataContext =Enum.GetValues(typeof(Category));//Input the only possible categories
             
         }
         /// <summary>
@@ -60,7 +59,7 @@ namespace PL
         private void AddProduct(object sender, RoutedEventArgs e)
         {
             ProductWindow p = new ProductWindow(_bl ?? throw new BO.ObgectNullableException());
-            p.Show();
+            p.ShowDialog();
         }
 
         /// <summary>
@@ -72,8 +71,10 @@ namespace PL
         {
             BO.ProductForList productForList= (BO.ProductForList)ProductsListView.SelectedItem;        
             ProductWindow updateProduct =new ProductWindow(_bl ?? throw new BO.ObgectNullableException(), productForList);
-            updateProduct.Show();
+            updateProduct.ShowDialog();
 
         }
-    }
+
+      
+        }
 }

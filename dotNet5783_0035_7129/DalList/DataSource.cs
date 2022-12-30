@@ -129,7 +129,7 @@ namespace Dal
                 order.CustomerName = firstNames[rnd.Next(0, 10)] + " " + lastNames[rnd.Next(0, 10)];
                 order.CustomerEmail = order.CustomerName.Replace(" ", String.Empty) + "@gmail.com";
                 order.CustomerAdress = City[rnd.Next(0, 10)] + " " + St[rnd.Next(0, 10)] + " " + rnd.Next(1, 150);
-                order.OrderDate = DateTime.Now.AddMinutes(rnd.Next(-100, -10));
+                order.OrderDate = DateTime.Today.AddMinutes(rnd.Next(-100, -10));
                 if (rnd.Next(0, 100) > 20)
                 {
                     order.DeliveredDate = order.OrderDate?.AddMinutes(rnd.Next(10, 100));

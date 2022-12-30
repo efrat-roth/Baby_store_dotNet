@@ -3,10 +3,103 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:local="clr-namespace:ValueConverterDemo"
         mc:Ignorable="d"
         Title="NewOrder" Height="450" Width="800">
-    <Grid>
-        
+    <Window.Resources>
+        <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter"/>
+    </Window.Resources>
+
+    <Grid Name="MainGrid" VerticalAlignment="Stretch" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid"  Grid.Row="0"
+        VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <Label Content="Category:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16"  />
+            <ComboBox x:Name="CategorySelector" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="CategroyFilter" ItemsSource="{Binding}">
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFF0F0F0"/>
+                        <GradientStop Color="#FFF395D6" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListView x:Name="ProductsListView"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5 }"  Grid.Column="0" 
+                   Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="DetailsOfProduct" ItemsSource="{Binding}" 
+                      HorizontalContentAlignment="Stretch" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Grid x:Name="ProductsByCategory" Grid.Row="1" Grid.Column="0" Background="#FFFBE6F4" 
+                   Visibility="{Binding Path= IsChecked, ElementName=CategoryCheck,Converter={StaticResource notBooleanToVisibilityConverter}}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Clothes:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
+                <ListView x:Name="ClothesBy" Background="#FFFBE6F4" Grid.Row="1" Grid.Column="0" MouseDoubleClick="DetailsOfProduct" ItemsSource="{Binding}"/>
+                <Label Content="Bottles:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
+                <ListView x:Name="BottlesBy" Background="#FFFBE6F4" Grid.Row="3" Grid.Column="0" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding}"/>
+                <Label Content="Toys" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"/>
+                <ListView x:Name="ToysBy" Background="#FFFBE6F4" Grid.Row="5" Grid.Column="0" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding}"/>
+                <Label Content="Soks:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
+                <ListView x:Name="SocksBy" Background="#FFFBE6F4" Grid.Row="1" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding}"/>
+                <Label Content="Accesories:" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"/>
+                <ListView x:Name="AcceoriesBy" Background="#FFFBE6F4" Grid.Row="3" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding}"/>
+                <Label Content="Baby Carriages:" Grid.Row="4" Grid.Column="1"/>
+                <ListView x:Name="BabyCarrigesBy" Background="#FFFBE6F4" Grid.Row="5" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding}"/>
+            </Grid>
+            <Grid Background="#FFFBE6F4" Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Press twice on product to&#xD;&#xA; see its details" FontSize="12" Background="White" Margin="0,10,0,34" Grid.RowSpan="3"  />
+                <Label x:Name="id" Content="Enter an ID of product&#xD;&#xA;to add to the cart"  Grid.Row="3"   Background="White"/>
+                <TextBox x:Name="idD"   Grid.Row="4"   Background="White" PreviewKeyDown="IdIsNumber"/>
+                <Label x:Name="amount" Content="Enter the amount of&#xD;&#xA;product to add to the cart"  Grid.Row="6"   Background="White"/>
+                <TextBox x:Name="amountD"  Grid.Row="7"   Background="White" PreviewKeyDown="AmountIsNumber"/>
+                <Button x:Name="btnAdd" Content="Add product to the cart"  Grid.Row="9"  Click="AddProduct" Background="White"/>
+                <Button x:Name="Cart" Content="Go to the cart"  Grid.Row="11" Click="ShowCart" Background="White" />
+                <Label x:Name="CategoryShow" Content="Show the products by &#xD;&#xA;category"  Grid.Row="13"  Background="White" />
+                <CheckBox x:Name="CategoryCheck" Grid.Row="14"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

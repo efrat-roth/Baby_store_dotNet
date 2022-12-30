@@ -29,13 +29,13 @@ namespace PL
         private void ShowListProducts(object sender, RoutedEventArgs e)
         {
             ProductListWindow productList=new ProductListWindow(_bl??throw new BO.ObgectNullableException());
-            productList.Show();
+            productList.ShowDialog();
         }
 
         private void ShowListOrders(object sender, RoutedEventArgs e)
         {
             OrderListWindow orderList = new OrderListWindow(_bl);
-            orderList.Show();
+            orderList.ShowDialog();
         }
     }
 }

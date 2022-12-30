@@ -55,7 +55,7 @@ namespace PL
             AddProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
             ///The details of the current product:
             EnterID.Visibility = Visibility.Collapsed;
-            OrderDataBiding.Product pToPrint = new OrderDataBiding.Product()
+            ProductDataBiding.Product pToPrint = new ProductDataBiding.Product()
             {
                 ID = p.ID,
                 Price = p.Price,

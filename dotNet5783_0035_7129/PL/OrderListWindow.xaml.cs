@@ -27,15 +27,14 @@ namespace PL
         {
             InitializeComponent();
             _bl = bl;
-            ObservableCollection<OrderForList> ordersList = new ObservableCollection<OrderForList>(_bl!.Order.GetListOfOrders());//convert to observel in order to update the details 
-            OrdersListView.ItemsSource = ordersList;
-            DataContext= ordersList;
+            ObservableCollection<OrderForList?> ordersList = new ObservableCollection<OrderForList?>(_bl!.Order.GetListOfOrders());//convert to observel in order to update the details 
+            DataContext = ordersList;
         }
 
         private void UpdateOrder(object sender, MouseButtonEventArgs e)
         {
             OrderWindow orderWindow = new OrderWindow(_bl??throw new BO.ObgectNullableException(), (BO.OrderForList)OrdersListView.SelectedItem);
-            orderWindow.Show();
+            orderWindow.ShowDialog();
         }
 
         /// <summary>
@@ -47,5 +46,7 @@ namespace PL
         {
             this.Close();
         }
+
+        
     }
 }
