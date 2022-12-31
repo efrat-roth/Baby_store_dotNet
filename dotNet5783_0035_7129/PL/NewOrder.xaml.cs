@@ -70,12 +70,18 @@ namespace PL
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AddProduct(object sender, RoutedEventArgs e)
-        {
+        { 
+            if(idD.Text.Length==0||amountD.Text.Length==0)
+            {
+                MessageBox.Show("You have to enter the details first");
+                return;
+            }
             try
             {
                 cart=_bl?.Cart.AddProductToCart(cart, int.Parse(idD.Text));
                 cart=_bl?.Cart.UpdateProductAmount(cart, int.Parse(idD.Text), int.Parse(amountD.Text));
-                
+                MessageBox.Show("The product is added to the cart");
+
             }
             catch(FailedGet m)
             {
@@ -134,10 +140,7 @@ namespace PL
             c.ShowDialog();
         }
 
-        private void ShowByCategory(object sender, RoutedEventArgs e)
-        {
 
-        }
         private void IdIsNumber(object sender, KeyEventArgs e)
         {
             TextBox? text = sender as TextBox;

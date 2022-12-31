@@ -36,7 +36,7 @@ namespace PL
         {
             InitializeComponent();
             _bl = bl1;
-            ChooseCategory.ItemsSource=Enum.GetValues(typeof(BO.Category));
+            ChooseCategory.DataContext = Enum.GetValues(typeof(BO.Category));
             UpdateProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
             showCurrent.Visibility = Visibility.Collapsed;
         }
@@ -50,7 +50,7 @@ namespace PL
         {
             InitializeComponent();
             _bl = bl1;
-            ChooseCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+            ChooseCategory.DataContext = Enum.GetValues(typeof(BO.Category));
             product = p;
             AddProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
             ///The details of the current product:

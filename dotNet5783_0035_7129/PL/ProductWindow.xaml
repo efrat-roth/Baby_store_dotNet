@@ -13,7 +13,7 @@
         <Label x:Name="Namexamel" Content="Enter the name of the product" HorizontalAlignment="Left" Margin="220,99,0,0" VerticalAlignment="Top"/>
         <Label x:Name="Categoryxamel" Content="choose the category of product" HorizontalAlignment="Left" Margin="220,169,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="EnterName" HorizontalAlignment="Left" Margin="437,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <ComboBox x:Name="ChooseCategory" HorizontalAlignment="Left" Margin="437,166,0,0" VerticalAlignment="Top" Width="120" Text="Choose category of product "/>
+        <ComboBox x:Name="ChooseCategory" HorizontalAlignment="Left" Margin="437,166,0,0" ItemsSource="{Binding}" VerticalAlignment="Top" Width="120" Text="Choose category of product "/>
         <Label x:Name="Pricexamel" Content="Enter the price of product" HorizontalAlignment="Left" Margin="220,238,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="EnterPrice" HorizontalAlignment="Left" Margin="437,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="PriceIsNumber"/>
         <Label x:Name="InStockxamel" Content="Enter the amount of product in stock" HorizontalAlignment="Left" Margin="220,306,0,0" VerticalAlignment="Top"/>

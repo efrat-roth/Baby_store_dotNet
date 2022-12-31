@@ -20,7 +20,7 @@
 
             <Grid x:Name="OrderDetailsRows" Height="439" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -38,8 +38,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="Title" Content="The details of " HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" FontSize="24" Margin="0,0,0,17" Grid.RowSpan="2" />
-                <Label x:Name="Title2" Content="order " HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" FontSize="24" Margin="0,0,0,17" Grid.RowSpan="2" />
+                <Label x:Name="Title" Content="The details of " HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" FontSize="24"  />
+                <Label x:Name="Title2" Content="order " HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" FontSize="24"  />
                 <Label x:Name="IDxamel" Content="The ID of order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" />
                 <Label x:Name="Namexamel" Content="The name of the customer" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" />
                 <Label x:Name="Emailxamel" Content="The email of the customer" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3" />
@@ -61,7 +61,13 @@
                 <Label x:Name="showStatus" Content="{Binding Status}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="8"/>
                 <Label x:Name="showAmount" Content="{Binding AmountOfItems}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="9"/>
                 <Label x:Name="showPrice" Content="{Binding Price}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="10"/>
-                <ListView x:Name="showItems" ItemsSource="{Binding }" Grid.Column="1" Grid.Row="11"   d:ItemsSource="{d:SampleData ItemCount=1 }"/>
+                <ListView x:Name="showItems" ItemsSource="{Binding }" Grid.Column="1" Grid.Row="11"   d:ItemsSource="{d:SampleData ItemCount=5 }">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <Label x:Name="CheckUpdate"  Content="Put v in the sqare if you want to update the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="12"/>
                 <CheckBox x:Name="WantToUpdate" HorizontalAlignment="Center" Grid.Row="12" Grid.Column="1" IsChecked="False"/>
             </Grid>
