@@ -88,7 +88,7 @@ internal class Product : IProduct
                 Price = p.Price
             };
             BO.OrderItem? oi = cart?.Items?.FirstOrDefault(p => p?.ProductID == product.ID);//get the item in the cart that represent the wanted product
-            if(oi != null)//ewswt the amount of the product in the cart
+            if(oi != null)//update the amount of the product in the cart
             {
                 product.AmountInCart = oi.Amount;
             }

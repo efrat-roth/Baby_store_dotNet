@@ -69,7 +69,7 @@ namespace PL
         /// <param name="e"></param>
         private void UpdateProduct(object sender, MouseButtonEventArgs e)
         {
-            BO.ProductForList productForList= (BO.ProductForList)ProductsListView.SelectedItem;        
+            BO.ProductForList? productForList= (BO.ProductForList?)ProductsListView.SelectedItem;        
             ProductWindow updateProduct =new ProductWindow(_bl ?? throw new BO.ObgectNullableException(), productForList);
             updateProduct.ShowDialog();
 

@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="CartWindow" Height="450" Width="800">
     <Grid>
-        
+        <Label Name="CustomerName" Content="{Binding}"/>
+        <Label Name="CustomerEmail" Content="{Binding}"/>
+        <Label Name="CustomerAdress" Content="{Binding}"/>
+        <Label Name="TotalPrice" Content="{Binding}"/>
+        <ListView Name="productsInCart" ItemsSource="{Binding}"/>
     </Grid>
 </Window>

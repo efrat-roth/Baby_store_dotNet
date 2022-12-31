@@ -27,7 +27,7 @@ namespace PL
     public partial class ProductWindow : Window
     {
         BlApi.IBl? _bl ;
-        BO.ProductForList  product=new BO.ProductForList();
+        BO.ProductForList product=new BO.ProductForList();
         /// <summary>
         /// Constractor for adding product
         /// </summary>

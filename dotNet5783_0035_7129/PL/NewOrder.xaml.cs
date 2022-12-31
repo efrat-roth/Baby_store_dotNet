@@ -22,7 +22,7 @@ namespace PL
     public partial class NewOrder : Window
     {
         BlApi.IBl? _bl;
-        Cart cart=new Cart();  
+        Cart? cart=new Cart();  
         public NewOrder(BlApi.IBl bl1)
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace PL
               //convert to observel in order to update the details
             DataContext = ProductsList;//Resets the list by products in the store
             ObservableCollection<IGrouping<BO.Category?, ProductItem>> ByCategory =//divide to groups for categories view
-                new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>(collection: from p in ProductsList
+                new ObservableCollection<IGrouping<BO.Category?, ProductItem>>(collection: from p in ProductsList
                                                                                group p by p.Category into g
                                                                                select g);
             ClothesBy.DataContext = new ObservableCollection<ProductItem?>(from g in ByCategory
@@ -78,20 +78,20 @@ namespace PL
             }
             try
             {
-                cart=_bl?.Cart.AddProductToCart(cart, int.Parse(idD.Text));
-                cart=_bl?.Cart.UpdateProductAmount(cart, int.Parse(idD.Text), int.Parse(amountD.Text));
+                cart=_bl?.Cart.AddProductToCart(cart!, int.Parse(idD.Text));
+                cart=_bl?.Cart.UpdateProductAmount(cart!, int.Parse(idD.Text), int.Parse(amountD.Text));
                 MessageBox.Show("The product is added to the cart");
 
             }
-            catch(FailedGet m)
+            catch(FailedGet )
             {
                 MessageBox.Show("The product is not in the store, enter the ID again");
             }
-            catch(InvalidVariableException m)
+            catch(InvalidVariableException )
             {
                 MessageBox.Show("The amount is bigger than the amount in stock");
             }
-            catch (CanNotDOActionException m)
+            catch (CanNotDOActionException )
             {
                 MessageBox.Show("The amount is bigger than the amount in stock");
             }
@@ -99,8 +99,8 @@ namespace PL
 
         private void CategroyFilter(object sender, SelectionChangedEventArgs e)
         {
-            IEnumerable<ProductItem?> productItems = from p in _bl.Product.GetListOfProduct()
-                                                     let productItem = _bl.Product.GetProductCustomer(p.ID, cart)
+            IEnumerable<ProductItem?> productItems = from p in _bl?.Product.GetListOfProduct()
+                                                     let productItem = _bl?.Product.GetProductCustomer(p.ID, cart)
                                                      select productItem;
             if ((PL.Category)CategorySelector.SelectedItem == Category.AllProducts)//if the selected item is all products
             {
@@ -111,9 +111,9 @@ namespace PL
             }
             ObservableCollection<ProductItem?> ProductsList = //convert to observel in order to update the details
             new ObservableCollection<ProductItem?>
-            ((from p in _bl.Product.GetListOfProduct()
+            ((from p in _bl?.Product.GetListOfProduct()
                        where p.Category == (BO.Category)CategorySelector.SelectedItem
-                       let productItem = _bl.Product.GetProductCustomer(p.ID, cart)
+                       let productItem = _bl?.Product.GetProductCustomer(p.ID, cart)
                        select productItem));
             DataContext = ProductsList;
         }
