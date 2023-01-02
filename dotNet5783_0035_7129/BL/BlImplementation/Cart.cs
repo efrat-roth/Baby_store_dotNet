@@ -165,7 +165,7 @@ internal class Cart:ICart
             CustomerAdress = adress11,   //creates new order.
             CustomerName = name11,
             CustomerEmail = emailAdress,
-            OrderDate = DateTime.Now,
+            OrderDate = DateTime.Today,
             DeliveredDate = null,
             ArrivedDate = null,
         };

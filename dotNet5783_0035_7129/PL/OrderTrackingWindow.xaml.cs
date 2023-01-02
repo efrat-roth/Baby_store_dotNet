@@ -28,7 +28,7 @@ namespace PL
         public OrderTrackingWindow(BlApi.IBl? bl , OrderTrackingDataBiding.OrderTracking o)
         {
             _bl = bl;
-            order = _bl.Order.GetDetailsOrderManager(o.ID);
+            order = _bl?.Order.GetDetailsOrderManager(o.ID);
             orderToTrack = o;            
             InitializeComponent();
         }  

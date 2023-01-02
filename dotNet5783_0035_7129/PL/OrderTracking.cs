@@ -26,7 +26,7 @@ namespace OrderTrackingDataBiding
         /// The status of the order.
         /// </summary>
         public static readonly DependencyProperty StatusProperty =
-                     DependencyProperty.Register(nameof(Status), typeof(BO.OrderStatus), typeof(OrderTracking));
+                     DependencyProperty.Register(nameof(Status), typeof(BO.OrderStatus?), typeof(OrderTracking));
         public BO.OrderStatus? Status { get => (BO.OrderStatus)GetValue(StatusProperty); set => SetValue(StatusProperty, value); }
 
 
