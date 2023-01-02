@@ -126,7 +126,7 @@ internal class Cart:ICart
     /// <param name="name11"></param>customer name
     /// <param name="emailAdress"></param>customer email adress
     /// <exception cref="Exception"></exception>
-    public DO.Order MakeOrder(BO.Cart finalCart, string adress11, string name11, string emailAdress)
+    public BO.Order MakeOrder(BO.Cart finalCart, string adress11, string name11, string emailAdress)
     {
         if (finalCart.Items?.Count() == 0)
         {
@@ -145,7 +145,7 @@ internal class Cart:ICart
         if (!isExistShtrudel)//if the email hasn't @-throw exception
             throw new BO.InvalidVariableException();
 
-        OrderItem? WrongAmount = finalCart?.Items?.Find(o => o?.Amount < 0);//checks if the amount is positive
+        OrderItem? WrongAmount = finalCart?.Items?.Find(o => o?.Amount <= 0);//checks if the amount is positive
         if (WrongAmount != null)
             throw new InvalidVariableException();
 
@@ -154,7 +154,7 @@ internal class Cart:ICart
         if (!checkExistProduct?.Any() ?? throw new InvalidVariableException()) //if there is product that is not in the store
             throw new InvalidVariableException();
 
-        if (checkExistProduct!.Any(oi => ProductInStore.Any(p => p?.ID == oi?.ProductID)))//checks if there are products in stock.
+        if (!checkExistProduct!.Any(oi => ProductInStore.Any(p => p?.ID == oi?.ProductID)))//checks if there are products in stock.
             throw new InvalidVariableException();
 
         // if everything is correct ***
@@ -201,7 +201,20 @@ internal class Cart:ICart
         catch (Exception inner) { throw new FailedGet(inner); }
         try{productsInCart.ToList().ForEach((p => _dal.Product.Update(p))); }//Update the new amount of each product in the cart, in the database. 
         catch (Exception inner) { throw new FailedUpdate(inner); }
-        return finalOrder;
+        BO.Order oToReturn = new BO.Order()
+        {
+            ID = finalOrder.ID,
+            CustomerAdress = finalOrder.CustomerAdress,
+            DeliveryDate = finalOrder.ArrivedDate,
+            CustomerEmail = finalOrder.CustomerEmail,
+            CustomerName = finalOrder.CustomerName,
+            Items = finalCart.Items,
+            OrderDate = finalOrder.OrderDate,
+            ShipDate = finalOrder.DeliveredDate,
+            Status = BO.OrderStatus.ConfirmedOrder,
+            TotalPrice = finalCart.TotalPrice
+        };
+        return oToReturn;
     }
         
         

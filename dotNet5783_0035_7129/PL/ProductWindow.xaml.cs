@@ -25,7 +25,7 @@ namespace PL
         BlApi.IBl? _bl ;
         public ProductDataBiding.Product? product { get; set; }
         private Action<BO.ProductForList?> _action { get; set; }
-        public Array _Category { get; set; } = Enum.GetValues(typeof(Category));
+        public Array _Category { get; set; } = Enum.GetValues(typeof(BO.Category));
         /// <summary>
         /// Constractor for adding product
         /// </summary>

@@ -33,5 +33,5 @@ public interface ICart
     /// <param name="name11"></param>customer name
     /// <param name="emailAdress"></param>customer email adress
     /// <exception cref="Exception"></exception>
-    public DO.Order MakeOrder(BO.Cart finalCart, string adress11, string name11, string emailAdress);
+    public BO.Order MakeOrder(BO.Cart finalCart, string adress11, string name11, string emailAdress);
 }

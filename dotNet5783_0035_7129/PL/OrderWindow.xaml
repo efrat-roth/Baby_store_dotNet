@@ -3,16 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ValueConverterDemo"
+        xmlns:con="clr-namespace:ValueConverterDemo"
         mc:Ignorable="d"
         Title="OrderWindow" Height="640" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
 
     <Window.Resources>
-        <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter"/>
-        <local:NotNullToVisibilityConverter x:Key="notNullToVisibilityConverter"/>
-        <local:NullToAndDoNotDidYetVisibilityConverter x:Key="nullToAndDoNotDidYetVisibilityConverter"/>
-        <local:NotNullAndDoneYetToVisibilityConverter x:Key="notNullAndDoneYetToVisibilityConverter"/>
+        <con:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter"/>
+        <con:NotNullToVisibilityConverter x:Key="notNullToVisibilityConverter"/>
+        <con:NullToAndDoNotDidYetVisibilityConverter x:Key="nullToAndDoNotDidYetVisibilityConverter"/>
+        <con:NotNullAndDoneYetToVisibilityConverter x:Key="notNullAndDoneYetToVisibilityConverter"/>
     </Window.Resources>
 
     <Grid x:Name="MainGrid" >
