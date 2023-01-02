@@ -14,10 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 
-
-
-
-
 namespace PL
 {
     
@@ -27,18 +23,19 @@ namespace PL
     public partial class ProductWindow : Window
     {
         BlApi.IBl? _bl ;
-        BO.ProductForList product=new BO.ProductForList();
+        public ProductDataBiding.Product? product { get; set; }
+        private Action<BO.ProductForList?> _action { get; set; }
+        public Array _Category { get; set; } = Enum.GetValues(typeof(Category));
         /// <summary>
         /// Constractor for adding product
         /// </summary>
         /// <param name="bl1"></param>The contract with the logic layer
-        public ProductWindow(BlApi.IBl bl1)
+        public ProductWindow(Action<BO.ProductForList?> action,BlApi.IBl bl1)
         {
-            InitializeComponent();
             _bl = bl1;
-            ChooseCategory.DataContext = Enum.GetValues(typeof(BO.Category));
-            UpdateProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
-            showCurrent.Visibility = Visibility.Collapsed;
+            _action = action;
+            InitializeComponent();
+            
         }
 
         /// <summary>
@@ -46,15 +43,11 @@ namespace PL
         /// </summary>
         /// <param name="bl1"></param>The contract with the logic layer
         /// <param name="p"></param>The product to update
-        public ProductWindow(BlApi.IBl bl1 ,BO.ProductForList p)
+        public ProductWindow(Action<BO.ProductForList?> action,BlApi.IBl bl1 ,BO.ProductForList p)
         {
-            InitializeComponent();
             _bl = bl1;
-            ChooseCategory.DataContext = Enum.GetValues(typeof(BO.Category));
-            product = p;
-            AddProductxamel.Visibility = Visibility.Collapsed;//Hides the add button
+            _action = action;
             ///The details of the current product:
-            EnterID.Visibility = Visibility.Collapsed;
             ProductDataBiding.Product pToPrint = new ProductDataBiding.Product()
             {
                 ID = p.ID,
@@ -63,7 +56,9 @@ namespace PL
                 Amount = _bl.Product.GetProductManager(p.ID).InStock,
                 Category = p.Category,
             };
-            MainGrid.DataContext=pToPrint;//resets the value to be the product
+            product = pToPrint;
+            InitializeComponent();
+     
             
         }
 
@@ -91,6 +86,7 @@ namespace PL
                     InStock = int.Parse(EnterInStock.Text),
                 };
                 _bl?.Product.AddProduct(p);//Add the product
+                _action(_bl?.Product.GetProductByCondition(pr => pr.ID == p?.ID).FirstOrDefault());
                  MessageBox.Show("The product has been successfully added");
                 this.Close();
             }
@@ -129,7 +125,7 @@ namespace PL
 
             try
             {
-                BO.Product p= new BO.Product//The updating product
+                BO.Product? p= new BO.Product//The updating product
                 {
                     ID = product.ID,
                     Name = product.Name,
@@ -138,6 +134,7 @@ namespace PL
                     InStock = inStock1,
                 };
                 _bl.Product.UpdatingProductDetails(p);//Update the product
+                _action(_bl?.Product.GetProductByCondition(item => item.ID == p.ID).FirstOrDefault());
                 messageBoxResult = MessageBox.Show("The product has been successfuly updated"); 
                 this.Close();
             }

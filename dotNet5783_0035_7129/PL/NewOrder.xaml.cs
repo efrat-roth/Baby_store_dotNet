@@ -22,47 +22,26 @@ namespace PL
     public partial class NewOrder : Window
     {
         BlApi.IBl? _bl;
-        Cart? cart=new Cart();  
+        Cart? cart { get; set; }
+        public Array _Category { get; set; } = Enum.GetValues(typeof(Category));
+        public ObservableCollection<ProductItem?> ProductsLists { get; set; }
+        private IEnumerable<ProductItem?> productsLists { get; }
+        public ObservableCollection<IGrouping<BO.Category?, ProductItem?>> _ByCategory { get; set; }
         public NewOrder(BlApi.IBl bl1)
         {
-            InitializeComponent();
             _bl = bl1;
-            CategorySelector.DataContext = Enum.GetValues(typeof(Category));
-            ObservableCollection<ProductItem?> ProductsList =
-            new ObservableCollection<ProductItem?>(from p in _bl.Product.GetListOfProduct()
-                                                   let productItem = _bl.Product.GetProductCustomer(p.ID, cart)
-                                                   select productItem);
-              //convert to observel in order to update the details
-            DataContext = ProductsList;//Resets the list by products in the store
-            ObservableCollection<IGrouping<BO.Category?, ProductItem>> ByCategory =//divide to groups for categories view
-                new ObservableCollection<IGrouping<BO.Category?, ProductItem>>(collection: from p in ProductsList
-                                                                               group p by p.Category into g
-                                                                               select g);
-            ClothesBy.DataContext = new ObservableCollection<ProductItem?>(from g in ByCategory
-                                                                          where g.Key == BO.Category.Clothes
-                                                                          from p in g
-                                                                          select p);
-            ToysBy.DataContext = new ObservableCollection<ProductItem?>(from g in ByCategory
-                                                                       where g.Key == BO.Category.Toys
-                                                                       from p in g
-                                                                       select p);
-            AcceoriesBy.DataContext = new ObservableCollection<ProductItem?>(from g in ByCategory
-                                                                            where g.Key == BO.Category.Accessories
-                                                                            from p in g
-                                                                            select p);
-            BabyCarrigesBy.DataContext = new ObservableCollection<ProductItem?>(from g in ByCategory
-                                                                               where g.Key == BO.Category.BabyCarriages
-                                                                               from p in g
-                                                                               select p);
-            BottlesBy.DataContext = new ObservableCollection<ProductItem?>(from g in ByCategory
-                                                                          where g.Key == BO.Category.Bottles
-                                                                          from p in g
-                                                                          select p);
-            SocksBy.DataContext = new ObservableCollection<ProductItem?>(from g in ByCategory
-                                                                        where g.Key == BO.Category.Socks
-                                                                        from p in g
-                                                                        select p);
+            productsLists = _bl.Product.GetListOfProductsItem();
+            ProductsLists = new ObservableCollection<ProductItem?>(productsLists);
+            cart = new Cart();
             cart.Items = new List<OrderItem?>();
+            //convert to observel in order to update the details
+            _ByCategory = new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>
+                (from p in ProductsLists
+                 orderby p.Category//order for identify the index in biding
+                 group p by p.Category into g
+                 select g);//divide to groups for categories view
+            InitializeComponent();
+               
         }
         /// <summary>
         /// Add product to the cart
@@ -99,29 +78,46 @@ namespace PL
 
         private void CategroyFilter(object sender, SelectionChangedEventArgs e)
         {
-            IEnumerable<ProductItem?> productItems = from p in _bl?.Product.GetListOfProduct()
-                                                     let productItem = _bl?.Product.GetProductCustomer(p.ID, cart)
-                                                     select productItem;
-            if ((PL.Category)CategorySelector.SelectedItem == Category.AllProducts)//if the selected item is all products
+            Category? category = CategorySelector.SelectedItem as Category?;
+            if (category!=null)//if the selected item is all products
             {
-                ObservableCollection<ProductItem?> ProductsList1 =
-                new ObservableCollection<ProductItem?>(productItems); //convert to observel in order to update the details
-                DataContext = ProductsList1;//Resets the list by products in the store
-                return;
+                if(category.Equals(Category.AllProducts))//Back to the state where you see the whole list
+                {
+                    var products = productsLists;
+                    addProducts(products);
+                }
+                else
+                {
+                    var products = from p in _bl!.Product.GetProductByCondition( product => product.Category == (BO.Category)category).ToList()
+                                   let pReturn=_bl.Product.GetProductCustomer(p.ID,cart)
+                                   select pReturn;
+                                              
+                    addProducts(products);
+                }
             }
-            ObservableCollection<ProductItem?> ProductsList = //convert to observel in order to update the details
-            new ObservableCollection<ProductItem?>
-            ((from p in _bl?.Product.GetListOfProduct()
-                       where p.Category == (BO.Category)CategorySelector.SelectedItem
-                       let productItem = _bl?.Product.GetProductCustomer(p.ID, cart)
-                       select productItem));
-            DataContext = ProductsList;
-        }
 
+        }
+    
+        /// <summary>
+        /// Helping method to rebuild the list in the filter
+        /// </summary>
+        /// <param name="products"></param>
+        private void addProducts(IEnumerable<ProductItem?> products)
+        {
+            if (products.Any())
+            {
+                ProductsLists.Clear();
+                foreach (var item in products)
+                {
+                    ProductsLists.Add(item);
+                }
+            }
+        }
+        
         private void DetailsOfProduct(object sender, MouseButtonEventArgs e)
         {
-            ProductItem p = (ProductItem)ProductsListView.SelectedItem;
-            ProductDataBiding.ProductItem product = new ProductDataBiding.ProductItem()
+            ProductItem? p = (ProductItem?)ProductsListView.SelectedItem;
+            ProductDataBiding.ProductItem? product = new ProductDataBiding.ProductItem()
             {
                 ID = p.ID,
                 Category = p.Category,
@@ -133,14 +129,11 @@ namespace PL
             DetailsProductWindow details = new DetailsProductWindow(_bl,product);
             details.ShowDialog();
         }
-
         private void ShowCart(object sender, RoutedEventArgs e)
         {
             CartWindow c = new CartWindow();
             c.ShowDialog();
         }
-
-
         private void IdIsNumber(object sender, KeyEventArgs e)
         {
             TextBox? text = sender as TextBox;
@@ -167,5 +160,7 @@ namespace PL
             return;
 
         }
+
+      
     }
 }

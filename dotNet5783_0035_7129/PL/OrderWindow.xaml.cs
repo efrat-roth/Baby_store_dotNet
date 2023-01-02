@@ -28,37 +28,40 @@ namespace PL
         public partial class OrderWindow : Window
         {
             BlApi.IBl? _bl;
-            OrderDataBiding.Order order;
-            public OrderWindow(IBl bl1, BO.OrderForList o)
+            public OrderDataBiding.Order order { get; set; }
+            public Action<OrderForList?>? Action1 { get; set; }
+        public OrderWindow(Action<OrderForList?> a,IBl bl1, BO.OrderForList o)
+        {
+            _bl = bl1;
+            Action1 = a;
+            OrderDataBiding.Order? order1 = new OrderDataBiding.Order()
             {
-                InitializeComponent();
-                _bl = bl1;
-                OrderDataBiding.Order order1 = new OrderDataBiding.Order()
-                {
-                    ID = o.ID,
-                    Price = o.TotalPrice,
-                    Name = o.CustomerName,
-                    AmountOfItems = o.AmountOfItems,
-                    Status = (BO.OrderStatus?)o.Status,
-                    Email=_bl.Order.GetDetailsOrderManager(o.ID).CustomerEmail,
-                    Adress=_bl.Order.GetDetailsOrderManager(o.ID).CustomerAdress,
-                    OrderDate= _bl.Order.GetDetailsOrderManager(o.ID).OrderDate,
-                    ShipDate=_bl.Order.GetDetailsOrderManager(o.ID).ShipDate,
-                    DeliveryDate= _bl.Order.GetDetailsOrderManager(o.ID).DeliveryDate,                    
-                };
-                showItems.DataContext= new ObservableCollection<BO.OrderItem?>(_bl.Order.GetDetailsOrderManager(o.ID).Items);
-                order = order1;
-                OrderDetailsRows.DataContext = order;
-            }
-
-
-            private void UpdateProducts(object sender, RoutedEventArgs e)
+                ID = o.ID,
+                TotalPrice = o.TotalPrice,
+                Name = o.CustomerName,
+                AmountOfItems = o.AmountOfItems,
+                Status = (BO.OrderStatus?)o.Status,
+                Email = _bl.Order.GetDetailsOrderManager(o.ID).CustomerEmail,
+                Adress = _bl.Order.GetDetailsOrderManager(o.ID).CustomerAdress,
+                OrderDate = _bl.Order.GetDetailsOrderManager(o.ID).OrderDate,
+                ShipDate = _bl.Order.GetDetailsOrderManager(o.ID).ShipDate,
+                DeliveryDate = _bl.Order.GetDetailsOrderManager(o.ID).DeliveryDate,
+                Items = _bl?.Order.GetDetailsOrderManager(o.ID).Items
+            };
+            order = order1;
+            InitializeComponent();
+            
+        }
+        
+        
+        private void UpdateProducts(object sender, RoutedEventArgs e)
         {
             try
             {
+                BO.Order order1 = new BO.Order();
                 if (GetProduct.Text.Length == 0 && amountContent.Text.Length == 0 && updateShiped.IsChecked == false && updateDelivery.IsChecked == false)
                 {//Input integrity check in case the uset didn't input the all details
-                    MessageBox.Show("please input at least one detail to update");
+                    MessageBox.Show("Please input at least one detail to update");
                     return;
                 }
                 if ((GetProduct.Text.Length > 0 && amountContent.Text.Length == 0) || (GetProduct.Text.Length == 0 && amountContent.Text.Length > 0))
@@ -69,30 +72,37 @@ namespace PL
                 if (GetProduct.Text.Length > 0 && amountContent.Text.Length > 0)
                 {
                     int idProduct, amount;
-                    int.TryParse(GetProduct.Text, out idProduct);
-                    int.TryParse(amountContent.Text, out amount);
-                    _bl?.Order.UpdateOrder(order.ID, idProduct, amount);
+                    if(!int.TryParse(GetProduct.Text, out idProduct)||
+                    !int.TryParse(amountContent.Text, out amount))
+                    {
+                        MessageBox.Show("The data wasn't succeded to convert to int, please input the datails again ");
+                        return ;
+                    }
+                    order1=_bl?.Order.UpdateOrder(order.ID, idProduct, amount);
+                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o=>o?.ID==order1?.ID));
                 }
-                BO.Order order1=new BO.Order();
                 if (updateShiped.IsChecked == true)
                 {
-                    order1 = _bl?.Order.DeliveredOrder(order.ID);
-                    
+                    order1 = _bl?.Order.DeliveredOrder(order.ID)!;
+                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));
                 }
                 if (updateDelivery.IsChecked == true)
-                   order1= _bl?.Order.ArrivedOrder(order.ID);
+                {
+                    order1 = _bl?.Order.ArrivedOrder(order.ID);
+                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));
+                }
                 MessageBox.Show("The order has been successfuly updated");
                 this.Close();
             }
-            catch (CanNotDOActionException inner)
+            catch (CanNotDOActionException )
             {
                 MessageBox.Show("The order is already shiped or arrived, can't change the date and the product details");
             }
-            catch (InvalidVariableException inner)
+            catch (InvalidVariableException )
             {
                 MessageBox.Show("The details are invalid, or the product is not in the order, please check again");
             }
-            catch (FailedGet inner)
+            catch (FailedGet )
             {
                 MessageBox.Show("The order wasn't found");
             }

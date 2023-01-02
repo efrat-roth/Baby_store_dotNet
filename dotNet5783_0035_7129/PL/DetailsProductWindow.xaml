@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DetailsProductWindow" Height="450" Width="800">
-    
+        Title="DetailsProductWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
+
     <Grid x:Name="detailsProductPresentation" VerticalAlignment="Stretch" >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -28,12 +29,12 @@
         <Label Content="InStock:" Grid.Row="6" HorizontalAlignment="Right"   VerticalAlignment="Center"  FontSize="16" Grid.Column="0"/>
         <Label Content="PRICE:" Grid.Row="5" HorizontalAlignment="Right"  VerticalAlignment="Center"   FontSize="16" Grid.Column="0"/>
         <Label Content="The details of the product:" Grid.Row="0"  VerticalAlignment="Center"  HorizontalAlignment="Center"  FontSize="20" Grid.Column="0"/>
-        <Label Grid.Column="1" Content="{Binding ID}" Grid.Row="1" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Name}" Grid.Row="2" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Category}" Grid.Row="3" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Amount}" Grid.Row="4" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Price}" Grid.Row="5" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding InStock}" Grid.Row="6" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.ID}" Grid.Row="1" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.Name}" Grid.Row="2" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.Category}" Grid.Row="3" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.Amount}" Grid.Row="4" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.Price}" Grid.Row="5" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.InStock}" Grid.Row="6" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
 
     </Grid>
 </Window>

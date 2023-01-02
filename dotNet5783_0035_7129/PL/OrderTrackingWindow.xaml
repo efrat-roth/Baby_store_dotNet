@@ -7,7 +7,9 @@
         xmlns:local1="clr-namespace:OrderTrackingDataBiding"
 
         mc:Ignorable="d"
-        Title="OrderTrackingWindow" Height="450" Width="800">
+        Title="OrderTrackingWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
+
     <Window.Resources>
         <local:FullToVisibilityConverter x:Key="fullToVisibility"/>
     </Window.Resources>
@@ -28,9 +30,9 @@
         <Label Name="IDO" Content="Enter the ID of the order:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Label Name="StatusO" Content="The status of the order:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Label Name="DateO" Content="The date status of the order" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <TextBox x:Name="IDInput" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Text="" Width="100"   TextChanged="IDInput_TextChanged" />
-        <Label Content="{Binding Status}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <ListBox x:Name="statusNodes" ItemsSource="{Binding}" Grid.Row="3" Grid.Column="1"    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <Label x:Name="IDInput" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding orderToTrack.ID}" Width="100"  />
+        <Label Content="{Binding orderToTrack.Status}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <ListBox x:Name="statusNodes" ItemsSource="{Binding orderToTrack.ListDateStatus}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         </ListBox>
         <Button x:Name="orderDetails" Visibility="{Binding ElementName=IDInput, Path=Text, Converter={StaticResource fullToVisibility}}" Content="Press to see the details of the order" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowOrder"/>
 

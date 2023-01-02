@@ -15,26 +15,29 @@ using System.Windows.Shapes;
 using BO;
 using Tools;
 using AutoMapper;
+using BlApi;
 
 namespace PL
 {
-    public enum Category { Clothes, Bottles, Toys, Socks, Accessories, BabyCarriages,AllProducts }
+    
+    public enum Category { Clothes, Bottles, Toys, Socks, Accessories, BabyCarriages, AllProducts }
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
     /// </summary>
     public partial class ProductListWindow : Window
     {
         BlApi.IBl? _bl ;
-        
+        public ObservableCollection<ProductForList?>? _ProductForLists {get;set;}
+        private IEnumerable<ProductForList?>? _productForLists { get; }
+        public Array _Category { get; set; } = Enum.GetValues(typeof(Category));
         public ProductListWindow(BlApi.IBl bl1)//constractor
         {
-            InitializeComponent();
             _bl = bl1;
-            ObservableCollection<ProductForList?> ProductsList = //convert to observel in order to update the details
-            new ObservableCollection<ProductForList?>(_bl.Product.GetListOfProduct());
-            DataContext = ProductsList;//Resets the list by products in the store
-            CategorySelector.DataContext =Enum.GetValues(typeof(Category));//Input the only possible categories
+            _productForLists = _bl.Product.GetListOfProduct().ToList();
+            _ProductForLists = new ObservableCollection<ProductForList?>(_productForLists);//convert to observel in order to update the details           
+            InitializeComponent(); 
             
+            //DataContext = this;//Resets the list by products in the store           
         }
         /// <summary>
         /// Filter the list view by Category
@@ -43,14 +46,40 @@ namespace PL
         /// <param name="e"></param>
         private void CategroyFilter(object sender, SelectionChangedEventArgs e)
         {
-            if(CategorySelector.SelectedItem.Equals(Category.AllProducts))//If the uset want to see the all products
+            Category? category = CategorySelector.SelectedItem as Category?;
+            if (category != null)//if the selected item is all products
             {
-                ProductsListView.ItemsSource= _bl?.Product.GetListOfProduct();
-                return;
+                if (category.Equals(Category.AllProducts))//Back to the state where you see the whole list
+                {
+                    var products = _productForLists;
+                    addProducts(products);
+                }
+                else
+                {
+                    var products = _bl!.Product.GetProductByCondition(product => product.Category == (BO.Category)category);
+
+                    addProducts(products);
+                }
             }
-            ProductsListView.ItemsSource=_bl?.Product.GetProductByCondition(p=>p!.Category==(BO.Category)CategorySelector.SelectedItem);
+
         }
 
+        /// <summary>
+        /// Helping method to rebuild the list in the filter
+        /// </summary>
+        /// <param name="products"></param>
+        private void addProducts(IEnumerable<ProductForList?> products)
+        {
+            if (products.Any())
+            {
+                _ProductForLists?.Clear();
+                foreach (var item in products)
+                {
+                    _ProductForLists?.Add(item);
+                }
+            }
+        }
+        private void addP(BO.ProductForList productForList) => _ProductForLists?.Add(productForList);
         /// <summary>
         /// Add product by click event
         /// </summary>
@@ -58,10 +87,16 @@ namespace PL
         /// <param name="e"></param>
         private void AddProduct(object sender, RoutedEventArgs e)
         {
-            ProductWindow p = new ProductWindow(_bl ?? throw new BO.ObgectNullableException());
+            ProductWindow p = new ProductWindow(addP!,_bl ?? throw new BO.ObgectNullableException());
             p.ShowDialog();
         }
+        private void UpdateP(ProductForList productForList)
+        {
+            var p = _ProductForLists?.FirstOrDefault(item => item.ID == productForList.ID);
+            int index = _ProductForLists.IndexOf(p);
+            _ProductForLists[index] = productForList;
 
+        }
         /// <summary>
         /// Update product by click event
         /// </summary>
@@ -70,11 +105,10 @@ namespace PL
         private void UpdateProduct(object sender, MouseButtonEventArgs e)
         {
             BO.ProductForList? productForList= (BO.ProductForList?)ProductsListView.SelectedItem;        
-            ProductWindow updateProduct =new ProductWindow(_bl ?? throw new BO.ObgectNullableException(), productForList);
+            ProductWindow updateProduct =new ProductWindow(UpdateP,_bl ?? throw new BO.ObgectNullableException(), productForList);
             updateProduct.ShowDialog();
 
         }
-
       
-        }
+    }
 }

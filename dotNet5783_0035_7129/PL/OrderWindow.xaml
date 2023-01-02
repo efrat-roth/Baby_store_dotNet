@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ValueConverterDemo"
         mc:Ignorable="d"
-        Title="OrderWindow" Height="640" Width="800">
+        Title="OrderWindow" Height="640" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
+
     <Window.Resources>
         <local:NotBooleanToVisibilityConverter x:Key="notBooleanToVisibilityConverter"/>
+        <local:NotNullToVisibilityConverter x:Key="notNullToVisibilityConverter"/>
     </Window.Resources>
 
     <Grid x:Name="MainGrid" >
@@ -51,25 +54,25 @@
                 <Label x:Name="Amountxamel" Content="The amount of items in the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="9"/>
                 <Label x:Name="Pricexamel" Content="The total price of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="10"/>
                 <Label x:Name="Itemsxamel" Content="The products of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="11"/>
-                <Label x:Name="showID"  Content="{Binding  ID}"  HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
-                <Label x:Name="showName" Content="{Binding Name}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2"/>
-                <Label x:Name="showMail" Content="{Binding Mail}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3"/>
-                <Label x:Name="showAdress" Content="{Binding Adress}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4"/>
-                <Label x:Name="showOrderDate" Content="{Binding OrderDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="5"/>
-                <Label x:Name="showShipDate" Content="{Binding ShipDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="6"/>
-                <Label x:Name="showDeliveryDate" Content="{Binding DeliveryDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="7"/>
-                <Label x:Name="showStatus" Content="{Binding Status}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="8"/>
-                <Label x:Name="showAmount" Content="{Binding AmountOfItems}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="9"/>
-                <Label x:Name="showPrice" Content="{Binding Price}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="10"/>
-                <ListView x:Name="showItems" ItemsSource="{Binding }" Grid.Column="1" Grid.Row="11"   d:ItemsSource="{d:SampleData ItemCount=5 }">
+                <Label x:Name="showID"  Content="{Binding  order.ID}"  HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
+                <Label x:Name="showName" Content="{Binding order.Name}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2"/>
+                <Label x:Name="showMail" Content="{Binding order.Email}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3"/>
+                <Label x:Name="showAdress" Content="{Binding order.Adress}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4"/>
+                <Label x:Name="showOrderDate" Content="{Binding order.OrderDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="5"/>
+                <Label x:Name="showShipDate" Content="{Binding order.ShipDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="6"/>
+                <Label x:Name="showDeliveryDate" Content="{Binding order.DeliveryDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="7"/>
+                <Label x:Name="showStatus" Content="{Binding order.Status}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="8"/>
+                <Label x:Name="showAmount" Content="{Binding order.AmountOfItems}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="9"/>
+                <Label x:Name="showPrice" Content="{Binding order.TotalPrice}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="10"/>
+                <ListView x:Name="showItems" ItemsSource="{Binding order.Items }" Grid.Row="11"   d:ItemsSource="{d:SampleData ItemCount=5 }"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Label x:Name="CheckUpdate"  Content="Put v in the sqare if you want to update the order" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="12"/>
-                <CheckBox x:Name="WantToUpdate" HorizontalAlignment="Center" Grid.Row="12" Grid.Column="1" IsChecked="False"/>
+                <Label x:Name="CheckUpdate"  Content="Put v in the sqare if you want to update the order" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="12"  />
+                <CheckBox x:Name="WantToUpdate" HorizontalAlignment="Center" Grid.Row="12" Grid.Column="1" IsChecked="False" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" />
             </Grid>
 
         </StackPanel>

@@ -24,42 +24,16 @@ namespace PL
     {
         BlApi.IBl? _bl;
         Order? order;
-        public OrderTrackingWindow(BlApi.IBl? bl)
+        public OrderTrackingDataBiding.OrderTracking? orderToTrack { get; set; }
+        public OrderTrackingWindow(BlApi.IBl? bl , OrderTrackingDataBiding.OrderTracking o)
         {
-            InitializeComponent();
             _bl = bl;
+            order = _bl.Order.GetDetailsOrderManager(o.ID);
+            orderToTrack = o;            
+            InitializeComponent();
         }  
 
-        private void IDInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                if (IDInput.Text.Length == 0)
-                {
-                    MainGrid.DataContext=null;
-                }
-                else
-                {
-                    order = _bl?.Order.GetDetailsOrderManager(int.Parse(IDInput.Text));
-                    OrderTrackingDataBiding.OrderTracking orderToTrack = new OrderTrackingDataBiding.OrderTracking()
-                    {
-                        ID = _bl?.Order.OrderTracking(order?.ID?? throw new BO.ObgectNullableException()).ID ?? throw new BO.ObgectNullableException(),
-                        Status = (BO.OrderStatus?)_bl?.Order.GetDetailsOrderManager(order.ID).Status ,
-                        ListDateStatus= new ObservableCollection<NodeDateStatus?>(_bl.Order.OrderTracking(order.ID).ListDateStatus)
-                };
-                   
-                    statusNodes.DataContext = orderToTrack.ListDateStatus;
-                    MainGrid.DataContext = orderToTrack;
-
-                }
-            }
-            catch (FailedGet) { MessageBox.Show("The id is invalid, or not in the database"); IDInput.Text = null; MainGrid.DataContext = null; }
-            catch (BO.ObgectNullableException) { MessageBox.Show("an error accured, obect is a nullable, please try again"); }
-            
-        }
-    
-
-    private void ShowOrder(object sender, RoutedEventArgs e)
+        private void ShowOrder(object sender, RoutedEventArgs e)
         {
             try
             {                                   
@@ -71,9 +45,7 @@ namespace PL
                     Status = order.Status,
                     TotalPrice = order.TotalPrice
                 };
-                OrderWindow orderWindow = new OrderWindow(_bl, o);
-                orderWindow.CheckUpdate.Visibility = Visibility.Collapsed;
-                orderWindow.WantToUpdate.Visibility = Visibility.Collapsed;
+                OrderWindow orderWindow = new OrderWindow(null,_bl, o);
                 orderWindow.ShowDialog();
             }
             catch(FailedGet g) { MessageBox.Show(g.ToString()); }

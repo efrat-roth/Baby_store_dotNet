@@ -198,5 +198,19 @@ internal class Product : IProduct
         newProducts = newProducts.Where(p =>f(p)).ToList();//filters the products by the condition
         return newProducts.ToList();
     }
-    
+
+    public IEnumerable<BO.ProductItem?> GetListOfProductsItem()
+    {
+        return from DO.Product? product1 in _dal!.Product.PrintAll()
+               select new BO.ProductItem
+               {
+                   ID = product1?.ID ?? throw new BO.ObgectNullableException(),
+                   Name = product1?.Name ?? throw new BO.ObgectNullableException(),
+                   Category = (BO.Category)(product1?.Category ?? throw new BO.ObgectNullableException()),
+                   Price = product1?.Price ?? throw new BO.ObgectNullableException(),
+                   InStock = product1?.InStock > 0 ? true : false,
+                   AmountInCart = 0
+               };
+    }
+
 }

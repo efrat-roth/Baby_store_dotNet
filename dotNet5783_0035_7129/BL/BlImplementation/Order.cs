@@ -92,7 +92,7 @@ internal class Order:BlApi.IOrder
         try { order1 = _dal?.Order.PrintByID(ID) ?? throw new ObgectNullableException(); }//asked order
         catch(Exception inner) { throw new FailedGet(inner); }
         IEnumerable<DO.OrderItem?> orderItems=new List<DO.OrderItem?>();
-        try { orderItems = _dal.OrderItem.PrintAll(oi=>oi?.ID==ID); }//List of orderItems of the order
+        try { orderItems = _dal.OrderItem.PrintAll(oi=>oi?.OrderID==ID); }//List of orderItems of the order
         catch(Exception inner) { throw new FailedGet(inner); }
         BO.Order logicOrder = new BO.Order
         {
@@ -103,7 +103,9 @@ internal class Order:BlApi.IOrder
             DeliveryDate = order1.ArrivedDate,
             ShipDate = order1.DeliveredDate,
             OrderDate = order1.OrderDate,
-            Items = new List<OrderItem?>()
+            Items = new List<OrderItem?>(),
+            TotalPrice=0,
+            
         };//Resets the field of item to return
                
         if (order1.OrderDate <= DateTime.Today)
@@ -333,7 +335,7 @@ internal class Order:BlApi.IOrder
         {
             throw new FailedGet(inner);
         }
-        if (_dal?.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Now)
+        if (_dal?.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Today)
             throw new CanNotDOActionException();
         BO.Order? wantedOrder = GetDetailsOrderManager(IDOrder);
         BO.OrderItem? oi = wantedOrder?.Items?.FirstOrDefault(oi => oi?.ProductID == IDProduct)??throw new InvalidVariableException();

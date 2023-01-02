@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using BO;
+using OrderTrackingDataBiding;
 
 
 
@@ -62,8 +64,38 @@ namespace PL
         /// <exception cref="BO.ObgectNullableException"></exception>
         private void ShowTrackOrder(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
         {
-            OrderTrackingWindow track = new OrderTrackingWindow(bl ?? throw new BO.ObgectNullableException());
+            OrderTrackingDataBiding.OrderTracking orderToTrack1;
+            try
+            {
+                 orderToTrack1 = new OrderTrackingDataBiding.OrderTracking()
+                {
+                    ID = int.Parse(id.Text),
+                    Status = (BO.OrderStatus?)bl?.Order.GetDetailsOrderManager(int.Parse(id.Text)).Status,
+                    ListDateStatus = new ObservableCollection<NodeDateStatus?>(bl?.Order.OrderTracking(int.Parse(id.Text)).ListDateStatus)
+                };
+            }
+            catch (FailedGet) { MessageBox.Show("The id is invalid, or not in the database"); return; }
+            catch (BO.ObgectNullableException) { MessageBox.Show("an error accured, obect is a nullable, please try again"); return; }
+            OrderTrackingWindow track = new OrderTrackingWindow(bl ?? throw new BO.ObgectNullableException(), orderToTrack1);
             track.ShowDialog();
+
+        }
+        /// <summary>
+        ///  Check the values of ID field, in order to get valid input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void IdIsNumber(object sender, KeyEventArgs e)
+        {
+            TextBox? text = sender as TextBox;
+            if (text == null) return;
+            if (e == null) return;
+            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+            if (char.IsControl(c)) return;
+            if (char.IsDigit(c))
+                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt))) return;
+            e.Handled = true;
+            return;
 
         }
     }

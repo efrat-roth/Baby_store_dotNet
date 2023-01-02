@@ -23,17 +23,25 @@ namespace PL
     public partial class OrderListWindow : Window
     {
         BlApi.IBl? _bl;
+        public ObservableCollection<OrderForList?>? OrderForLists { get; set; }
+        private IEnumerable<OrderForList?>? orderForLists { get; }
         public OrderListWindow(BlApi.IBl? bl)
         {
-            InitializeComponent();
             _bl = bl;
-            ObservableCollection<OrderForList?> ordersList = new ObservableCollection<OrderForList?>(_bl!.Order.GetListOfOrders());//convert to observel in order to update the details 
-            DataContext = ordersList;
+            orderForLists = _bl!.Order.GetListOfOrders();
+            OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);//convert to observel in order to update the details 
+            InitializeComponent();         
         }
+        private void UpdateO(OrderForList orderForList)
+        {
+            var o = OrderForLists?.FirstOrDefault(item => item.ID == orderForList.ID);
+            int index = OrderForLists!.IndexOf(o);
+            OrderForLists[index] = orderForList;
 
+        }
         private void UpdateOrder(object sender, MouseButtonEventArgs e)
         {
-            OrderWindow orderWindow = new OrderWindow(_bl??throw new BO.ObgectNullableException(), (BO.OrderForList)OrdersListView.SelectedItem);
+            OrderWindow orderWindow = new OrderWindow(UpdateO,_bl??throw new BO.ObgectNullableException(), (BO.OrderForList)OrdersListView.SelectedItem);
             orderWindow.ShowDialog();
         }
 

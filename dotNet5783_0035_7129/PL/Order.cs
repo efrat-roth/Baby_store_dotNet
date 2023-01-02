@@ -66,8 +66,11 @@ namespace OrderDataBiding
         ///  The total price of the order.
         /// </summary>
         public static readonly DependencyProperty PriceProperty =
-                      DependencyProperty.Register(nameof(Price), typeof(double), typeof(Order));
-        public double Price { get => (double)GetValue(PriceProperty); set => SetValue(PriceProperty, value); }
+                      DependencyProperty.Register(nameof(TotalPrice), typeof(double), typeof(Order));
+        public double TotalPrice { get => (double)GetValue(PriceProperty); set => SetValue(PriceProperty, value); }
+        public static readonly DependencyProperty ItemsProperty =
+                      DependencyProperty.Register(nameof(Items), typeof(IEnumerable<OrderItem?>), typeof(Order));
+        public IEnumerable<OrderItem?>? Items { get => (IEnumerable<OrderItem?>?)GetValue(ItemsProperty); set => SetValue(ItemsProperty, value); }
 
         /// </summary>
         /// Prints all the details of the order.

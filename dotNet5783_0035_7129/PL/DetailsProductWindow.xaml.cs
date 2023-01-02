@@ -19,14 +19,14 @@ namespace PL
     /// </summary>
     public partial class DetailsProductWindow : Window
     {
-        ProductDataBiding.ProductItem Product = new ProductDataBiding.ProductItem();
+        public ProductDataBiding.ProductItem Product { get; set; }
         BlApi.IBl? _bl;
         public DetailsProductWindow(BlApi.IBl? bl, ProductDataBiding.ProductItem p)
         {
-            InitializeComponent();
             _bl = bl;
             Product = p;
-            detailsProductPresentation.DataContext = p;
+            InitializeComponent();
+            
         }
     }
 }

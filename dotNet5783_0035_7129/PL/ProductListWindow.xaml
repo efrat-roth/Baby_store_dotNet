@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ProductListWindow" Height="640" Width="800">
+        Title="ProductListWindow" Height="640" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
+
     <Grid Name="MainGrid" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -19,7 +21,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <Label Content="Category:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16"  />
-            <ComboBox x:Name="CategorySelector" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="CategroyFilter" ItemsSource="{Binding}">
+            <ComboBox x:Name="CategorySelector" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="CategroyFilter" ItemsSource="{Binding _Category}">
                 <ComboBox.Background>
                     <LinearGradientBrush EndPoint="0,1">
                         <GradientStop Color="#FFF0F0F0"/>
@@ -29,7 +31,7 @@
             </ComboBox>
         </Grid>
         <ListView x:Name="ProductsListView"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5 }" 
-                  Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateProduct" ItemsSource="{Binding}" >
+                  Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateProduct" ItemsSource="{Binding _ProductForLists}" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

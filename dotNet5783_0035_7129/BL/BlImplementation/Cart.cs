@@ -43,12 +43,13 @@ internal class Cart:ICart
             {
                 BO.OrderItem newProductInOrder = new BO.OrderItem
                 {
-                    ID = oi1.ID,
+                    ID = oi1.ID+1,
                     Price = ProductInStore?.Price??throw new ObgectNullableException(),
                     TotalPrice = ProductInStore?.Price??throw new ObgectNullableException(),
                     ProductID = id,
                     Name = ProductInStore?.Name,
                     Amount = 1,
+                    
                 };
                 finalCart?.Items?.Add(newProductInOrder);
                 finalCart!.TotalPrice += newProductInOrder.Price;
