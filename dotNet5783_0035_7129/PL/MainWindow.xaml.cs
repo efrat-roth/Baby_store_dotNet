@@ -67,6 +67,11 @@ namespace PL
             OrderTrackingDataBiding.OrderTracking orderToTrack1;
             try
             {
+                if(id.Text.Length==0)//if the user didn't input ID
+                {
+                    MessageBox.Show("Input id of order to track after the order");
+                    return;
+                }
                  orderToTrack1 = new OrderTrackingDataBiding.OrderTracking()
                 {
                     ID = int.Parse(id.Text),

@@ -28,7 +28,7 @@ namespace ValueConverterDemo
             bool boolValue = (bool)value;
             if (!boolValue)
             {
-                
+
                 return Visibility.Hidden; //Visibility.Collapsed;
             }
             else
@@ -51,13 +51,13 @@ namespace ValueConverterDemo
             }
         }
     }
-    public class FullToVisibilityConverter:IValueConverter
+    public class FullToVisibilityConverter : IValueConverter
     {
         //convert from source property type to target property type
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string boolValue= (string)value;
-            if (boolValue.Length==0)
+            string boolValue = (string)value;
+            if (boolValue.Length == 0)
             {
                 return Visibility.Hidden; //Visibility.Collapsed;
             }
@@ -77,7 +77,7 @@ namespace ValueConverterDemo
         //convert from source property type to target property type
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            
+
             if (value == null)
             {
                 return Visibility.Visible; //Visibility.Collapsed;
@@ -114,6 +114,49 @@ namespace ValueConverterDemo
             throw new NotImplementedException();
         }
     }
-   
-    
+    public class NotNullAndDoneYetToVisibilityConverter : IValueConverter
+    {
+        //convert from source property type to target property type
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+
+            if (value == null ||
+                (DateTime)value <= DateTime.Today)
+            {
+                return Visibility.Hidden; //Visibility.Collapsed;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+        //convert from target property type to source property type
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+
+    }
+    public class NullToAndDoNotDidYetVisibilityConverter : IValueConverter
+    {
+        //convert from source property type to target property type
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+
+            if (value == null|| (DateTime)value > DateTime.Today)
+            {
+                return Visibility.Visible; //Visibility.Collapsed;
+            }
+            else
+            {
+                return Visibility.Hidden;
+            }
+        }
+        //convert from target property type to source property type
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
