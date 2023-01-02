@@ -3,15 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
-        mc:Ignorable="d"
-        Title="CartWindow" Height="450" Width="800">
-        
+        xmlns:local="clr-namespace:Ex93_DataTemplate"        mc:Ignorable="d"
+        Title="CartWindow" Height="450" Width="800"
+         DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <Window.Resources>
+        <DataTemplate x:Key="MyDataTemplate" DataType="local:MyData">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="ID: " />
+                <TextBlock Grid.Column="1" Text="{Binding Path=ProductID}" />
+                <TextBlock Grid.Column="2" Text="Name: " />
+                <TextBlock Grid.Column="3" Text="{Binding Path=Name}" />
+                <TextBlock Grid.Column="2" Text="Price: " />
+                <TextBlock Grid.Column="3" Text="{Binding Path=Price}" />
+                <TextBlock Grid.Column="2" Text="Amount: " />
+                <TextBox Grid.Column="3" Text="{Binding Path=Amount}" />
+                <TextBlock Grid.Column="2" Text="TotalPrice: " />
+                <TextBlock Grid.Column="3" Text="{Binding Path=TotalPrice}" />
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <Label Name="CustomerName" Content="{Binding}"/>
-        <Label Name="CustomerEmail" Content="{Binding}"/>
-        <Label Name="CustomerAdress" Content="{Binding}"/>
-        <Label Name="TotalPrice" Content="{Binding}"/>
-        <ListView Name="productsInCart" ItemsSource="{Binding}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="subGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Name="CustomerName" Content="{Binding cart.CustomerName}" FontSize="18" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Name="CustomerEmail" Content="{Binding cart.CustomerEmail}" FontSize="18" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Name="CustomerAdress" Content="{Binding cart.CustomerAdress}"  FontSize="18" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Name="TotalPrice" Content="{Binding cart.TotalPrice}"  FontSize="18" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <ListView Name="productsInCart" ItemsSource="{Binding OrderItems}" Grid.Row="1" Background="#FFFBE6F4" ItemTemplate="{StaticResource MyDataTemplate}"/>
+        <Button x:Name="OpenOrder" Content="create the order" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Margin="627,0,0,0" Click="OpenOrder_Click" Height="34" Width="141" FontSize="16"/>
     </Grid>
-</Window>
+</Window>S

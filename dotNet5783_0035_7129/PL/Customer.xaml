@@ -1,0 +1,24 @@
+﻿<Window x:Class="PL.Customer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Customer" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="NewOrder" Content="Make new order" HorizontalAlignment="Stretch" Grid.Row="0"   Grid.Column="1"
+                  Height="107" Width="236" Click="ShowNewOrder"
+                FontSize="20" Background="#FFFFF0DB"  />
+        <Button x:Name="TrackOrder" Content="Tracking after the order" Grid.Row="1"
+                 Height="107" Width="236" Click="ShowTrackOrder"
+                FontSize="20" Background="#FFFFF0DB" Margin="282,100,282,10"  />
+        <TextBox x:Name="id" Grid.Row="1"  Height="20" Width="100" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#FFFFF0DB" Margin="0,75,0,0" PreviewKeyDown="IdIsNumber" />
+        <Label x:Name="idL" Content="Enter the id of order to&#xD;&#xA;     you want to track" VerticalAlignment="Top"  HorizontalAlignment="Left" Height="70" Width="236" Margin="303,15,0,0"  FontSize="18" Grid.Row="1"/>
+        <StackPanel/>
+    </Grid>
+</Window>

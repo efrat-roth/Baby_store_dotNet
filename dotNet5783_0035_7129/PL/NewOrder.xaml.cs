@@ -27,12 +27,12 @@ namespace PL
         public ObservableCollection<ProductItem?> ProductsLists { get; set; }
         private IEnumerable<ProductItem?> productsLists { get; }
         public ObservableCollection<IGrouping<BO.Category?, ProductItem?>> _ByCategory { get; set; }
-        public NewOrder(BlApi.IBl bl1)
+        public NewOrder(BlApi.IBl bl1,Cart c)
         {
             _bl = bl1;
             productsLists = _bl.Product.GetListOfProductsItem();
             ProductsLists = new ObservableCollection<ProductItem?>(productsLists);
-            cart = new Cart();
+            cart = c;
             cart.Items = new List<OrderItem?>();
             //convert to observel in order to update the details
             _ByCategory = new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>
@@ -131,7 +131,7 @@ namespace PL
         }
         private void ShowCart(object sender, RoutedEventArgs e)
         {
-            CartWindow c = new CartWindow();
+            CartWindow c = new CartWindow(_bl,cart);
             c.ShowDialog();
         }
         private void IdIsNumber(object sender, KeyEventArgs e)

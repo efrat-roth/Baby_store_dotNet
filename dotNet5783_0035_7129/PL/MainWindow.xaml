@@ -15,21 +15,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="Admin" Content="Admin" HorizontalAlignment="Stretch" Grid.Row="2"   Grid.Column="1"
+        <Button x:Name="Admin" Content="Admin" HorizontalAlignment="Stretch" Grid.Row="0"   Grid.Column="1"
                 Height="107" Width="236"
                 FontSize="20" Background="#FFFFF0DB" Click="ShowProductList" />
-        <Button x:Name="NewOrder" Content="Make new order" HorizontalAlignment="Stretch" Grid.Row="0"   Grid.Column="1"
-                  Height="107" Width="236" Click="ShowNewOrder"
-                FontSize="20" Background="#FFFFF0DB"  />
-        <Button x:Name="TrackOrder" Content="Tracking after the order" HorizontalAlignment="Stretch" Grid.Row="1"   Grid.Column="1"
-                 Height="107" Width="236" Click="ShowTrackOrder"
-                FontSize="20" Background="#FFFFF0DB"  />
-        <TextBox x:Name="id" Grid.Row="1" Grid.Column="2"  Height="20" Width="100" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#FFFFF0DB" Margin="0,94,0,0" PreviewKeyDown="IdIsNumber" />
-        <Label x:Name="idL" Content="Enter the id of order you want to track" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"  HorizontalAlignment="Center" Height="30" Width="220"  />
-        <StackPanel/>
+        <Button x:Name="Customer" Content="Customer" HorizontalAlignment="Stretch" Grid.Row="1"   Grid.Column="1"
+                Height="107" Width="236"
+                FontSize="20" Background="#FFFFF0DB" Click="Customer_Click" />
+
 
 
     </Grid>

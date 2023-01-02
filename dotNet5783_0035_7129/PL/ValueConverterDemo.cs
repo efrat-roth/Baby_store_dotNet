@@ -121,7 +121,7 @@ namespace ValueConverterDemo
         {
 
             if (value == null ||
-                (DateTime)value <= DateTime.Today)
+                (DateTime)value > DateTime.Today)
             {
                 return Visibility.Hidden; //Visibility.Collapsed;
             }
@@ -141,10 +141,10 @@ namespace ValueConverterDemo
     public class NullToAndDoNotDidYetVisibilityConverter : IValueConverter
     {
         //convert from source property type to target property type
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value , Type targetType, object parameter, CultureInfo culture)
         {
 
-            if (value == null|| (DateTime)value > DateTime.Today)
+            if (value == null|| (DateTime)value > DateTime.Now)
             {
                 return Visibility.Visible; //Visibility.Collapsed;
             }
@@ -158,5 +158,6 @@ namespace ValueConverterDemo
         {
             throw new NotImplementedException();
         }
-    }
+        
+        }
 }
