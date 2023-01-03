@@ -30,17 +30,17 @@
                   d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Product id" x:Name="ID"  DisplayMemberBinding="{Binding ProductID}" ></GridViewColumn>
-                    <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
-                    <GridViewColumn Header="Product price" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                    <GridViewColumn Header="Product id" x:Name="ID"  DisplayMemberBinding="{Binding IDProduct , Mode=TwoWay}" ></GridViewColumn>
+                    <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Name , Mode=TwoWay}"></GridViewColumn>
+                    <GridViewColumn Header="Product price" DisplayMemberBinding="{Binding Price , Mode=TwoWay}"></GridViewColumn>
                     <GridViewColumn Header="Amount">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Amount}" TextChanged="TextBox_TextChanged"  PreviewKeyDown="amountIsNumber" ></TextBox>
+                                <TextBox Text="{Binding Amount, Mode=TwoWay}" LostFocus="TextBox_TextChanged"   PreviewKeyDown="amountIsNumber" ></TextBox>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding TotalPrice}"></GridViewColumn>
+                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding TotalPrice, Mode=TwoWay}"></GridViewColumn>
 
                 </GridView>
             </ListView.View>

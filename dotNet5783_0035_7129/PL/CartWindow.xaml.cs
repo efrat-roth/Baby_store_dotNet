@@ -26,14 +26,23 @@ namespace PL
     {
         public Cart cart { get; set; }
         IBl _bl { get; set; }
-        public ObservableCollection<OrderItem?>? OrderItems { get; set; }
-        private IEnumerable<OrderItem?>? orderItems { get; }
+        public ObservableCollection<ProductDataBiding.OrderItem?>? OrderItems { get; set; }
+        private IEnumerable<ProductDataBiding.OrderItem?>? orderItems { get; }
         public CartWindow(IBl bl, Cart c)
         {
             _bl= bl;
             cart = c;
-            orderItems = cart.Items;
-            OrderItems = new ObservableCollection<OrderItem?>(orderItems);
+            orderItems = from i in cart.Items
+                         select new ProductDataBiding.OrderItem()
+                         {
+                             Amount=i.Amount,
+                             ID=i.ID,
+                             IDProduct=i.ProductID,
+                             Name=i.Name,
+                             TotalPrice=i.TotalPrice,
+                             Price=i.Price,
+                         };
+            OrderItems = new ObservableCollection<ProductDataBiding.OrderItem?>(orderItems);
             DataContext = this;
             InitializeComponent();
         }
@@ -42,7 +51,6 @@ namespace PL
         {
             try
             {
-
                 BO.Order order= _bl.Cart.MakeOrder(cart, cart.CustomerAdress, cart.CustomerName, cart.CustomerEmail);
                 
                 MessageBox.Show("The order was created successfully, the id of the order is"+ order.ID );
@@ -72,16 +80,27 @@ namespace PL
 
         }
 
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        /// <summary>
+        /// The method is singing to event of changing in the product amount
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBox_TextChanged(object sender, RoutedEventArgs  e)
         {
-            FrameworkElement f = sender as FrameworkElement;
-            OrderItem p = (BO.OrderItem)f.DataContext;
-            int productId = p.ProductID;
-            int amount = p.Amount;
-            _bl.Cart.UpdateProductAmount(cart, productId, amount);
-            orderItems.ToList().Clear();
-            OrderItems = new ObservableCollection<OrderItem?>(cart.Items);
+            try
+            {
+                FrameworkElement? f = sender as FrameworkElement;
+                ProductDataBiding.OrderItem? p = (ProductDataBiding.OrderItem?)f?.DataContext;//gets the product to change
+                int productId = p.IDProduct;
+                int amount = p.Amount;
+                _bl.Cart.UpdateProductAmount(cart, productId, amount);
+                f.DataContext = cart?.Items?.FirstOrDefault(oi => oi?.ID == p.ID);
+                //orderItems?.ToList().Clear();
+                //OrderItems = new ObservableCollection<ProductDataBiding.OrderItem?>(cart.Items);
+            }
+            catch (FailedGet) { MessageBox.Show("The product is not in the store"); return; }
+            catch (CanNotDOActionException) { MessageBox.Show("The amount is bigger than the amount in stock"); return; }
+        
         }
         private void amountIsNumber(object sender, KeyEventArgs e)
         {
@@ -97,6 +116,6 @@ namespace PL
 
         }
 
-       
+        
     }
 }

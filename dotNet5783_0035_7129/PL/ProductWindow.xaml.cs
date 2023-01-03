@@ -43,18 +43,18 @@ namespace PL
         /// </summary>
         /// <param name="bl1"></param>The contract with the logic layer
         /// <param name="p"></param>The product to update
-        public ProductWindow(Action<BO.ProductForList?> action,BlApi.IBl bl1 ,BO.ProductForList p)
+        public ProductWindow(Action<BO.ProductForList?> action,BlApi.IBl bl1 ,BO.ProductForList? p)
         {
             _bl = bl1;
             _action = action;
             ///The details of the current product:
-            ProductDataBiding.Product pToPrint = new ProductDataBiding.Product()
+            ProductDataBiding.Product? pToPrint = new ProductDataBiding.Product()
             {
                 ID = p.ID,
                 Price = p.Price,
-                Name = p.Name,
+                Name = p?.Name,
                 Amount = _bl.Product.GetProductManager(p.ID).InStock,
-                Category = p.Category,
+                Category = p?.Category,
             };
             product = pToPrint;
             InitializeComponent();
