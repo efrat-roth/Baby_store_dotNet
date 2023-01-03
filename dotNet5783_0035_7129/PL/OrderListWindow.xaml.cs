@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
-using Tools;
 
 namespace PL
 {
@@ -41,7 +40,8 @@ namespace PL
         }
         private void UpdateOrder(object sender, MouseButtonEventArgs e)
         {
-            OrderWindow orderWindow = new OrderWindow(UpdateO,_bl??throw new BO.ObgectNullableException(), (BO.OrderForList)OrdersListView.SelectedItem);
+            BO.OrderForList? O = (BO.OrderForList?)OrdersListView.SelectedItem;
+            OrderWindow orderWindow = new OrderWindow(UpdateO,_bl??throw new BO.ObgectNullableException(), O);
             orderWindow.ShowDialog();
         }
 

@@ -15,7 +15,6 @@ using System.Windows.Media.TextFormatting;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-using Tools;
 
 
 namespace ValueConverterDemo

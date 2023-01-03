@@ -20,11 +20,11 @@
                   Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateOrder" ItemsSource="{Binding OrderForLists}"  >
             <ListView.View >
                 <GridView>
-                    <GridViewColumn Header="ID" Width="auto" x:Name="idP" DisplayMemberBinding="{Binding ID, Mode=TwoWay}"/>
-                    <GridViewColumn Header="Name of customer" Width="auto" DisplayMemberBinding="{Binding CustomerName, Mode=TwoWay}"/>
-                    <GridViewColumn Header="Status" Width="auto" DisplayMemberBinding="{Binding Status, Mode=TwoWay}"/>
-                    <GridViewColumn Header="Amount of items" Width="auto" DisplayMemberBinding="{Binding AmountOfItems, Mode=TwoWay}"/>
-                    <GridViewColumn Header="Total price" Width="auto" DisplayMemberBinding="{Binding TotalPrice, Mode=TwoWay}"/>
+                    <GridViewColumn Header="ID" Width="auto" x:Name="idP" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Name of customer" Width="auto" DisplayMemberBinding="{Binding CustomerName}"/>
+                    <GridViewColumn Header="Status" Width="auto" DisplayMemberBinding="{Binding Status}"/>
+                    <GridViewColumn Header="Amount of items" Width="auto" DisplayMemberBinding="{Binding AmountOfItems}"/>
+                    <GridViewColumn Header="Total price" Width="auto" DisplayMemberBinding="{Binding TotalPrice}"/>
                 </GridView>
             </ListView.View>
         </ListView>

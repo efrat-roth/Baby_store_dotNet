@@ -42,6 +42,6 @@
                 VerticalAlignment="Top" Click="AddProducts"  Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}" Margin="0,31,224,0" Height="20" Width="181" Grid.ColumnSpan="2" />
         <Button x:Name="UpdateProductxamel" Grid.Row="5" Grid.Column="1" Content="Update the product in the store"  HorizontalAlignment="Right" 
                 VerticalAlignment="Top" Click="UpdateProducts" Visibility="{Binding product, Converter={StaticResource notNullToVisibilityConverter}}" Margin="0,31,224,0" Height="20" Width="172" Grid.ColumnSpan="2" />
-        <Label x:Name="showID" Background="#FFFAEFF5" Grid.Column="2" Content="{Binding product, XPath=ID}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="120"/>
+        <Label x:Name="showID" Background="#FFFAEFF5" Grid.Column="2" Visibility="{Binding product, Converter={StaticResource notNullToVisibilityConverter}}" Content="{Binding product.ID}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="120"/>
     </Grid>
 </Window>

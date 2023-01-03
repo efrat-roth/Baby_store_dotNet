@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 
-namespace Tools
+namespace DO
 {
 
     public static class ToolsDo
@@ -26,7 +26,7 @@ namespace Tools
                 if (item.GetValue(t, null) is IEnumerable<object>)
                 {
                     IEnumerable<object?>? list = (IEnumerable<object?>?)item.GetValue(t, null);
-                    string s = string.Join(" ", list ?? throw new DO.ObgectNullableException());
+                    string s = string.Join(" ", list ?? throw new ObgectNullableException());
                     str += s;
                 }
                 else

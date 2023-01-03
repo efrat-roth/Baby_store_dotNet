@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
-using Tools;
 using AutoMapper;
 using BlApi;
 
@@ -37,7 +36,6 @@ namespace PL
             _ProductForLists = new ObservableCollection<ProductForList?>(_productForLists);//convert to observel in order to update the details           
             InitializeComponent(); 
             
-            //DataContext = this;//Resets the list by products in the store           
         }
         /// <summary>
         /// Filter the list view by Category
@@ -104,7 +102,8 @@ namespace PL
         /// <param name="e"></param>
         private void UpdateProduct(object sender, MouseButtonEventArgs e)
         {
-            BO.ProductForList? productForList= (BO.ProductForList?)ProductsListView.SelectedItem;        
+            BO.ProductForList? productForList = (BO.ProductForList?)ProductsListView.SelectedItem;
+           
             ProductWindow updateProduct =new ProductWindow(UpdateP,_bl ?? throw new BO.ObgectNullableException(), productForList);
             updateProduct.ShowDialog();
 

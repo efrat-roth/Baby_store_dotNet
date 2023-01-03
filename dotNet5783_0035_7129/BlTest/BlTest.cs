@@ -442,7 +442,7 @@ internal class BlTest
                         {
                             try
                             {
-                                DO.Order order = bl?.Cart.MakeOrder(c, c.CustomerAdress!, c.CustomerName!, c.CustomerEmail!) ?? throw new ObgectNullableException();
+                                BO.Order order = bl?.Cart.MakeOrder(c, c.CustomerAdress!, c.CustomerName!, c.CustomerEmail!) ?? throw new ObgectNullableException();
                                 Console.WriteLine(order);
                             }
                             catch (Exception m)

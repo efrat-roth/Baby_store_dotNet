@@ -50,24 +50,7 @@ namespace PL
             }
             catch(FailedGet g) { MessageBox.Show(g.ToString()); }
         }
-        /// <summary>
-        ///  Check the values of ID field, in order to get valid input
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void IdIsNumber(object sender, KeyEventArgs e)
-        {
-            TextBox? text = sender as TextBox;
-            if (text == null) return;
-            if (e == null) return;
-            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-            if (char.IsControl(c)) return;
-            if (char.IsDigit(c))
-                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt))) return;
-            e.Handled = true;
-            return;
-
-        }
+        
 
 
     }

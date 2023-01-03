@@ -44,16 +44,16 @@
                 
                 <ListView.View >
                     <GridView>
-                        <GridViewColumn Header="ID" Width="auto" x:Name="idP" DisplayMemberBinding="{Binding ID, Mode=TwoWay}"/>
-                        <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name, Mode=TwoWay}"/>
-                        <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price, Mode=TwoWay}"/>
-                        <GridViewColumn Header="Categoy" Width="auto" DisplayMemberBinding="{Binding Category, Mode=TwoWay}"/>
+                        <GridViewColumn Header="ID" Width="auto" x:Name="idP" DisplayMemberBinding="{Binding ID}"/>
+                        <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                        <GridViewColumn Header="Categoy" Width="auto" DisplayMemberBinding="{Binding Category}"/>
                       
-                            <GridViewColumn Header="Amount in cart" Width="auto" x:Name="AmountCart" DisplayMemberBinding="{Binding AmountInCart, Mode=TwoWay}"/>
+                            <GridViewColumn Header="Amount in cart" Width="auto" x:Name="AmountCart" DisplayMemberBinding="{Binding AmountInCart}"/>
                             <GridViewColumn Header="InStock">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox Width="auto" IsEnabled="False" IsChecked="{Binding InStock, Mode=TwoWay}" Name="inS"/>
+                                <CheckBox Width="auto" IsEnabled="False" IsChecked="{Binding InStock}" Name="inS"/>
                             </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             </GridViewColumn>

@@ -34,7 +34,7 @@ public struct OrderItem
     /// <returns></returns>
     public override string ToString()
     {
-        return Tools.ToolsDo.ToStringProperty(this);
+        return ToolsDo.ToStringProperty(this);
     }
 
 

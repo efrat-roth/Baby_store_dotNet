@@ -15,7 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-using Tools;
 
 
 
@@ -30,7 +29,7 @@ namespace PL
             BlApi.IBl? _bl;
             public OrderDataBiding.Order order { get; set; }
             public Action<OrderForList?>? Action1 { get; set; }
-        public OrderWindow(Action<OrderForList?> a,IBl bl1, BO.OrderForList o)
+        public OrderWindow(Action<OrderForList?> a,IBl bl1, BO.OrderForList? o)
         {
             _bl = bl1;
             Action1 = a;

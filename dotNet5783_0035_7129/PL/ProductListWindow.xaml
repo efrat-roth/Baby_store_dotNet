@@ -34,10 +34,10 @@
                   Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateProduct" ItemsSource="{Binding _ProductForLists}" >
             <ListView.View >
                 <GridView>
-                    <GridViewColumn Header="ID" Width="auto"  DisplayMemberBinding="{Binding ID, Mode=TwoWay}"/>
-                    <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name, Mode=TwoWay}"/>
-                    <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price, Mode=TwoWay}"/>
-                    <GridViewColumn Header="Categoy" Width="auto" DisplayMemberBinding="{Binding Category, Mode=TwoWay}"/>
+                    <GridViewColumn Header="ID" Width="auto"  DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Categoy" Width="auto" DisplayMemberBinding="{Binding Category}"/>
                 </GridView>
             </ListView.View>
         </ListView>

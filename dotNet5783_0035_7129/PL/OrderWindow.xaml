@@ -40,59 +40,59 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="234*"/>
+                    <ColumnDefinition Width="166*"/>
+                    <ColumnDefinition Width="221*"/>
+                    <ColumnDefinition Width="179*"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="Title" Content="The details of " HorizontalAlignment="Right" Grid.Column="1" 
-                       Grid.Row="0" FontSize="24"  />
+                <Label x:Name="Title" Content="The details of " HorizontalAlignment="Left" Grid.Column="1" 
+                       Grid.Row="0" FontSize="24" Grid.ColumnSpan="2"  Width="159"  />
                 <Label x:Name="Title2" Content="order " HorizontalAlignment="Left" Grid.Column="2" Grid.Row="0"
-                       FontSize="24"  />
-                <Label x:Name="IDxamel" Content="ID" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" />
+                       FontSize="24"  Width="74"  />
+                <Label x:Name="IDxamel" Content="ID" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Margin="0,0,0,24" Grid.RowSpan="2" Width="22" />
                 <Label x:Name="Namexamel" Content="Customer name" HorizontalAlignment="Left" Grid.Column="1" 
-                       Grid.Row="2" />
+                       Grid.Row="2" Margin="0,0,0,25" Grid.RowSpan="2" Width="94" />
                 <Label x:Name="Emailxamel" Content="Customer email" HorizontalAlignment="Left" Grid.Column="1"
-                       Grid.Row="3" />
+                       Grid.Row="2" Margin="0,24,0,25" Grid.RowSpan="3" Width="93" />
                 <Label x:Name="Adressxamel" Content="Customer adress" HorizontalAlignment="Left" Grid.Column="1"
-                       Grid.Row="4" />
+                       Grid.Row="3" Margin="0,24,0,24" Grid.RowSpan="3" Width="98" />
                 <Label x:Name="OrderDatexamel" Content="Order date" HorizontalAlignment="Left" Grid.Column="1" 
-                       Grid.Row="5" />
+                       Grid.Row="5" Margin="0,0,0,25" Grid.RowSpan="2" Width="68" />
                 <Label x:Name="ShipDatexamel" Content="Delivery date" HorizontalAlignment="Left" Grid.Column="1" 
-                       Grid.Row="6" />
+                       Grid.Row="5" Margin="0,24,0,24" Grid.RowSpan="3" Width="79" />
                 <Label x:Name="DeliveryDatexamel" Content="Arrived date" HorizontalAlignment="Left" 
-                       Grid.Column="1" Grid.Row="7" />
+                       Grid.Column="1" Grid.Row="6" Margin="0,24,0,24" Grid.RowSpan="3" Width="75" />
                 <Label x:Name="Statusxamel" Content="Status" HorizontalAlignment="Left" Grid.Column="1"
-                       Grid.Row="8"/>
+                       Grid.Row="7" Margin="0,24,0,24" Grid.RowSpan="3" Width="42"/>
                 <Label x:Name="Amountxamel" Content="Amount of items" HorizontalAlignment="Left"
-                       Grid.Column="1" Grid.Row="9"/>
+                       Grid.Column="1" Grid.Row="8" Margin="0,25,0,0" Grid.RowSpan="2" Width="99"/>
                 <Label x:Name="Pricexamel" Content="Total price" HorizontalAlignment="Left"
-                       Grid.Column="1" Grid.Row="10"/>
+                       Grid.Column="1" Grid.Row="9" Margin="0,24,0,121" Grid.RowSpan="3" Width="64"/>
                 <Label x:Name="Itemsxamel" Content="The products of the order" HorizontalAlignment="Left" 
-                       Grid.Column="1" Grid.Row="11"/>
-                <Label x:Name="showID"  Background="#FFFAEFF5" Content="{Binding  order.ID}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="1"/>
-                <Label x:Name="showName"  Background="#FFFAEFF5" Content="{Binding order.Name}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="2"/>
-                <Label x:Name="showMail"  Background="#FFFAEFF5" Content="{Binding order.Email}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="3"/>
-                <Label x:Name="showAdress"  Background="#FFFAEFF5" Content="{Binding order.Adress}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="4"/>
-                <Label x:Name="showOrderDate" Background="#FFFAEFF5" Content="{Binding order.OrderDate}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="5"/>
-                <Label x:Name="showShipDate"  Background="#FFFAEFF5" Content="{Binding order.ShipDate}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="6"/>
-                <Label x:Name="showDeliveryDate" Background="#FFFAEFF5" Content="{Binding order.DeliveryDate}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="7"/>
-                <Label x:Name="showStatus" Background="#FFFAEFF5" Content="{Binding order.Status}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="8"/>
-                <Label x:Name="showAmount" Background="#FFFAEFF5" Content="{Binding order.AmountOfItems}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="9"/>
-                <Label x:Name="showPrice" Background="#FFFAEFF5" Content="{Binding order.TotalPrice}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="10"/>
-                <ListView x:Name="showItems" Background="#FFFAEFF5" ItemsSource="{Binding order.Items }"  Grid.Row="11"   d:ItemsSource="{d:SampleData ItemCount=5 }"  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                       Grid.Column="1" Grid.Row="10" Margin="0,25,0,0" Grid.RowSpan="2" Width="146"/>
+                <Label x:Name="showID"  Background="#FFFAEFF5" Content="{Binding  order.ID}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" />
+                <Label x:Name="showName"  Background="#FFFAEFF5" Content="{Binding order.Name}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" />
+                <Label x:Name="showMail"  Background="#FFFAEFF5" Content="{Binding order.Email}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" />
+                <Label x:Name="showAdress"  Background="#FFFAEFF5" Content="{Binding order.Adress}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4"/>
+                <Label x:Name="showOrderDate" Background="#FFFAEFF5" Content="{Binding order.OrderDate}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" />
+                <Label x:Name="showShipDate"  Background="#FFFAEFF5" Content="{Binding order.ShipDate}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="6"/>
+                <Label x:Name="showDeliveryDate" Background="#FFFAEFF5" Content="{Binding order.DeliveryDate}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="7"/>
+                <Label x:Name="showStatus" Background="#FFFAEFF5" Content="{Binding order.Status}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="8" />
+                <Label x:Name="showAmount" Background="#FFFAEFF5" Content="{Binding order.AmountOfItems}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="9" />
+                <Label x:Name="showPrice" Background="#FFFAEFF5" Content="{Binding order.TotalPrice}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="10" />
+                <ListView x:Name="showItems" Background="#FFFAEFF5" HorizontalAlignment="Center" ItemsSource="{Binding order.Items }"  Grid.Row="10"   d:ItemsSource="{d:SampleData ItemCount=5 }"  Grid.Column="2" Margin="0,25,0,0" Grid.RowSpan="2" Width="196">
                     <ListView.View >
                         <GridView>
-                            <GridViewColumn Header="ID of product" Width="auto" DisplayMemberBinding="{Binding ProductID, Mode=TwoWay}"/>
-                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding CustomerName, Mode=TwoWay}"/>
-                            <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price, Mode=TwoWay}"/>
-                            <GridViewColumn Header="Amount" Width="auto" DisplayMemberBinding="{Binding Amount, Mode=TwoWay}"/>
-                            <GridViewColumn Header="Total price" Width="auto" DisplayMemberBinding="{Binding TotalPrice, Mode=TwoWay}"/>
+                            <GridViewColumn Header="ID of product" Width="auto" DisplayMemberBinding="{Binding ProductID}"/>
+                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding CustomerName}"/>
+                            <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="Amount" Width="auto" DisplayMemberBinding="{Binding Amount}"/>
+                            <GridViewColumn Header="Total price" Width="auto" DisplayMemberBinding="{Binding TotalPrice}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Label x:Name="CheckUpdate"  Content="Put v in the sqare if you want to update the order" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="12"  />
-                <CheckBox x:Name="WantToUpdate"  Background="#FFFAEFF5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="12" Grid.Column="2" IsChecked="False" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" />
+                <Label x:Name="CheckUpdate"  Content="Put v to update the order" HorizontalAlignment="Left" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" Grid.Column="1" Grid.Row="12"   />
+                <CheckBox x:Name="WantToUpdate"  Background="#FFFAEFF5" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="12" Grid.Column="2" IsChecked="False" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" Height="15" Width="16" />
             </Grid>
 
         </StackPanel>
