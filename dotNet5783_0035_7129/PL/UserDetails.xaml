@@ -20,9 +20,9 @@
         <Label Content="Enter name" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Enter Email" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Enter Adress" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="UserName" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72"/>
-        <TextBox x:Name="UserEmail" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72" />
-        <TextBox x:Name="UserAdress" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72"/>
+        <TextBox x:Name="UserName" Background="#FFFAEFF5" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72"/>
+        <TextBox x:Name="UserEmail" Background="#FFFAEFF5" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72" />
+        <TextBox x:Name="UserAdress" Background="#FFFAEFF5" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72"/>
         <Button x:Name="OrderW" Content="Go to the store" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" FontSize="9" Margin="0,0,10,10" Click="OrderW_Click" />
     </Grid>
 </Window>

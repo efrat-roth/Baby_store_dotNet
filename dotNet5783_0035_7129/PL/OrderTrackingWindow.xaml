@@ -3,16 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ValueConverterDemo"
-        xmlns:local1="clr-namespace:OrderTrackingDataBiding"
+        xmlns:local="clr-namespace:OrderTrackingDataBiding"
 
         mc:Ignorable="d"
         Title="OrderTrackingWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
 
-    <Window.Resources>
-        <local:FullToVisibilityConverter x:Key="fullToVisibility"/>
-    </Window.Resources>
+   
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -27,14 +24,14 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Name="Title" Content="The order state:" Grid.Row="0" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="IDO" Content="Enter the ID of the order:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="StatusO" Content="The status of the order:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Name="IDO" Content="ID of the order:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Name="StatusO" Content="The status:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Label Name="DateO" Content="The date status of the order" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <Label x:Name="IDInput" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding orderToTrack.ID}" Width="100"  />
-        <Label Content="{Binding orderToTrack.Status}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <ListBox x:Name="statusNodes" ItemsSource="{Binding orderToTrack.ListDateStatus}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-        </ListBox>
-        <Button x:Name="orderDetails" Visibility="{Binding ElementName=IDInput, Path=Text, Converter={StaticResource fullToVisibility}}" Content="Press to see the details of the order" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowOrder"/>
+        <Label x:Name="IDInput"  Background="#FFFAEFF5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding orderToTrack.ID}" Width="100"  />
+        <Label Content="{Binding orderToTrack.Status}"  Background="#FFFAEFF5" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <ListView x:Name="statusNodes"  Background="#FFFAEFF5" ItemsSource="{Binding orderToTrack.ListDateStatus}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        </ListView>
+        <Button x:Name="orderDetails" Content="Press to see the details of the order" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowOrder"/>
 
     </Grid>
 </Window>

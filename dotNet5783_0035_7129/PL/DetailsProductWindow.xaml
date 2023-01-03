@@ -22,19 +22,32 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="ID :" HorizontalAlignment="Right"  VerticalAlignment="Center"   FontSize="16"  Grid.Row="1" Grid.Column="0"/>
-        <Label Content="NAME:"  HorizontalAlignment="Right" VerticalAlignment="Center"  FontSize="16"  Grid.Row="2" Grid.Column="0"/>
-        <Label Content="CATEGORY:"  HorizontalAlignment="Right"  VerticalAlignment="Center"  FontSize="16"  Grid.Row="3" Grid.Column="0"/>
-        <Label Content="AMOUNT:" Grid.Row="4" HorizontalAlignment="Right"  VerticalAlignment="Center"   FontSize="16" Grid.Column="0" />
-        <Label Content="InStock:" Grid.Row="6" HorizontalAlignment="Right"   VerticalAlignment="Center"  FontSize="16" Grid.Column="0"/>
-        <Label Content="PRICE:" Grid.Row="5" HorizontalAlignment="Right"  VerticalAlignment="Center"   FontSize="16" Grid.Column="0"/>
-        <Label Content="The details of the product:" Grid.Row="0"  VerticalAlignment="Center"  HorizontalAlignment="Center"  FontSize="20" Grid.Column="0"/>
-        <Label Grid.Column="1" Content="{Binding Product.ID}" Grid.Row="1" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Product.Name}" Grid.Row="2" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Product.Category}" Grid.Row="3" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Product.Amount}" Grid.Row="4" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Product.Price}" Grid.Row="5" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Product.InStock}" Grid.Row="6" HorizontalAlignment="Left"  FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Content="ID :" HorizontalAlignment="Right"  VerticalAlignment="Center" 
+               FontSize="16"  Grid.Row="1" Grid.Column="0"/>
+        <Label Content="NAME:"  HorizontalAlignment="Right" VerticalAlignment="Center" 
+               FontSize="16"  Grid.Row="2" Grid.Column="0"/>
+        <Label Content="CATEGORY:"  HorizontalAlignment="Right"  VerticalAlignment="Center" 
+               FontSize="16"  Grid.Row="3" Grid.Column="0"/>
+        <Label Content="AMOUNT:" Grid.Row="4" HorizontalAlignment="Right"  VerticalAlignment="Center" 
+               FontSize="16" Grid.Column="0" />
+        <Label Content="InStock:" Grid.Row="6" HorizontalAlignment="Right"   VerticalAlignment="Center" 
+               FontSize="16" Grid.Column="0"/>
+        <Label Content="PRICE:" Grid.Row="5" HorizontalAlignment="Right"  VerticalAlignment="Center" 
+               FontSize="16" Grid.Column="0"/>
+        <Label Content="The details of the product:" Grid.Row="0"  VerticalAlignment="Center" 
+               HorizontalAlignment="Center"  FontSize="20" Grid.Column="0"/>
+        <Label Grid.Column="1" Content="{Binding Product.ID}" Grid.Row="1" HorizontalAlignment="Left" 
+               FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.Name}" Grid.Row="2" HorizontalAlignment="Left" 
+               FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.Category}" Grid.Row="3" HorizontalAlignment="Left" 
+               FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.Amount}" Grid.Row="4" HorizontalAlignment="Left" 
+               FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.Price}" Grid.Row="5" HorizontalAlignment="Left" 
+               FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <Label Grid.Column="1" Content="{Binding Product.InStock}" Grid.Row="6" HorizontalAlignment="Left" 
+               FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
 
     </Grid>
 </Window>

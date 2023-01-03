@@ -26,23 +26,24 @@ namespace PL
     {
         public Cart cart { get; set; }
         IBl _bl { get; set; }
-        public ObservableCollection<ProductDataBiding.OrderItem?>? OrderItems { get; set; }
-        private IEnumerable<ProductDataBiding.OrderItem?>? orderItems { get; }
+        public ObservableCollection<BO.OrderItem?>? OrderItems { get; set; }
+        private IEnumerable<BO.OrderItem?>? orderItems { get; }
         public CartWindow(IBl bl, Cart c)
         {
             _bl= bl;
             cart = c;
-            orderItems = from i in cart.Items
-                         select new ProductDataBiding.OrderItem()
-                         {
-                             Amount=i.Amount,
-                             ID=i.ID,
-                             IDProduct=i.ProductID,
-                             Name=i.Name,
-                             TotalPrice=i.TotalPrice,
-                             Price=i.Price,
-                         };
-            OrderItems = new ObservableCollection<ProductDataBiding.OrderItem?>(orderItems);
+            orderItems = cart.Items;
+            //orderItems = from i in cart.Items
+            //             select new ProductDataBiding.OrderItem()
+            //             {
+            //                 ID=i.ID,
+            //                 IDProduct=i.ProductID,
+            //                 Name=i.Name,
+            //                 TotalPrice=i.TotalPrice,
+            //                 Price=i.Price,
+            //                 Amount = i.Amount,
+            //             };
+            OrderItems = new ObservableCollection<BO.OrderItem?>(orderItems);
             DataContext = this;
             InitializeComponent();
         }
@@ -51,7 +52,7 @@ namespace PL
         {
             try
             {
-                BO.Order order= _bl.Cart.MakeOrder(cart, cart.CustomerAdress, cart.CustomerName, cart.CustomerEmail);
+                BO.Order order= _bl.Cart.MakeOrder(cart, cart?.CustomerAdress!, cart?.CustomerName!, cart?.CustomerEmail!);
                 
                 MessageBox.Show("The order was created successfully, the id of the order is"+ order.ID );
                 this.Close();
@@ -90,13 +91,12 @@ namespace PL
             try
             {
                 FrameworkElement? f = sender as FrameworkElement;
-                ProductDataBiding.OrderItem? p = (ProductDataBiding.OrderItem?)f?.DataContext;//gets the product to change
-                int productId = p.IDProduct;
+                BO.OrderItem? p = (BO.OrderItem?)f?.DataContext;//gets the product to change
+                int productId = p.ProductID;
                 int amount = p.Amount;
-                _bl.Cart.UpdateProductAmount(cart, productId, amount);
+                cart=_bl.Cart.UpdateProductAmount(cart, productId, amount);
                 f.DataContext = cart?.Items?.FirstOrDefault(oi => oi?.ID == p.ID);
-                //orderItems?.ToList().Clear();
-                //OrderItems = new ObservableCollection<ProductDataBiding.OrderItem?>(cart.Items);
+                
             }
             catch (FailedGet) { MessageBox.Show("The product is not in the store"); return; }
             catch (CanNotDOActionException) { MessageBox.Show("The amount is bigger than the amount in stock"); return; }
@@ -116,6 +116,6 @@ namespace PL
 
         }
 
-        
+       
     }
 }

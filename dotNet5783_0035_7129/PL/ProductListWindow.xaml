@@ -32,9 +32,12 @@
         </Grid>
         <ListView x:Name="ProductsListView"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5 }" 
                   Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateProduct" ItemsSource="{Binding _ProductForLists}" >
-            <ListView.View>
+            <ListView.View >
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="ID" Width="auto"  DisplayMemberBinding="{Binding ID, Mode=TwoWay}"/>
+                    <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name, Mode=TwoWay}"/>
+                    <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price, Mode=TwoWay}"/>
+                    <GridViewColumn Header="Categoy" Width="auto" DisplayMemberBinding="{Binding Category, Mode=TwoWay}"/>
                 </GridView>
             </ListView.View>
         </ListView>

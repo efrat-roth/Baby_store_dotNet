@@ -27,20 +27,20 @@
             <Label Name="TotalPrice" Content="{Binding cart.TotalPrice}"  FontSize="18" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <ListView Name="productsInCart" ItemsSource="{Binding OrderItems}" Grid.Row="1" Background="#FFFBE6F4" 
-                  d:ItemsSource="{d:SampleData ItemCount=5}">
+                  d:ItemsSource="{d:SampleData ItemCount=5}" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Product id" x:Name="ID"  DisplayMemberBinding="{Binding IDProduct , Mode=TwoWay}" ></GridViewColumn>
-                    <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Name , Mode=TwoWay}"></GridViewColumn>
-                    <GridViewColumn Header="Product price" DisplayMemberBinding="{Binding Price , Mode=TwoWay}"></GridViewColumn>
+                    <GridViewColumn Header="Product id" Width="auto" x:Name="ID"  DisplayMemberBinding="{Binding ProductID , Mode=TwoWay}" ></GridViewColumn>
+                    <GridViewColumn Header="Product name" Width="auto"   DisplayMemberBinding="{Binding Name , Mode=TwoWay}"></GridViewColumn>
+                    <GridViewColumn Header="Product price" Width="auto"  DisplayMemberBinding="{Binding Price , Mode=TwoWay}"></GridViewColumn>
                     <GridViewColumn Header="Amount">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Amount, Mode=TwoWay}" LostFocus="TextBox_TextChanged"   PreviewKeyDown="amountIsNumber" ></TextBox>
+                                <TextBox Text="{Binding Amount, Mode=TwoWay}" Width="auto"  LostFocus="TextBox_TextChanged"   PreviewKeyDown="amountIsNumber" ></TextBox>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding TotalPrice, Mode=TwoWay}"></GridViewColumn>
+                    <GridViewColumn Header="Total price" Width="auto" DisplayMemberBinding="{Binding TotalPrice, Mode=TwoWay}"></GridViewColumn>
 
                 </GridView>
             </ListView.View>

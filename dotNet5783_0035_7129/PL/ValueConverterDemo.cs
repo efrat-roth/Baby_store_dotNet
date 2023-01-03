@@ -51,6 +51,8 @@ namespace ValueConverterDemo
             }
         }
     }
+   
+    
     public class FullToVisibilityConverter : IValueConverter
     {
         //convert from source property type to target property type

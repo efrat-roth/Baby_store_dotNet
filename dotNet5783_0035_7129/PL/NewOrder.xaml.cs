@@ -119,7 +119,7 @@ namespace PL
             ProductItem? p = (ProductItem?)ProductsListView.SelectedItem;
             ProductDataBiding.ProductItem? product = new ProductDataBiding.ProductItem()
             {
-                ID = p.ID,
+                ID = p?.ID??0,
                 Category = p.Category,
                 Name = p.Name,
                 Price = p.Price,

@@ -37,44 +37,62 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="Title" Content="The details of " HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" FontSize="24"  />
-                <Label x:Name="Title2" Content="order " HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" FontSize="24"  />
-                <Label x:Name="IDxamel" Content="The ID of order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" />
-                <Label x:Name="Namexamel" Content="The name of the customer" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" />
-                <Label x:Name="Emailxamel" Content="The email of the customer" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3" />
-                <Label x:Name="Adressxamel" Content="The adress of the customer" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4" />
-                <Label x:Name="OrderDatexamel" Content="The order date of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="5" />
-                <Label x:Name="ShipDatexamel" Content="The ship date of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="6" />
-                <Label x:Name="DeliveryDatexamel" Content="The delivery date of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="7" />
-                <Label x:Name="Statusxamel" Content="The Status of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="8"/>
-                <Label x:Name="Amountxamel" Content="The amount of items in the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="9"/>
-                <Label x:Name="Pricexamel" Content="The total price of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="10"/>
-                <Label x:Name="Itemsxamel" Content="The products of the order" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="11"/>
-                <Label x:Name="showID"  Content="{Binding  order.ID}"  HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
-                <Label x:Name="showName" Content="{Binding order.Name}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2"/>
-                <Label x:Name="showMail" Content="{Binding order.Email}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="3"/>
-                <Label x:Name="showAdress" Content="{Binding order.Adress}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4"/>
-                <Label x:Name="showOrderDate" Content="{Binding order.OrderDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="5"/>
-                <Label x:Name="showShipDate" Content="{Binding order.ShipDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="6"/>
-                <Label x:Name="showDeliveryDate" Content="{Binding order.DeliveryDate}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="7"/>
-                <Label x:Name="showStatus" Content="{Binding order.Status}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="8"/>
-                <Label x:Name="showAmount" Content="{Binding order.AmountOfItems}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="9"/>
-                <Label x:Name="showPrice" Content="{Binding order.TotalPrice}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="10"/>
-                <ListView x:Name="showItems" ItemsSource="{Binding order.Items }" Grid.Row="11"   d:ItemsSource="{d:SampleData ItemCount=5 }"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <ListView.View>
+                <Label x:Name="Title" Content="The details of " HorizontalAlignment="Right" Grid.Column="1" 
+                       Grid.Row="0" FontSize="24"  />
+                <Label x:Name="Title2" Content="order " HorizontalAlignment="Left" Grid.Column="2" Grid.Row="0"
+                       FontSize="24"  />
+                <Label x:Name="IDxamel" Content="ID" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" />
+                <Label x:Name="Namexamel" Content="Customer name" HorizontalAlignment="Left" Grid.Column="1" 
+                       Grid.Row="2" />
+                <Label x:Name="Emailxamel" Content="Customer email" HorizontalAlignment="Left" Grid.Column="1"
+                       Grid.Row="3" />
+                <Label x:Name="Adressxamel" Content="Customer adress" HorizontalAlignment="Left" Grid.Column="1"
+                       Grid.Row="4" />
+                <Label x:Name="OrderDatexamel" Content="Order date" HorizontalAlignment="Left" Grid.Column="1" 
+                       Grid.Row="5" />
+                <Label x:Name="ShipDatexamel" Content="Delivery date" HorizontalAlignment="Left" Grid.Column="1" 
+                       Grid.Row="6" />
+                <Label x:Name="DeliveryDatexamel" Content="Arrived date" HorizontalAlignment="Left" 
+                       Grid.Column="1" Grid.Row="7" />
+                <Label x:Name="Statusxamel" Content="Status" HorizontalAlignment="Left" Grid.Column="1"
+                       Grid.Row="8"/>
+                <Label x:Name="Amountxamel" Content="Amount of items" HorizontalAlignment="Left"
+                       Grid.Column="1" Grid.Row="9"/>
+                <Label x:Name="Pricexamel" Content="Total price" HorizontalAlignment="Left"
+                       Grid.Column="1" Grid.Row="10"/>
+                <Label x:Name="Itemsxamel" Content="The products of the order" HorizontalAlignment="Left" 
+                       Grid.Column="1" Grid.Row="11"/>
+                <Label x:Name="showID"  Background="#FFFAEFF5" Content="{Binding  order.ID}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="1"/>
+                <Label x:Name="showName"  Background="#FFFAEFF5" Content="{Binding order.Name}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="2"/>
+                <Label x:Name="showMail"  Background="#FFFAEFF5" Content="{Binding order.Email}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="3"/>
+                <Label x:Name="showAdress"  Background="#FFFAEFF5" Content="{Binding order.Adress}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="4"/>
+                <Label x:Name="showOrderDate" Background="#FFFAEFF5" Content="{Binding order.OrderDate}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="5"/>
+                <Label x:Name="showShipDate"  Background="#FFFAEFF5" Content="{Binding order.ShipDate}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="6"/>
+                <Label x:Name="showDeliveryDate" Background="#FFFAEFF5" Content="{Binding order.DeliveryDate}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="7"/>
+                <Label x:Name="showStatus" Background="#FFFAEFF5" Content="{Binding order.Status}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="8"/>
+                <Label x:Name="showAmount" Background="#FFFAEFF5" Content="{Binding order.AmountOfItems}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="9"/>
+                <Label x:Name="showPrice" Background="#FFFAEFF5" Content="{Binding order.TotalPrice}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="10"/>
+                <ListView x:Name="showItems" Background="#FFFAEFF5" ItemsSource="{Binding order.Items }"  Grid.Row="11"   d:ItemsSource="{d:SampleData ItemCount=5 }"  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ListView.View >
                         <GridView>
-                            <GridViewColumn/>
+                            <GridViewColumn Header="ID of product" Width="auto" DisplayMemberBinding="{Binding ProductID, Mode=TwoWay}"/>
+                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding CustomerName, Mode=TwoWay}"/>
+                            <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price, Mode=TwoWay}"/>
+                            <GridViewColumn Header="Amount" Width="auto" DisplayMemberBinding="{Binding Amount, Mode=TwoWay}"/>
+                            <GridViewColumn Header="Total price" Width="auto" DisplayMemberBinding="{Binding TotalPrice, Mode=TwoWay}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Label x:Name="CheckUpdate"  Content="Put v in the sqare if you want to update the order" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="12"  />
-                <CheckBox x:Name="WantToUpdate" HorizontalAlignment="Center" Grid.Row="12" Grid.Column="1" IsChecked="False" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" />
+                <Label x:Name="CheckUpdate"  Content="Put v in the sqare if you want to update the order" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="12"  />
+                <CheckBox x:Name="WantToUpdate"  Background="#FFFAEFF5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="12" Grid.Column="2" IsChecked="False" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" />
             </Grid>
 
         </StackPanel>
@@ -103,7 +121,7 @@
                 <CheckBox x:Name="updateShiped"  Grid.Column="1"   Grid.Row="2" HorizontalAlignment="Left"  Width="108" Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
                 <CheckBox x:Name="updateDelivery"  Grid.Column="1"   Grid.Row="3" HorizontalAlignment="Left"  Width="108" Visibility="{ Binding order.ShipDate, Converter={StaticResource notNullAndDoneYetToVisibilityConverter}}"/>
 
-                <Button x:Name="UpdateProductxamel"  Content="Update the order"  HorizontalAlignment="Left" Click="UpdateProducts" Grid.Column="1" Grid.Row="4"  Width="172" />
+                <Button x:Name="UpdateProductxamel"  Content="Update the order" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Click="UpdateProducts" Grid.Column="1" Grid.Row="4"  Width="172" />
             </Grid>
         </StackPanel>
     </Grid>

@@ -171,17 +171,22 @@ internal class Cart:ICart
         };
         try { _dal.Order.Add(finalOrder); } //adds the new order  
         catch (Exception inner) { throw new FailedAdd(inner); }
-        IEnumerable<DO.OrderItem> orderitems = from o in finalCart?.Items//converts the all orderItems to DO 
-                                               let orderItem111 = new DO.OrderItem()
-                                               {
-                                                   ID = o!.ID,
-                                                   Amount = o.Amount,
-                                                   OrderID = finalOrder.ID,
-                                                   Price = o.Price,
-                                                   ProductID = o.ProductID,
-                                               }
-                                               select orderItem111;
-        try { orderitems.ToList().ForEach(o => _dal.OrderItem.Add(o)); }//Insert the order items details to the order items list.
+        IEnumerable<DO.OrderItem> orderitems;
+        try
+        {
+            orderitems = from o in finalCart?.Items//converts the all orderItems to DO 
+                         let orderItem111 = new DO.OrderItem()
+                         {
+                             ID = _dal.OrderItem.PrintAll().Last()?.ID + 1 ?? 0,
+                             Amount = o.Amount,
+                             OrderID = finalOrder.ID,
+                             Price = o.Price,
+                             ProductID = o.ProductID,
+                         }
+                         let t = _dal.OrderItem.Add(orderItem111)
+                         select orderItem111;
+        }
+        //Insert the order items details to the order items list.
         catch (Exception inner) { throw new FailedAdd(inner); }
         IEnumerable<DO.Product> productsInCart = new List<DO.Product>();
         try

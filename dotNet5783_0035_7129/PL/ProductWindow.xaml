@@ -31,17 +31,17 @@
         <Label x:Name="IDxamel" Grid.Column="1" Content="Enter ID of product" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26"  Width="111"/>
         <Label x:Name="Namexamel" Grid.Row="1" Grid.Column="1" Content="Enter the name" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="91"/>
         <Label x:Name="Categoryxamel" Grid.Row="2" Grid.Column="1" Content="choose the category" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="26"  Width="118"/>
-        <TextBox x:Name="EnterName" Grid.Row="1" Grid.Column="2" Text="{Binding product.Name}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="17" />
-        <ComboBox x:Name="ChooseCategory" Grid.Row="2" Grid.Column="2" SelectedItem="{Binding product.Category}" HorizontalAlignment="Left" ItemsSource="{Binding _Category}" VerticalAlignment="Center" Width="120" Text="Choose category of product " Height="22"/>
+        <TextBox x:Name="EnterName" Background="#FFFAEFF5" Grid.Row="1" Grid.Column="2" Text="{Binding product.Name}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="17" />
+        <ComboBox x:Name="ChooseCategory" Background="#FFFAEFF5" Grid.Row="2" Grid.Column="2" SelectedItem="{Binding product.Category}" HorizontalAlignment="Left" ItemsSource="{Binding _Category}" VerticalAlignment="Center" Width="120" Text="Choose category of product " Height="22"/>
         <Label x:Name="Pricexamel" Grid.Row="3" Grid.Column="1" Content="Enter the price" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="87"/>
-        <TextBox x:Name="EnterPrice" Grid.Row="3" Grid.Column="2" Text="{Binding product.Price}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" PreviewKeyDown="PriceIsNumber" Height="18"/>
+        <TextBox x:Name="EnterPrice" Background="#FFFAEFF5" Grid.Row="3" Grid.Column="2" Text="{Binding product.Price}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" PreviewKeyDown="PriceIsNumber" Height="18"/>
         <Label x:Name="InStockxamel" Grid.Row="4" Grid.Column="1" Content="Enter amount in stock" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="126"/>
-        <TextBox x:Name="EnterInStock" Grid.Row="4" Grid.Column="2" Text="{Binding product.Amount}" HorizontalAlignment="Left" TextWrapping="Wrap"
+        <TextBox x:Name="EnterInStock" Background="#FFFAEFF5" Grid.Row="4" Grid.Column="2" Text="{Binding product.Amount}" HorizontalAlignment="Left" TextWrapping="Wrap"
         VerticalAlignment="Center" Width="120" PreviewKeyDown="InStockIsNumber" Height="18"/>
         <Button x:Name="AddProductxamel" Grid.Row="5" Grid.Column="1" Content="Add the new product to the store"  HorizontalAlignment="Right" 
                 VerticalAlignment="Top" Click="AddProducts"  Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}" Margin="0,31,224,0" Height="20" Width="181" Grid.ColumnSpan="2" />
         <Button x:Name="UpdateProductxamel" Grid.Row="5" Grid.Column="1" Content="Update the product in the store"  HorizontalAlignment="Right" 
                 VerticalAlignment="Top" Click="UpdateProducts" Visibility="{Binding product, Converter={StaticResource notNullToVisibilityConverter}}" Margin="0,31,224,0" Height="20" Width="172" Grid.ColumnSpan="2" />
-        <Label x:Name="showID" Grid.Column="2" Content="{Binding product, XPath=ID}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="120"/>
+        <Label x:Name="showID" Background="#FFFAEFF5" Grid.Column="2" Content="{Binding product, XPath=ID}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="120"/>
     </Grid>
 </Window>

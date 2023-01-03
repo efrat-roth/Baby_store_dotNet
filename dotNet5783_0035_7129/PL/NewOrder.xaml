@@ -41,12 +41,26 @@
             <ListView x:Name="ProductsListView"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5 }"  Grid.Column="0" 
                    Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ProductsLists }" 
                       HorizontalContentAlignment="Stretch" >
-                <ListView.View>
+                
+                <ListView.View >
                     <GridView>
-                        <GridViewColumn/>
+                        <GridViewColumn Header="ID" Width="auto" x:Name="idP" DisplayMemberBinding="{Binding ID, Mode=TwoWay}"/>
+                        <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name, Mode=TwoWay}"/>
+                        <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price, Mode=TwoWay}"/>
+                        <GridViewColumn Header="Categoy" Width="auto" DisplayMemberBinding="{Binding Category, Mode=TwoWay}"/>
+                      
+                            <GridViewColumn Header="Amount in cart" Width="auto" x:Name="AmountCart" DisplayMemberBinding="{Binding AmountInCart, Mode=TwoWay}"/>
+                            <GridViewColumn Header="InStock">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Width="auto" IsEnabled="False" IsChecked="{Binding InStock, Mode=TwoWay}" Name="inS"/>
+                            </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
+          
             <Grid x:Name="ProductsByCategory" Grid.Row="1" Grid.Column="0" Background="#FFFBE6F4" 
                    Visibility="{Binding Path= IsChecked, ElementName=CategoryCheck,Converter={StaticResource notBooleanToVisibilityConverter}}" >
                 <Grid.ColumnDefinitions>
@@ -62,7 +76,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Clothes:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
-                <ListView x:Name="ClothesBy" Background="#FFFBE6F4" Grid.Row="1" Grid.Column="0" MouseDoubleClick="DetailsOfProduct" ItemsSource="{Binding _ByCategory[0] }"/>
+                <ListView x:Name="ClothesBy"  Background="#FFFBE6F4" Grid.Row="1" Grid.Column="0" MouseDoubleClick="DetailsOfProduct" ItemsSource="{Binding _ByCategory[0] }"/>
                 <Label Content="Bottles:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
                 <ListView x:Name="BottlesBy" Background="#FFFBE6F4" Grid.Row="3" Grid.Column="0" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding _ByCategory[1] }"/>
                 <Label Content="Toys" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"/>
@@ -92,14 +106,14 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Label Content="Press twice on product &#xD;&#xA;     to see its details" FontSize="12" Background="White" Margin="10,10,10,10"  />
-                <Label x:Name="id" Content="Enter ID"  Grid.Row="3"   Background="White" Margin="4,0,95,18" Grid.RowSpan="2"/>
+                <Label Content="Press twice on product &#xD;&#xA;     to see its details" FontSize="12" Background="White" Margin="10,10,10,0"  />
+                <Label x:Name="idProduct" Content="Enter ID"  Grid.Row="3"   Background="White" Margin="4,0,95,18" Grid.RowSpan="2"/>
                 <TextBox x:Name="idD"   Grid.Row="4"   Background="White" PreviewKeyDown="IdIsNumber" Margin="4,18,95,5" Grid.RowSpan="2"/>
                 <Label x:Name="amount" Content="Enter amount"  Grid.Row="3"   Background="White" Margin="70,0,4,18" Grid.RowSpan="2"/>
                 <TextBox x:Name="amountD"  Grid.Row="4"   Background="White" PreviewKeyDown="AmountIsNumber" Margin="70,18,0,5" Grid.RowSpan="2" HorizontalAlignment="Left" Width="86"/>
                 <Button x:Name="btnAdd" Content="Add product to the cart"  Grid.Row="5"  Click="AddProduct" Background="White" Margin="4,20,4,42" Grid.RowSpan="6"/>
                 <Button x:Name="Cart" Content="Go to the cart"  Grid.Row="11" Click="ShowCart" Background="White" />
-                <Label x:Name="CategoryShow" Content="Show the products by &#xD;&#xA;category"  Grid.Row="12"  Background="White" Margin="9,23,9,10" />
+                <Label x:Name="CategoryShow" Content="Show the products by &#xD;&#xA;category"  Grid.Row="12"  Background="White" Margin="9,20,9,10" />
                 <CheckBox x:Name="CategoryCheck" Grid.Row="14" Margin="62,0,80,6"/>
             </Grid>
         </Grid>
