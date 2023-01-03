@@ -6,7 +6,8 @@
      
         xmlns:local1="clr-namespace:PL"      
         mc:Ignorable="d"
-        Title="CartWindow" Height="450" Width="800">
+        Title="CartWindow" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -24,9 +25,9 @@
             <Label Name="CustomerName" Content="{Binding cart.CustomerName}" FontSize="18" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Name="CustomerEmail" Content="{Binding cart.CustomerEmail}" FontSize="18" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Name="CustomerAdress" Content="{Binding cart.CustomerAdress}"  FontSize="18" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Name="TotalPrice" Content="{Binding cart.TotalPrice}"  FontSize="18" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Name="TotalPrice" Content="{Binding cart.TotalPrice, Mode=TwoWay}"  FontSize="18" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        <ListView Name="productsInCart" ItemsSource="{Binding OrderItems}" Grid.Row="1" Background="#FFFBE6F4" 
+        <ListView Name="productsInCart"  ItemsSource="{Binding OrderItems, Mode=TwoWay}" Grid.Row="1" Background="#FFFBE6F4" 
                   d:ItemsSource="{d:SampleData ItemCount=5}" >
             <ListView.View>
                 <GridView>
@@ -36,11 +37,11 @@
                     <GridViewColumn Header="Amount">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Amount}" Width="auto"  LostFocus="TextBox_TextChanged"   PreviewKeyDown="amountIsNumber" ></TextBox>
+                                <TextBox x:Name="amo" Text="{Binding Amount,Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Width="auto"  LostFocus="TextBox_TextChanged"   PreviewKeyDown="amountIsNumber" ></TextBox>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Total price" Width="auto" DisplayMemberBinding="{Binding TotalPrice}"></GridViewColumn>
+                    <GridViewColumn Header="Total price" x:Name="PriceTotal" Width="auto" DisplayMemberBinding="{Binding TotalPrice}"></GridViewColumn>
 
                 </GridView>
             </ListView.View>

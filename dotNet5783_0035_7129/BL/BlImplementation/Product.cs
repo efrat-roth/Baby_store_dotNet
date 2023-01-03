@@ -79,20 +79,19 @@ internal class Product : IProduct
             bool inStock1 = false;
             if (p.InStock > 0)
                 inStock1 = true;
-
             ProductItem? product = new ProductItem()//create the product to return
             {
                 ID = p.ID,
                 Category = (BO.Category?)p.Category,
                 Name = p.Name,
-                Price = p.Price
+                Price = p.Price,
+                InStock=inStock1,
             };
             BO.OrderItem? oi = cart?.Items?.FirstOrDefault(p => p?.ProductID == product.ID);//get the item in the cart that represent the wanted product
             if(oi != null)//update the amount of the product in the cart
             {
                 product.AmountInCart = oi.Amount;
             }
-            product.InStock = inStock1;   
             return product;
         }
         catch (Exception inner)

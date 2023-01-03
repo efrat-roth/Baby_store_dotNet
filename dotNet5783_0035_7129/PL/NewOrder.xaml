@@ -49,7 +49,6 @@
                         <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
                         <GridViewColumn Header="Categoy" Width="auto" DisplayMemberBinding="{Binding Category}"/>
                       
-                            <GridViewColumn Header="Amount in cart" Width="auto" x:Name="AmountCart" DisplayMemberBinding="{Binding AmountInCart}"/>
                             <GridViewColumn Header="InStock">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -57,6 +56,8 @@
                             </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             </GridViewColumn>
+                        <GridViewColumn Header="Amount in cart" Width="auto" x:Name="AmountCart" DisplayMemberBinding="{Binding AmountInCart}"/>
+                    
                     </GridView>
                 </ListView.View>
             </ListView>

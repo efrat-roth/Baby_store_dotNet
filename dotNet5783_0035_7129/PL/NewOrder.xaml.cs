@@ -50,6 +50,7 @@ namespace PL
         /// <param name="e"></param>
         private void AddProduct(object sender, RoutedEventArgs e)
         { 
+
             if(idD.Text.Length==0||amountD.Text.Length==0)
             {
                 MessageBox.Show("You have to enter the details first");
@@ -57,8 +58,10 @@ namespace PL
             }
             try
             {
-                cart=_bl?.Cart.AddProductToCart(cart!, int.Parse(idD.Text));
-                cart=_bl?.Cart.UpdateProductAmount(cart!, int.Parse(idD.Text), int.Parse(amountD.Text));
+                int index = ProductsLists.IndexOf(ProductsLists.FirstOrDefault(p=>p.ID== int.Parse(idD.Text)));
+                cart =_bl?.Cart.AddProductToCart(cart!, int.Parse(idD.Text));
+                cart=_bl?.Cart.UpdateProductAmount(cart!, int.Parse(idD.Text), int.Parse(amountD.Text));    
+                ProductsLists[index] = _bl.Product.GetProductCustomer(int.Parse(idD.Text), cart);
                 MessageBox.Show("The product is added to the cart");
 
             }
@@ -74,6 +77,7 @@ namespace PL
             {
                 MessageBox.Show("The amount is bigger than the amount in stock");
             }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
 
         private void CategroyFilter(object sender, SelectionChangedEventArgs e)
