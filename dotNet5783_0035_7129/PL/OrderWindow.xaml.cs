@@ -29,11 +29,17 @@ namespace PL
             BlApi.IBl? _bl;
             public OrderDataBiding.Order order { get; set; }
             public Action<OrderForList?>? Action1 { get; set; }
+        /// <summary>
+        /// constractor
+        /// </summary>
+        /// <param name="a"></param>Action
+        /// <param name="bl1"></param>IBl
+        /// <param name="o"></param>OrderForList?
         public OrderWindow(Action<OrderForList?> a,IBl bl1, BO.OrderForList? o)
         {
             _bl = bl1;
             Action1 = a;
-            OrderDataBiding.Order? order1 = new OrderDataBiding.Order()
+            OrderDataBiding.Order? order1 = new OrderDataBiding.Order()//build the order with dependency propert for biding
             {
                 ID = o.ID,
                 TotalPrice = o.TotalPrice,
@@ -52,7 +58,11 @@ namespace PL
             
         }
         
-        
+        /// <summary>
+        /// Update a order, adiing or update product, update status
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateProducts(object sender, RoutedEventArgs e)
         {
             try
@@ -64,12 +74,12 @@ namespace PL
                     return;
                 }
                 if ((GetProduct.Text.Length > 0 && amountContent.Text.Length == 0) || (GetProduct.Text.Length == 0 && amountContent.Text.Length > 0))
-                {
+                {//if only one depended detail input
                     MessageBox.Show("The amount of product is depended on ID product input, you habe to fill both, or neither");
                     return;
                 }
                 if (GetProduct.Text.Length > 0 && amountContent.Text.Length > 0)
-                {
+                {//case of updae aproduct
                     int idProduct, amount;
                     if(!int.TryParse(GetProduct.Text, out idProduct)||
                     !int.TryParse(amountContent.Text, out amount))
@@ -77,7 +87,7 @@ namespace PL
                         MessageBox.Show("The data wasn't succeded to convert to int, please input the datails again ");
                         return ;
                     }
-                    order1=_bl?.Order.UpdateOrder(order.ID, idProduct, amount);
+                    order1=_bl?.Order.UpdateOrder(order.ID, idProduct, amount)!;
                     Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o=>o?.ID==order1?.ID));
                 }
                 if (updateShiped.IsChecked == true)
@@ -87,7 +97,7 @@ namespace PL
                 }
                 if (updateDelivery.IsChecked == true)
                 {
-                    order1 = _bl?.Order.ArrivedOrder(order.ID);
+                    order1 = _bl?.Order.ArrivedOrder(order.ID)!;
                     Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));
                 }
                 MessageBox.Show("The order has been successfuly updated");
@@ -99,7 +109,7 @@ namespace PL
             }
             catch (InvalidVariableException )
             {
-                MessageBox.Show("The details are invalid, or the product is not in the order, please check again");
+                MessageBox.Show("The details are invalid, or the amount of product is bigger than in the stock, please check again");
             }
             catch (FailedGet )
             {

@@ -338,7 +338,34 @@ internal class Order:BlApi.IOrder
         if (_dal?.Order.PrintByID(IDOrder).DeliveredDate <= DateTime.Today)
             throw new CanNotDOActionException();
         BO.Order? wantedOrder = GetDetailsOrderManager(IDOrder);
-        BO.OrderItem? oi = wantedOrder?.Items?.FirstOrDefault(oi => oi?.ProductID == IDProduct)??throw new InvalidVariableException();
+        BO.OrderItem? oi = wantedOrder?.Items?.FirstOrDefault(oi => oi?.ProductID == IDProduct);
+        if (_dal.Product.PrintByID(IDProduct).InStock < 0|| _dal.Product.PrintByID(IDProduct).InStock < newAmount)
+            throw new InvalidVariableException();
+     
+        if (oi==null)//if he product is not in the order, add it
+        {
+            oi = new OrderItem()
+            {
+                ID = _dal?.OrderItem.PrintAll().Last()?.ID + 1 ?? 0,
+                Amount = newAmount,
+                Name = _dal?.Product.PrintByID(IDProduct).Name,
+                Price = _dal?.Product.PrintByID(IDProduct).Price??0,
+                ProductID = IDProduct,
+                TotalPrice = newAmount * _dal?.Product.PrintByID(IDProduct).Price??0,
+            };
+            DO.OrderItem add = new DO.OrderItem()//update in the daa layer
+            {
+                ID = oi.ID,
+                Amount = oi.Amount,
+                OrderID = IDOrder,
+                Price = oi.Price,
+                ProductID = IDProduct
+            };
+            wantedOrder?.Items?.Add(oi);
+            _dal?.OrderItem.Add(add);
+            return wantedOrder;
+        }
+        
         wantedOrder!.TotalPrice -= oi!.TotalPrice;//for calculate the new total price of the order
         oi.Amount = newAmount;
         oi.TotalPrice = newAmount * oi.Price;
@@ -354,5 +381,4 @@ internal class Order:BlApi.IOrder
         _dal?.OrderItem.Update(update);
         return wantedOrder;    
     }
-
 }

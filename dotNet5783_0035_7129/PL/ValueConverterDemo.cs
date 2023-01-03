@@ -145,7 +145,7 @@ namespace ValueConverterDemo
         public object Convert(object value , Type targetType, object parameter, CultureInfo culture)
         {
 
-            if (value == null|| (DateTime)value > DateTime.Now)
+            if (value == null|| (DateTime)value > DateTime.Today)
             {
                 return Visibility.Visible; //Visibility.Collapsed;
             }
