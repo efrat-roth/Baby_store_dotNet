@@ -84,7 +84,7 @@
                     <ListView.View >
                         <GridView>
                             <GridViewColumn Header="ID of product" Width="auto" DisplayMemberBinding="{Binding ProductID}"/>
-                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding CustomerName}"/>
+                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
                             <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
                             <GridViewColumn Header="Amount" Width="auto" DisplayMemberBinding="{Binding Amount}"/>
                             <GridViewColumn Header="Total price" Width="auto" DisplayMemberBinding="{Binding TotalPrice}"/>
