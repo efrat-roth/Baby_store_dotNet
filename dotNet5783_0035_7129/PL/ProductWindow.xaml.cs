@@ -50,11 +50,11 @@ namespace PL
             ///The details of the current product:
             ProductDataBiding.Product? pToPrint = new ProductDataBiding.Product()
             {
-                ID = p.ID,
-                Price = p.Price,
-                Name = p?.Name,
-                Amount = _bl.Product.GetProductManager(p.ID).InStock,
-                Category = p?.Category,
+                IDProduct = p.ID,
+                PriceP = p.Price,
+                NameP = p?.Name,
+                AmountP = _bl.Product.GetProductManager(p.ID).InStock,
+                CategoryP = p?.Category,
             };
             product = pToPrint;
             InitializeComponent();
@@ -102,7 +102,7 @@ namespace PL
         private void UpdateProducts(object sender, RoutedEventArgs e)
         {
             MessageBoxResult messageBoxResult;
-            int inStock1=_bl?.Product.GetProductManager(product.ID).InStock ?? throw new BO.ObgectNullableException();
+            int inStock1=_bl?.Product.GetProductManager(product.IDProduct).InStock ?? throw new BO.ObgectNullableException();
             if (EnterInStock.Text.Length == 0 && EnterName.Text.Length == 0
                && EnterPrice.Text.Length == 0 && ChooseCategory.SelectedItem == null)
             {//Input integrity check in case the uset didn't input the all details
@@ -115,22 +115,22 @@ namespace PL
                 inStock1 = int.Parse(EnterInStock.Text);
 
             if (EnterName.Text.Length != 0)
-                product.Name = EnterName.Text;
+                product.NameP = EnterName.Text;
 
             if (EnterPrice.Text.Length != 0)
-                product.Price = double.Parse(EnterPrice.Text);
+                product.PriceP = double.Parse(EnterPrice.Text);
 
             if (ChooseCategory.SelectedItem != null)
-                product.Category = (BO.Category)ChooseCategory.SelectedItem;
+                product.CategoryP = (BO.Category)ChooseCategory.SelectedItem;
 
             try
             {
                 BO.Product? p= new BO.Product//The updating product
                 {
-                    ID = product.ID,
-                    Name = product.Name,
-                    Price = product.Price,
-                    category = (BO.Category)product.Category!,
+                    ID = product.IDProduct,
+                    Name = product.NameP,
+                    Price = product.PriceP,
+                    category = (BO.Category)product.CategoryP!,
                     InStock = inStock1,
                 };
                 _bl.Product.UpdatingProductDetails(p);//Update the product
@@ -181,7 +181,7 @@ namespace PL
 
         }
         /// <summary>
-        ///  Check the values of ID field, in order to get valid input
+        ///  Check the values of IDProduct field, in order to get valid input
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

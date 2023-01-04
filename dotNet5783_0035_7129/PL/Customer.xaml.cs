@@ -53,7 +53,7 @@ namespace PL
             OrderTrackingDataBiding.OrderTracking orderToTrack1;
             try
             {
-                if (id.Text.Length == 0)//if the user didn't input ID
+                if (id.Text.Length == 0)//if the user didn't input IDProduct
                 {
                     MessageBox.Show("Input id of order to track after the order");
                     return;
@@ -72,7 +72,7 @@ namespace PL
 
         }
         /// <summary>
-        ///  Check the values of ID field, in order to get valid input
+        ///  Check the values of IDProduct field, in order to get valid input
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

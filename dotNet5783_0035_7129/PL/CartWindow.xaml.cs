@@ -35,12 +35,12 @@ namespace PL
             orderItems = from i in cart.Items
                          select new ProductDataBiding.OrderItem()
                          {
-                             ID = i.ID,
+                             IDOI = i.ID,
                              ProductID = i.ProductID,
-                             Name = i.Name,
+                             NameOI = i.Name,
                              TotalPrice = i.TotalPrice,
-                             Price = i.Price,
-                             Amount = i.Amount,
+                             PriceOI = i.Price,
+                             AmountOI = i.Amount,
                          };
             OrderItems = new ObservableCollection<ProductDataBiding.OrderItem?>(orderItems);
             InitializeComponent();
@@ -88,16 +88,16 @@ namespace PL
                 FrameworkElement? f = sender as FrameworkElement;
                 ProductDataBiding.OrderItem? p = (ProductDataBiding.OrderItem?)f?.DataContext;//gets the product to change
                 int productId = p.ProductID;
-                int amount = p.Amount;
+                int amount = p.AmountOI;
                 cart=_bl.Cart.UpdateProductAmount(cart, productId, amount);
                 ProductDataBiding.OrderItem orderItem = new ProductDataBiding.OrderItem()
                 {
-                    ID = productId,
+                    IDOI = productId,
                     ProductID = productId,
-                    Amount = amount,
-                    Name = p.Name,
-                    Price = p.Price,
-                    TotalPrice = cart.Items.FirstOrDefault(oi => oi.ID == p.ID).TotalPrice
+                    AmountOI = amount,
+                    NameOI = p.NameOI,
+                    PriceOI = p.PriceOI,
+                    TotalPrice = cart.Items.FirstOrDefault(oi => oi.ID == p.IDOI).TotalPrice
                 };
                 OrderItems[OrderItems.IndexOf(p)]=orderItem;
             }

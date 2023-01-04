@@ -58,16 +58,21 @@ namespace PL
             }
             try
             {
-                int index = ProductsLists.IndexOf(ProductsLists.FirstOrDefault(p=>p.ID== int.Parse(idD.Text)));
-                cart =_bl?.Cart.AddProductToCart(cart!, int.Parse(idD.Text));
+                //find the index of product for products show:
+                int index = ProductsLists.IndexOf(ProductsLists.FirstOrDefault(p=>p?.ID== int.Parse(idD.Text)));
+                //find the grup of the product:
+                //var group = _ByCategory.FirstOrDefault(g => g.Key == ProductsLists[index]?.Category);
+                //find its index:
+                //int index2= group.ToList().IndexOf(group.FirstOrDefault(p => p?.ID == int.Parse(idD.Text)));
+                cart = _bl?.Cart.AddProductToCart(cart!, int.Parse(idD.Text));
                 cart=_bl?.Cart.UpdateProductAmount(cart!, int.Parse(idD.Text), int.Parse(amountD.Text));    
-                ProductsLists[index] = _bl.Product.GetProductCustomer(int.Parse(idD.Text), cart);
+                ProductsLists[index] = _bl?.Product.GetProductCustomer(int.Parse(idD.Text), cart);                
                 MessageBox.Show("The product is added to the cart");
 
             }
             catch(FailedGet )
             {
-                MessageBox.Show("The product is not in the store, enter the ID again");
+                MessageBox.Show("The product is not in the store, enter the IDProduct again");
             }
             catch(InvalidVariableException )
             {

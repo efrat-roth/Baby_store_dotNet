@@ -170,13 +170,20 @@ internal class Cart:ICart
         };
         try { _dal.Order.Add(finalOrder); } //adds the new order  
         catch (Exception inner) { throw new FailedAdd(inner); }
-        IEnumerable<DO.OrderItem> orderitems;
-        try
-        {
+        IEnumerable<DO.OrderItem> orderitems;        
+        bool flag = false;
+        int id = _dal.OrderItem.PrintAll().Last()?.ID + 1 ?? 0; ;
+        while (!flag)//while he id is in he store
+        {            
+            try { DO.OrderItem? o = _dal.OrderItem.PrintByID(id); }
+            catch (DO.IdDoesNotExistException x) { flag = true; break; }
+            ++id;
+        }
+        try{
             orderitems = from o in finalCart?.Items//converts the all orderItems to DO 
                          let orderItem111 = new DO.OrderItem()
                          {
-                             ID = _dal.OrderItem.PrintAll().Last()?.ID + 1 ?? 0,
+                             ID = id++,
                              Amount = o.Amount,
                              OrderID = finalOrder.ID,
                              Price = o.Price,
@@ -184,6 +191,7 @@ internal class Cart:ICart
                          }
                          let t = _dal.OrderItem.Add(orderItem111)
                          select orderItem111;
+        
         }
         //Insert the order items details to the order items list.
         catch (Exception inner) { throw new FailedAdd(inner); }

@@ -75,7 +75,7 @@ namespace PL
                 }
                 if ((GetProduct.Text.Length > 0 && amountContent.Text.Length == 0) || (GetProduct.Text.Length == 0 && amountContent.Text.Length > 0))
                 {//if only one depended detail input
-                    MessageBox.Show("The amount of product is depended on ID product input, you habe to fill both, or neither");
+                    MessageBox.Show("The amount of product is depended on IDProduct product input, you habe to fill both, or neither");
                     return;
                 }
                 if (GetProduct.Text.Length > 0 && amountContent.Text.Length > 0)
@@ -118,7 +118,7 @@ namespace PL
         }
 
             /// <summary>
-            ///  Check the values of ID field, in order to get valid input
+            ///  Check the values of IDProduct field, in order to get valid input
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>

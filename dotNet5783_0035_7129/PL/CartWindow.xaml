@@ -32,12 +32,12 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Product id" Width="auto" x:Name="ID"  DisplayMemberBinding="{Binding ProductID }" ></GridViewColumn>
-                    <GridViewColumn Header="Product name" Width="auto"   DisplayMemberBinding="{Binding Name }"></GridViewColumn>
-                    <GridViewColumn Header="Product price" Width="auto"  DisplayMemberBinding="{Binding Price }"></GridViewColumn>
+                    <GridViewColumn Header="Product name" Width="auto"   DisplayMemberBinding="{Binding NameOI }"></GridViewColumn>
+                    <GridViewColumn Header="Product price" Width="auto"  DisplayMemberBinding="{Binding PriceOI }"></GridViewColumn>
                     <GridViewColumn Header="Amount">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox x:Name="amo" Text="{Binding Amount,Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Width="auto"  LostFocus="TextBox_TextChanged"   PreviewKeyDown="amountIsNumber" ></TextBox>
+                                <TextBox x:Name="amo" Text="{Binding AmountOI,Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Width="auto"  LostFocus="TextBox_TextChanged"   PreviewKeyDown="amountIsNumber" ></TextBox>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
