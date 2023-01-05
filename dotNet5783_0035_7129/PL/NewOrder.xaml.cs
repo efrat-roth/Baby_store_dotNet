@@ -125,7 +125,9 @@ namespace PL
         
         private void DetailsOfProduct(object sender, MouseButtonEventArgs e)
         {
-            ProductItem? p = (ProductItem?)ProductsListView.SelectedItem;
+            ListView list = (ListView)sender;
+            if (list.SelectedItem == null) return;
+            ProductItem? p = (ProductItem?)list.SelectedItem;
             ProductDataBiding.ProductItem? product = new ProductDataBiding.ProductItem()
             {
                 ID = p?.ID??0,
@@ -138,6 +140,7 @@ namespace PL
             DetailsProductWindow details = new DetailsProductWindow(_bl,product);
             details.ShowDialog();
         }
+        
         private void ShowCart(object sender, RoutedEventArgs e)
         {
             CartWindow c = new CartWindow(_bl,cart);

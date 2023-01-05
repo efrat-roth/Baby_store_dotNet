@@ -89,7 +89,7 @@ namespace PL
                 ProductDataBiding.OrderItem? p = (ProductDataBiding.OrderItem?)f?.DataContext;//gets the product to change
                 int productId = p.ProductID;
                 int amount = p.AmountOI;
-                cart=_bl.Cart.UpdateProductAmount(cart, productId, amount);
+                cart=_bl.Cart.UpdateProductAmount(finalCart: cart, productId, amount);
                 ProductDataBiding.OrderItem orderItem = new ProductDataBiding.OrderItem()
                 {
                     IDOI = productId,
