@@ -215,7 +215,7 @@ namespace PL
             catch (ObgectNullableException) { MessageBox.Show("ERROR, please try again"); }
             catch (FailedGet) { MessageBox.Show("The product coudn't reload"); }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-        }\
         }
+        
     }
 }
