@@ -171,19 +171,24 @@ internal class Product : IProduct
         }
         DO.OrderItem? exist = orderI.FirstOrDefault(oi => oi?.ProductID == ID) ?? new DO.OrderItem();//check if the product to delete is exist
         if(exist==null)// if the product is not exist
-            throw new BO.CanNotDOActionException();
+            throw new BO.IdDoesNotExistException();
         if (!_dal?.Product.Delete(ID) ?? throw new BO.ObgectNullableException())//delete the product
             throw new BO.IdDoesNotExistException();
     }
 
     /// <summary>
     /// return a list of products by filtering them
-    /// </summary>
+    /// </summary>  
     /// <param name="c"></param>Category of the product
     /// <returns></returns>list of the products
     public List<BO.ProductForList?>? GetProductByCondition(Func<BO.ProductForList?,bool>f)
     {
-        IEnumerable<DO.Product?> Allproduct = _dal?.Product.PrintAll() ?? new List<DO.Product?>();//gets the all products
+        IEnumerable<DO.Product?> Allproduct;
+        try { Allproduct = _dal?.Product.PrintAll() ?? new List<DO.Product?>(); }///gets the all products
+        catch (Exception inner)
+        {
+            throw new FailedGet(inner);
+        }
         IEnumerable<ProductForList?>? newProducts = from p in Allproduct                 //convert the product to ProductForList
                                                     let pForList = new ProductForList()
                                                     {

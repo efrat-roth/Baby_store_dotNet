@@ -60,10 +60,6 @@ namespace PL
             {
                 //find the index of product for products show:
                 int index = ProductsLists.IndexOf(ProductsLists.FirstOrDefault(p=>p?.ID== int.Parse(idD.Text)));
-                //find the grup of the product:
-                //var group = _ByCategory.FirstOrDefault(g => g.Key == ProductsLists[index]?.Category);
-                //find its index:
-                //int index2= group.ToList().IndexOf(group.FirstOrDefault(p => p?.ID == int.Parse(idD.Text)));
                 cart = _bl?.Cart.AddProductToCart(cart!, int.Parse(idD.Text));
                 cart=_bl?.Cart.UpdateProductAmount(cart!, int.Parse(idD.Text), int.Parse(amountD.Text));    
                 ProductsLists[index] = _bl?.Product.GetProductCustomer(int.Parse(idD.Text), cart);                

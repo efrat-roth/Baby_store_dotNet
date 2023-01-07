@@ -88,12 +88,18 @@ namespace PL
             ProductWindow p = new ProductWindow(addP!,_bl ?? throw new BO.ObgectNullableException());
             p.ShowDialog();
         }
-        private void UpdateP(ProductForList productForList)
+        private void UpdateP(ProductForList? productForList)
         {
-            var p = _ProductForLists?.FirstOrDefault(item => item.ID == productForList.ID);
+            var p = _ProductForLists?.FirstOrDefault(item => item?.ID == productForList?.ID);
             int index = _ProductForLists.IndexOf(p);
             _ProductForLists[index] = productForList;
 
+        }
+        private void DeleteP(ProductForList? productForList)
+        {
+            var p = _ProductForLists?.FirstOrDefault(item => item?.ID == productForList?.ID);
+            int index = _ProductForLists.IndexOf(p);
+            _ProductForLists.Remove(_ProductForLists[index]);
         }
         /// <summary>
         /// Update product by click event
@@ -104,7 +110,7 @@ namespace PL
         {
             BO.ProductForList? productForList = (BO.ProductForList?)ProductsListView.SelectedItem;
            
-            ProductWindow updateProduct =new ProductWindow(UpdateP,_bl ?? throw new BO.ObgectNullableException(), productForList);
+            ProductWindow updateProduct =new ProductWindow(UpdateP, DeleteP, _bl ?? throw new BO.ObgectNullableException(), productForList);
             updateProduct.ShowDialog();
 
         }

@@ -90,16 +90,25 @@ namespace PL
                 int productId = p.ProductID;
                 int amount = p.AmountOI;
                 cart=_bl.Cart.UpdateProductAmount(finalCart: cart, productId, amount);
-                ProductDataBiding.OrderItem orderItem = new ProductDataBiding.OrderItem()
+                
+                if (amount != 0)
                 {
-                    IDOI = productId,
-                    ProductID = productId,
-                    AmountOI = amount,
-                    NameOI = p.NameOI,
-                    PriceOI = p.PriceOI,
-                    TotalPrice = cart.Items.FirstOrDefault(oi => oi.ID == p.IDOI).TotalPrice
-                };
-                OrderItems[OrderItems.IndexOf(p)]=orderItem;
+                    ProductDataBiding.OrderItem? orderItem = new ProductDataBiding.OrderItem()
+                    {
+                        IDOI = productId,
+                        ProductID = productId,
+                        AmountOI = amount,
+                        NameOI = p.NameOI,
+                        PriceOI = p.PriceOI,
+                        TotalPrice = cart.Items.FirstOrDefault(oi => oi.ID == p.IDOI).TotalPrice
+                    };
+                    OrderItems[OrderItems.IndexOf(p)] = orderItem;
+                }
+                else
+                {
+                    OrderItems?.Remove( OrderItems[OrderItems.IndexOf(p)]);
+                }
+               
             }
             catch (FailedGet) { MessageBox.Show("The product is not in the store"); return; }
             catch (CanNotDOActionException) { MessageBox.Show("The amount is bigger than the amount in stock"); return; }

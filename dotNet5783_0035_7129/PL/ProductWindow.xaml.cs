@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using BO;
 
 namespace PL
 {
@@ -25,6 +26,8 @@ namespace PL
         BlApi.IBl? _bl ;
         public ProductDataBiding.Product? product { get; set; }
         private Action<BO.ProductForList?> _action { get; set; }
+        private Action<BO.ProductForList?> _actionDel { get; set; }
+
         public Array _Category { get; set; } = Enum.GetValues(typeof(BO.Category));
         /// <summary>
         /// Constractor for adding product
@@ -43,10 +46,11 @@ namespace PL
         /// </summary>
         /// <param name="bl1"></param>The contract with the logic layer
         /// <param name="p"></param>The product to update
-        public ProductWindow(Action<BO.ProductForList?> action,BlApi.IBl bl1 ,BO.ProductForList? p)
+        public ProductWindow(Action<BO.ProductForList?> action, Action<BO.ProductForList?> delete, BlApi.IBl bl1 ,BO.ProductForList? p)
         {
             _bl = bl1;
             _action = action;
+            _actionDel = delete;
             ///The details of the current product:
             ProductDataBiding.Product? pToPrint = new ProductDataBiding.Product()
             {
@@ -95,7 +99,7 @@ namespace PL
         }
 
         /// <summary>
-        /// Update a product
+        /// Update details of product in the store
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -109,7 +113,6 @@ namespace PL
                 MessageBox.Show("The product has not been updated");
                 return;
             }
-
             //check wether the fields to update
             if (EnterInStock.Text.Length != 0)
                 inStock1 = int.Parse(EnterInStock.Text);
@@ -199,6 +202,20 @@ namespace PL
 
         }
 
-        
+        private void DeleteProducts(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _actionDel(_bl?.Product?.GetProductByCondition(item => item?.ID == product?.IDProduct)?.FirstOrDefault());
+                _bl?.Product.DeleteProduct(product.IDProduct);
+                this.Close();
+            }
+            catch (IdDoesNotExistException) { MessageBox.Show("The product is not in the store"); }
+            catch (InvalidVariableException) { MessageBox.Show("The minimum value of product ID is 100000"); }
+            catch (ObgectNullableException) { MessageBox.Show("ERROR, please try again"); }
+            catch (FailedGet) { MessageBox.Show("The product coudn't reload"); }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+        }\
+        }
     }
 }

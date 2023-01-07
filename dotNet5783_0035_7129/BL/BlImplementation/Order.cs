@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BlImplementation;
 
-internal class Order:BlApi.IOrder
+internal class Order : BlApi.IOrder
 {
     DalApi.IDal? _dal = DalApi.Factory.Get();
     /// <summary>
@@ -21,9 +22,9 @@ internal class Order:BlApi.IOrder
     /// <returns></returns>List of OrderForList
     public List<OrderForList?> GetListOfOrders()
     {
-        IEnumerable<DO.Order?> orders = _dal?.Order.PrintAll()??throw new ObgectNullableException();
+        IEnumerable<DO.Order?> orders = _dal?.Order.PrintAll() ?? throw new ObgectNullableException();
         IEnumerable<OrderForList?> ordersOrderedReturn = from o in orders
-                                                         where( o?.OrderDate <= DateTime.Today&&!(o?.ArrivedDate<=DateTime.Today)&&!(o?.DeliveredDate<=DateTime.Today))
+                                                         where (o?.OrderDate <= DateTime.Today && !(o?.ArrivedDate <= DateTime.Today) && !(o?.DeliveredDate <= DateTime.Today))
                                                          let oNew = new OrderForList()
                                                          {
                                                              ID = o?.ID ?? throw new ObgectNullableException(),
@@ -38,10 +39,11 @@ internal class Order:BlApi.IOrder
                                                              Status = BO.OrderStatus.ConfirmedOrder
 
                                                          }
+                                                         where oNew.AmountOfItems > 0
                                                          select oNew;
 
         IEnumerable<OrderForList?> ordersDeliveredReturn = from o in orders
-                                                           where( o?.DeliveredDate <= DateTime.Today&&!(o?.ArrivedDate<=DateTime.Today))
+                                                           where (o?.DeliveredDate <= DateTime.Today && !(o?.ArrivedDate <= DateTime.Today))
                                                            let oNew = new OrderForList()
                                                            {
                                                                ID = o?.ID ?? throw new ObgectNullableException(),
@@ -56,6 +58,7 @@ internal class Order:BlApi.IOrder
                                                                Status = BO.OrderStatus.DeliveredOrder
 
                                                            }
+                                                           where oNew.AmountOfItems > 0
                                                            select oNew;
 
         IEnumerable<OrderForList?> ordersArrivedReturn = from o in orders
@@ -74,10 +77,11 @@ internal class Order:BlApi.IOrder
                                                              Status = BO.OrderStatus.ArrivedOrder
 
                                                          }
+                                                         where oNew.AmountOfItems > 0
                                                          select oNew;
 
-        return ordersOrderedReturn.Union(ordersArrivedReturn.Union(ordersDeliveredReturn)).OrderBy(o=>o?.ID).ToList();    
-    //return the union of the all groups
+        return ordersOrderedReturn.Union(ordersArrivedReturn.Union(ordersDeliveredReturn)).OrderBy(o => o?.ID).ToList();
+        //return the union of the all groups
     }
 
     /// <summary>
@@ -88,12 +92,12 @@ internal class Order:BlApi.IOrder
     /// <exception cref="Exception"></exception>ID not exist
     public BO.Order GetDetailsOrderManager(int ID)
     {
-        DO.Order order1=new DO.Order();
+        DO.Order order1 = new DO.Order();
         try { order1 = _dal?.Order.PrintByID(ID) ?? throw new ObgectNullableException(); }//asked order
-        catch(Exception inner) { throw new FailedGet(inner); }
-        IEnumerable<DO.OrderItem?> orderItems=new List<DO.OrderItem?>();
-        try { orderItems = _dal.OrderItem.PrintAll(oi=>oi?.OrderID==ID); }//List of orderItems of the order
-        catch(Exception inner) { throw new FailedGet(inner); }
+        catch (Exception inner) { throw new FailedGet(inner); }
+        IEnumerable<DO.OrderItem?> orderItems = new List<DO.OrderItem?>();
+        try { orderItems = _dal.OrderItem.PrintAll(oi => oi?.OrderID == ID); }//List of orderItems of the order
+        catch (Exception inner) { throw new FailedGet(inner); }
         BO.Order logicOrder = new BO.Order
         {
             ID = order1.ID,
@@ -104,10 +108,10 @@ internal class Order:BlApi.IOrder
             ShipDate = order1.DeliveredDate,
             OrderDate = order1.OrderDate,
             Items = new List<OrderItem?>(),
-            TotalPrice=0,
-            
+            TotalPrice = 0,
+
         };//Resets the field of item to return
-               
+
         if (order1.OrderDate <= DateTime.Today)
         {
             logicOrder.Status = OrderStatus.ConfirmedOrder;
@@ -132,15 +136,15 @@ internal class Order:BlApi.IOrder
                               Price = OI?.Price ?? throw new ObgectNullableException(),
                               Amount = OI?.Amount ?? throw new ObgectNullableException(),
                               TotalPrice = OI?.Price * OI?.Amount ?? throw new ObgectNullableException(),
-                              
+
                           }
                           select OItem;
         }
         catch (Exception inner) { throw new FailedGet(inner); }
         logicOrder.Items = orderItems1.ToList();//put the all orderItems in the item field of logicOrder
-        logicOrder.TotalPrice=logicOrder.Items.Sum(o => o?.TotalPrice??throw new ObgectNullableException());
+        logicOrder.TotalPrice = logicOrder.Items.Sum(o => o?.TotalPrice ?? throw new ObgectNullableException());
         //Sum the all price of all orderItems
-        return logicOrder;     
+        return logicOrder;
     }
 
 
@@ -163,19 +167,19 @@ internal class Order:BlApi.IOrder
     /// <returns></returns>BO.Order
     public BO.Order DeliveredOrder(int IDOrder)
     {
-        DO.Order CheckOrder=new DO.Order();
+        DO.Order CheckOrder = new DO.Order();
         try { CheckOrder = _dal?.Order.PrintByID(IDOrder) ?? throw new ObgectNullableException(); }
-        catch(Exception inner) { throw new FailedGet(inner); }
+        catch (Exception inner) { throw new FailedGet(inner); }
         if (CheckOrder.DeliveredDate <= DateTime.Today)//If the order delivered already
         {
             throw new CanNotDOActionException();
         }
-        CheckOrder.DeliveredDate=DateTime.Today;//resets the field to now
-        try { _dal.Order.Update( CheckOrder); }//update the order in the database
+        CheckOrder.DeliveredDate = DateTime.Today;//resets the field to now
+        try { _dal.Order.Update(CheckOrder); }//update the order in the database
         catch (Exception inner) { throw new FailedUpdate(inner); }
-        IEnumerable<DO.OrderItem?> items1=new List<DO.OrderItem?>();
-        try { items1 = _dal.OrderItem.PrintAll(oi=>oi?.OrderID==IDOrder); }//gets the all orderItems of the order
-        catch(Exception inner) { throw new FailedGet(inner); }
+        IEnumerable<DO.OrderItem?> items1 = new List<DO.OrderItem?>();
+        try { items1 = _dal.OrderItem.PrintAll(oi => oi?.OrderID == IDOrder); }//gets the all orderItems of the order
+        catch (Exception inner) { throw new FailedGet(inner); }
         try
         {
             BO.Order ReturnOrder = new BO.Order//create BO order
@@ -212,34 +216,34 @@ internal class Order:BlApi.IOrder
     /// <returns></returns>BO.Order
     public BO.Order ArrivedOrder(int IDOrder)
     {
-        DO.Order CheckOrder=new DO.Order();
+        DO.Order CheckOrder = new DO.Order();
         try { CheckOrder = _dal?.Order.PrintByID(IDOrder) ?? throw new ObgectNullableException(); }
         catch (Exception inner) { throw new FailedGet(inner); }
         if (CheckOrder.ArrivedDate <= DateTime.Today)
         {
-                throw new CanNotDOActionException();
+            throw new CanNotDOActionException();
         }
         if (CheckOrder.DeliveredDate <= DateTime.Today)
         {
         }
         else CheckOrder.DeliveredDate = DateTime.Today;
-        CheckOrder.ArrivedDate= DateTime.Today;
+        CheckOrder.ArrivedDate = DateTime.Today;
         if (!(_dal.Order.Update(CheckOrder)))
             throw new CanNotDOActionException();
 
         IEnumerable<DO.OrderItem?> items1 = _dal.OrderItem.PrintAll(items1 => items1?.ID == IDOrder);
-            BO.Order ReturnOrder = new BO.Order
-            {
-                ID = IDOrder,
-                CustomerName = CheckOrder.CustomerName,
-                CustomerEmail = CheckOrder.CustomerEmail,
-                CustomerAdress = CheckOrder.CustomerAdress,
-                OrderDate = CheckOrder.OrderDate,
-                ShipDate = CheckOrder.DeliveredDate,
-                DeliveryDate = CheckOrder.ArrivedDate,
-                Status = OrderStatus.ArrivedOrder,
-                Items = new List<OrderItem?>(),
-            };
+        BO.Order ReturnOrder = new BO.Order
+        {
+            ID = IDOrder,
+            CustomerName = CheckOrder.CustomerName,
+            CustomerEmail = CheckOrder.CustomerEmail,
+            CustomerAdress = CheckOrder.CustomerAdress,
+            OrderDate = CheckOrder.OrderDate,
+            ShipDate = CheckOrder.DeliveredDate,
+            DeliveryDate = CheckOrder.ArrivedDate,
+            Status = OrderStatus.ArrivedOrder,
+            Items = new List<OrderItem?>(),
+        };
         IEnumerable<OrderItem?> convertedOrderItems;
         try
         {
@@ -257,7 +261,7 @@ internal class Order:BlApi.IOrder
         }
         catch (Exception inner) { throw new FailedGet(inner); }
         ReturnOrder.Items = convertedOrderItems.ToList();
-        return ReturnOrder;        
+        return ReturnOrder;
     }
 
     /// <summary>
@@ -269,51 +273,51 @@ internal class Order:BlApi.IOrder
     public OrderTracking OrderTracking(int IDOrder)
     {
 
-        DO.Order CheckOrder=new DO.Order();
+        DO.Order CheckOrder = new DO.Order();
         try { CheckOrder = _dal?.Order.PrintByID(IDOrder) ?? throw new ObgectNullableException(); }
-        catch (Exception inner){throw new FailedGet(inner); }
-            List<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
-            OrderStatus status1 = new OrderStatus();
-            if (CheckOrder.OrderDate <= DateTime.Today)
+        catch (Exception inner) { throw new FailedGet(inner); }
+        List<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
+        OrderStatus status1 = new OrderStatus();
+        if (CheckOrder.OrderDate <= DateTime.Today)
+        {
+            NodeDateStatus newNode = new NodeDateStatus
             {
-                NodeDateStatus newNode = new NodeDateStatus
-                {
-                    Date = CheckOrder.OrderDate,
-                    status = "The order was created"
-                };
-                ListDateStatus1.Add(newNode);
-                status1 = OrderStatus.ConfirmedOrder;
-            }
-            if (CheckOrder.DeliveredDate <= DateTime.Today)
-            {
-                NodeDateStatus newNode1 = new NodeDateStatus
-                {
-                    Date = CheckOrder.OrderDate,
-                    status = "The order was delivered"
-                };
-                ListDateStatus1.Add(newNode1);
-                status1 = OrderStatus.DeliveredOrder;
-            }
-            if (CheckOrder.ArrivedDate <= DateTime.Today)
-            {
-                NodeDateStatus newNode2 = new NodeDateStatus
-                {
-                    Date = CheckOrder.OrderDate,
-                    status = "The order was arrived"
-                };
-                ListDateStatus1.Add(newNode2);
-                status1 = OrderStatus.ArrivedOrder;
-            }
-            OrderTracking NewOrderTracking = new OrderTracking
-            {
-                ID = IDOrder,
-                Status = status1,
-                ListDateStatus = ListDateStatus1
+                Date = CheckOrder.OrderDate,
+                status = "The order was created"
             };
-            return NewOrderTracking;
+            ListDateStatus1.Add(newNode);
+            status1 = OrderStatus.ConfirmedOrder;
+        }
+        if (CheckOrder.DeliveredDate <= DateTime.Today)
+        {
+            NodeDateStatus newNode1 = new NodeDateStatus
+            {
+                Date = CheckOrder.OrderDate,
+                status = "The order was delivered"
+            };
+            ListDateStatus1.Add(newNode1);
+            status1 = OrderStatus.DeliveredOrder;
+        }
+        if (CheckOrder.ArrivedDate <= DateTime.Today)
+        {
+            NodeDateStatus newNode2 = new NodeDateStatus
+            {
+                Date = CheckOrder.OrderDate,
+                status = "The order was arrived"
+            };
+            ListDateStatus1.Add(newNode2);
+            status1 = OrderStatus.ArrivedOrder;
+        }
+        OrderTracking NewOrderTracking = new OrderTracking
+        {
+            ID = IDOrder,
+            Status = status1,
+            ListDateStatus = ListDateStatus1
+        };
+        return NewOrderTracking;
     }
 
-    
+
     /// <summary>
     /// The method update the amount of product in exist order
     /// </summary>
@@ -322,16 +326,16 @@ internal class Order:BlApi.IOrder
     /// <param name="newAmount"></param>New amont of product
     /// <returns></returns>BO.Order with the new amount
     /// <exception cref="Exception"></exception>The ID is less than zero / The order was shiped already
-    public BO.Order UpdateOrder(int IDOrder,int IDProduct, int  newAmount)
+    public BO.Order UpdateOrder(int IDOrder, int IDProduct, int newAmount)
     {
         if (IDOrder < 0)
-            throw  new BO.InvalidVariableException();
+            throw new BO.InvalidVariableException();
         if (IDProduct < 0)
             throw new BO.InvalidVariableException();
         if (newAmount < 0)
-            throw  new BO.InvalidVariableException();
+            throw new BO.InvalidVariableException();
         try { _dal?.Order.PrintByID(IDOrder); }
-        catch(Exception inner)
+        catch (Exception inner)
         {
             throw new FailedGet(inner);
         }
@@ -339,21 +343,46 @@ internal class Order:BlApi.IOrder
             throw new CanNotDOActionException();
         BO.Order? wantedOrder = GetDetailsOrderManager(IDOrder);
         BO.OrderItem? oi = wantedOrder?.Items?.FirstOrDefault(oi => oi?.ProductID == IDProduct);
-        if (_dal.Product.PrintByID(IDProduct).InStock < 0|| _dal.Product.PrintByID(IDProduct).InStock < newAmount)
+        if (_dal?.Product.PrintByID(IDProduct).InStock < 0 || _dal?.Product.PrintByID(IDProduct).InStock < newAmount)
             throw new InvalidVariableException();
-     
-        if (oi==null)//if he product is not in the order, add it
+        DO.Product product = _dal.Product.PrintByID(IDProduct);//for update in stock
+        if (newAmount > product.InStock - oi?.Amount)
+            throw new InvalidVariableException();
+        if (newAmount != 0)
         {
-            oi = new OrderItem()
+            if (oi == null)//if he product is not in the order, add it
             {
-                ID = _dal?.OrderItem.PrintAll().Last()?.ID + 1 ?? 0,
-                Amount = newAmount,
-                Name = _dal?.Product.PrintByID(IDProduct).Name,
-                Price = _dal?.Product.PrintByID(IDProduct).Price??0,
-                ProductID = IDProduct,
-                TotalPrice = newAmount * _dal?.Product.PrintByID(IDProduct).Price??0,
-            };
-            DO.OrderItem add = new DO.OrderItem()//update in the daa layer
+                oi = new OrderItem()
+                {
+                    ID = _dal?.OrderItem.PrintAll().Last()?.ID + 1 ?? 0,
+                    Amount = newAmount,
+                    Name = _dal?.Product.PrintByID(IDProduct).Name,
+                    Price = _dal?.Product.PrintByID(IDProduct).Price ?? 0,
+                    ProductID = IDProduct,
+                    TotalPrice = newAmount * _dal?.Product.PrintByID(IDProduct).Price ?? 0,
+                };
+                DO.OrderItem add = new DO.OrderItem()//update in the daa layer
+                {
+                    ID = oi.ID,
+                    Amount = oi.Amount,
+                    OrderID = IDOrder,
+                    Price = oi.Price,
+                    ProductID = IDProduct
+                };
+                wantedOrder?.Items?.Add(oi);
+                _dal?.OrderItem.Add(add);
+                product.InStock -= add.Amount;
+                _dal?.Product.Update(product);//update the amount in stocp of product
+                return wantedOrder;
+            }
+           
+            product.InStock += oi.Amount;
+            _dal.Product.Update(product);
+            wantedOrder!.TotalPrice -= oi!.TotalPrice;//for calculate the new total price of the order
+            oi.Amount = newAmount;
+            oi.TotalPrice = newAmount * oi.Price;
+            wantedOrder.TotalPrice += oi.TotalPrice;//for calculate the new total price of the order
+            DO.OrderItem update = new DO.OrderItem()
             {
                 ID = oi.ID,
                 Amount = oi.Amount,
@@ -361,24 +390,23 @@ internal class Order:BlApi.IOrder
                 Price = oi.Price,
                 ProductID = IDProduct
             };
-            wantedOrder?.Items?.Add(oi);
-            _dal?.OrderItem.Add(add);
+           
+            product.InStock -= oi.Amount;
+            _dal?.OrderItem.Update(update);
             return wantedOrder;
         }
-        
-        wantedOrder!.TotalPrice -= oi!.TotalPrice;//for calculate the new total price of the order
-        oi.Amount = newAmount;
-        oi.TotalPrice = newAmount * oi.Price;
-        wantedOrder.TotalPrice += oi.TotalPrice;//for calculate the new total price of the order
-        DO.OrderItem update = new DO.OrderItem()
+        else
         {
-            ID = oi.ID,
-            Amount=oi.Amount,
-            OrderID=IDOrder,
-            Price=oi.Price,
-            ProductID=IDProduct            
-        };
-        _dal?.OrderItem.Update(update);
-        return wantedOrder;    
+            product.InStock += oi.Amount;
+            _dal.Product.Update(product);
+            wantedOrder?.Items?.Remove(oi);
+            _dal?.OrderItem.Delete(oi.ID);
+            if (wantedOrder?.Items?.Count() == 0)
+            {
+                _dal?.Order.Delete(IDOrder);
+            }
+            return wantedOrder;
+        }
+
     }
 }

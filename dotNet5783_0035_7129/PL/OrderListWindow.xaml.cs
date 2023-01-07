@@ -31,11 +31,22 @@ namespace PL
             OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);//convert to observel in order to update the details 
             InitializeComponent();         
         }
-        private void UpdateO(OrderForList orderForList)
+        private void UpdateO(OrderForList? orderForList)
         {
-            var o = OrderForLists?.FirstOrDefault(item => item.ID == orderForList.ID);
+            var o = OrderForLists?.FirstOrDefault(item => item?.ID == orderForList?.ID);
             int index = OrderForLists!.IndexOf(o);
-            OrderForLists[index] = orderForList;
+            if (orderForList.AmountOfItems != 0)
+            {
+               
+                OrderForLists[index] = orderForList;
+            }
+            else
+            {
+                OrderForLists.Remove(OrderForLists[index]);
+            }
+
+
+
 
         }
         private void UpdateOrder(object sender, MouseButtonEventArgs e)

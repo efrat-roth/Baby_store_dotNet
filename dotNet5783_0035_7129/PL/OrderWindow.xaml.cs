@@ -87,7 +87,17 @@ namespace PL
                         MessageBox.Show("The data wasn't succeded to convert to int, please input the datails again ");
                         return ;
                     }
-                    order1=_bl?.Order.UpdateOrder(order.ID, idProduct, amount)!;
+                    order1 = _bl?.Order.UpdateOrder(order.ID, idProduct, amount)!;
+                    if (order1.Items.Count()==0)//if delete the last produc in the order, delete the order
+                    {
+                      OrderForList? orderFor = new OrderForList()
+                        {
+                            ID = order1.ID,
+                            AmountOfItems = 0,                            
+                        };
+                        Action1!(orderFor);
+                    }
+                   else
                     Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o=>o?.ID==order1?.ID));
                 }
                 if (updateShiped.IsChecked == true)
@@ -115,6 +125,7 @@ namespace PL
             {
                 MessageBox.Show("The order wasn't found");
             }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
 
             /// <summary>
