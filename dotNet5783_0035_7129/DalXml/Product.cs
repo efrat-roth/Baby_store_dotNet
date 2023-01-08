@@ -50,19 +50,19 @@ internal class Product : IProduct
         ProductRoot = new XElement("products", v);
         ProductRoot.Save(FPath);
     }
-    public List<DO.Product?> GetProductsList()
+    public List<DO.Product?>? GetProductsList()
     {
         LoadData();
-        List<DO.Product> products;
+        List<DO.Product?>? products;
        
         try
         {
             DO.Category c=new DO.Category();
             products = (from p in ProductRoot.Elements()
                         let b = Category.TryParse(p.Element("Category")!.Value, out c)
-                        let product1 = new DO.Product()
+                        let product1 = new DO.Product() 
                         {
-                            ID = Convert.ToInt32(p.Element("id")!.Value),
+                            ID= Convert.ToInt32(p.Element("id")!.Value),
                             Name = p.Element("name")!.Value,
                             Price = Convert.ToDouble(p.Element("Price")!.Value),
                             Category = c,
@@ -74,6 +74,6 @@ internal class Product : IProduct
         {
             products = null;
         }
-        return products??throw new ObgectNullableException();
+        return products;
     }
 }
