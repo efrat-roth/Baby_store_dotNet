@@ -107,7 +107,7 @@ namespace DalTest
                                     int id1;
                                     if (!int.TryParse(Console.ReadLine(), out id1))
                                         throw new InvalidVariableException();
-                                    Product p = dalList1?.Product.PrintByID(id1) ?? throw new ObgectNullableException();
+                                    Product p = dalList1?.Product.GetByID(id1) ?? throw new ObgectNullableException();
                                     Console.WriteLine(p);
                                     break;
                                 }
@@ -132,7 +132,7 @@ namespace DalTest
                             {
                                 try
                                 {
-                                    IEnumerable<Product?> productPrint= dalList1?.Product.PrintAll() ?? throw new ObgectNullableException();
+                                    IEnumerable<Product?> productPrint= dalList1?.Product.GetAll() ?? throw new ObgectNullableException();
                                     foreach (Product? p in productPrint)
                                     {
                                         Console.WriteLine(p);
@@ -185,7 +185,7 @@ namespace DalTest
                                     int id1;
                                     if (!int.TryParse(Console.ReadLine(), out id1))
                                         throw new InvalidVariableException();
-                                    Product p = dalList1?.Product.PrintByID(id1) ?? throw new ObgectNullableException();
+                                    Product p = dalList1?.Product.GetByID(id1) ?? throw new ObgectNullableException();
                                     Console.WriteLine("Do you want to change the name?, enter y for yes and n for no");
                                     string? answer = Console.ReadLine();
                                     if (answer == "y")
@@ -377,7 +377,7 @@ namespace DalTest
                                     int id1;
                                    if(!int.TryParse(Console.ReadLine(), out id1))
                                             throw new InvalidVariableException();
-                                    Order p = dalList1?.Order.PrintByID(id1) ?? throw new ObgectNullableException();
+                                    Order p = dalList1?.Order.GetByID(id1) ?? throw new ObgectNullableException();
                                     Console.WriteLine(value: p);
                                 }
                                 catch (InvalidVariableException m)
@@ -400,7 +400,7 @@ namespace DalTest
                                 try
                                 {
                                     IEnumerable<Order?> orderPrint=new List<Order?>();
-                                    orderPrint = dalList1?.Order.PrintAll() ?? throw new ObgectNullableException();
+                                    orderPrint = dalList1?.Order.GetAll() ?? throw new ObgectNullableException();
                                     foreach (Order? o in orderPrint)
                                     {
                                         Console.WriteLine(o);
@@ -453,7 +453,7 @@ namespace DalTest
                                     if (!int.TryParse(Console.ReadLine(), out id1))
                                         throw new InvalidVariableException();
                                     Order p = new Order();
-                                    p = dalList1?.Order.PrintByID(id1) ?? throw new ObgectNullableException();
+                                    p = dalList1?.Order.GetByID(id1) ?? throw new ObgectNullableException();
                                     Console.WriteLine("Do you want to change the customer name?, enter y for yes and n for no");
                                     string? answer = Console.ReadLine();
                                     if (answer == "y")
@@ -645,7 +645,7 @@ namespace DalTest
                                     int id1;
                                     if (!int.TryParse(Console.ReadLine(), out id1))
                                         throw new InvalidVariableException();
-                                    OrderItem p = dalList1?.OrderItem.PrintByID(id1) ?? throw new ObgectNullableException();
+                                    OrderItem p = dalList1?.OrderItem.GetByID(id1) ?? throw new ObgectNullableException();
                                     Console.WriteLine(p);
                                     break;
                                 }
@@ -669,7 +669,7 @@ namespace DalTest
                                 try
                                 {
                                     IEnumerable<OrderItem?> orderItemPrint;
-                                    orderItemPrint = dalList1?.OrderItem.PrintAll() ?? throw new ObgectNullableException();
+                                    orderItemPrint = dalList1?.OrderItem.GetAll() ?? throw new ObgectNullableException();
                                     foreach (OrderItem? p in orderItemPrint)
                                     {
                                         Console.WriteLine(value: p);
@@ -722,7 +722,7 @@ namespace DalTest
                                     if(!int.TryParse(Console.ReadLine(), out id))
                                         throw new InvalidVariableException();
                                     OrderItem p = new OrderItem();
-                                    p = dalList1?.OrderItem.PrintByID(id) ?? throw new ObgectNullableException();
+                                    p = dalList1?.OrderItem.GetByID(id) ?? throw new ObgectNullableException();
                                     Console.WriteLine("Do you want to change the id of order?, enter y for yes and n for no");
                                     string? answer = Console.ReadLine();
                                     if (answer == "y")
@@ -799,7 +799,7 @@ namespace DalTest
                                     }
                                     Func<OrderItem?, bool>? func = o;
                                     OrderItem? oi=
-                                    dalList1?.OrderItem.PrintByCondition(oi => oi?.OrderID == id1&&oi?.ProductID==id2) ?? throw new ObgectNullableException();
+                                    dalList1?.OrderItem.GetByCondition(oi => oi?.OrderID == id1&&oi?.ProductID==id2) ?? throw new ObgectNullableException();
                                     Console.WriteLine(oi);
                                     break;
                                 }
@@ -827,7 +827,7 @@ namespace DalTest
                                     if (!int.TryParse(Console.ReadLine(), out id1))
                                         throw new InvalidVariableException();
                                     IEnumerable<OrderItem?> orderItemByOrderId =
-                                        dalList1?.OrderItem.PrintAll(oi=>oi?.ID==id1) ?? throw new ObgectNullableException();
+                                        dalList1?.OrderItem.GetAll(oi=>oi?.ID==id1) ?? throw new ObgectNullableException();
                                     foreach (OrderItem? p in orderItemByOrderId)
                                     {
                                         Console.WriteLine(p);

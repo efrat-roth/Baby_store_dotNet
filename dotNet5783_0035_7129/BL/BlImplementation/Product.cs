@@ -22,7 +22,7 @@ internal class Product : IProduct
     {
 
         IEnumerable<DO.Product?> list= new List<DO.Product?>();
-        try { list = _dal?.Product.PrintAll() ?? new List<DO.Product?>(); }//gets the all product
+        try { list = _dal?.Product.GetAll() ?? new List<DO.Product?>(); }//gets the all product
         catch(Exception inner) { throw new FailedGet(inner); }
         IEnumerable<ProductForList?> productList;
         productList = from product in list//for each product, convert ot to the wanted type
@@ -47,7 +47,7 @@ internal class Product : IProduct
     {
         try
         {
-            DO.Product p = _dal?.Product.PrintByID(ID) ?? throw new BO.ObgectNullableException();//get the wanted product
+            DO.Product p = _dal?.Product.GetByID(ID) ?? throw new BO.ObgectNullableException();//get the wanted product
             BO.Product product = new BO.Product()//create the product to return
             {
                 ID = p.ID,
@@ -75,7 +75,7 @@ internal class Product : IProduct
     {
         try
         {
-            DO.Product p = _dal?.Product.PrintByID(ID) ?? throw new BO.ObgectNullableException();//gets the wanted product
+            DO.Product p = _dal?.Product.GetByID(ID) ?? throw new BO.ObgectNullableException();//gets the wanted product
             bool inStock1 = false;
             if (p.InStock > 0)
                 inStock1 = true;
@@ -164,7 +164,7 @@ internal class Product : IProduct
     public void DeleteProduct(int ID)
     {
         IEnumerable<DO.OrderItem?> orderI;
-        try { orderI = _dal?.OrderItem.PrintAll() ?? new List<DO.OrderItem?>(); }//gets the al orderItems
+        try { orderI = _dal?.OrderItem.GetAll() ?? new List<DO.OrderItem?>(); }//gets the al orderItems
         catch (Exception inner)
         {
             throw new FailedGet(inner);
@@ -187,7 +187,7 @@ internal class Product : IProduct
     public List<BO.ProductForList?>? GetProductByCondition(Func<BO.ProductForList?,bool>f)
     {
         IEnumerable<DO.Product?> Allproduct;
-        try { Allproduct = _dal?.Product.PrintAll() ?? new List<DO.Product?>(); }///gets the all products
+        try { Allproduct = _dal?.Product.GetAll() ?? new List<DO.Product?>(); }///gets the all products
         catch (Exception inner)
         {
             throw new FailedGet(inner);
@@ -208,7 +208,7 @@ internal class Product : IProduct
 
     public IEnumerable<BO.ProductItem?> GetListOfProductsItem()
     {
-        return from DO.Product? product1 in _dal!.Product.PrintAll()
+        return from DO.Product? product1 in _dal!.Product.GetAll()
                select new BO.ProductItem
                {
                    ID = product1?.ID ?? throw new BO.ObgectNullableException(),

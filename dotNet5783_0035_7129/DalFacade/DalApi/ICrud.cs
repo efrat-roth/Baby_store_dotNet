@@ -33,19 +33,23 @@ public interface ICrud <T> where T : struct
     /// </summary>
     /// <param name="t"></param>
     /// <returns></returns>
-   T PrintByID(int id);
+   T? GetByID(int id);
     /// <summary>
     /// 
     /// </summary>
     /// <param name="ID"></param>
     /// <param name="func"></param>
     /// <returns></returns>
-   T? PrintByCondition(Func<T?, bool>? func);
+   T? GetByCondition(Func<T?, bool>? func);
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    IEnumerable<T?> PrintAll(Func<T?,bool>? func=null); 
-
+    IEnumerable<T?> GetAll(Func<T?,bool>? func=null);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="productsList"></param>
+    void saveListToXML(List<T?> List);
 
 }

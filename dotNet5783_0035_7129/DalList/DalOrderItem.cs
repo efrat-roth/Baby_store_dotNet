@@ -31,7 +31,7 @@ internal class DalOrderItem:IOrderItem
     /// </summary>
     /// <param name="id"></param>integer-ID of the IOrderItem
     /// <returns></returns>IOrderItem
-    public OrderItem PrintByID(int id)
+    public OrderItem GetByID(int id)
     {
         if (id < 0)
             throw new InvalidVariableException();
@@ -43,7 +43,7 @@ internal class DalOrderItem:IOrderItem
     /// </summary>
     /// <param name="func"></param>
     /// <returns></returns>OrderItem?
-    public OrderItem? PrintByCondition(Func<OrderItem?, bool>? func)
+    public OrderItem? GetByCondition(Func<OrderItem?, bool>? func)
     {
         func =func??throw new InvalidVariableException();
         OrderItem? o = orderItems.FirstOrDefault(i => func(i ))??throw new IdDoesNotExistException();
@@ -53,7 +53,7 @@ internal class DalOrderItem:IOrderItem
     /// 
     /// </summary>
     /// <returns></returns>Returns the all database of IOrderItem
-    public IEnumerable<OrderItem?> PrintAll(Func<OrderItem?, bool>? func = null)
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? func = null)
     {
         if (func == null)
         {

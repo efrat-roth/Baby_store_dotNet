@@ -28,7 +28,7 @@ internal class Cart:ICart
         DO.Product? ProductInStore=new DO.Product();
         try
         {
-            ProductInStore = _dal?.Product.PrintByID(id);//variable for the product.
+            ProductInStore = _dal?.Product.GetByID(id);//variable for the product.
         }   
         catch(Exception inner)
         {
@@ -37,7 +37,7 @@ internal class Cart:ICart
         BO.OrderItem? orderItem = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id);
         if (orderItem==null)
         {
-            DO.OrderItem oi1 = _dal?.OrderItem.PrintAll().Last() ?? throw new InvalidVariableException();
+            DO.OrderItem oi1 = _dal?.OrderItem.GetAll().Last() ?? throw new InvalidVariableException();
             if (ProductInStore?.InStock > 0)   //If the product is not on order and is in the store.
             {
                 BO.OrderItem newProductInOrder = new BO.OrderItem
@@ -83,7 +83,7 @@ internal class Cart:ICart
     public BO.Cart UpdateProductAmount(BO.Cart finalCart, int id, int newAmount)
     {
         DO.Product? ProductInStore;
-        try { ProductInStore = _dal?.Product.PrintByID(id); } //Variable for the product.
+        try { ProductInStore = _dal?.Product.GetByID(id); } //Variable for the product.
         catch(Exception inner) { throw new FailedGet(inner); }
         OrderItem? orderItemOfProduct = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id);
         if (orderItemOfProduct?.Amount < newAmount)   //If the new amount is bigger.
@@ -131,7 +131,7 @@ internal class Cart:ICart
         {
             throw new ListIsEmptyException();
         }
-        IEnumerable<DO.Product?> ProductInStore = _dal?.Product.PrintAll() ?? throw new ObgectNullableException();  //variable for the product.
+        IEnumerable<DO.Product?> ProductInStore = _dal?.Product.GetAll() ?? throw new ObgectNullableException();  //variable for the product.
         if (adress11 == null || name11 == null || emailAdress == null //checks if all the strings fields is correct.
                 || emailAdress[0] == '@' || emailAdress[emailAdress.Length - 1] == '@')
             throw new BO.InvalidVariableException();
@@ -157,7 +157,7 @@ internal class Cart:ICart
             throw new InvalidVariableException();
 
         // if everything is correct ***
-        DO.Order op = _dal.Order.PrintAll().Last() ?? throw new InvalidVariableException();
+        DO.Order op = _dal.Order.GetAll().Last() ?? throw new InvalidVariableException();
         DO.Order finalOrder = new DO.Order
         {
             ID = op.ID + 1,
@@ -172,10 +172,10 @@ internal class Cart:ICart
         catch (Exception inner) { throw new FailedAdd(inner); }
         IEnumerable<DO.OrderItem> orderitems;        
         bool flag = false;
-        int id = _dal.OrderItem.PrintAll().Last()?.ID + 1 ?? 0; ;
+        int id = _dal.OrderItem.GetAll().Last()?.ID + 1 ?? 0; ;
         while (!flag)//while he id is in he store
         {            
-            try { DO.OrderItem? o = _dal.OrderItem.PrintByID(id); }
+            try { DO.OrderItem? o = _dal.OrderItem.GetByID(id); }
             catch (DO.IdDoesNotExistException x) { flag = true; break; }
             ++id;
         }
@@ -199,7 +199,7 @@ internal class Cart:ICart
         try
         {
             productsInCart = from o in orderitems
-                             let productInCart = _dal.Product.PrintByID(o.ProductID)
+                             let productInCart = _dal.Product.GetByID(o.ProductID)
                              let productToSelect = new DO.Product()//Update the new amount.
                              {
                                  ID = productInCart.ID,
