@@ -43,7 +43,11 @@ namespace PL
             
         }
 
-
+        /// <summary>
+        /// Show the customer window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Customer_Click(object sender, RoutedEventArgs e)
         {
             Customer customer = new Customer(bl);

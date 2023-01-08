@@ -61,26 +61,22 @@ namespace PL
                 //find the index of product for products show:
                 int index = ProductsLists.IndexOf(ProductsLists.FirstOrDefault(p=>p?.ID== int.Parse(idD.Text)));
                 cart = _bl?.Cart.AddProductToCart(cart!, int.Parse(idD.Text));
-                cart=_bl?.Cart.UpdateProductAmount(cart!, int.Parse(idD.Text), int.Parse(amountD.Text));    
-                ProductsLists[index] = _bl?.Product.GetProductCustomer(int.Parse(idD.Text), cart);                
+                cart=_bl?.Cart.UpdateProductAmount(cart!, int.Parse(idD.Text), int.Parse(amountD.Text)); // if the amount is bigger than 1   
+                ProductsLists[index] = _bl?.Product.GetProductCustomer(int.Parse(idD.Text), cart);   //change the details of product in the catalog following the canges             
                 MessageBox.Show("The product is added to the cart");
 
             }
-            catch(FailedGet )
-            {
-                MessageBox.Show("The product is not in the store, enter the IDProduct again");
-            }
-            catch(InvalidVariableException )
-            {
-                MessageBox.Show("The amount is bigger than the amount in stock");
-            }
-            catch (CanNotDOActionException )
-            {
-                MessageBox.Show("The amount is bigger than the amount in stock");
-            }
+            catch(FailedGet ){MessageBox.Show("The product is not in the store, enter the IDProduct again"); return; }
+            catch(InvalidVariableException ) { MessageBox.Show("The amount is bigger than the amount in stock"); return;  }
+            catch (CanNotDOActionException ){ MessageBox.Show("The amount is bigger than the amount in stock"); return; }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
 
+        /// <summary>
+        /// show only one category of product, or the all products
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CategroyFilter(object sender, SelectionChangedEventArgs e)
         {
             Category? category = CategorySelector.SelectedItem as Category?;
@@ -119,6 +115,11 @@ namespace PL
             }
         }
         
+        /// <summary>
+        /// Show details of product, by click it twice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailsOfProduct(object sender, MouseButtonEventArgs e)
         {
             ListView list = (ListView)sender;
@@ -142,6 +143,12 @@ namespace PL
             CartWindow c = new CartWindow(_bl,cart);
             c.ShowDialog();
         }
+
+        /// <summary>
+        /// Can input only numbers to the ID field
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IdIsNumber(object sender, KeyEventArgs e)
         {
             TextBox? text = sender as TextBox;
@@ -155,6 +162,12 @@ namespace PL
             return;
 
         }
+
+        /// <summary>
+        /// Can input only numbers to the amount field
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AmountIsNumber(object sender, KeyEventArgs e)
         {
             TextBox? text = sender as TextBox;

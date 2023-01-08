@@ -170,8 +170,11 @@ internal class Product : IProduct
             throw new FailedGet(inner);
         }
         DO.OrderItem? exist = orderI.FirstOrDefault(oi => oi?.ProductID == ID) ?? new DO.OrderItem();//check if the product to delete is exist
-        if(exist==null)// if the product is not exist
-            throw new BO.IdDoesNotExistException();
+        if (exist != null)// if the product is exist
+        {
+            throw new BO.CanNotDOActionException();
+            return;
+        }
         if (!_dal?.Product.Delete(ID) ?? throw new BO.ObgectNullableException())//delete the product
             throw new BO.IdDoesNotExistException();
     }

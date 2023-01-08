@@ -33,6 +33,12 @@ namespace PL
             InitializeComponent();
         }  
 
+        /// <summary>
+        /// Show the details of the order, by clicking on a button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="BO.ObgectNullableException"></exception>
         private void ShowOrder(object sender, RoutedEventArgs e)
         {
             try

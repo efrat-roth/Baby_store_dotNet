@@ -32,7 +32,7 @@ namespace PL
         {
             _bl= bl;
             cart = c;
-            orderItems = from i in cart.Items
+            orderItems = from i in cart.Items  //convert the all order items in the cart
                          select new ProductDataBiding.OrderItem()
                          {
                              IDOI = i.ID,
@@ -46,6 +46,11 @@ namespace PL
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create new order from the cart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenOrder_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -54,26 +59,11 @@ namespace PL
                 MessageBox.Show("The order was created successfully, the id of the order is"+ order.ID );
                 this.Close();
             }
-            catch(ListIsEmptyException)
-            {
-                MessageBox.Show("The order has no items"); return;
-            }
-            catch (ObgectNullableException)
-            {
-                MessageBox.Show("There are no products in the store"); return;
-            }
-            catch (InvalidVariableException)
-            {
-                MessageBox.Show("There are items with negative amount"); return;
-            }
-            catch (FailedUpdate)
-            {
-                MessageBox.Show("The amount of one of the items is bigger than in the stock"); return;
-            }
-            catch (Exception v)
-            {
-                MessageBox.Show(v.ToString()); return;
-            }
+            catch(ListIsEmptyException){MessageBox.Show("The order has no items"); return; }
+            catch (ObgectNullableException) { MessageBox.Show("There are no products in the store"); return; }
+            catch (InvalidVariableException) { MessageBox.Show("There are items with negative amount"); return; }
+            catch (FailedUpdate){MessageBox.Show("The amount of one of the items is bigger than in the stock"); return; }
+            catch (Exception v) { MessageBox.Show(v.ToString()); return;}
         }
 
         /// <summary>
@@ -91,7 +81,7 @@ namespace PL
                 int amount = p.AmountOI;
                 cart=_bl.Cart.UpdateProductAmount(finalCart: cart, productId, amount);
                 
-                if (amount != 0)
+                if (amount != 0)//only have to change tha amount and the othe properties matchly
                 {
                     ProductDataBiding.OrderItem? orderItem = new ProductDataBiding.OrderItem()
                     {
@@ -104,7 +94,7 @@ namespace PL
                     };
                     OrderItems[OrderItems.IndexOf(p)] = orderItem;
                 }
-                else
+                else//if the amount is 0, remove the product from the order
                 {
                     OrderItems?.Remove( OrderItems[OrderItems.IndexOf(p)]);
                 }
@@ -114,6 +104,12 @@ namespace PL
             catch (CanNotDOActionException) { MessageBox.Show("The amount is bigger than the amount in stock"); return; }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); return; }
         }
+
+        /// <summary>
+        /// Can input only numbers to the amount field
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void amountIsNumber(object sender, KeyEventArgs e)
         {
             TextBox? text = sender as TextBox;

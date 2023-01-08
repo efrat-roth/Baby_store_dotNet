@@ -35,11 +35,11 @@ namespace PL
         /// <param name="a"></param>Action
         /// <param name="bl1"></param>IBl
         /// <param name="o"></param>OrderForList?
-        public OrderWindow(Action<OrderForList?> a,IBl bl1, BO.OrderForList? o)
+        public OrderWindow(Action<OrderForList?>? a,IBl bl1, BO.OrderForList? o)
         {
             _bl = bl1;
             Action1 = a;
-            OrderDataBiding.Order? order1 = new OrderDataBiding.Order()//build the order with dependency propert for biding
+            OrderDataBiding.Order? order1 = new OrderDataBiding.Order()//build the order with dependency properties for biding
             {
                 ID = o.ID,
                 TotalPrice = o.TotalPrice,
@@ -59,7 +59,7 @@ namespace PL
         }
         
         /// <summary>
-        /// Update a order, adiing or update product, update status
+        /// Update an order, adiing or update amount of product, update status
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -79,7 +79,7 @@ namespace PL
                     return;
                 }
                 if (GetProduct.Text.Length > 0 && amountContent.Text.Length > 0)
-                {//case of updae aproduct
+                {//case of update aproduct
                     int idProduct, amount;
                     if(!int.TryParse(GetProduct.Text, out idProduct)||
                     !int.TryParse(amountContent.Text, out amount))
@@ -88,42 +88,41 @@ namespace PL
                         return ;
                     }
                     order1 = _bl?.Order.UpdateOrder(order.ID, idProduct, amount)!;
-                    if (order1.Items.Count()==0)//if delete the last produc in the order, delete the order
+                    if (order1?.Items?.Count()==0)//if delete the last product in the order, delete the order
                     {
                       OrderForList? orderFor = new OrderForList()
                         {
                             ID = order1.ID,
                             AmountOfItems = 0,                            
                         };
-                        Action1!(orderFor);
+                        Action1!(orderFor);//update in the list of products
                     }
                    else
-                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o=>o?.ID==order1?.ID));
+                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o=>o?.ID==order1?.ID));//update in the list of products
                 }
                 if (updateShiped.IsChecked == true)
                 {
                     order1 = _bl?.Order.DeliveredOrder(order.ID)!;
-                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));
+                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
                 }
                 if (updateDelivery.IsChecked == true)
                 {
                     order1 = _bl?.Order.ArrivedOrder(order.ID)!;
-                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));
+                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
                 }
                 MessageBox.Show("The order has been successfuly updated");
                 this.Close();
             }
             catch (CanNotDOActionException )
-            {
-                MessageBox.Show("The order is already shiped or arrived, can't change the date and the product details");
+            {MessageBox.Show("The order is already shiped or arrived, can't change the date and the product details"); return;
             }
             catch (InvalidVariableException )
             {
-                MessageBox.Show("The details are invalid, or the amount of product is bigger than in the stock, please check again");
+                MessageBox.Show("The details are invalid, or the amount of product is bigger than in the stock, please check again"); return;
             }
             catch (FailedGet )
             {
-                MessageBox.Show("The order wasn't found");
+                MessageBox.Show("The order wasn't found"); return;
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }

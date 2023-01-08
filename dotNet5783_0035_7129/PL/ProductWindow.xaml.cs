@@ -202,6 +202,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// delete product from the store
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteProducts(object sender, RoutedEventArgs e)
         {
             try
@@ -211,6 +216,7 @@ namespace PL
                 this.Close();
             }
             catch (IdDoesNotExistException) { MessageBox.Show("The product is not in the store"); }
+            catch (CanNotDOActionException) { MessageBox.Show("The product is exist in orders in the store, can't delete"); }
             catch (InvalidVariableException) { MessageBox.Show("The minimum value of product ID is 100000"); }
             catch (ObgectNullableException) { MessageBox.Show("ERROR, please try again"); }
             catch (FailedGet) { MessageBox.Show("The product coudn't reload"); }

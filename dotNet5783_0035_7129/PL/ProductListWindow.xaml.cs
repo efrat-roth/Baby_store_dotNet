@@ -63,7 +63,7 @@ namespace PL
         }
 
         /// <summary>
-        /// Helping method to rebuild the list in the filter
+        /// Helping method to rebuild the list in the updating
         /// </summary>
         /// <param name="products"></param>
         private void addProducts(IEnumerable<ProductForList?> products)
@@ -88,6 +88,11 @@ namespace PL
             ProductWindow p = new ProductWindow(addP!,_bl ?? throw new BO.ObgectNullableException());
             p.ShowDialog();
         }
+
+        /// <summary>
+        /// Helping method to rebuild the list in the updating
+        /// </summary>
+        /// <param name="productForList"></param>
         private void UpdateP(ProductForList? productForList)
         {
             var p = _ProductForLists?.FirstOrDefault(item => item?.ID == productForList?.ID);
@@ -95,6 +100,12 @@ namespace PL
             _ProductForLists[index] = productForList;
 
         }
+
+
+        /// <summary>
+        /// Helping method to rebuild the list in the updating
+        /// </summary>
+        /// <param name="productForList"></param>
         private void DeleteP(ProductForList? productForList)
         {
             var p = _ProductForLists?.FirstOrDefault(item => item?.ID == productForList?.ID);

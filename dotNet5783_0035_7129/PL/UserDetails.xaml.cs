@@ -30,6 +30,11 @@ namespace PL
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Open the catalog to create the order
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OrderW_Click(object sender, RoutedEventArgs e)
         {
             if (UserName.Text.Length == 0 || UserEmail.Text.Length == 0 || UserAdress.Text.Length == 0)

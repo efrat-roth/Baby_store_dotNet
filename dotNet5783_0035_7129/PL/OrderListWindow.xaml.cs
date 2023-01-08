@@ -26,11 +26,20 @@ namespace PL
         private IEnumerable<OrderForList?>? orderForLists { get; }
         public OrderListWindow(BlApi.IBl? bl)
         {
-            _bl = bl;
-            orderForLists = _bl!.Order.GetListOfOrders();
-            OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);//convert to observel in order to update the details 
-            InitializeComponent();         
+            try
+            {
+                _bl = bl;
+                orderForLists = _bl!.Order.GetListOfOrders();
+                OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);//convert to observel in order to update the details 
+                InitializeComponent();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+        /// <summary>
+        /// Helping method to rebuild the list after updating
+        /// </summary>
+        /// <param name="products"></param>
         private void UpdateO(OrderForList? orderForList)
         {
             var o = OrderForLists?.FirstOrDefault(item => item?.ID == orderForList?.ID);
@@ -45,15 +54,18 @@ namespace PL
                 OrderForLists.Remove(OrderForLists[index]);
             }
 
-
-
-
         }
+
+
         private void UpdateOrder(object sender, MouseButtonEventArgs e)
         {
-            BO.OrderForList? O = (BO.OrderForList?)OrdersListView.SelectedItem;
-            OrderWindow orderWindow = new OrderWindow(UpdateO,_bl??throw new BO.ObgectNullableException(), O);
-            orderWindow.ShowDialog();
+            try
+            {
+                BO.OrderForList? O = (BO.OrderForList?)OrdersListView.SelectedItem;
+                OrderWindow orderWindow = new OrderWindow(UpdateO, _bl ?? throw new BO.ObgectNullableException(), O);
+                orderWindow.ShowDialog();
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         /// <summary>
