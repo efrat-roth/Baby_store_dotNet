@@ -53,22 +53,18 @@ internal class Product : IProduct
     public List<DO.Product?>? GetProductsList()
     {
         LoadData();
-        List<DO.Product?>? products;
-       
+        List<DO.Product?>? products;      
         try
         {
-            DO.Category c=new DO.Category();
             products = (from p in ProductRoot.Elements()
-                        let b = Category.TryParse(p.Element("Category")!.Value, out c)
-                        let product1 = new DO.Product() 
-                        {
+                        select  new DO.Product() 
+                        {                           
                             ID= Convert.ToInt32(p.Element("id")!.Value),
                             Name = p.Element("name")!.Value,
                             Price = Convert.ToDouble(p.Element("Price")!.Value),
-                            Category = c,
+                            Category = (DO.Category)Enum.Parse(typeof(DO.Category), (string)p.Element("Category")!),
                             InStock = Convert.ToInt32(p.Element("InStock")!.Value)
-                        } 
-                        select product1).ToList();
+                        }).ToList();
         }
         catch
         {
