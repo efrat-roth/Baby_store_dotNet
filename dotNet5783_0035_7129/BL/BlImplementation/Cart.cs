@@ -157,10 +157,17 @@ internal class Cart:ICart
             throw new InvalidVariableException();
 
         // if everything is correct ***
-        DO.Order op = _dal.Order.GetAll().Last() ?? throw new InvalidVariableException();
+        bool flag1 = false;
+        int id1 = _dal.Order.GetAll().Last()?.ID + 1 ?? 0; ;
+        while (!flag1)//while he id is in he store
+        {
+            try { DO.Order? o = _dal.Order.GetByID(id1); }
+            catch (DO.IdDoesNotExistException x) { flag1 = true; break; }
+            ++id1;
+        }
         DO.Order finalOrder = new DO.Order
         {
-            ID = op.ID + 1,
+            ID =id1,
             CustomerAdress = adress11,   //creates new order.
             CustomerName = name11,
             CustomerEmail = emailAdress,

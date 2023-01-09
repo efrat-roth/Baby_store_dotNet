@@ -94,11 +94,11 @@ namespace PL
             }
             catch (CanNotDOActionException)
             {
-                MessageBox.Show("The order is already shiped or arrived, can't change the date and the product details"); return;
+                MessageBox.Show("The order is already shiped or arrived, can't change the date"); return;
             }
             catch (InvalidVariableException)
             {
-                MessageBox.Show("The details are invalid, or the amount of product is bigger than in the stock, please check again"); return;
+                MessageBox.Show("The details are invalid, please check again"); return;
             }
             catch (FailedGet)
             {
@@ -148,40 +148,58 @@ namespace PL
 
         private void UpdateAmountOfProducts(object sender, RoutedEventArgs e)
         {
-            BO.Order order1 = new BO.Order();
+            try
+            {
+                BO.Order order1 = new BO.Order();
 
-            if (GetProduct.Text.Length == 0 && amountContent.Text.Length == 0)
-            {
-                MessageBox.Show("Please input at least one detail to update");
-                return;
-            }
-            if ((GetProduct.Text.Length > 0 && amountContent.Text.Length == 0) || (GetProduct.Text.Length == 0 && amountContent.Text.Length > 0))
-            {//if only one depended detail input
-                MessageBox.Show("The amount of product is depended on IDProduct product input, you have to fill both, or neither");
-                return;
-            }
-            if (GetProduct.Text.Length > 0 && amountContent.Text.Length > 0)
-            {//case of update aproduct
-            int idProduct, amount;
-            if (!int.TryParse(GetProduct.Text, out idProduct) ||
-            !int.TryParse(amountContent.Text, out amount))
-            {
-                MessageBox.Show("The data wasn't succeded to convert to int, please input the datails again ");
-                return;
-            }
-            order1 = _bl?.Order.UpdateOrder(order.ID, idProduct, amount)!;
-            if (order1?.Items?.Count() == 0)//if delete the last product in the order, delete the order
-            {
-                OrderForList? orderFor = new OrderForList()
+                if (GetProduct.Text.Length == 0 && amountContent.Text.Length == 0)
                 {
-                    ID = order1.ID,
-                    AmountOfItems = 0,
-                };
-                Action1!(orderFor);//update in the list of products
+                    MessageBox.Show("Please input at least one detail to update");
+                    return;
+                }
+                if ((GetProduct.Text.Length > 0 && amountContent.Text.Length == 0) || (GetProduct.Text.Length == 0 && amountContent.Text.Length > 0))
+                {//if only one depended detail input
+                    MessageBox.Show("The amount of product is depended on IDProduct product input, you have to fill both, or neither");
+                    return;
+                }
+                if (GetProduct.Text.Length > 0 && amountContent.Text.Length > 0)
+                {//case of update aproduct
+                    int idProduct, amount;
+                    if (!int.TryParse(GetProduct.Text, out idProduct) ||
+                    !int.TryParse(amountContent.Text, out amount))
+                    {
+                        MessageBox.Show("The data wasn't succeded to convert to int, please input the datails again ");
+                        return;
+                    }
+                    order1 = _bl?.Order.UpdateOrder(order.ID, idProduct, amount)!;
+                    if (order1?.Items?.Count() == 0)//if delete the last product in the order, delete the order
+                    {
+                        OrderForList? orderFor = new OrderForList()
+                        {
+                            ID = order1.ID,
+                            AmountOfItems = 0,
+                        };
+                        Action1!(orderFor);//update in the list of products
+                    }
+                    else
+                        Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
+                    MessageBox.Show("The order has been successfuly updated");
+                    this.Close();
+                }
             }
-            else
-                Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
+            catch (CanNotDOActionException)
+            {
+                MessageBox.Show("The order is already shiped or arrived, can't change the date and the product details"); return;
             }
+            catch (InvalidVariableException)
+            {
+                MessageBox.Show("The details are invalid, or the amount of product is bigger than in the stock, please check again"); return;
+            }
+            catch (FailedGet)
+            {
+                MessageBox.Show("The order wasn't found"); return;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
     }
     

@@ -5,7 +5,7 @@
     <Name>NewBornCarriage</Name>
     <Category>BabyCarriages</Category>
     <Price>600</Price>
-    <InStock>150</InStock>
+    <InStock>149</InStock>
   </Product>
   <Product>
     <ID>100001</ID>
@@ -89,7 +89,7 @@
     <Name>WarmSocks</Name>
     <Category>Socks</Category>
     <Price>1130</Price>
-    <InStock>215</InStock>
+    <InStock>224</InStock>
   </Product>
   <Product>
     <ID>100013</ID>

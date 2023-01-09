@@ -21,6 +21,7 @@ namespace Dal
             string dir = "..\\xml\\";
             FileStream fs = new FileStream(dir+path, FileMode.Create);
             x.Serialize(fs, list);
+            fs.Close();
         }
 
         /// <summary>
@@ -35,6 +36,7 @@ namespace Dal
             string dir = "..\\xml\\";
             FileStream fs = new FileStream(dir + path, FileMode.Open);
             list = (List<T?>)x.Deserialize(fs);
+            fs.Close();
             return list.ToList<T?>();
         }
     }
