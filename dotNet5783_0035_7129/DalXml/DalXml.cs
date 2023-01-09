@@ -1,6 +1,7 @@
 ﻿using DalApi;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,4 +13,6 @@ sealed internal class DalXml : IDal
     public IProduct Product { get; } = new Dal.Product();
     public IOrderItem OrderItem { get; } = new Dal.OrderItem();
     public IOrder Order { get; } = new Dal.Order();
+    public static IDal Instance { get; } = new DalXml();
+    private DalXml() { }
 }

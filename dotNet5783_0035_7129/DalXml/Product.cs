@@ -11,11 +11,11 @@ namespace Dal;
 
 internal class Product : IProduct
 {
-    XElement? ProductRoot;
-    string FPath = "C:\\Users\\משתמש\\source\\repos\\efrat-roth\\dotNet5783_0035_7129\\dotNet5783_0035_7129\\xml\\Product.xml";
+    static XElement? ProductRoot;
+    static string ProductPath = @"Product.xml";
     public Product()
     {
-        if (!File.Exists(FPath))
+        if (!File.Exists(ProductPath))
             CreateFiles();
         else
             LoadData();
@@ -23,33 +23,21 @@ internal class Product : IProduct
     private void CreateFiles()
     {
         ProductRoot = new XElement("products");
-        ProductRoot.Save(FPath);
+        ProductRoot.Save(ProductPath);
     }
 
     private void LoadData()
     {
         try
         {
-            ProductRoot = XElement.Load(FPath);
+            ProductRoot = XElement.Load(ProductPath);
         }
         catch
         {
             throw new Exception("File upload problem");
         }
     }
-    public void saveListToXML(List<DO.Product> productsList)
-    {
-        var v = from p in productsList
-                select new XElement("product",
-                    new XElement("id", p.ID),
-                   new XElement("name",p.Name),
-                   new XElement("InStock", p.InStock),
-                   new XElement("Price", p.Price),
-                   new XElement("Category", p.Category)                  
-                    );
-        ProductRoot = new XElement("products", v);
-        ProductRoot.Save(FPath);
-    }
+
     public IEnumerable<DO.Product?> GetAll(Func<DO.Product?, bool>? func = null)
     {
         LoadData();
@@ -89,12 +77,12 @@ internal class Product : IProduct
                         where func(pro)
                         select pro;
         }
-        return (IEnumerable<DO.Product?>)products;
+        return (List<DO.Product?>)products;
     }
-    public DO.Product? GetByID(int id)
+    public DO.Product GetByID(int id)
     {
         LoadData();
-        DO.Product? product;
+        DO.Product product;
         try
         {
             product = (from p in ProductRoot?.Elements()
@@ -110,7 +98,7 @@ internal class Product : IProduct
         }
         catch
         {
-            product = null;
+            throw new ObgectNullableException();
         }
         return product;
     }
@@ -139,7 +127,7 @@ internal class Product : IProduct
         XElement inStock = new XElement("InSrock",product?.InStock);
         XElement Category = new XElement("Category",product?.Category);
         ProductRoot?.Add(new XElement("product", id, name));
-        ProductRoot?.Save(FPath);
+        ProductRoot?.Save(ProductPath);
         return product?.ID??throw new ObgectNullableException();
     }
     public bool Delete(int id)
@@ -151,7 +139,7 @@ internal class Product : IProduct
                               where Convert.ToInt32(p.Element("id")!.Value) == id
                               select p).FirstOrDefault();
             ProductElement!.Remove();
-            ProductRoot?.Save(FPath);
+            ProductRoot?.Save(ProductPath);
             return true;
         }
         catch
@@ -164,7 +152,7 @@ internal class Product : IProduct
         try
         {
             XElement? productElement = (from p in ProductRoot?.Elements()
-                                        where Convert.ToInt32(p!.Element("id")!.Value) == product.ID
+                                        where Convert.ToInt32(p!.Element("id")!.Value) == product?.ID
                                         select p).FirstOrDefault();
 
             productElement!.Element("name")!.Value = product?.Name!;
@@ -172,7 +160,7 @@ internal class Product : IProduct
             productElement!.Element("InStock")!.Value = product?.InStock.ToString()!;
             productElement!.Element("Category")!.Value = product?.Category.ToString()!;
 
-            ProductRoot?.Save(FPath);
+            ProductRoot?.Save(ProductPath);
             return true;
         }
         catch

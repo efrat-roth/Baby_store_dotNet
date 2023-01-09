@@ -33,7 +33,7 @@ public interface ICrud <T> where T : struct
     /// </summary>
     /// <param name="t"></param>
     /// <returns></returns>
-   T? GetByID(int id);
+   T GetByID(int id);
     /// <summary>
     /// 
     /// </summary>
@@ -46,10 +46,6 @@ public interface ICrud <T> where T : struct
     /// </summary>
     /// <returns></returns>
     IEnumerable<T?> GetAll(Func<T?,bool>? func=null);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="productsList"></param>
-    void saveListToXML(List<T?> List);
+
 
 }

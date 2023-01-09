@@ -1,21 +1,41 @@
-﻿using DO;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using Dal;
+using DO;
+using System.Collections;
+
+using static Dal.DataSourceXml;
+using System.Data;
 
 namespace Dal
 {
-    internal static class DataSource
+    internal static class DataSourceXml
     {
+        /// <summary>
+        /// Constractor that initialize the item
+        /// </summary>
+        static DataSourceXml() { 
+            Initialize();
+           SaveProductListLinq(products);
+            SaveOrdertListLinq(orders);
+            SaveOrderItemtListLinq(orderItems);
+        }
         readonly static Random rnd = new Random();
-        
+        private static XElement intialize;
 
+        internal static string ProductPath = @"Product.xml";
+        internal static string OrderPath = @"Order.xml";
+        internal static string OrderItemPath = @"OrderItem.xml";
         internal static List<DO.Product?> products = new List<DO.Product?>();
         internal static List<DO.Order?> orders = new List<DO.Order?>();
         internal static List<DO.OrderItem?> orderItems = new List<DO.OrderItem?>();
-        /// <summary>
-        /// Constracto
-        /// r that initialize the item
-        /// </summary>
-        static DataSource() { Initialize(); }
+
+
         private static int countProductID = 100000;
         private static int countOrderID = 1;
         private static int countOrderItemsID = 1;
@@ -30,7 +50,7 @@ namespace Dal
             for (int i = 0; i < 20; i++)
             {
                 int index = 0;
-                Product product = new Product();
+                DO.Product product = new DO.Product();
                 product.Category = (Category)rnd.Next(0, 6);
 
                 if (rnd.Next(0, 100) > 5)
@@ -126,7 +146,7 @@ namespace Dal
 
             for (int i = 0; i < 100; i++)
             {
-                Order order = new Order();
+                DO.Order order = new DO.Order();
                 order.ID = nextCountOrderID();
                 order.CustomerName = firstNames[rnd.Next(0, 10)] + " " + lastNames[rnd.Next(0, 10)];
                 order.CustomerEmail = order.CustomerName.Replace(" ", String.Empty) + "@gmail.com";
@@ -151,9 +171,9 @@ namespace Dal
             int y = countOrderID - 100;
             for (int i = 0; i < 180; i++)
             {
-                Product product = new Product();
-                OrderItem orderItem = new OrderItem();
-                product = (Product)products[rnd.Next(0, products.Count())]!;
+                DO.Product product = new DO.Product();
+                DO.OrderItem orderItem = new DO.OrderItem();
+                product = (DO.Product)products[rnd.Next(0, products.Count())]!;
                 orderItem.ID = nextCountOrderItemsID();
                 orderItem.ProductID = product.ID;
                 orderItem.Amount = rnd.Next(1, 11);
@@ -162,6 +182,54 @@ namespace Dal
                 orderItems.Add(orderItem);
             }
         }
+
+        private static void SaveProductListLinq(List<DO.Product?> listPruducts)
+        {
+            var v = from p in listPruducts
+                    select new XElement("Product",
+                        new XElement("Id", p?.ID),
+                        new XElement("Name", p?.Name),
+                        new XElement("InStock", p?.InStock),
+                        new XElement("Price", p?.Price)
+                        );
+
+            intialize = new XElement("Product", v);
+            intialize.Save(ProductPath);
+        }
+
+        private static void SaveOrdertListLinq(List<DO.Order?> listOrders)
+        {
+            var v = from p in listOrders
+                    select new XElement("Order",
+                        new XElement("id", p?.ID),
+                        new XElement("Name", p?.CustomerName),
+                        new XElement("Email", p?.CustomerEmail),
+                        new XElement("Adress", p?.CustomerAdress),
+                        new XElement("OrderTime", p?.OrderDate),
+                        new XElement("ShipDate", p?.DeliveredDate),
+                        new XElement("DeliveryrDate", p?.ArrivedDate)
+                        );
+
+            intialize = new XElement("Order", v);
+            intialize.Save(OrderPath);
+        }
+
+        private static void SaveOrderItemtListLinq(List<DO.OrderItem?> listOrderItems)
+        {
+            var v = from p in listOrderItems
+                    select new XElement("OrderItem",
+                        new XElement("id", p?.ID),
+                        new XElement("name", p?.ProductID),
+                        new XElement("firstName", p?.OrderID),
+                        new XElement("lastName", p?.Price),
+                        new XElement("name", p?.Amount)
+                        );
+
+            intialize = new XElement("OrderItem", v);
+            intialize.Save(OrderItemPath);
+        }
+
+
         /// <summary>
         /// Check if the id is in the system
         /// </summary>
@@ -202,6 +270,3 @@ namespace Dal
         }
     }
 }
-
-
-

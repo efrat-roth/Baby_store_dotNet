@@ -31,10 +31,15 @@ namespace PL
         public Array _Category { get; set; } = Enum.GetValues(typeof(Category));
         public ProductListWindow(BlApi.IBl bl1)//constractor
         {
-            _bl = bl1;
-            _productForLists = _bl.Product.GetListOfProduct().ToList();
-            _ProductForLists = new ObservableCollection<ProductForList?>(_productForLists);//convert to observel in order to update the details           
-            InitializeComponent(); 
+            try
+            {
+
+                _bl = bl1;
+                _productForLists = _bl.Product.GetListOfProduct();
+                _ProductForLists = new ObservableCollection<ProductForList?>(_productForLists);//convert to observel in order to update the details           
+                InitializeComponent();
+            }
+            catch(Exception ex) { MessageBox.Show(ex.ToString()); }
             
         }
         /// <summary>

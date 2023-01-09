@@ -6,14 +6,14 @@ using static Dal.DataSource;
 
 namespace Dal;
 
-internal class DalOrderItem:IOrderItem
+internal class DalOrderItem : IOrderItem
 {
     /// <summary>
     /// Adding new IOrderItem to the database
     /// </summary>
-    /// <param name="oi"></param>IOrderItem variable
+    /// <param name = "oi" ></ param > IOrderItem variable
     /// <returns></returns>ID of the new orderItem
-    /// <exception cref="Exception"></exception>
+    /// <exception cref = "Exception" ></ exception >
     public int Add(OrderItem? oi)
     {
         bool exist = orderItems.Exists(orderI => orderI?.ID == oi?.ID);
@@ -21,7 +21,7 @@ internal class DalOrderItem:IOrderItem
         {
             throw new IdAlreadyExistException();
         }
-        int y =oi?.ID ?? throw new InvalidVariableException();
+        int y = oi?.ID ?? throw new InvalidVariableException();
         orderItems.Add(oi);
         return y;
 
@@ -29,7 +29,7 @@ internal class DalOrderItem:IOrderItem
     /// <summary>
     /// Returns IOrderItem by its ID
     /// </summary>
-    /// <param name="id"></param>integer-ID of the IOrderItem
+    /// <param name = "id" ></ param > integer - ID of the IOrderItem
     /// <returns></returns>IOrderItem
     public OrderItem GetByID(int id)
     {
@@ -41,12 +41,12 @@ internal class DalOrderItem:IOrderItem
     /// <summary>
     /// Return a specific orderItem that matches the condition.
     /// </summary>
-    /// <param name="func"></param>
-    /// <returns></returns>OrderItem?
+    /// <param name = "func" ></ param >
+    /// < returns ></ returns > OrderItem ?
     public OrderItem? GetByCondition(Func<OrderItem?, bool>? func)
     {
-        func =func??throw new InvalidVariableException();
-        OrderItem? o = orderItems.FirstOrDefault(i => func(i ))??throw new IdDoesNotExistException();
+        func = func ?? throw new InvalidVariableException();
+        OrderItem? o = orderItems.FirstOrDefault(i => func(i)) ?? throw new IdDoesNotExistException();
         return o;
     }
     /// <summary>
@@ -66,7 +66,7 @@ internal class DalOrderItem:IOrderItem
     /// <summary>
     /// Delete an orderItem by its ID
     /// </summary>
-    /// <param name="id"></param>Integer-ID of the orderItem
+    /// <param name = "id" ></ param > Integer - ID of the orderItem
     /// <returns></returns>True if the orderItem in the database, else returns false
     public bool Delete(int id)
     {
@@ -79,7 +79,7 @@ internal class DalOrderItem:IOrderItem
     /// <summary>
     /// Update the details of an orderItem
     /// </summary>
-    /// <param name="oi"></param>IOrderItem variable
+    /// <param name = "oi" ></ param > IOrderItem variable
     /// <returns></returns>True if the id is in the database, else returns false
     public bool Update(OrderItem? oi)
     {
@@ -88,6 +88,6 @@ internal class DalOrderItem:IOrderItem
         orderItems.Add(oi);
         return true;
     }
-    
+
 
 }

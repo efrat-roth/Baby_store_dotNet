@@ -12,28 +12,37 @@ namespace Dal;
 
 internal class Order : IOrder
 {
-    XElement? OrderRoot;
-    string FPath= "C:\\Users\\משתמש\\source\\repos\\efrat-roth\\dotNet5783_0035_7129\\dotNet5783_0035_7129\\xml\\Order.xml"
-
-    public static void saveListToXML(List<DO.Order?> list, string path)
+    static XElement? OrderRoot;
+    static string OrderPath = @"Order.xml";
+    public Order()
     {
-        XmlSerializer x = new XmlSerializer(list.GetType());
-        FileStream fs = new FileStream(path, FileMode.Create);
-        x.Serialize(fs, list);
+        if (!File.Exists(OrderPath))
+            CreateFiles();
+        else
+            LoadData();
     }
-
-    public static List<DO.Order?> loadListFromXML(string path)
+    private void CreateFiles()
     {
-        List<DO.Order?> list;
-        XmlSerializer x = new XmlSerializer(typeof(List<DO.Order>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        list = (List<DO.Order?>)x.Deserialize(fs);
-        return list;
-
+        OrderRoot = new XElement("orders");
+        OrderRoot.Save(OrderPath);
     }
-    public List<DO.Order?> GetAll(Func<DO.Order?, bool>? func = null)
+    private void LoadData()
     {
-        List<DO.Order?> orders=loadListFromXML(FPath);
+        try
+        {
+            OrderRoot = XElement.Load(OrderPath);
+        }
+        catch
+        {
+            throw new Exception("File upload problem");
+        }
+    }
+    
+    
+    public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? func = null)
+    {
+        LoadData();
+        List<DO.Order?> orders=Tools<DO.Order?>.loadListFromXML(OrderPath, OrderRoot);
         if (func == null)
         {
             return orders;
@@ -44,7 +53,8 @@ internal class Order : IOrder
    
     public int Add(DO.Order? order)
     {
-        List<DO.Order?> orders = loadListFromXML(FPath);
+
+        List<DO.Order?> orders = Tools<DO.Order?>.loadListFromXML(OrderPath, OrderRoot);
         bool exist = orders.Exists(o => o?.ID == order?.ID);
         if (exist)
         {
@@ -52,34 +62,34 @@ internal class Order : IOrder
         }
         int y = order?.ID ?? throw new InvalidVariableException();
         orders.Add(order);
-        saveListToXML(orders,FPath);
+        Tools<DO.Order?>.saveListToXML(orders, OrderPath, OrderRoot);
         return y;
     }
     
     public bool Update(DO.Order? order)
     {
-        List<DO.Order?>? orders = loadListFromXML(FPath);
+        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath, OrderRoot);
         DO.Order? o = orders.FirstOrDefault(order1 => order1?.ID == order?.ID) ?? throw new IdDoesNotExistException(); ;
         orders.Remove(o);
         orders.Add(order);
-        saveListToXML(orders, FPath);
+        Tools<DO.Order?>.saveListToXML(orders, OrderPath, OrderRoot);
         return true;
     }
     
     public bool Delete(int id)
     {
-        List<DO.Order?>? orders = loadListFromXML(FPath);
+        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath, OrderRoot);
         if (id < 0)
             throw new InvalidVariableException();
         DO.Order? o = orders.FirstOrDefault(o => o?.ID == id) ?? throw new IdDoesNotExistException(); ;
         orders.Remove(o);
-        saveListToXML(orders, FPath);
+        Tools<DO.Order?>.saveListToXML(orders,OrderPath, OrderRoot);
         return true;
     }
 
-    public DO.Order? GetByID(int id)
+    public DO.Order GetByID(int id)
     {
-        List<DO.Order?>? orders = loadListFromXML(FPath);
+        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath, OrderRoot);
         if (id < 0)
             throw new InvalidVariableException();
         DO.Order? o = orders.FirstOrDefault(o => o?.ID == id);
@@ -88,7 +98,7 @@ internal class Order : IOrder
 
     public DO.Order? GetByCondition(Func<DO.Order?, bool>? func)
     {
-        List<DO.Order?>? orders = loadListFromXML(FPath);
+        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath, OrderRoot);
         func = func ?? throw new InvalidVariableException();
         DO.Order? o = orders.FirstOrDefault(i => func(i)) ?? throw new IdDoesNotExistException();
         return o;
