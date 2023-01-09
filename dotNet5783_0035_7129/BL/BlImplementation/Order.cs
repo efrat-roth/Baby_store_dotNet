@@ -15,24 +15,25 @@ namespace BlImplementation;
 
 internal class Order : BlApi.IOrder
 {
-    DalApi.IDal? _dal = DalApi.Factory.Get();
+    DalApi.IDal? dal = DalApi.Factory.Get();
     /// <summary>
     /// The method returns details of orders
     /// </summary>
     /// <returns></returns>List of OrderForList
     public List<OrderForList?> GetListOfOrders()
     {
-        IEnumerable<DO.Order?> orders = _dal?.Order.GetAll() ?? throw new ObgectNullableException();
+        IEnumerable<DO.Order?> orders = dal?.Order.GetAll() ?? throw new ObgectNullableException();
+        IEnumerable<DO.OrderItem?> orderItems = dal?.OrderItem.GetAll()??throw new ObgectNullableException();
         IEnumerable<OrderForList?> ordersOrderedReturn = from o in orders
                                                          where (o?.OrderDate <= DateTime.Today && !(o?.ArrivedDate <= DateTime.Today) && !(o?.DeliveredDate <= DateTime.Today))
                                                          let oNew = new OrderForList()
                                                          {
                                                              ID = o?.ID ?? throw new ObgectNullableException(),
-                                                             AmountOfItems = (from oi in _dal?.OrderItem.GetAll()
+                                                             AmountOfItems = (from oi in orderItems
                                                                               where oi?.OrderID == o?.ID
                                                                               select oi).ToList().Count(),
                                                              CustomerName = o?.CustomerName,
-                                                             TotalPrice = (from oi in _dal?.OrderItem.GetAll()
+                                                             TotalPrice = (from oi in orderItems
                                                                            where oi?.OrderID == o?.ID
                                                                            select oi).Sum(oi => oi?.Price)
                                                                          ?? throw new ObgectNullableException(),
@@ -47,11 +48,11 @@ internal class Order : BlApi.IOrder
                                                            let oNew = new OrderForList()
                                                            {
                                                                ID = o?.ID ?? throw new ObgectNullableException(),
-                                                               AmountOfItems = (from oi in _dal?.OrderItem.GetAll()
+                                                               AmountOfItems = (from oi in orderItems
                                                                                 where oi?.OrderID == o?.ID
                                                                                 select oi).ToList().Count(),
                                                                CustomerName = o?.CustomerName,
-                                                               TotalPrice = (from oi in _dal?.OrderItem.GetAll()
+                                                               TotalPrice = (from oi in orderItems
                                                                              where oi?.OrderID == o?.ID
                                                                              select oi).Sum(oi => oi?.Price)
                                                                            ?? throw new ObgectNullableException(),
@@ -66,11 +67,11 @@ internal class Order : BlApi.IOrder
                                                          let oNew = new OrderForList()
                                                          {
                                                              ID = o?.ID ?? throw new ObgectNullableException(),
-                                                             AmountOfItems = (from oi in _dal?.OrderItem.GetAll()
+                                                             AmountOfItems = (from oi in orderItems
                                                                               where oi?.OrderID == o?.ID
                                                                               select oi).ToList().Count(),
                                                              CustomerName = o?.CustomerName,
-                                                             TotalPrice = (from oi in _dal?.OrderItem.GetAll()
+                                                             TotalPrice = (from oi in orderItems
                                                                            where oi?.OrderID == o?.ID
                                                                            select oi).Sum(oi => oi?.Price)
                                                                          ?? throw new ObgectNullableException(),
@@ -93,10 +94,10 @@ internal class Order : BlApi.IOrder
     public BO.Order GetDetailsOrderManager(int ID)
     {
         DO.Order order1 = new DO.Order();
-        try { order1 = _dal?.Order.GetByID(ID) ?? throw new ObgectNullableException(); }//asked order
+        try { order1 = dal?.Order.GetByID(ID) ?? throw new ObgectNullableException(); }//asked order
         catch (Exception inner) { throw new FailedGet(inner); }
         IEnumerable<DO.OrderItem?> orderItems = new List<DO.OrderItem?>();
-        try { orderItems = _dal.OrderItem.GetAll(oi => oi?.OrderID == ID); }//List of orderItems of the order
+        try { orderItems = dal.OrderItem.GetAll(oi => oi?.OrderID == ID); }//List of orderItems of the order
         catch (Exception inner) { throw new FailedGet(inner); }
         BO.Order logicOrder = new BO.Order
         {
@@ -131,7 +132,7 @@ internal class Order : BlApi.IOrder
                           let OItem = new OrderItem()
                           {
                               ID = OI?.ID ?? throw new ObgectNullableException(),
-                              Name = _dal.Product.GetByID(OI?.ProductID ?? throw new ObgectNullableException()).Name,
+                              Name = dal.Product.GetByID(OI?.ProductID ?? throw new ObgectNullableException()).Name,
                               ProductID = OI?.ProductID ?? throw new ObgectNullableException(),
                               Price = OI?.Price ?? throw new ObgectNullableException(),
                               Amount = OI?.Amount ?? throw new ObgectNullableException(),
@@ -168,17 +169,17 @@ internal class Order : BlApi.IOrder
     public BO.Order DeliveredOrder(int IDOrder)
     {
         DO.Order CheckOrder = new DO.Order();
-        try { CheckOrder = _dal?.Order.GetByID(IDOrder) ?? throw new ObgectNullableException(); }
+        try { CheckOrder = dal?.Order.GetByID(IDOrder) ?? throw new ObgectNullableException(); }
         catch (Exception inner) { throw new FailedGet(inner); }
         if (CheckOrder.DeliveredDate <= DateTime.Today)//If the order delivered already
         {
             throw new CanNotDOActionException();
         }
         CheckOrder.DeliveredDate = DateTime.Today;//resets the field to now
-        try { _dal.Order.Update(CheckOrder); }//update the order in the database
+        try { dal.Order.Update(CheckOrder); }//update the order in the database
         catch (Exception inner) { throw new FailedUpdate(inner); }
         IEnumerable<DO.OrderItem?> items1 = new List<DO.OrderItem?>();
-        try { items1 = _dal.OrderItem.GetAll(oi => oi?.OrderID == IDOrder); }//gets the all orderItems of the order
+        try { items1 = dal.OrderItem.GetAll(oi => oi?.OrderID == IDOrder); }//gets the all orderItems of the order
         catch (Exception inner) { throw new FailedGet(inner); }
         try
         {
@@ -196,7 +197,7 @@ internal class Order : BlApi.IOrder
                          let orderItem = new BO.OrderItem
                          {
                              ID = item?.ID ?? throw new ObgectNullableException(),
-                             Name = _dal.Product.GetByID(item?.ProductID ?? throw new ObgectNullableException()).Name,
+                             Name = dal.Product.GetByID(item?.ProductID ?? throw new ObgectNullableException()).Name,
                              ProductID = item?.ProductID ?? throw new ObgectNullableException(),
                              Price = item?.Price ?? throw new ObgectNullableException(),
                              Amount = item?.Amount ?? throw new ObgectNullableException(),
@@ -217,7 +218,7 @@ internal class Order : BlApi.IOrder
     public BO.Order ArrivedOrder(int IDOrder)
     {
         DO.Order CheckOrder = new DO.Order();
-        try { CheckOrder = _dal?.Order.GetByID(IDOrder) ?? throw new ObgectNullableException(); }
+        try { CheckOrder = dal?.Order.GetByID(IDOrder) ?? throw new ObgectNullableException(); }
         catch (Exception inner) { throw new FailedGet(inner); }
         if (CheckOrder.ArrivedDate <= DateTime.Today)
         {
@@ -228,10 +229,10 @@ internal class Order : BlApi.IOrder
         }
         else CheckOrder.DeliveredDate = DateTime.Today;
         CheckOrder.ArrivedDate = DateTime.Today;
-        if (!(_dal.Order.Update(CheckOrder)))
+        if (!(dal.Order.Update(CheckOrder)))
             throw new CanNotDOActionException();
 
-        IEnumerable<DO.OrderItem?> items1 = _dal.OrderItem.GetAll(items1 => items1?.ID == IDOrder);
+        IEnumerable<DO.OrderItem?> items1 = dal.OrderItem.GetAll(items1 => items1?.ID == IDOrder);
         BO.Order ReturnOrder = new BO.Order
         {
             ID = IDOrder,
@@ -251,7 +252,7 @@ internal class Order : BlApi.IOrder
                                   let orderItem = new BO.OrderItem
                                   {
                                       ID = item?.ID ?? throw new ObgectNullableException(),
-                                      Name = _dal.Product.GetByID(item?.ProductID ?? throw new ObgectNullableException()).Name,
+                                      Name = dal.Product.GetByID(item?.ProductID ?? throw new ObgectNullableException()).Name,
                                       ProductID = item?.ProductID ?? throw new ObgectNullableException(),
                                       Price = item?.Price ?? throw new ObgectNullableException(),
                                       Amount = item?.Amount ?? throw new ObgectNullableException(),
@@ -274,7 +275,7 @@ internal class Order : BlApi.IOrder
     {
 
         DO.Order CheckOrder = new DO.Order();
-        try { CheckOrder = _dal?.Order.GetByID(IDOrder) ?? throw new ObgectNullableException(); }
+        try { CheckOrder = dal?.Order.GetByID(IDOrder) ?? throw new ObgectNullableException(); }
         catch (Exception inner) { throw new FailedGet(inner); }
         List<NodeDateStatus> ListDateStatus1 = new List<NodeDateStatus>();
         OrderStatus status1 = new OrderStatus();
@@ -334,32 +335,35 @@ internal class Order : BlApi.IOrder
             throw new BO.InvalidVariableException();
         if (newAmount < 0)
             throw new BO.InvalidVariableException();
-        try { _dal?.Order.GetByID(IDOrder); }
+        DO.Order? order;
+        try { order=dal?.Order.GetByID(IDOrder); }
         catch (Exception inner)
         {
             throw new FailedGet(inner);
         }
-        if (_dal?.Order.GetByID(IDOrder).DeliveredDate <= DateTime.Today)
+        if (order?.DeliveredDate <= DateTime.Today)
             throw new CanNotDOActionException();
+        DO.Product product = dal.Product.GetByID(IDProduct);//for update in stock
         BO.Order? wantedOrder = GetDetailsOrderManager(IDOrder);
         BO.OrderItem? oi = wantedOrder?.Items?.FirstOrDefault(oi => oi?.ProductID == IDProduct);
-        if (_dal?.Product.GetByID(IDProduct).InStock < 0 || _dal?.Product.GetByID(IDProduct).InStock < newAmount)
+        if (product.InStock < 0 ||product.InStock < newAmount)
             throw new InvalidVariableException();
-        DO.Product product = _dal.Product.GetByID(IDProduct);//for update in stock
         if (newAmount > product.InStock - oi?.Amount)
             throw new InvalidVariableException();
         if (newAmount != 0)
         {
             if (oi == null)//if he product is not in the order, add it
             {
+                DO.Product? productHelp = dal?.Product.GetByID(IDProduct);
+                IEnumerable<DO.OrderItem?> orderItems = dal?.OrderItem.GetAll();
                 oi = new OrderItem()
                 {
-                    ID = _dal?.OrderItem.GetAll().Last()?.ID + 1 ?? 0,
+                    ID = orderItems?.Last()?.ID + 1 ?? 0,
                     Amount = newAmount,
-                    Name = _dal?.Product.GetByID(IDProduct).Name,
-                    Price = _dal?.Product.GetByID(IDProduct).Price ?? 0,
+                    Name = productHelp?.Name,
+                    Price = productHelp?.Price ?? 0,
                     ProductID = IDProduct,
-                    TotalPrice = newAmount * _dal?.Product.GetByID(IDProduct).Price ?? 0,
+                    TotalPrice = newAmount * productHelp?.Price ?? 0,
                 };
                 DO.OrderItem add = new DO.OrderItem()//update in the daa layer
                 {
@@ -370,14 +374,14 @@ internal class Order : BlApi.IOrder
                     ProductID = IDProduct
                 };
                 wantedOrder?.Items?.Add(oi);
-                _dal?.OrderItem.Add(add);
+                dal?.OrderItem.Add(add);
                 product.InStock -= add.Amount;
-                _dal?.Product.Update(product);//update the amount in stocp of product
+                dal?.Product.Update(product);//update the amount in stocp of product
                 return wantedOrder;
             }
            
             product.InStock += oi.Amount;
-            _dal.Product.Update(product);
+            dal.Product.Update(product);
             wantedOrder!.TotalPrice -= oi!.TotalPrice;//for calculate the new total price of the order
             oi.Amount = newAmount;
             oi.TotalPrice = newAmount * oi.Price;
@@ -392,18 +396,18 @@ internal class Order : BlApi.IOrder
             };
            
             product.InStock -= oi.Amount;
-            _dal?.OrderItem.Update(update);
+            dal?.OrderItem.Update(update);
             return wantedOrder;
         }
         else
         {
             product.InStock += oi.Amount;
-            _dal.Product.Update(product);
+            dal.Product.Update(product);
             wantedOrder?.Items?.Remove(oi);
-            _dal?.OrderItem.Delete(oi.ID);
+            dal?.OrderItem.Delete(oi.ID);
             if (wantedOrder?.Items?.Count() == 0)
             {
-                _dal?.Order.Delete(IDOrder);
+                dal?.Order.Delete(IDOrder);
             }
             return wantedOrder;
         }

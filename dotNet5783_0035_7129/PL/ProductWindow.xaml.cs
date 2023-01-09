@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -212,7 +213,7 @@ namespace PL
             try
             {
                 _actionDel(_bl?.Product?.GetProductByCondition(item => item?.ID == product?.IDProduct)?.FirstOrDefault());
-                _bl?.Product.DeleteProduct(product.IDProduct);
+                _bl?.Product.DeleteProduct(product?.IDProduct??throw new ObgectNullableException());
                 this.Close();
             }
             catch (IdDoesNotExistException) { MessageBox.Show("The product is not in the store"); }

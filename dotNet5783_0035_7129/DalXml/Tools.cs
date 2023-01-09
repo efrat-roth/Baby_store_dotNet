@@ -10,44 +10,32 @@ namespace Dal
 {
     internal static class Tools<T>
     {
-
-        static XElement? Root;
-        static string? Path;
-        public static void LoadData()
+        /// <summary>
+        /// Take a list from the xml and copy it to list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="path"></param>
+        public static void saveListToXML(List<T?> list,string path)
         {
-            try
-            {
-                Root = XElement.Load(Path);
-            }
-            catch
-            {
-                throw new Exception("File upload problem");
-            }
-        }
-        public static void saveListToXML(List<T?> list,string path, XElement? root)
-        {
-            Root=root;
-            Path = path;
-            LoadData();
             XmlSerializer x = new XmlSerializer(list.GetType());
             string dir = "..\\xml\\";
             FileStream fs = new FileStream(dir+path, FileMode.Create);
             x.Serialize(fs, list);
         }
 
-        public static List<T?> loadListFromXML(string path, XElement? root)
+        /// <summary>
+        /// Take a list from a list and copy it to xml
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static List<T?> loadListFromXML(string path)
         {
-
-            Root = root;
-            Path = path;
-            LoadData();
             List<T?> list;
             XmlSerializer x = new XmlSerializer(typeof(List<T?>));            
             string dir = "..\\xml\\";
             FileStream fs = new FileStream(dir + path, FileMode.Open);
             list = (List<T?>)x.Deserialize(fs);
             return list.ToList<T?>();
-
         }
     }
 }

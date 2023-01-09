@@ -21,9 +21,9 @@ namespace Dal
         /// </summary>
         static DataSourceXml() { 
             Initialize();
-           SaveProductListLinq(products);
-            SaveOrdertListLinq(orders);
-            SaveOrderItemtListLinq(orderItems);
+           //SaveProductListLinq(products);
+           // SaveOrdertListLinq(orders);
+           // SaveOrderItemtListLinq(orderItems);
         }
         readonly static Random rnd = new Random();
         private static XElement intialize;

@@ -101,6 +101,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -118,10 +119,12 @@
                 <Label x:Name="delivered"  Content="Enter v to update arrived" HorizontalAlignment="Center"   Grid.Row="3" Grid.Column="0"  Visibility="{ Binding order.ShipDate, Converter={StaticResource notNullAndDoneYetToVisibilityConverter}}"/>
 
                 <TextBox x:Name="amountContent"  Grid.Column="1" PreviewKeyDown="amountIsNumber" Grid.Row="1" HorizontalAlignment="Left"  Width="108"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
+                <Button x:Name="UpdateProductAmountxamel"  Content="Update amount" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Click="UpdateAmountOfProducts" Grid.Column="3" Grid.Row="1"  Width="172" Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
+
                 <CheckBox x:Name="updateShiped"  Grid.Column="1"   Grid.Row="2" HorizontalAlignment="Left"  Width="108" Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
                 <CheckBox x:Name="updateDelivery"  Grid.Column="1"   Grid.Row="3" HorizontalAlignment="Left"  Width="108" Visibility="{ Binding order.ShipDate, Converter={StaticResource notNullAndDoneYetToVisibilityConverter}}"/>
 
-                <Button x:Name="UpdateProductxamel"  Content="Update the order" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Click="UpdateProducts" Grid.Column="1" Grid.Row="4"  Width="172" />
+                <Button x:Name="UpdateProductxamel"  Content="Update dates" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Click="UpdateProducts" Grid.Column="3" Grid.Row="4"  Width="172" />
             </Grid>
         </StackPanel>
     </Grid>
