@@ -43,7 +43,7 @@ namespace PL
         {
             try
             {                                   
-                OrderForList o = new OrderForList()//convert to orderForList in order to send to order window
+                OrderForList? o = new OrderForList()//convert to orderForList in order to send to order window
                 {
                     ID = order?.ID??throw new BO.ObgectNullableException(),
                     AmountOfItems = _bl!.Order.GetListOfOrders().FirstOrDefault(ord => ord!.ID == order.ID)!.AmountOfItems,
@@ -55,6 +55,7 @@ namespace PL
                 orderWindow.ShowDialog();
             }
             catch(FailedGet g) { MessageBox.Show(g.ToString()); }
+            catch(Exception ex) { MessageBox.Show(ex.ToString()); } 
         }
         
 

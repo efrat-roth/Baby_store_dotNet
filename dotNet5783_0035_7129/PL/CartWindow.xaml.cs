@@ -25,25 +25,32 @@ namespace PL
     public partial class CartWindow : Window
     {
         public Cart cart { get; set; }
-        IBl _bl { get; set; }
+        IBl bl { get; set; }
         public ObservableCollection<ProductDataBiding.OrderItem?>? OrderItems { get; set; }
         private IEnumerable<ProductDataBiding.OrderItem?>? orderItems { get; }
-        public CartWindow(IBl bl, Cart c)
+        public CartWindow(IBl bl1, Cart c)
         {
-            _bl= bl;
-            cart = c;
-            orderItems = from i in cart.Items  //convert the all order items in the cart
-                         select new ProductDataBiding.OrderItem()
-                         {
-                             IDOI = i.ID,
-                             ProductID = i.ProductID,
-                             NameOI = i.Name,
-                             TotalPrice = i.TotalPrice,
-                             PriceOI = i.Price,
-                             AmountOI = i.Amount,
-                         };
-            OrderItems = new ObservableCollection<ProductDataBiding.OrderItem?>(orderItems);
-            InitializeComponent();
+            try
+            {
+                bl = bl1;
+                cart = c;
+                orderItems = from i in cart.Items  //convert the all order items in the cart
+                             select new ProductDataBiding.OrderItem()
+                             {
+                                 IDOI = i.ID,
+                                 ProductID = i.ProductID,
+                                 NameOI = i.Name,
+                                 TotalPrice = i.TotalPrice,
+                                 PriceOI = i.Price,
+                                 AmountOI = i.Amount,
+                             };
+                OrderItems = new ObservableCollection<ProductDataBiding.OrderItem?>(orderItems);
+                InitializeComponent();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -55,7 +62,7 @@ namespace PL
         {
             try
             {
-                BO.Order order= _bl.Cart.MakeOrder(cart, cart?.CustomerAdress!, cart?.CustomerName!, cart?.CustomerEmail!);               
+                BO.Order order= bl.Cart.MakeOrder(cart, cart?.CustomerAdress!, cart?.CustomerName!, cart?.CustomerEmail!);               
                 MessageBox.Show("The order was created successfully, the id of the order is"+ order.ID );
                 this.Close();
             }
@@ -77,10 +84,9 @@ namespace PL
             {
                 FrameworkElement? f = sender as FrameworkElement;
                 ProductDataBiding.OrderItem? p = (ProductDataBiding.OrderItem?)f?.DataContext;//gets the product to change
-                int productId = p.ProductID;
+                int productId = p!.ProductID;
                 int amount = p.AmountOI;
-                cart=_bl.Cart.UpdateProductAmount(finalCart: cart, productId, amount);
-                
+                cart=bl.Cart.UpdateProductAmount( cart, productId, amount);               
                 if (amount != 0)//only have to change tha amount and the othe properties matchly
                 {
                     ProductDataBiding.OrderItem? orderItem = new ProductDataBiding.OrderItem()
@@ -123,7 +129,6 @@ namespace PL
             return;
 
         }
-
        
     }
 }

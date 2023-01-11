@@ -14,29 +14,7 @@ internal class OrderItem : IOrderItem
 {
     //static XElement? OrderItemRoot;
     static string OrderItemPath = @"OrderItem.xml";
-    //public OrderItem()
-    //{
-    //    if (!File.Exists(OrderItemPath))
-    //        CreateFiles();
-    //    else
-    //        LoadData();
-    //}
-    //private void CreateFiles()
-    //{
-    //    OrderItemRoot = new XElement("orderItems");
-    //    OrderItemRoot.Save(OrderItemPath);
-    //}
-    //private void LoadData()
-    //{
-    //    try
-    //    {
-    //        OrderItemRoot = XElement.Load(OrderItemPath);
-    //    }
-    //    catch
-    //    {
-    //        throw new Exception("File upload problem");
-    //    }
-    //}
+
 
     /// <summary>
     /// Return the all orderItems in the store

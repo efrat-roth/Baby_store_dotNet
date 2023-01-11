@@ -8,6 +8,8 @@
         Title="DetailsProductWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
 
+
+
     <Grid x:Name="detailsProductPresentation" VerticalAlignment="Stretch" >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -21,6 +23,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="ID :" HorizontalAlignment="Right"  VerticalAlignment="Center" 
                FontSize="16"  Grid.Row="1" Grid.Column="0"/>
@@ -28,8 +31,10 @@
                FontSize="16"  Grid.Row="2" Grid.Column="0"/>
         <Label Content="CATEGORY:"  HorizontalAlignment="Right"  VerticalAlignment="Center" 
                FontSize="16"  Grid.Row="3" Grid.Column="0"/>
+        
         <Label Content="AMOUNT:" Grid.Row="4" HorizontalAlignment="Right"  VerticalAlignment="Center" 
                FontSize="16" Grid.Column="0" />
+
         <Label Content="InStock:" Grid.Row="6" HorizontalAlignment="Right"   VerticalAlignment="Center" 
                FontSize="16" Grid.Column="0"/>
         <Label Content="PRICE:" Grid.Row="5" HorizontalAlignment="Right"  VerticalAlignment="Center" 
@@ -42,12 +47,33 @@
                FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
         <Label Grid.Column="1" Content="{Binding Product.Category}" Grid.Row="3" HorizontalAlignment="Left" 
                FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <Label Grid.Column="1" Content="{Binding Product.Amount}" Grid.Row="4" HorizontalAlignment="Left" 
+        <Grid Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="down" Grid.Column="0" Content="^" RenderTransformOrigin="0.5,0.5" Width="20" Click="MinusAmount">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="179.902"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Label Content="{Binding Product.Amount, Mode=TwoWay}" Name="NewAmount" Grid.Column="1"  Grid.Row="4" HorizontalAlignment="Left" 
                FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+            <Button x:Name="up" Grid.Column="2" Content="^" Width="20" Click="PlusAmount" />
+
+        </Grid>
+
         <Label Grid.Column="1" Content="{Binding Product.Price}" Grid.Row="5" HorizontalAlignment="Left" 
                FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
         <Label Grid.Column="1" Content="{Binding Product.InStock}" Grid.Row="6" HorizontalAlignment="Left" 
                FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
+        <DockPanel LastChildFill="True"/>
 
     </Grid>
 </Window>

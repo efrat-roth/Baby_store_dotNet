@@ -37,12 +37,19 @@ internal class Cart:ICart
         BO.OrderItem? orderItem = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id);
         if (orderItem==null)
         {
-            DO.OrderItem oi1 = _dal?.OrderItem.GetAll().Last() ?? throw new InvalidVariableException();
+            int idOI = _dal?.OrderItem.GetAll().Last()?.ID ?? throw new InvalidVariableException();
+            bool flag = true;
+            while (flag)//While the new id is already exist
+            { 
+                try { _dal.OrderItem.GetByID(idOI); ++idOI; }                
+                catch { flag = false; };
+            }
+
             if (ProductInStore?.InStock > 0)   //If the product is not on order and is in the store.
             {
                 BO.OrderItem newProductInOrder = new BO.OrderItem
                 {
-                    ID = oi1.ID+1,
+                    ID = idOI,
                     Price = ProductInStore?.Price??throw new ObgectNullableException(),
                     TotalPrice = ProductInStore?.Price??throw new ObgectNullableException(),
                     ProductID = id,
@@ -82,6 +89,8 @@ internal class Cart:ICart
     /// <exception cref="Exception"></exception>
     public BO.Cart UpdateProductAmount(BO.Cart finalCart, int id, int newAmount)
     {
+        if (id < 0 || newAmount < 0)
+            throw new InvalidVariableException();
         DO.Product? ProductInStore;
         try { ProductInStore = _dal?.Product.GetByID(id); } //Variable for the product.
         catch(Exception inner) { throw new FailedGet(inner); }

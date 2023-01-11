@@ -5,7 +5,7 @@
     <Name>NewBornCarriage</Name>
     <Category>BabyCarriages</Category>
     <Price>600</Price>
-    <InStock>149</InStock>
+    <InStock>148</InStock>
   </Product>
   <Product>
     <ID>100001</ID>
@@ -138,7 +138,7 @@
     <Name>PinkCarriage</Name>
     <Category>BabyCarriages</Category>
     <Price>304</Price>
-    <InStock>247</InStock>
+    <InStock>245</InStock>
   </Product>
   <Product>
     <ID>100020</ID>

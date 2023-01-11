@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class NewOrder : Window
     {
-        BlApi.IBl? _bl;
+        BlApi.IBl? bl;
         Cart? cart { get; set; }
         public Array _Category { get; set; } = Enum.GetValues(typeof(Category));
         public ObservableCollection<ProductItem?> ProductsLists { get; set; }
@@ -29,8 +29,8 @@ namespace PL
         public ObservableCollection<IGrouping<BO.Category?, ProductItem?>> _ByCategory { get; set; }
         public NewOrder(BlApi.IBl bl1,Cart c)
         {
-            _bl = bl1;
-            productsLists = _bl.Product.GetListOfProductsItem();
+            bl = bl1;
+            productsLists = bl.Product.GetListOfProductsItem();
             ProductsLists = new ObservableCollection<ProductItem?>(productsLists);
             cart = c;
             cart.Items = new List<OrderItem?>();
@@ -43,33 +43,23 @@ namespace PL
             InitializeComponent();
                
         }
-        /// <summary>
-        /// Add product to the cart
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddProduct(object sender, RoutedEventArgs e)
-        { 
 
-            if(idD.Text.Length==0||amountD.Text.Length==0)
-            {
-                MessageBox.Show("You have to enter the details first");
-                return;
-            }
+        /// <summary>
+        /// Delegate to update thr=e amount from product window
+        /// </summary>
+        /// <param name="id"></param>id of product to change
+        /// <param name="amount"></param>new amount
+        private bool AmountChanged(int id,Cart? c)
+        {
             try
             {
-                //find the index of product for products show:
-                int index = ProductsLists.IndexOf(ProductsLists.FirstOrDefault(p=>p?.ID== int.Parse(idD.Text)));
-                cart = _bl?.Cart.AddProductToCart(cart!, int.Parse(idD.Text));
-                cart=_bl?.Cart.UpdateProductAmount(cart!, int.Parse(idD.Text), int.Parse(amountD.Text)); // if the amount is bigger than 1   
-                ProductsLists[index] = _bl?.Product.GetProductCustomer(int.Parse(idD.Text), cart);   //change the details of product in the catalog following the canges             
-                MessageBox.Show("The product is added to the cart");
-
+                var p = ProductsLists.FirstOrDefault(p => p?.ID == id);
+                int index = ProductsLists.IndexOf(p);
+                ProductsLists[index] = bl?.Product.GetProductCustomer(id, cart!);
+                cart = c;
+                return true;
             }
-            catch(FailedGet ){MessageBox.Show("The product is not in the store, enter the IDProduct again"); return; }
-            catch(InvalidVariableException ) { MessageBox.Show("The amount is bigger than the amount in stock"); return;  }
-            catch (CanNotDOActionException ){ MessageBox.Show("The amount is bigger than the amount in stock"); return; }
-            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+            catch { return false; }
         }
 
         /// <summary>
@@ -89,8 +79,8 @@ namespace PL
                 }
                 else
                 {
-                    var products = from p in _bl!.Product.GetProductByCondition( product => product.Category == (BO.Category)category).ToList()
-                                   let pReturn=_bl.Product.GetProductCustomer(p.ID,cart)
+                    var products = from p in bl?.Product?.GetProductByCondition( product => product.Category == (BO.Category)category)?.ToList()
+                                   let pReturn=bl?.Product.GetProductCustomer(p.ID,cart!)
                                    select pReturn;
                                               
                     addProducts(products);
@@ -128,19 +118,19 @@ namespace PL
             ProductDataBiding.ProductItem? product = new ProductDataBiding.ProductItem()
             {
                 ID = p?.ID??0,
-                Category = p.Category,
-                Name = p.Name,
+                Category = p?.Category,
+                Name = p?.Name,
                 Price = p.Price,
                 Amount= p.AmountInCart,
                 InStock = p.InStock,
             };
-            DetailsProductWindow details = new DetailsProductWindow(_bl,product);
+            DetailsProductWindow details = new DetailsProductWindow(bl,product,AmountChanged,cart);
             details.ShowDialog();
         }
         
         private void ShowCart(object sender, RoutedEventArgs e)
         {
-            CartWindow c = new CartWindow(_bl,cart);
+            CartWindow c = new CartWindow(bl!,cart!);
             c.ShowDialog();
         }
 

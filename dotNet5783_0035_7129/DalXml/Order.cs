@@ -12,31 +12,8 @@ namespace Dal;
 
 internal class Order : IOrder
 {
-    //static XElement? OrderRoot;
     static string OrderPath = @"Order.xml";
-    //public Order()
-    //{
-    //    if (!File.Exists(dir+OrderPath))
-    //        CreateFiles();
-    //    else
-    //        LoadData();
-    //}
-    //private void CreateFiles()
-    //{
-    //    OrderRoot = new XElement("orders");
-    //    OrderRoot.Save(dir+OrderPath);
-    //}
-    //private void LoadData()
-    //{
-    //    try
-    //    {
-    //        OrderRoot = XElement.Load(dir+OrderPath);
-    //    }
-    //    catch
-    //    {
-    //        throw new Exception("File upload problem");
-    //    }
-    //}
+   
     
     /// <summary>
     /// Gets the all orders
