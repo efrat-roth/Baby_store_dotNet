@@ -343,7 +343,9 @@ internal class Order : BlApi.IOrder
         }
         if (order?.DeliveredDate <= DateTime.Today)
             throw new CanNotDOActionException();
-        DO.Product product = dal.Product.GetByID(IDProduct);//for update in stock
+        DO.Product product;
+        try { product = dal!.Product.GetByID(IDProduct); }//for update in stock field
+        catch (Exception inner) { throw new FailedGet(inner); }
         BO.Order? wantedOrder = GetDetailsOrderManager(IDOrder);
         BO.OrderItem? oi = wantedOrder?.Items?.FirstOrDefault(oi => oi?.ProductID == IDProduct);
         if (product.InStock < 0 ||product.InStock < newAmount)
@@ -365,7 +367,7 @@ internal class Order : BlApi.IOrder
                     ProductID = IDProduct,
                     TotalPrice = newAmount * productHelp?.Price ?? 0,
                 };
-                DO.OrderItem add = new DO.OrderItem()//update in the daa layer
+                DO.OrderItem add = new DO.OrderItem()//update in the data layer
                 {
                     ID = oi.ID,
                     Amount = oi.Amount,
@@ -377,11 +379,10 @@ internal class Order : BlApi.IOrder
                 dal?.OrderItem.Add(add);
                 product.InStock -= add.Amount;
                 dal?.Product.Update(product);//update the amount in stocp of product
-                return wantedOrder;
+                return wantedOrder!;
             }
-           
+           //if the product has been in the order already
             product.InStock += oi.Amount;
-            dal.Product.Update(product);
             wantedOrder!.TotalPrice -= oi!.TotalPrice;//for calculate the new total price of the order
             oi.Amount = newAmount;
             oi.TotalPrice = newAmount * oi.Price;
@@ -396,6 +397,7 @@ internal class Order : BlApi.IOrder
             };
            
             product.InStock -= oi.Amount;
+            dal.Product.Update(product);
             dal?.OrderItem.Update(update);
             return wantedOrder;
         }

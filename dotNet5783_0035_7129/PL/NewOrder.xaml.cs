@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace PL
         public Array _Category { get; set; } = Enum.GetValues(typeof(Category));
         public ObservableCollection<ProductItem?> ProductsLists { get; set; }
         private IEnumerable<ProductItem?> productsLists { get; }
-        public ObservableCollection<IGrouping<BO.Category?, ProductItem?>> _ByCategory { get; set; }
+        public ObservableCollection<IGrouping<BO.Category?, ProductItem?>> ByCategory { get; set; }
         public NewOrder(BlApi.IBl bl1,Cart c)
         {
             bl = bl1;
@@ -35,7 +36,7 @@ namespace PL
             cart = c;
             cart.Items = new List<OrderItem?>();
             //convert to observel in order to update the details
-            _ByCategory = new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>
+            ByCategory = new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>
                 (from p in ProductsLists
                  orderby p.Category//order for identify the index in biding
                  group p by p.Category into g
@@ -57,6 +58,11 @@ namespace PL
                 int index = ProductsLists.IndexOf(p);
                 ProductsLists[index] = bl?.Product.GetProductCustomer(id, cart!);
                 cart = c;
+                //Change in the category show
+                int indexCategory = ByCategory.IndexOf(ByCategory.FirstOrDefault(g => g.Key == p?.Category)!);
+                int indexCategoryitem=ByCategory[indexCategory].ToList().IndexOf(p);
+                ByCategory[indexCategory].ToList().[indexCategoryitem]= bl?.Product.GetProductCustomer(id, cart!); 
+
                 return true;
             }
             catch { return false; }

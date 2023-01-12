@@ -35,13 +35,13 @@ namespace PL
         /// <param name="a"></param>Action
         /// <param name="bl1"></param>IBl
         /// <param name="o"></param>OrderForList?
-        public OrderWindow(Action<OrderForList?>? a, IBl bl1, BO.OrderForList? o)
+        public OrderWindow(Action<OrderForList?>? a, IBl? bl1, BO.OrderForList? o)
         {
             try
             {
                 _bl = bl1;
                 Action1 = a;
-                BO.Order orderHelp = _bl.Order.GetDetailsOrderManager(o.ID);
+                BO.Order? orderHelp = _bl?.Order.GetDetailsOrderManager(o?.ID??throw new ObgectNullableException());
                 OrderDataBiding.Order? order1 = new OrderDataBiding.Order()//build the order with dependency properties for biding
                 {
                     ID = o.ID,
@@ -49,12 +49,12 @@ namespace PL
                     Name = o.CustomerName,
                     AmountOfItems = o.AmountOfItems,
                     Status = (BO.OrderStatus?)o.Status,
-                    Email = orderHelp.CustomerEmail,
-                    Adress = orderHelp.CustomerAdress,
-                    OrderDate = orderHelp.OrderDate,
-                    ShipDate = orderHelp.ShipDate,
-                    DeliveryDate = orderHelp.DeliveryDate,
-                    Items = orderHelp.Items
+                    Email = orderHelp?.CustomerEmail,
+                    Adress = orderHelp?.CustomerAdress,
+                    OrderDate = orderHelp?.OrderDate,
+                    ShipDate = orderHelp?.ShipDate,
+                    DeliveryDate = orderHelp?.DeliveryDate,
+                    Items = orderHelp?.Items
                 };
                 order = order1;
                 InitializeComponent();
@@ -150,7 +150,7 @@ namespace PL
         {
             try
             {
-                BO.Order order1 = new BO.Order();
+                BO.Order? order1 = new BO.Order();
 
                 if (GetProduct.Text.Length == 0 && amountContent.Text.Length == 0)
                 {
@@ -158,12 +158,12 @@ namespace PL
                     return;
                 }
                 if ((GetProduct.Text.Length > 0 && amountContent.Text.Length == 0) || (GetProduct.Text.Length == 0 && amountContent.Text.Length > 0))
-                {//if only one depended detail input
+                {//if only one depended detail typed
                     MessageBox.Show("The amount of product is depended on IDProduct product input, you have to fill both, or neither");
                     return;
                 }
                 if (GetProduct.Text.Length > 0 && amountContent.Text.Length > 0)
-                {//case of update aproduct
+                {//case of update a product
                     int idProduct, amount;
                     if (!int.TryParse(GetProduct.Text, out idProduct) ||
                     !int.TryParse(amountContent.Text, out amount))

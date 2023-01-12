@@ -44,9 +44,9 @@
 
                 <ListView.View >
                     <GridView>
-                        <GridViewColumn Header="ID" Width="auto" x:Name="idP" DisplayMemberBinding="{Binding ID}"/>
-                        <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                        <GridViewColumn Header="ID" x:Name="idP" Width="70"  DisplayMemberBinding="{Binding ID}"/>
+                        <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
                         <GridViewColumn Header="Categoy" Width="auto" DisplayMemberBinding="{Binding Category}"/>
 
                         <GridViewColumn Header="InStock">
@@ -77,12 +77,12 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Clothes:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
-                <ListView x:Name="ClothesBy"  Background="#FFFBE6F4" Grid.Row="1" Grid.Column="0" MouseDoubleClick="DetailsOfProduct" ItemsSource="{Binding _ByCategory[0] }">
+                <ListView x:Name="ClothesBy"  Background="#FFFBE6F4" Grid.Row="1" Grid.Column="0" MouseDoubleClick="DetailsOfProduct" ItemsSource="{Binding ByCategory[0] }">
                     <ListView.View >
                         <GridView>
-                            <GridViewColumn Header="ID" Width="auto"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
                             <GridViewColumn Header="InStock">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -96,12 +96,12 @@
                     </ListView.View>
                 </ListView>
                 <Label Content="Bottles:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
-                <ListView x:Name="BottlesBy" Background="#FFFBE6F4" Grid.Row="3" Grid.Column="0" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding _ByCategory[1] }">
+                <ListView x:Name="BottlesBy" Background="#FFFBE6F4" Grid.Row="3" Grid.Column="0" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[1] }">
                     <ListView.View >
                         <GridView>
-                            <GridViewColumn Header="ID" Width="auto"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
                             <GridViewColumn Header="InStock">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -115,12 +115,12 @@
                     </ListView.View>
                 </ListView>
                 <Label Content="Toys" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"/>
-                <ListView x:Name="ToysBy" Background="#FFFBE6F4" Grid.Row="5" Grid.Column="0" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding _ByCategory[2] }">
+                <ListView x:Name="ToysBy" Background="#FFFBE6F4" Grid.Row="5" Grid.Column="0" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[2] }">
                     <ListView.View >
                         <GridView>
-                            <GridViewColumn Header="ID" Width="auto"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
                             <GridViewColumn Header="InStock">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -134,12 +134,12 @@
                     </ListView.View>
                 </ListView>
                 <Label Content="Socks:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
-                <ListView x:Name="SocksBy" Background="#FFFBE6F4" Grid.Row="1" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding _ByCategory[3] }">
+                <ListView x:Name="SocksBy" Background="#FFFBE6F4" Grid.Row="1" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[3] }">
                     <ListView.View >
                         <GridView>
-                            <GridViewColumn Header="ID" Width="auto"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
                             <GridViewColumn Header="InStock">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -153,12 +153,12 @@
                     </ListView.View>
                 </ListView>
                 <Label Content="Accesories:" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"/>
-                <ListView x:Name="AcceoriesBy" Background="#FFFBE6F4" Grid.Row="3" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding _ByCategory[4] }">
+                <ListView x:Name="AcceoriesBy" Background="#FFFBE6F4" Grid.Row="3" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[4] }">
                     <ListView.View >
                         <GridView>
-                            <GridViewColumn Header="ID" Width="auto"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
                             <GridViewColumn Header="InStock">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -172,12 +172,12 @@
                     </ListView.View>
                 </ListView>
                 <Label Content="Baby carriages:" Grid.Row="4" Grid.Column="1"/>
-                <ListView x:Name="Babycarriages" Background="#FFFBE6F4" Grid.Row="5" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding _ByCategory[5] }">
+                <ListView x:Name="Babycarriages" Background="#FFFBE6F4" Grid.Row="5" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[5] }">
                     <ListView.View >
                         <GridView>
-                            <GridViewColumn Header="ID" Width="auto"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="auto" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="auto" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
                             <GridViewColumn Header="InStock">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
