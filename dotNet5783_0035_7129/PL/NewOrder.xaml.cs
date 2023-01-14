@@ -25,23 +25,28 @@ namespace PL
         BlApi.IBl? bl;
         Cart? cart { get; set; }
         public Array _Category { get; set; } = Enum.GetValues(typeof(Category));
-        public ObservableCollection<ProductItem?> ProductsLists { get; set; }
-        private IEnumerable<ProductItem?> productsLists { get; }
-        public ObservableCollection<IGrouping<BO.Category?, ProductItem?>> _ByCategory { get; set; }
+        public ObservableCollection<ProductItem?>? ProductsLists { get; set; }
+        private IEnumerable<ProductItem?>? productsLists { get; }
+        public ObservableCollection<IGrouping<BO.Category?, ProductItem?>>? ByCategory { get; set; }
         public NewOrder(BlApi.IBl bl1,Cart c)
         {
-            bl = bl1;
-            productsLists = bl.Product.GetListOfProductsItem();
-            ProductsLists = new ObservableCollection<ProductItem?>(productsLists);
-            cart = c;
-            cart.Items = new List<OrderItem?>();
-            //convert to observel in order to update the details
-            _ByCategory = new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>
-                (from p in ProductsLists
-                 orderby p.Category//order for identify the index in biding
-                 group p by p.Category into g
-                 select g);//divide to groups for categories view
-            InitializeComponent();
+            try
+            {
+                bl = bl1;
+                productsLists = bl.Product.GetListOfProductsItem();
+                ProductsLists = new ObservableCollection<ProductItem?>(productsLists);
+                cart = c;
+                cart.Items = new List<OrderItem?>();
+                //convert to observel in order to update the details
+                ByCategory = new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>
+                    (from p in ProductsLists
+                     orderby p.Category//order for identify the index in biding
+                     group p by p.Category into g
+                     select g);//divide to groups for categories view
+
+                InitializeComponent();
+            }
+            catch (FailedGet f) { MessageBox.Show(f.Message); }
                
         }
 
@@ -54,15 +59,15 @@ namespace PL
         {
             try
             {
-                var p = ProductsLists.FirstOrDefault(p => p?.ID == id);
-                int index = ProductsLists.IndexOf(p);
+                var p = ProductsLists!.FirstOrDefault(p => p?.ID == id);
+                int index = ProductsLists!.IndexOf(p);
                 ProductsLists[index] = bl?.Product.GetProductCustomer(id, cart!);
                 cart = c;
                 //Change in the category show
-                int indexCategory = _ByCategory.IndexOf(_ByCategory.FirstOrDefault(g => g.Key == p.Category));
-                int indexCategoryitem=_ByCategory[indexCategory].ToList().IndexOf(p);
-                _ByCategory[indexCategory].ToList()[indexCategoryitem]= bl?.Product.GetProductCustomer(id, cart!); 
-
+                int indexCategory = ByCategory!.IndexOf(ByCategory!.FirstOrDefault(g => g.Key == p?.Category)!);
+                int indexCategoryitem=ByCategory[indexCategory].ToList().IndexOf(p);
+                ByCategory[indexCategory].ToList()[indexCategoryitem]= bl?.Product.GetProductCustomer(id, cart!);
+                
                 return true;
             }
             catch { return false; }
@@ -103,10 +108,10 @@ namespace PL
         {
             if (products.Any())
             {
-                ProductsLists.Clear();
+                ProductsLists?.Clear();
                 foreach (var item in products)
                 {
-                    ProductsLists.Add(item);
+                    ProductsLists?.Add(item);
                 }
             }
         }
@@ -178,6 +183,14 @@ namespace PL
 
         }
 
-      
+        //private void CategoryCheck_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    ByCategory = new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>
+        //            (from p in ProductsLists
+        //             orderby p.Category//order for identify the index in biding
+        //             group p by p.Category into g
+        //             select g);//divide to groups for categories view
+            
+        //}
     }
 }

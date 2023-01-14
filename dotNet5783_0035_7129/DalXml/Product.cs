@@ -48,7 +48,7 @@ internal class Product : IProduct
     public IEnumerable<DO.Product?> GetAll(Func<DO.Product?, bool>? func = null)
     {
         LoadData();
-        IEnumerable<DO.Product?> products=new List<DO.Product?>();
+        IEnumerable<DO.Product?>? products=new List<DO.Product?>();
         if (func == null)
         { 
          
@@ -84,7 +84,7 @@ internal class Product : IProduct
                         where func(pro)
                         select pro).Cast<DO.Product?>();
         }
-        return products;
+        return products??throw new ListIsEmptyException();
     }
     /// <summary>
     /// Return product by its ID

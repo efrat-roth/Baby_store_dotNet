@@ -77,7 +77,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Clothes:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
-                <ListView x:Name="ClothesBy"  Background="#FFFBE6F4" Grid.Row="1" Grid.Column="0" MouseDoubleClick="DetailsOfProduct" ItemsSource="{Binding ByCategory[0] }">
+                <ListView x:Name="ClothesBy"  Background="#FFFBE6F4" Grid.Row="1" Grid.Column="0" MouseDoubleClick="DetailsOfProduct" ItemsSource="{Binding }">
                     <ListView.View >
                         <GridView>
                             <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
@@ -171,7 +171,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Label Content="Baby carriages:" Grid.Row="4" Grid.Column="1"/>
+                <Label Content="Baby carriages:" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"/>
                 <ListView x:Name="Babycarriages" Background="#FFFBE6F4" Grid.Row="5" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[5] }">
                     <ListView.View >
                         <GridView>

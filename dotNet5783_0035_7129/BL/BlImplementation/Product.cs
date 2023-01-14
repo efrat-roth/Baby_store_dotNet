@@ -208,16 +208,23 @@ internal class Product : IProduct
 
     public IEnumerable<BO.ProductItem?> GetListOfProductsItem()
     {
-        return from DO.Product? product1 in _dal!.Product.GetAll()
-               select new BO.ProductItem
-               {
-                   ID = product1?.ID ?? throw new BO.ObgectNullableException(),
-                   Name = product1?.Name ?? throw new BO.ObgectNullableException(),
-                   Category = (BO.Category)(product1?.Category ?? throw new BO.ObgectNullableException()),
-                   Price = product1?.Price ?? throw new BO.ObgectNullableException(),
-                   InStock = product1?.InStock > 0 ? true : false,
-                   AmountInCart = 0
-               };
+        try
+        {
+            return from DO.Product? product1 in _dal!.Product.GetAll()
+                   select new BO.ProductItem
+                   {
+                       ID = product1?.ID ?? throw new BO.ObgectNullableException(),
+                       Name = product1?.Name ?? throw new BO.ObgectNullableException(),
+                       Category = (BO.Category)(product1?.Category ?? throw new BO.ObgectNullableException()),
+                       Price = product1?.Price ?? throw new BO.ObgectNullableException(),
+                       InStock = product1?.InStock > 0 ? true : false,
+                       AmountInCart = 0
+                   };
+        }
+        catch(Exception inner)
+        {
+            throw new FailedGet(inner);
+        }
     }
 
 }
