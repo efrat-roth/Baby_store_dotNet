@@ -16,6 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid"  Grid.Row="0"
         VerticalAlignment="Stretch" Width="auto">
@@ -36,13 +37,17 @@
         <Grid Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <ListView x:Name="ProductsListView"  Grid.Row="0" d:ItemsSource="{d:SampleData ItemCount=5 }"  
+            <ListView x:Name="ProductsListView"  Grid.Row="0"  
                    Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ProductsLists }" 
-                      HorizontalContentAlignment="Stretch" >
-
-                <ListView.View >
+                      HorizontalContentAlignment="Stretch">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" x:Name="idP" Width="70"  DisplayMemberBinding="{Binding ID}"/>
                         <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
@@ -57,150 +62,51 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Amount in cart" Width="auto" x:Name="AmountCart" DisplayMemberBinding="{Binding AmountInCart}"/>
-
                     </GridView>
                 </ListView.View>
+
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="True">
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}"  FontSize="18" VerticalAlignment="Bottom" />
+                                                        <TextBlock Text=" " FontWeight="Bold"   FontSize="18" VerticalAlignment="Bottom" />
+
+                                                        <TextBlock Text="{Binding ItemCount}" FontSize="12" Foreground="{DynamicResource PrimaryHueLightBrush}"  FontStyle="Italic" VerticalAlignment="Bottom" />
+
+                                                        <TextBlock Text=" item(s)" FontSize="12" Foreground="{DynamicResource PrimaryHueLightBrush}" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                    </StackPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+                 
             </ListView>
 
-            <Grid x:Name="ProductsByCategory" Grid.Row="0"  Background="#FFFBE6F4" 
-                   Visibility="{Binding Path= IsChecked, ElementName=CategoryCheck,Converter={StaticResource notBooleanToVisibilityConverter}}" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Label Content="Clothes:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
-                <ListView x:Name="ClothesBy"  Background="#FFFBE6F4" Grid.Row="1" Grid.Column="0" MouseDoubleClick="DetailsOfProduct" ItemsSource="{Binding }">
-                    <ListView.View >
-                        <GridView>
-                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
-                            <GridViewColumn Header="InStock">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Width="auto" IsEnabled="False" IsChecked="{Binding InStock}" Name="inS"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Amount in cart" Width="auto"  DisplayMemberBinding="{Binding AmountInCart}"/>
 
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Label Content="Bottles:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
-                <ListView x:Name="BottlesBy" Background="#FFFBE6F4" Grid.Row="3" Grid.Column="0" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[1] }">
-                    <ListView.View >
-                        <GridView>
-                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
-                            <GridViewColumn Header="InStock">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Width="auto" IsEnabled="False" IsChecked="{Binding InStock}" Name="inS"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Amount in cart" Width="auto"  DisplayMemberBinding="{Binding AmountInCart}"/>
 
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Label Content="Toys" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"/>
-                <ListView x:Name="ToysBy" Background="#FFFBE6F4" Grid.Row="5" Grid.Column="0" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[2] }">
-                    <ListView.View >
-                        <GridView>
-                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
-                            <GridViewColumn Header="InStock">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Width="auto" IsEnabled="False" IsChecked="{Binding InStock}" Name="inS"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Amount in cart" Width="auto"  DisplayMemberBinding="{Binding AmountInCart}"/>
-
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Label Content="Socks:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
-                <ListView x:Name="SocksBy" Background="#FFFBE6F4" Grid.Row="1" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[3] }">
-                    <ListView.View >
-                        <GridView>
-                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
-                            <GridViewColumn Header="InStock">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Width="auto" IsEnabled="False" IsChecked="{Binding InStock}" Name="inS"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Amount in cart" Width="auto"  DisplayMemberBinding="{Binding AmountInCart}"/>
-
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Label Content="Accesories:" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"/>
-                <ListView x:Name="AcceoriesBy" Background="#FFFBE6F4" Grid.Row="3" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[4] }">
-                    <ListView.View >
-                        <GridView>
-                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
-                            <GridViewColumn Header="InStock">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Width="auto" IsEnabled="False" IsChecked="{Binding InStock}" Name="inS"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Amount in cart" Width="auto"  DisplayMemberBinding="{Binding AmountInCart}"/>
-
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Label Content="Baby carriages:" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"/>
-                <ListView x:Name="Babycarriages" Background="#FFFBE6F4" Grid.Row="5" Grid.Column="1" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ByCategory[5] }">
-                    <ListView.View >
-                        <GridView>
-                            <GridViewColumn Header="ID" Width="70"  DisplayMemberBinding="{Binding ID}"/>
-                            <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
-                            <GridViewColumn Header="InStock">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Width="auto" IsEnabled="False" IsChecked="{Binding InStock}" Name="inS"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Amount in cart" x:Name="a" Width="auto"  DisplayMemberBinding="{Binding AmountInCart}"/>
-
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Grid>
-            <Grid Background="#FFFBE6F4" Grid.Row="1 ">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Press twice on product to see details&#xD;&#xA;                 put v to show by category" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Stretch"  FontSize="12" Background="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0.7"  />
-                <Button  x:Name="Cart" Content="Go to the cart" HorizontalAlignment="Right" HorizontalContentAlignment="Center"  Grid.Column="2" Click="ShowCart" Background="#FFDADADA" Opacity="0.8"  Width="130" />
-                <CheckBox x:Name="CategoryCheck" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-            </Grid>
+        </Grid>
+        <Grid Background="#FFFBE6F4" Grid.Row="2 ">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Press twice on product to see details&#xD;&#xA;                 put v to show by category" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontSize="12" Background="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0.7"  />
+            <Button  x:Name="Cart" Content="Go to the cart" HorizontalAlignment="Right" HorizontalContentAlignment="Center"  Grid.Column="2" Click="ShowCart" Background="#FFDADADA" Opacity="0.8"  Width="130" />
+            <CheckBox x:Name="CategoryCheck" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Checked="CategoryCheck_Checked" Unchecked="CategoryCheck_UnChecked"/>
         </Grid>
     </Grid>
 </Window>

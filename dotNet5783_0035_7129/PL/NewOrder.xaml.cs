@@ -27,7 +27,8 @@ namespace PL
         public Array _Category { get; set; } = Enum.GetValues(typeof(Category));
         public ObservableCollection<ProductItem?>? ProductsLists { get; set; }
         private IEnumerable<ProductItem?>? productsLists { get; }
-        public ObservableCollection<IGrouping<BO.Category?, ProductItem?>>? ByCategory { get; set; }
+        ICollectionView? collectionView;
+        PropertyGroupDescription? propertyGroupDescription;
         public NewOrder(BlApi.IBl bl1,Cart c)
         {
             try
@@ -37,12 +38,10 @@ namespace PL
                 ProductsLists = new ObservableCollection<ProductItem?>(productsLists);
                 cart = c;
                 cart.Items = new List<OrderItem?>();
-                //convert to observel in order to update the details
-                ByCategory = new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>
-                    (from p in ProductsLists
-                     orderby p.Category//order for identify the index in biding
-                     group p by p.Category into g
-                     select g);//divide to groups for categories view
+                collectionView = CollectionViewSource.GetDefaultView(ProductsLists);
+                propertyGroupDescription = new PropertyGroupDescription("Category");
+
+                
 
                 InitializeComponent();
             }
@@ -54,7 +53,7 @@ namespace PL
         /// Delegate to update thr=e amount from product window
         /// </summary>
         /// <param name="id"></param>id of product to change
-        /// <param name="amount"></param>new amount
+        /// <param name="c"></param>new cart
         private bool AmountChanged(int id,Cart? c)
         {
             try
@@ -63,11 +62,6 @@ namespace PL
                 int index = ProductsLists!.IndexOf(p);
                 ProductsLists[index] = bl?.Product.GetProductCustomer(id, cart!);
                 cart = c;
-                //Change in the category show
-                int indexCategory = ByCategory!.IndexOf(ByCategory!.FirstOrDefault(g => g.Key == p?.Category)!);
-                int indexCategoryitem=ByCategory[indexCategory].ToList().IndexOf(p);
-                ByCategory[indexCategory].ToList()[indexCategoryitem]= bl?.Product.GetProductCustomer(id, cart!);
-                
                 return true;
             }
             catch { return false; }
@@ -183,14 +177,14 @@ namespace PL
 
         }
 
-        //private void CategoryCheck_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    ByCategory = new ObservableCollection<IGrouping<BO.Category?, ProductItem?>>
-        //            (from p in ProductsLists
-        //             orderby p.Category//order for identify the index in biding
-        //             group p by p.Category into g
-        //             select g);//divide to groups for categories view
-            
-        //}
+        private void CategoryCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            collectionView.GroupDescriptions.Add(propertyGroupDescription);
+
+        }private void CategoryCheck_UnChecked(object sender, RoutedEventArgs e)
+        {
+            collectionView.GroupDescriptions.Remove(propertyGroupDescription);
+
+        }
     }
 }
