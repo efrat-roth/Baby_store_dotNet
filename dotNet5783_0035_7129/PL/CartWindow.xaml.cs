@@ -28,7 +28,8 @@ namespace PL
         IBl bl { get; set; }
         public ObservableCollection<ProductDataBiding.OrderItem?>? OrderItems { get; set; }
         private IEnumerable<ProductDataBiding.OrderItem?>? orderItems { get; }
-        public CartWindow(IBl bl1, Cart c)
+        Func<int, Cart?, bool> action;
+        public CartWindow(IBl bl1, Cart c, Func<int, Cart?, bool> a)
         {
             try
             {
@@ -45,6 +46,7 @@ namespace PL
                                  AmountOI = i.Amount,
                              };
                 OrderItems = new ObservableCollection<ProductDataBiding.OrderItem?>(orderItems);
+                action = a;
                 InitializeComponent();
             }
             catch(Exception ex)
@@ -99,12 +101,14 @@ namespace PL
                         TotalPrice = cart.Items.FirstOrDefault(oi => oi.ID == p.IDOI).TotalPrice
                     };
                     OrderItems[OrderItems.IndexOf(p)] = orderItem;
+                    action(orderItem.IDOI,cart);
                 }
                 else//if the amount is 0, remove the product from the order
                 {
                     OrderItems?.Remove( OrderItems[OrderItems.IndexOf(p)]);
+                    action(productId, cart);
                 }
-               
+
             }
             catch (FailedGet) { MessageBox.Show("The product is not in the store"); return; }
             catch (CanNotDOActionException) { MessageBox.Show("The amount is bigger than the amount in stock"); return; }

@@ -135,7 +135,7 @@ namespace PL
         
         private void ShowCart(object sender, RoutedEventArgs e)
         {
-            CartWindow c = new CartWindow(bl!,cart!);
+            CartWindow c = new CartWindow(bl!,cart!, AmountChanged);
             c.ShowDialog();
         }
 
