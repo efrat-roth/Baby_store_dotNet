@@ -378,10 +378,10 @@ internal class Order : BlApi.IOrder
                 wantedOrder?.Items?.Add(oi);
                 dal?.OrderItem.Add(add);
                 product.InStock -= add.Amount;
-                dal?.Product.Update(product);//update the amount in stocp of product
+                dal?.Product.Update(product);//update the amount in stocp of product.
                 return wantedOrder!;
             }
-           //if the product has been in the order already
+           //if the product has been in the order already.
             product.InStock += oi.Amount;
             wantedOrder!.TotalPrice -= oi!.TotalPrice;//for calculate the new total price of the order
             oi.Amount = newAmount;

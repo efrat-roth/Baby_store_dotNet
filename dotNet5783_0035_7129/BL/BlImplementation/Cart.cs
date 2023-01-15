@@ -34,47 +34,55 @@ internal class Cart:ICart
         {
             throw new FailedGet(inner);
         }
-        BO.OrderItem? orderItem = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id);
-        if (orderItem==null)
+        BO.OrderItem? orderItem=new BO.OrderItem();
+        try
         {
-            int idOI = _dal?.OrderItem.GetAll().Last()?.ID ?? throw new InvalidVariableException();
-            bool flag = true;
-            while (flag)//While the new id is already exist
-            { 
-                try { _dal.OrderItem.GetByID(idOI); ++idOI; }                
-                catch { flag = false; };
+            orderItem = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id);
+        }
+        catch (Exception? inner) { throw inner; }
+            if (orderItem == null)
+            {
+                int idOI = _dal?.OrderItem.GetAll().Last()?.ID ?? throw new InvalidVariableException();
+                bool flag = true;
+                while (flag)//While the new id is already exist
+                {
+                    try { _dal.OrderItem.GetByID(idOI); ++idOI; }
+                    catch { flag = false; };
+                }
+
+                if (ProductInStore?.InStock > 0)   //If the product is not on order and is in the store.
+                {
+                    BO.OrderItem newProductInOrder = new BO.OrderItem
+                    {
+                        ID = idOI,
+                        Price = ProductInStore?.Price ?? throw new ObgectNullableException(),
+                        TotalPrice = ProductInStore?.Price ?? throw new ObgectNullableException(),
+                        ProductID = id,
+                        Name = ProductInStore?.Name,
+                        Amount = 1,
+
+                    };
+                    finalCart?.Items?.Add(newProductInOrder);
+                    finalCart!.TotalPrice += newProductInOrder.Price;
+                    return finalCart;
+                }
             }
 
-            if (ProductInStore?.InStock > 0)   //If the product is not on order and is in the store.
+            finalCart?.Items?.Remove(orderItem);
+            if (ProductInStore?.InStock > 0)
             {
-                BO.OrderItem newProductInOrder = new BO.OrderItem
-                {
-                    ID = idOI,
-                    Price = ProductInStore?.Price??throw new ObgectNullableException(),
-                    TotalPrice = ProductInStore?.Price??throw new ObgectNullableException(),
-                    ProductID = id,
-                    Name = ProductInStore?.Name,
-                    Amount = 1,
-                    
-                };
-                finalCart?.Items?.Add(newProductInOrder);
-                finalCart!.TotalPrice += newProductInOrder.Price;
+                orderItem!.Amount++;
+                orderItem.TotalPrice += orderItem.TotalPrice;
+                finalCart!.TotalPrice += orderItem.Price;
+                finalCart.Items?.Add(orderItem);
                 return finalCart;
             }
-        }
-        finalCart?.Items?.Remove(orderItem);
-        if (ProductInStore?.InStock > 0)
-        {
-            orderItem!.Amount++;
-            orderItem.TotalPrice += orderItem.TotalPrice;
-            finalCart!.TotalPrice+=orderItem.Price;
-            finalCart.Items?.Add(orderItem);
-            return finalCart;
-        }
-        else
-        {
-            throw new InvalidVariableException();
-        }
+            else
+            {
+                throw new InvalidVariableException();
+            }
+        
+        
            
         throw new CanNotDOActionException();
     }

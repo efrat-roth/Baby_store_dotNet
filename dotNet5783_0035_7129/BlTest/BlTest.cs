@@ -24,14 +24,13 @@ internal class BlTest
             string? name = Console.ReadLine()?? throw new BO.InvalidVariableException();
             Console.WriteLine("Enter Customer Email");
             string? email = Console.ReadLine()??throw new BO.InvalidVariableException();
-            bool isRight = false;
-            foreach (char d in email)//checks if email is correct and has the @ in their.
-                if (d == '@')
-                    isRight = true;
-            if (!isRight)
+            var isRight = email.Where(ch => ch == '@');//checks if email is correct and has the @ in their.               
+            if (isRight.Count()==0)
                 throw new BO.InvalidVariableException();
             Console.WriteLine("Enter Customer Adress");
             string? adress = Console.ReadLine()?? throw new BO.InvalidVariableException();
+            if (email[0] == '@' || email[email.Length - 1] == '@')//checks if all the strings fields is correct.
+                throw new BO.InvalidVariableException();
             Cart cart = new Cart
             {
                 CustomerName = name,

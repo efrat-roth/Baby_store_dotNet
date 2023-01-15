@@ -29,7 +29,7 @@
             </ListView.View>
         </ListView>
         <Label x:Name="btnAdd" Content="To Update an order, click twice on the order"  Grid.Row="2"
-                HorizontalAlignment="Left" Padding="5" />
+                HorizontalAlignment="Left" />
         <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Click="Exit_Click" Height="34" Width="126" />
 
 
