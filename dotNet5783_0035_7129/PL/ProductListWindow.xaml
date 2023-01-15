@@ -12,7 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Grid.Row="0"
         VerticalAlignment="Stretch" Width="auto">
@@ -42,6 +42,8 @@
             </ListView.View>
         </ListView>
         <Button x:Name="btnAdd" Content="Add new product"  Grid.Row="2"
-                HorizontalAlignment="Right"  Click="AddProduct"  />
+                HorizontalAlignment="Left"  Click="AddProduct"   />
+        <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Click="Exit_Click" Height="34" Width="126"  />
+
     </Grid>
 </Window>

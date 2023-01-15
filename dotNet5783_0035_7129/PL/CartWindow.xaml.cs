@@ -24,18 +24,22 @@ namespace PL
     /// </summary>
     public partial class CartWindow : Window
     {
-        public Cart cart { get; set; }
-        IBl bl { get; set; }
+        //public Cart? cart { get; set; }
+        IBl? bl { get; set; }
         public ObservableCollection<ProductDataBiding.OrderItem?>? OrderItems { get; set; }
         private IEnumerable<ProductDataBiding.OrderItem?>? orderItems { get; }
-        Func<int, Cart?, bool> action;
-        public CartWindow(IBl bl1, Cart c, Func<int, Cart?, bool> a)
+        Func<int, Cart?, bool>? action;
+        public Cart cart { get => (Cart)GetValue(CartProperty); set => SetValue(CartProperty, value); }
+
+        public static readonly DependencyProperty CartProperty =
+            DependencyProperty.Register(nameof(cart), typeof(Cart), typeof(Window));
+        public CartWindow(IBl? bl1, Cart? c, Func<int, Cart?, bool> a)
         {
             try
             {
                 bl = bl1;
                 cart = c;
-                orderItems = from i in cart.Items  //convert the all order items in the cart
+                orderItems = from i in cart?.Items  //convert the all order items in the cart
                              select new ProductDataBiding.OrderItem()
                              {
                                  IDOI = i.ID,
@@ -64,7 +68,7 @@ namespace PL
         {
             try
             {
-                BO.Order order= bl.Cart.MakeOrder(cart, cart?.CustomerAdress!, cart?.CustomerName!, cart?.CustomerEmail!);               
+                BO.Order order= bl?.Cart.MakeOrder(cart, cart?.CustomerAdress!, cart?.CustomerName!, cart?.CustomerEmail!);               
                 MessageBox.Show("The order was created successfully, the id of the order is"+ order.ID );
                 this.Close();
             }
@@ -88,7 +92,7 @@ namespace PL
                 ProductDataBiding.OrderItem? p = (ProductDataBiding.OrderItem?)f?.DataContext;//gets the product to change
                 int productId = p!.ProductID;
                 int amount = p.AmountOI;
-                cart=bl.Cart.UpdateProductAmount( cart, productId, amount);               
+                cart=bl?.Cart.UpdateProductAmount( cart, productId, amount);
                 if (amount != 0)//only have to change tha amount and the othe properties matchly
                 {
                     ProductDataBiding.OrderItem? orderItem = new ProductDataBiding.OrderItem()
@@ -133,6 +137,11 @@ namespace PL
             return;
 
         }
-       
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
+        }
     }
 }

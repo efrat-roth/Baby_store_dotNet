@@ -31,7 +31,7 @@
                FontSize="16"  Grid.Row="2" Grid.Column="0"/>
         <Label Content="CATEGORY:"  HorizontalAlignment="Right"  VerticalAlignment="Center" 
                FontSize="16"  Grid.Row="3" Grid.Column="0"/>
-        
+
         <Label Content="AMOUNT:" Grid.Row="4" HorizontalAlignment="Right"  VerticalAlignment="Center" 
                FontSize="16" Grid.Column="0" />
 
@@ -73,7 +73,8 @@
                FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
         <Label Grid.Column="1" Content="{Binding Product.InStock}" Grid.Row="6" HorizontalAlignment="Left" 
                FontSize="16" Height="36" Width="139" Background="#FFFAEFF5"/>
-        <DockPanel LastChildFill="True"/>
+        <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="6" Grid.Column="2" Click="Exit_Click" Height="34" Width="126" FontSize="16"   />
+
 
     </Grid>
 </Window>

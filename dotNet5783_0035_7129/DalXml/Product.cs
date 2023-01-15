@@ -51,17 +51,16 @@ internal class Product : IProduct
         IEnumerable<DO.Product?>? products=new List<DO.Product?>();
         if (func == null)
         { 
-         
             try
             {
                 products = (from p in ProductRoot?.Elements()
                             select new DO.Product()
                             {
                                 ID = Convert.ToInt32(p.Element("ID")!.Value),
-                                Name = p.Element("Name")!.Value,
-                                Price = Convert.ToDouble(p.Element("Price")!.Value),
-                                Category = (DO.Category)Enum.Parse(typeof(DO.Category), (string)p.Element("Category")!),
-                                InStock = Convert.ToInt32(p.Element("InStock")!.Value)
+                                Name = p.Element("Name")?.Value ?? throw new ObgectNullableException(),
+                                Price = Convert.ToDouble(p.Element("Price")?.Value),
+                                Category = (DO.Category)Enum.Parse(typeof(DO.Category), (string?)p.Element("Category")??throw new ObgectNullableException()),
+                                InStock = Convert.ToInt32(p.Element("InStock")?.Value)
                             }).ToList().Cast<DO.Product?>();
             }
             catch
@@ -75,11 +74,11 @@ internal class Product : IProduct
             products = (from p in ProductRoot?.Elements()
                         let pro = new DO.Product()
                         {
-                            ID = Convert.ToInt32(p.Element("ID")!.Value),
-                            Name = p.Element("Name")!.Value,
-                            Price = Convert.ToDouble(p.Element("Price")!.Value),
-                            Category = (DO.Category)Enum.Parse(typeof(DO.Category), (string)p.Element("Category")!),
-                            InStock = Convert.ToInt32(p.Element("InStock")!.Value)
+                            ID = Convert.ToInt32(p.Element("ID")?.Value),
+                            Name = p.Element("Name")?.Value,
+                            Price = Convert.ToDouble(p.Element("Price")?.Value),
+                            Category = (DO.Category)Enum.Parse(typeof(DO.Category), (string?)p.Element("Category")??throw new ObgectNullableException()),
+                            InStock = Convert.ToInt32(p.Element("InStock")?.Value)
                         }
                         where func(pro)
                         select pro).Cast<DO.Product?>();
@@ -94,50 +93,30 @@ internal class Product : IProduct
     /// <exception cref="ObgectNullableException"></exception>
     public DO.Product GetByID(int id)
     {
+        if (id < 100000)
+            throw new DO.InvalidVariableException();
         LoadData();
-        DO.Product product;
+        DO.Product? product;
         try
         {
             product = (from p in ProductRoot?.Elements()
-                       where Convert.ToInt32(p.Element("ID")!.Value) == id
+                       where Convert.ToInt32(p.Element("ID")?.Value) == id
                        select new DO.Product()
                        {
-                           ID = Convert.ToInt32(p.Element("ID")!.Value),
-                           Name = p.Element("Name")!.Value,
-                           Price = Convert.ToDouble(p.Element("Price")!.Value),
-                           Category = (DO.Category)Enum.Parse(typeof(DO.Category), (string)p.Element("Category")!),
-                           InStock = Convert.ToInt32(p.Element("InStock")!.Value)
+                           ID = Convert.ToInt32(p.Element("ID")?.Value),
+                           Name = p.Element("Name")?.Value,
+                           Price = Convert.ToDouble(p.Element("Price")?.Value),
+                           Category = (DO.Category)Enum.Parse(typeof(DO.Category), (string?)p.Element("Category")??throw new ObgectNullableException()),
+                           InStock = Convert.ToInt32(p.Element("InStock")?.Value)
                        }).FirstOrDefault();
         }
         catch
         {
             throw new ObgectNullableException();
         }
-        return product;
+        return product??throw new IdDoesNotExistException();
     }   
 
-    /// <summary>
-    /// Return name of product
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public string? GetProductName(int id)
-    {
-        LoadData();
-        string? productName;
-        try
-        {
-            productName = (from p in ProductRoot?.Elements()
-                           where Convert.ToInt32(p.Element("ID")!.Value) == id
-                           select p.Element("Name")!.Value
-                              ).FirstOrDefault();
-        }
-        catch
-        {
-            productName = null;
-        }
-        return productName;
-    }
 
     /// <summary>
     /// Addng product to the store
@@ -147,6 +126,10 @@ internal class Product : IProduct
     /// <exception cref="ObgectNullableException"></exception>
     public int Add(DO.Product? product)
     {
+        if (GetByID(product?.ID ?? throw new ObgectNullableException()!)!.Name != null)
+            throw new IdAlreadyExistException();
+        if (product?.ID < 100000 || product?.Price <= 0 || product?.InStock < 0)
+            throw new InvalidVariableException();
         XElement id = new XElement("ID", product?.ID);
         XElement name = new XElement("Name",product?.Name);
         XElement Price = new XElement("Price",product?.Price);
@@ -164,13 +147,16 @@ internal class Product : IProduct
     /// <returns></returns>
     public bool Delete(int id)
     {
+        if (id < 100000)
+            throw new InvalidVariableException();
         XElement? ProductElement;
         try
         {
             ProductElement = (from p in ProductRoot?.Elements()
-                              where Convert.ToInt32(p.Element("ID")!.Value) == id
+                              where Convert.ToInt32(p.Element("ID")?.Value) == id
                               select p).FirstOrDefault();
-            ProductElement!.Remove();
+            ProductElement=ProductElement ?? throw new IdDoesNotExistException();
+            ProductElement?.Remove();
             ProductRoot?.Save(dir + ProductPath);
             return true;
         }
@@ -187,16 +173,20 @@ internal class Product : IProduct
     /// <returns></returns>
     public bool Update(DO.Product? product)
     {
+        if (GetByID(product?.ID ?? throw new ObgectNullableException()!)!.Name == null)
+            throw new IdDoesNotExistException();
+        if (product?.ID < 100000 || product?.Price <= 0 || product?.InStock < 0)
+            throw new InvalidVariableException();
         try
         {
             XElement? productElement = (from p in ProductRoot?.Elements()
-                                        where Convert.ToInt32(p!.Element("ID")!.Value) == product?.ID
+                                        where Convert.ToInt32(p?.Element("ID")?.Value) == product?.ID
                                         select p).FirstOrDefault();
 
-            productElement!.Element("Name")!.Value = product?.Name!;
+            productElement!.Element("Name")!.Value = product?.Name??throw new ObgectNullableException();
             productElement!.Element("Price")!.Value = product?.Price.ToString() ?? throw new ObgectNullableException();
-            productElement!.Element("InStock")!.Value = product?.InStock.ToString()!;
-            productElement!.Element("Category")!.Value = product?.Category.ToString()!;
+            productElement!.Element("InStock")!.Value = product?.InStock.ToString()??throw new ObgectNullableException();
+            productElement!.Element("Category")!.Value = product?.Category.ToString()??throw new ObgectNullableException();
 
             ProductRoot?.Save(dir+ProductPath);
             return true;
@@ -221,16 +211,16 @@ internal class Product : IProduct
         product = (from p in ProductRoot?.Elements()
                    let pro = new DO.Product()
                    {
-                       ID = Convert.ToInt32(p.Element("ID")!.Value),
-                       Name = p.Element("Name")!.Value,
-                       Price = Convert.ToDouble(p.Element("Price")!.Value),
-                       Category = (DO.Category)Enum.Parse(typeof(DO.Category), (string)p.Element("Category")!),
-                       InStock = Convert.ToInt32(p.Element("InStock")!.Value)
+                       ID = Convert.ToInt32(p.Element("ID")?.Value),
+                       Name = p.Element("Name")?.Value,
+                       Price = Convert.ToDouble(p.Element("Price")?.Value),
+                       Category = (DO.Category)Enum.Parse(typeof(DO.Category), (string)p.Element("Category")??throw new ObgectNullableException()),
+                       InStock = Convert.ToInt32(p.Element("InStock")?.Value)
                    }
                    where func(pro)
                    select pro).FirstOrDefault();
 
-        return product;
+        return product??throw new IdDoesNotExistException();
 
     }
 }

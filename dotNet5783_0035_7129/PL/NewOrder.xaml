@@ -35,10 +35,11 @@
             </ComboBox>
         </Grid>
         <Grid Grid.Row="1" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <ListView x:Name="ProductsListView"  Grid.Row="0"  
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <ListView x:Name="ProductsListView"  Grid.Column="0"  
                    Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="DetailsOfProduct"  ItemsSource="{Binding ProductsLists }" 
                       HorizontalContentAlignment="Stretch">
                 <ListView.ItemContainerStyle>
@@ -94,19 +95,22 @@
                 </ListView.GroupStyle>
                  
             </ListView>
-
+            <Grid Grid.Column="1" Background="#FFFBE6F4">
+                <Button  x:Name="Cart" Content="Go to the cart" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="ShowCart" Background="#FFDADADA" Opacity="0.8"  Width="130" Height="80" />
+            </Grid>
 
 
         </Grid>
         <Grid Background="#FFFBE6F4" Grid.Row="2 ">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="9*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Press twice on product to see details&#xD;&#xA;                 put v to show by category" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontSize="12" Background="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0.7"  />
-            <Button  x:Name="Cart" Content="Go to the cart" HorizontalAlignment="Right" HorizontalContentAlignment="Center"  Grid.Column="2" Click="ShowCart" Background="#FFDADADA" Opacity="0.8"  Width="130" />
-            <CheckBox x:Name="CategoryCheck" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Checked="CategoryCheck_Checked" Unchecked="CategoryCheck_UnChecked"/>
+            <CheckBox x:Name="CategoryCheck" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Checked="CategoryCheck_Checked" Unchecked="CategoryCheck_UnChecked"/>
+            <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Exit_Click" Height="34" Width="126" Grid.Column="1" Grid.ColumnSpan="2"  />
+
         </Grid>
     </Grid>
 </Window>

@@ -30,6 +30,8 @@ namespace DalTest
                     int id1;
                     if (!int.TryParse(Console.ReadLine(), out id1))
                         throw new InvalidVariableException();
+                    if(id1<100000)
+                        throw new InvalidVariableException();
                     p.ID = id1;
                     Console.WriteLine("Enter the name of product to add");
                     string? name1 = Console.ReadLine()??throw new InvalidVariableException();
@@ -45,11 +47,15 @@ namespace DalTest
                     bool c1=double.TryParse(Console.ReadLine(), out price1);
                     if(!c1)
                         throw new InvalidVariableException();
+                    if(price1<=0)
+                        throw new InvalidVariableException();
                     p.Price = price1;
                     Console.WriteLine("Enter amount of products in stock");
                     int inStock1 ;
                     bool c2=int.TryParse(Console.ReadLine(), out inStock1);
                     if(!c2)
+                        throw new InvalidVariableException();
+                    if (inStock1 <= 0)
                         throw new InvalidVariableException();
                     p.InStock = inStock1;
                     return p;

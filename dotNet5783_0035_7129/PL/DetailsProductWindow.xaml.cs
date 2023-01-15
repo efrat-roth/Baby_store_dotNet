@@ -111,5 +111,10 @@ namespace PL
             };
             action(Product.ID,cart);//Send the new product to the catalog, in order to update it
         }
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
+        }
     }
 }

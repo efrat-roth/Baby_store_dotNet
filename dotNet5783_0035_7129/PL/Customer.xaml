@@ -18,8 +18,8 @@
                  Height="107" Width="236" Click="ShowTrackOrder"
                 FontSize="20" Background="#FFFFF0DB" HorizontalAlignment="Center"
                 VerticalAlignment="Top" Margin="0,100,0,0" />
-        <TextBox x:Name="id" Grid.Row="1"  Height="20" Width="100" VerticalAlignment="Top" 
-                 HorizontalAlignment="Center" Background="#FFFFF0DB" Margin="0,75,0,0" 
+        <TextBox x:Name="id" Grid.Row="1"  Height="25" Width="236" VerticalAlignment="Top" 
+                 HorizontalAlignment="Center" Background="#FFFFF0DB" Margin="0,70,0,0" 
                  PreviewKeyDown="IdIsNumber" />
         <Label x:Name="idL" Content="Enter the id of order to&#xD;&#xA;     you want to track" 
                VerticalAlignment="Top"  HorizontalAlignment="Center" Height="70" Width="215" 

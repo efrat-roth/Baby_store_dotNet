@@ -32,6 +32,7 @@
         <ListView x:Name="statusNodes"  Background="#FFFAEFF5" ItemsSource="{Binding orderToTrack.ListDateStatus}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         </ListView>
         <Button x:Name="orderDetails" Content="Press to see the details of the order" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowOrder"/>
+        <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="4" Click="Exit_Click" Height="34" Width="99" />
 
     </Grid>
 </Window>

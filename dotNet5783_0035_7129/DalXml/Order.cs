@@ -23,14 +23,13 @@ internal class Order : IOrder
     
     public IEnumerable<DO.Order?> GetAll(Func<DO.Order?, bool>? func = null)
     {
-        //LoadData();
-        List<DO.Order?> orders=Tools<DO.Order?>.loadListFromXML(OrderPath);
+        List<DO.Order?>? orders=Tools<DO.Order?>.loadListFromXML(OrderPath)??throw new ListIsEmptyException();
         if (func == null)
         {
             return orders;
         }
-        IEnumerable<DO.Order?> o = orders.Where(i => func(i));
-        return o.ToList();
+        IEnumerable<DO.Order?>? o = orders.Where(i => func(i));
+        return o.ToList()??throw new ListIsEmptyException();
     }
    
     /// <summary>
@@ -41,8 +40,10 @@ internal class Order : IOrder
     /// <exception cref="IdAlreadyExistException"></exception>
     /// <exception cref="InvalidVariableException"></exception>
     public int Add(DO.Order? order)
-    { 
-        List<DO.Order?> orders = Tools<DO.Order?>.loadListFromXML(OrderPath);
+    {
+        if (order?.ID < 0)
+            throw new InvalidVariableException();
+        List<DO.Order?> orders = Tools<DO.Order?>.loadListFromXML(OrderPath) ?? throw new ListIsEmptyException();
         bool exist = orders.Exists(o => o?.ID == order?.ID);
         if (exist)
         {
@@ -62,7 +63,9 @@ internal class Order : IOrder
     /// <exception cref="IdDoesNotExistException"></exception>
     public bool Update(DO.Order? order)
     {
-        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath);
+        if (order?.ID < 0)
+            throw new InvalidVariableException();
+        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath) ?? throw new ListIsEmptyException();
         DO.Order? o = orders.FirstOrDefault(order1 => order1?.ID == order?.ID) ?? throw new IdDoesNotExistException(); ;
         orders.Remove(o);
         orders.Add(order);
@@ -97,9 +100,9 @@ internal class Order : IOrder
     /// <exception cref="IdDoesNotExistException"></exception>
     public DO.Order GetByID(int id)
     {
-        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath);
         if (id < 0)
             throw new InvalidVariableException();
+        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath) ?? throw new ListIsEmptyException();      
         DO.Order? o = orders.FirstOrDefault(o => o?.ID == id);
         return o ?? throw new IdDoesNotExistException();
     }
@@ -113,7 +116,7 @@ internal class Order : IOrder
     /// <exception cref="IdDoesNotExistException"></exception>
     public DO.Order? GetByCondition(Func<DO.Order?, bool>? func)
     {
-        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath);
+        List<DO.Order?>? orders = Tools<DO.Order?>.loadListFromXML(OrderPath) ?? throw new ListIsEmptyException();
         func = func ?? throw new InvalidVariableException();
         DO.Order? o = orders.FirstOrDefault(i => func(i)) ?? throw new IdDoesNotExistException();
         return o;

@@ -8,16 +8,16 @@
         Title="OrderListWindow" Height="640" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
 
-    <Grid x:Name="MainGrid" Height="624" VerticalAlignment="Bottom">
+    <Grid x:Name="MainGrid"  VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="500*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Label Content="Orders:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16" Grid.Row="0" />
+        <Label Content="Orders:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="16" Grid.Row="0" Height="auto" />
 
-        <ListView x:Name="OrdersListView"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5  }" 
-                  Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateOrder" ItemsSource="{Binding OrderForLists}"  >
+        <ListView x:Name="OrdersListView"  Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=6  }" 
+                  Background="#FFFBE6F4" FontSize="12" MouseDoubleClick="UpdateOrder" ItemsSource="{Binding OrderForLists}">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="ID" Width="70" x:Name="idP" DisplayMemberBinding="{Binding ID}"/>
@@ -29,9 +29,10 @@
             </ListView.View>
         </ListView>
         <Label x:Name="btnAdd" Content="To Update an order, click twice on the order"  Grid.Row="2"
-                HorizontalAlignment="Right" Padding="5" />
-        <Button x:Name="btnBack" Content="Return to admin window"  Grid.Row="2"
-                HorizontalAlignment="Left" Padding="5" Click="ReturnAdmin" />
+                HorizontalAlignment="Left" Padding="5" />
+        <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Click="Exit_Click" Height="34" Width="126" />
+
+
 
     </Grid>
 </Window>

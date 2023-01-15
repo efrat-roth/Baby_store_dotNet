@@ -68,16 +68,12 @@ namespace PL
             catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        /// <summary>
-        /// return to admin window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ReturnAdmin(object sender, RoutedEventArgs e)
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
         }
 
-        
+
     }
 }

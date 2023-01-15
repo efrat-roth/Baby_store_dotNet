@@ -223,6 +223,20 @@ namespace PL
             catch (FailedGet) { MessageBox.Show("The product coudn't reload"); }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
-        
+
+        private void ValidID(object sender, RoutedEventArgs e)
+        {
+            TextBox? text = sender as TextBox;
+            if (text?.Text.Length < 6)
+                IDValid.Visibility = Visibility.Visible;
+            else
+                IDValid.Visibility = Visibility.Hidden;
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
+        }
     }
 }

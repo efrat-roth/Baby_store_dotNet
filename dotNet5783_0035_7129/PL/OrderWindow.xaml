@@ -20,6 +20,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Exit_Click" Height="34" Width="126" Grid.Row="1" />
 
         <StackPanel Grid.Row="0"  >
 
@@ -37,7 +38,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5*"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="234*"/>
@@ -91,17 +92,19 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Label x:Name="CheckUpdate"  Content="Put v to update the order" HorizontalAlignment="Left" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" Grid.Column="1" Grid.Row="12"   />
+                <Label x:Name="CheckUpdate"  Content="Put v to update" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" Grid.Column="1" Grid.Row="11" Margin="0,121,22,0" Grid.RowSpan="2"   />
                 <CheckBox x:Name="WantToUpdate"  Background="#FFFAEFF5" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="12" Grid.Column="2" IsChecked="False" Visibility="{Binding Action1, Converter={StaticResource notNullToVisibilityConverter}}" Height="15" Width="16" />
+
             </Grid>
 
         </StackPanel>
-        <StackPanel Grid.Row="1" Visibility="{Binding Path= IsChecked, ElementName=WantToUpdate,Converter={StaticResource notBooleanToVisibilityConverter}}" >
+        <StackPanel Grid.Row="1" Visibility="{Binding Path=IsChecked, ElementName=WantToUpdate, Converter={StaticResource notBooleanToVisibilityConverter}}" >
             <Grid x:Name="UpdateGrid" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="234*"/>
+                    <ColumnDefinition Width="166*"/>
+                    <ColumnDefinition Width="221*"/>
+                    <ColumnDefinition Width="179*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -112,19 +115,20 @@
                     <RowDefinition Height="auto"/>
 
                 </Grid.RowDefinitions>
-                <Label x:Name="ChooseProduct"  Content="ID of product to update or add" HorizontalAlignment="Center" Grid.Row="0"  Grid.Column="0"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
-                <TextBox x:Name="GetProduct"   Grid.Column="1" Grid.Row="0" PreviewKeyDown="IdIsNumber" HorizontalAlignment="Left" Width="108"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
-                <Label x:Name="newAmount"  Content="Enter new amount" HorizontalAlignment="Center"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"  Grid.Row="1" Grid.Column="0"/>
-                <Label x:Name="shiped"  Content="Enter v to update delivered" HorizontalAlignment="Center"   Grid.Row="2" Grid.Column="0"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
-                <Label x:Name="delivered"  Content="Enter v to update arrived" HorizontalAlignment="Center"   Grid.Row="3" Grid.Column="0"  Visibility="{ Binding order.ShipDate, Converter={StaticResource notNullAndDoneYetToVisibilityConverter}}"/>
+                <Label x:Name="ChooseProduct"  Content="ID to update or add" HorizontalAlignment="Left" Grid.Row="0"  Grid.Column="1"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
+                <TextBox x:Name="GetProduct"   Grid.Column="2" Grid.Row="0" PreviewKeyDown="IdIsNumber" HorizontalAlignment="Left" Width="108"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
+                <Label x:Name="newAmount"  Content="Enter new amount" HorizontalAlignment="Left"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"  Grid.Row="1" Grid.Column="1"/>
+                <Label x:Name="shiped"  Content="Enter v to update delivered" HorizontalAlignment="Left"   Grid.Row="2" Grid.Column="1"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
+                <Label x:Name="delivered"  Content="Enter v to update arrived" HorizontalAlignment="Left"   Grid.Row="3" Grid.Column="1"  Visibility="{ Binding order.ShipDate, Converter={StaticResource notNullAndDoneYetToVisibilityConverter}}"/>
 
-                <TextBox x:Name="amountContent"  Grid.Column="1" PreviewKeyDown="amountIsNumber" Grid.Row="1" HorizontalAlignment="Left"  Width="108"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
-                <Button x:Name="UpdateProductAmountxamel"  Content="Update amount" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Click="UpdateAmountOfProducts" Grid.Column="3" Grid.Row="1"  Width="172" Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
+                <TextBox x:Name="amountContent"  Grid.Column="2" PreviewKeyDown="amountIsNumber" Grid.Row="1" HorizontalAlignment="Left"  Width="108"  Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
+                <Button x:Name="UpdateProductAmountxamel"  Content="Update amount" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Click="UpdateAmountOfProducts" Grid.Column="3" Grid.Row="1"  Width="172" Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
 
-                <CheckBox x:Name="updateShiped"  Grid.Column="1"   Grid.Row="2" HorizontalAlignment="Left"  Width="108" Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
-                <CheckBox x:Name="updateDelivery"  Grid.Column="1"   Grid.Row="3" HorizontalAlignment="Left"  Width="108" Visibility="{ Binding order.ShipDate, Converter={StaticResource notNullAndDoneYetToVisibilityConverter}}"/>
+                <CheckBox x:Name="updateShiped"  Grid.Column="2"   Grid.Row="2" HorizontalAlignment="Left"  Width="108" Visibility="{ Binding order.ShipDate, Converter={StaticResource nullToAndDoNotDidYetVisibilityConverter}}"/>
+                <CheckBox x:Name="updateDelivery"  Grid.Column="2"   Grid.Row="3" HorizontalAlignment="Left"  Width="108" Visibility="{ Binding order.ShipDate, Converter={StaticResource notNullAndDoneYetToVisibilityConverter}}"/>
 
                 <Button x:Name="UpdateProductxamel"  Content="Update dates" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Click="UpdateProducts" Grid.Column="3" Grid.Row="4"  Width="172" />
+
             </Grid>
         </StackPanel>
     </Grid>

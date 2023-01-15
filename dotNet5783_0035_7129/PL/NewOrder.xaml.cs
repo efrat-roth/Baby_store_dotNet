@@ -179,12 +179,17 @@ namespace PL
 
         private void CategoryCheck_Checked(object sender, RoutedEventArgs e)
         {
-            collectionView.GroupDescriptions.Add(propertyGroupDescription);
+            collectionView?.GroupDescriptions.Add(propertyGroupDescription);
 
         }private void CategoryCheck_UnChecked(object sender, RoutedEventArgs e)
         {
-            collectionView.GroupDescriptions.Remove(propertyGroupDescription);
+            collectionView?.GroupDescriptions.Remove(propertyGroupDescription);
 
+        }
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
         }
     }
 }

@@ -15,17 +15,17 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="subGrid">
+        <Grid x:Name="subGrid" DataContext="{Binding cart}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Name="CustomerName" Content="{Binding cart.CustomerName}" FontSize="18" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Name="CustomerEmail" Content="{Binding cart.CustomerEmail}" FontSize="18" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Name="CustomerAdress" Content="{Binding cart.CustomerAdress}"  FontSize="18" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Name="TotalPrice" Content="{Binding cart.TotalPrice, Mode=TwoWay}"  FontSize="18" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Name="CustomerName" Content="{Binding CustomerName}" FontSize="18" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Name="CustomerEmail" Content="{Binding CustomerEmail}" FontSize="18" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Name="CustomerAdress" Content="{Binding CustomerAdress}"  FontSize="18" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Name="TotalPrice" Content="{Binding TotalPrice}"  FontSize="18" Grid.Row="0" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <ListView Name="productsInCart"  ItemsSource="{Binding OrderItems, Mode=TwoWay}" Grid.Row="1" Background="#FFFBE6F4" 
                   d:ItemsSource="{d:SampleData ItemCount=5}" >
@@ -46,6 +46,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="OpenOrder" Content="create the order" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Margin="627,0,0,0" Click="OpenOrder_Click" Height="34" Width="141" FontSize="16"/>
+        <Button x:Name="OpenOrder" Content="Create the order" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Click="OpenOrder_Click" Height="34" Width="141" FontSize="16" Margin="10,0,0,0"/>
+        <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Click="Exit_Click" Height="34" Width="126" FontSize="16"  >
+</Button>
     </Grid>
 </Window>

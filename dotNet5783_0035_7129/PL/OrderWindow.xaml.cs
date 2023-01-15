@@ -201,6 +201,12 @@ namespace PL
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
+        }
     }
     
 }

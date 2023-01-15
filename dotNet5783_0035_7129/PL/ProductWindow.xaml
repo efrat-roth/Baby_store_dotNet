@@ -11,13 +11,14 @@
     <Window.Resources>
         <local:NullToVisibilityConverter x:Key="nullToVisibilityConverter"/>
         <local:NotNullToVisibilityConverter x:Key="notNullToVisibilityConverter"/>
+
     </Window.Resources>
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="267*"/>
-            <ColumnDefinition Width="158*"/>
-            <ColumnDefinition Width="317*"/>
-            <ColumnDefinition Width="58*"/>
+            <ColumnDefinition Width="223*"/>
+            <ColumnDefinition Width="202*"/>
+            <ColumnDefinition Width="256*"/>
+            <ColumnDefinition Width="119*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -25,10 +26,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="EnterID" Grid.Column="2" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120"  PreviewKeyDown="IdIsNumber" Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}" Height="18"  />
+        <TextBox x:Name="EnterID" Grid.Column="2" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120"  PreviewKeyDown="IdIsNumber" Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}" Height="18" TextChanged="ValidID" />
         <Label x:Name="IDxamel" Grid.Column="1" Content="Enter ID of product" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26"  Width="111"/>
+        <Label x:Name="IDValid" Grid.Column="2" Content="Insert at least 6 digits" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="26"  Width="111" FontSize="9" Foreground="Red" Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}" />
         <Label x:Name="Namexamel" Grid.Row="1" Grid.Column="1" Content="Enter the name" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="91"/>
         <Label x:Name="Categoryxamel" Grid.Row="2" Grid.Column="1" Content="choose the category" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="26"  Width="118"/>
         <TextBox x:Name="EnterName" Background="#FFFAEFF5" Grid.Row="1" Grid.Column="2" Text="{Binding product.NameP}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="17" />
@@ -38,12 +41,13 @@
         <Label x:Name="InStockxamel" Grid.Row="4" Grid.Column="1" Content="Enter amount in stock" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="126"/>
         <TextBox x:Name="EnterInStock" Background="#FFFAEFF5" Grid.Row="4" Grid.Column="2" Text="{Binding product.AmountP}" HorizontalAlignment="Left" TextWrapping="Wrap"
         VerticalAlignment="Center" Width="120" PreviewKeyDown="InStockIsNumber" Height="18"/>
-        <Button x:Name="AddProductxamel" Grid.Row="5" Grid.Column="1" Content="Add the new product to the store"  HorizontalAlignment="Right" 
-                VerticalAlignment="Top" Click="AddProducts"  Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}" Margin="0,31,224,0" Height="20" Width="181" Grid.ColumnSpan="2" />
-        <Button x:Name="UpdateProductxamel" Grid.Row="5" Content="Update the product in the store"  HorizontalAlignment="Left" 
-                VerticalAlignment="Top" Click="UpdateProducts" Visibility="{Binding product, Converter={StaticResource notNullToVisibilityConverter}}" Height="20" Width="172" Grid.ColumnSpan="2" Margin="224,0,0,0" />
-        <Button x:Name="DeleteProductxamel" Grid.Row="5" Grid.Column="2" Content="delete the product from the store"  HorizontalAlignment="Right" 
-                VerticalAlignment="Top" Click="DeleteProducts" Visibility="{Binding product, Converter={StaticResource notNullToVisibilityConverter}}"  Height="20" Width="172" Margin="0,0,85,0" />
+        <Button x:Name="AddProductxamel" Grid.Row="5" Grid.Column="1" Content="Add the new product to the store"  HorizontalAlignment="Center" 
+                VerticalAlignment="Center" Click="AddProducts"  Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}"  Height="20" Width="180" Grid.ColumnSpan="2" />
+        <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="6" Click="Exit_Click" Height="34" Width="126" Grid.ColumnSpan="2"  />
+        <Button x:Name="UpdateProductxamel" Grid.Row="5" Content="Update the product in the store"  HorizontalAlignment="Left" Grid.Column="1" 
+                VerticalAlignment="Top" Click="UpdateProducts" Visibility="{Binding product, Converter={StaticResource notNullToVisibilityConverter}}" Height="20" Width="204" />
+        <Button x:Name="DeleteProductxamel" Grid.Row="6" Grid.Column="1" Content="delete the product from the store"  HorizontalAlignment="Left" 
+                VerticalAlignment="Top" Click="DeleteProducts" Visibility="{Binding product, Converter={StaticResource notNullToVisibilityConverter}}"  Height="20" Width="204" />
         <Label x:Name="showID" Background="#FFFAEFF5" Grid.Column="2" Visibility="{Binding product, Converter={StaticResource notNullToVisibilityConverter}}" Content="{Binding product.IDProduct}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="120"/>
     </Grid>
 </Window>

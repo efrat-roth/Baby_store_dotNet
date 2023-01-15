@@ -24,12 +24,12 @@ internal class OrderItem : IOrderItem
    
     public IEnumerable<DO.OrderItem?> GetAll(Func<DO.OrderItem?, bool>? func = null)
     {
-        List<DO.OrderItem?> OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath);
+        List<DO.OrderItem?> OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath) ?? throw new ListIsEmptyException();
         if (func == null)
         {
             return OrderItems;
         }
-        IEnumerable<DO.OrderItem?> o = OrderItems.Where(i => func(i));
+        IEnumerable<DO.OrderItem?>? o = OrderItems.Where(i => func(i));
         return o.ToList();
 
     }
@@ -43,7 +43,9 @@ internal class OrderItem : IOrderItem
     /// <exception cref="InvalidVariableException"></exception>
     public int Add(DO.OrderItem? orderItem)
     {
-        List<DO.OrderItem?> OrderItems = Tools<DO.OrderItem?>.loadListFromXML( OrderItemPath);
+        if (orderItem?.ID <= 0|| orderItem?.OrderID <= 0|| orderItem?.ProductID <= 0|| orderItem?.Amount < 0|| orderItem?.Price <= 0)
+            throw new InvalidVariableException();
+        List<DO.OrderItem?>? OrderItems = Tools<DO.OrderItem?>.loadListFromXML( OrderItemPath)??throw new ListIsEmptyException();
         bool exist = OrderItems.Exists(o => o?.ID == orderItem?.ID);
         if (exist)
         {
@@ -63,7 +65,9 @@ internal class OrderItem : IOrderItem
     /// <exception cref="IdDoesNotExistException"></exception>
     public bool Update(DO.OrderItem? order)
     {
-        List<DO.OrderItem?>? OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath);
+        if (order?.ID <= 0 || order?.OrderID <= 0 || order?.ProductID <= 0 || order?.Amount < 0 || order?.Price <= 0)
+            throw new InvalidVariableException();
+        List<DO.OrderItem?>? OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath)??throw new ListIsEmptyException();
         DO.OrderItem? o = OrderItems.FirstOrDefault(order1 => order1?.ID == order?.ID) ?? throw new IdDoesNotExistException(); ;
         OrderItems.Remove(o);
         OrderItems.Add(order);
@@ -79,9 +83,9 @@ internal class OrderItem : IOrderItem
     /// <exception cref="IdDoesNotExistException"></exception>
     public bool Delete(int id)
     {
-        List<DO.OrderItem?>? OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath);
         if (id < 0)
             throw new InvalidVariableException();
+        List<DO.OrderItem?>? OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath)??throw new ListIsEmptyException();      
         DO.OrderItem? o = OrderItems.FirstOrDefault(o => o?.ID == id) ?? throw new IdDoesNotExistException(); ;
         OrderItems.Remove(o);
         Tools<DO.OrderItem?>.saveListToXML(OrderItems, OrderItemPath); return true;
@@ -96,7 +100,7 @@ internal class OrderItem : IOrderItem
     /// <exception cref="IdDoesNotExistException"></exception>
     public DO.OrderItem GetByID(int id)
     {
-        List<DO.OrderItem?>? OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath);
+        List<DO.OrderItem?>? OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath)??throw new ListIsEmptyException();
         if (id < 0)
             throw new InvalidVariableException();
         DO.OrderItem? o = OrderItems.FirstOrDefault(o => o?.ID == id);
@@ -112,7 +116,7 @@ internal class OrderItem : IOrderItem
     /// <exception cref="IdDoesNotExistException"></exception>
     public DO.OrderItem? GetByCondition(Func<DO.OrderItem?, bool>? func)
     {
-        List<DO.OrderItem?>? OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath);
+        List<DO.OrderItem?>? OrderItems = Tools<DO.OrderItem?>.loadListFromXML(OrderItemPath)??throw new ListIsEmptyException();
         func = func ?? throw new InvalidVariableException();
         DO.OrderItem? o = OrderItems.FirstOrDefault(i => func(i)) ?? throw new IdDoesNotExistException();
         return o;
