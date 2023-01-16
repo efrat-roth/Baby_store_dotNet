@@ -180,8 +180,12 @@ namespace PL
             if (char.IsControl(c)) return;
             if (char.IsDigit(c))
                 if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt))) return;
-            e.Handled = true;
-            return;
+            if (char.IsSymbol(c)) return;
+            if (char.IsLetter(c) || char.IsPunctuation(c) || char.IsSeparator(c) || char.IsWhiteSpace(c) || char.IsAscii(c))
+            { e.Handled = true; }
+            if (text.Text.Any(c=>c=='.')||text.Text.Length==0 )//canot inser two points, or in the beginning
+                e.Handled=true;
+            return; 
 
         }
         /// <summary>
@@ -237,6 +241,21 @@ namespace PL
         {
             for (int intCounter = App.Current.Windows.Count - 1; intCounter > 0; intCounter--)
                 App.Current.Windows[intCounter].Close();
+        }
+
+        /// <summary>
+        /// check if the price has no . in last place
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void priceValid(object sender, RoutedEventArgs e)
+        {
+            TextBox text=sender as TextBox;
+            if(text!=null)
+            {
+                if (text.Text[text.Text.Length-1]=='.')
+                    text.Text=text.Text.Substring(0,text.Text.Length-1);
+            }
         }
     }
 }
