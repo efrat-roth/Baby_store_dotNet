@@ -96,6 +96,7 @@ namespace PL
                 int productId = p!.ProductID;
                 int amount = p.AmountOI;
                 cart=bl?.Cart.UpdateProductAmount( cart, productId, amount);
+                TotalPrice.Content = cart?.TotalPrice;
                 if (amount != 0)//only have to change tha amount and the othe properties matchly
                 {
                     ProductDataBiding.OrderItem? orderItem = new ProductDataBiding.OrderItem()
