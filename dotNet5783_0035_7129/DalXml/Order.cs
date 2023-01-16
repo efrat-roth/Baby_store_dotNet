@@ -28,7 +28,7 @@ internal class Order : IOrder
         {
             return orders;
         }
-        IEnumerable<DO.Order?>? o = orders.Where(i => func(i));
+        IEnumerable<DO.Order?>? o = orders.Where(i => func(i)).OrderBy(o=>o?.ID);
         return o.ToList()??throw new ListIsEmptyException();
     }
    

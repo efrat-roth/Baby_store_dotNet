@@ -15,7 +15,7 @@ namespace BlImplementation;
 
 internal class Cart:ICart
 {
-    DalApi.IDal? _dal = DalApi.Factory.Get();
+    DalApi.IDal? dal = DalApi.Factory.Get();
     /// <summary>
     /// The mothod adds new or existing product to the cart.
     /// </summary>
@@ -28,7 +28,7 @@ internal class Cart:ICart
         DO.Product? ProductInStore=new DO.Product();
         try
         {
-            ProductInStore = _dal?.Product.GetByID(id);//variable for the product.
+            ProductInStore = dal?.Product.GetByID(id);//variable for the product.
         }   
         catch(Exception inner)
         {
@@ -42,11 +42,11 @@ internal class Cart:ICart
         catch (Exception? inner) { throw inner; }
             if (orderItem == null)
             {
-                int idOI = _dal?.OrderItem.GetAll().Last()?.ID ?? throw new InvalidVariableException();
+                int idOI = dal?.OrderItem.GetAll().Last()?.ID ?? throw new InvalidVariableException();
                 bool flag = true;
                 while (flag)//While the new id is already exist
                 {
-                    try { _dal.OrderItem.GetByID(idOI); ++idOI; }
+                    try { dal.OrderItem.GetByID(idOI); ++idOI; }
                     catch { flag = false; };
                 }
 
@@ -62,6 +62,7 @@ internal class Cart:ICart
                         Amount = 1,
 
                     };
+               
                     finalCart?.Items?.Add(newProductInOrder);
                     finalCart!.TotalPrice += newProductInOrder.Price;
                     return finalCart;
@@ -99,9 +100,12 @@ internal class Cart:ICart
     {
         if (id < 0 || newAmount < 0)
             throw new InvalidVariableException();
-        DO.Product? ProductInStore;
-        try { ProductInStore = _dal?.Product.GetByID(id); } //Variable for the product.
-        catch(Exception inner) { throw new FailedGet(inner); }
+        DO.Product? ProductInStore=new DO.Product();
+        try { ProductInStore = dal?.Product.GetByID(id); } //Variable for the product.
+        catch (Exception inner) { throw new FailedGet(inner); }
+
+        int p = ProductInStore?.InStock ?? throw new ObgectNullableException();
+
         OrderItem? orderItemOfProduct = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id);
         if (orderItemOfProduct?.Amount < newAmount)   //If the new amount is bigger.
         {
@@ -109,7 +113,19 @@ internal class Cart:ICart
             {
                 orderItemOfProduct.TotalPrice += orderItemOfProduct.Price * (newAmount - orderItemOfProduct.Amount);
                 finalCart!.TotalPrice += orderItemOfProduct.Price * (newAmount - orderItemOfProduct.Amount);
+                p = p + orderItemOfProduct.Amount;//to update in dal layer
                 orderItemOfProduct.Amount = newAmount;
+                p = p - newAmount;
+
+                DO.Product ProductUpdate = new DO.Product()
+                {
+                    Price = orderItemOfProduct.Price,
+                    Category = ProductInStore?.Category,
+                    ID = ProductInStore?.ID??throw new ObgectNullableException(),
+                    Name = ProductInStore?.Name,
+                    InStock = p
+                };
+                dal?.Product.Update(ProductUpdate);
                 return finalCart;
             }
             throw new CanNotDOActionException();
@@ -119,14 +135,35 @@ internal class Cart:ICart
         {
             orderItemOfProduct.TotalPrice -= orderItemOfProduct.Price * (orderItemOfProduct.Amount - newAmount);
             finalCart!.TotalPrice -= orderItemOfProduct.Price * (orderItemOfProduct.Amount - newAmount);
+            p += orderItemOfProduct.Amount;
             orderItemOfProduct.Amount = newAmount;
+            p -= newAmount;
+            
+            DO.Product ProductUpdate = new DO.Product()//update the product
+            {
+                Price = orderItemOfProduct.Price,
+                Category = ProductInStore?.Category,
+                ID = ProductInStore?.ID ?? throw new ObgectNullableException(),
+                Name = ProductInStore?.Name,
+                InStock = p
+            };
+            dal?.Product.Update(ProductUpdate);
             return finalCart;
         }
-        else if (newAmount == 0)//It will change the amount of products 
-                                //in the cart.
+        else if (newAmount == 0)//It will change the amount of products                                 
         {
             finalCart!.TotalPrice -= orderItemOfProduct!.TotalPrice;
             finalCart?.Items!.Remove(orderItemOfProduct);
+
+            DO.Product ProductUpdate = new DO.Product()
+            {
+                Price = orderItemOfProduct.Price,
+                Category = ProductInStore?.Category,
+                ID = ProductInStore?.ID ?? throw new ObgectNullableException(),
+                Name = ProductInStore?.Name,
+                InStock = ProductInStore?.InStock+ orderItemOfProduct.Amount??throw new ObgectNullableException(),
+            };
+            dal?.Product.Update(ProductUpdate);
             return finalCart!;
         }
         else if (orderItemOfProduct?.Amount == newAmount)
@@ -148,7 +185,7 @@ internal class Cart:ICart
         {
             throw new ListIsEmptyException();
         }
-        IEnumerable<DO.Product?> ProductInStore = _dal?.Product.GetAll() ?? throw new ObgectNullableException();  //variable for the product.
+        IEnumerable<DO.Product?> ProductInStore = dal?.Product.GetAll() ?? throw new ObgectNullableException();  //variable for the product.
         if (adress11 == null || name11 == null || emailAdress == null //checks if all the strings fields is correct.
                 || emailAdress[0] == '@' || emailAdress[emailAdress.Length - 1] == '@')
             throw new BO.InvalidVariableException();
@@ -175,10 +212,10 @@ internal class Cart:ICart
 
         // if everything is correct ***
         bool flag1 = false;
-        int id1 = _dal.Order.GetAll().Last()?.ID + 1 ?? 0; ;
+        int id1 = dal.Order.GetAll().Last()?.ID + 1 ?? 0; ;
         while (!flag1)//while he id is in he store
         {
-            try { DO.Order? o = _dal.Order.GetByID(id1); }
+            try { DO.Order? o = dal.Order.GetByID(id1); }
             catch (DO.IdDoesNotExistException x) { flag1 = true; break; }
             ++id1;
         }
@@ -192,14 +229,14 @@ internal class Cart:ICart
             DeliveredDate = null,
             ArrivedDate = null,
         };
-        try { _dal.Order.Add(finalOrder); } //adds the new order  
+        try { dal.Order.Add(finalOrder); } //adds the new order  
         catch (Exception inner) { throw new FailedAdd(inner); }
         IEnumerable<DO.OrderItem> orderitems;        
         bool flag = false;
-        int id = _dal.OrderItem.GetAll().Last()?.ID + 1 ?? 0; ;
+        int id = dal.OrderItem.GetAll().Last()?.ID + 1 ?? 0; ;
         while (!flag)//while he id is in he store
         {            
-            try { DO.OrderItem? o = _dal.OrderItem.GetByID(id); }
+            try { DO.OrderItem? o = dal.OrderItem.GetByID(id); }
             catch (DO.IdDoesNotExistException x) { flag = true; break; }
             ++id;
         }
@@ -213,7 +250,7 @@ internal class Cart:ICart
                              Price = o.Price,
                              ProductID = o.ProductID,
                          }
-                         let t = _dal.OrderItem.Add(orderItem111)
+                         let t = dal.OrderItem.Add(orderItem111)
                          select orderItem111;
         
         }
@@ -223,7 +260,7 @@ internal class Cart:ICart
         try
         {
             productsInCart = from o in orderitems
-                             let productInCart = _dal.Product.GetByID(o.ProductID)
+                             let productInCart = dal.Product.GetByID(o.ProductID)
                              let productToSelect = new DO.Product()//Update the new amount.
                              {
                                  ID = productInCart.ID,
@@ -235,7 +272,7 @@ internal class Cart:ICart
                              select productToSelect;
         }
         catch (Exception inner) { throw new FailedGet(inner); }
-        try{productsInCart.ToList().ForEach((p => _dal.Product.Update(p))); }//Update the new amount of each product in the cart, in the database. 
+        try{productsInCart.ToList().ForEach((p => dal.Product.Update(p))); }//Update the new amount of each product in the cart, in the database. 
         catch (Exception inner) { throw new FailedUpdate(inner); }
         BO.Order oToReturn = new BO.Order()
         {
@@ -244,7 +281,7 @@ internal class Cart:ICart
             DeliveryDate = finalOrder.ArrivedDate,
             CustomerEmail = finalOrder.CustomerEmail,
             CustomerName = finalOrder.CustomerName,
-            Items = finalCart.Items,
+            Items = finalCart?.Items,
             OrderDate = finalOrder.OrderDate,
             ShipDate = finalOrder.DeliveredDate,
             Status = BO.OrderStatus.ConfirmedOrder,

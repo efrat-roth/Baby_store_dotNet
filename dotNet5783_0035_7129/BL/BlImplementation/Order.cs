@@ -30,8 +30,9 @@ internal class Order : BlApi.IOrder
                                                          {
                                                              ID = o?.ID ?? throw new ObgectNullableException(),
                                                              AmountOfItems = (from oi in orderItems
-                                                                              where oi?.OrderID == o?.ID
-                                                                              select oi).ToList().Count(),
+                                                                              group oi by oi?.OrderID into g
+                                                                              where g.Key==o?.ID
+                                                                              select g).ToList().Count(),
                                                              CustomerName = o?.CustomerName,
                                                              TotalPrice = (from oi in orderItems
                                                                            where oi?.OrderID == o?.ID
@@ -49,8 +50,9 @@ internal class Order : BlApi.IOrder
                                                            {
                                                                ID = o?.ID ?? throw new ObgectNullableException(),
                                                                AmountOfItems = (from oi in orderItems
-                                                                                where oi?.OrderID == o?.ID
-                                                                                select oi).ToList().Count(),
+                                                                                group oi by oi?.OrderID into g
+                                                                                where g.Key == o?.ID
+                                                                                select g).ToList().Count(),
                                                                CustomerName = o?.CustomerName,
                                                                TotalPrice = (from oi in orderItems
                                                                              where oi?.OrderID == o?.ID
@@ -68,8 +70,9 @@ internal class Order : BlApi.IOrder
                                                          {
                                                              ID = o?.ID ?? throw new ObgectNullableException(),
                                                              AmountOfItems = (from oi in orderItems
-                                                                              where oi?.OrderID == o?.ID
-                                                                              select oi).ToList().Count(),
+                                                                              group oi by oi?.OrderID into g
+                                                                              where g.Key == o?.ID
+                                                                              select g).ToList().Count(),
                                                              CustomerName = o?.CustomerName,
                                                              TotalPrice = (from oi in orderItems
                                                                            where oi?.OrderID == o?.ID

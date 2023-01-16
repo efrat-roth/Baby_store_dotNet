@@ -15,7 +15,7 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="subGrid" DataContext="{Binding cart}" >
+        <Grid x:Name="subGrid"  DataContext="{Binding cart}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

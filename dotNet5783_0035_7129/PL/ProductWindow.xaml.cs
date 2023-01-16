@@ -138,7 +138,7 @@ namespace PL
                     InStock = inStock1,
                 };
                 _bl.Product.UpdatingProductDetails(p);//Update the product
-                _action(_bl?.Product.GetProductByCondition(item => item.ID == p.ID).FirstOrDefault());
+                _action(_bl?.Product?.GetProductByCondition(item => item.ID == p.ID)?.FirstOrDefault());
                 messageBoxResult = MessageBox.Show("The product has been successfuly updated"); 
                 this.Close();
             }
@@ -183,7 +183,7 @@ namespace PL
             if (char.IsSymbol(c)) return;
             if (char.IsLetter(c) || char.IsPunctuation(c) || char.IsSeparator(c) || char.IsWhiteSpace(c) || char.IsAscii(c))
             { e.Handled = true; }
-            if (text.Text.Any(c=>c=='.')||text.Text.Length==0 )//canot inser two points, or in the beginning
+            if (text.Text.Any(c=>c=='.')||text.Text.Length==0 )//canot insert two points, or in the beginning
                 e.Handled=true;
             return; 
 
@@ -244,16 +244,16 @@ namespace PL
         }
 
         /// <summary>
-        /// check if the price has no . in last place
+        /// check if the price has no point in last place
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void priceValid(object sender, RoutedEventArgs e)
         {
-            TextBox text=sender as TextBox;
+            TextBox? text=sender as TextBox;
             if(text!=null)
             {
-                if (text.Text[text.Text.Length-1]=='.')
+                if (text.Text[text.Text.Length-1]=='.')//if point in the last place, delete it
                     text.Text=text.Text.Substring(0,text.Text.Length-1);
             }
         }

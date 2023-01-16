@@ -5,7 +5,7 @@
     <Name>NewBornCarriage</Name>
     <Category>BabyCarriages</Category>
     <Price>500</Price>
-    <InStock>149</InStock>
+    <InStock>150</InStock>
   </Product>
   <Product>
     <ID>100001</ID>

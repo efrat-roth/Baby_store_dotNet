@@ -61,6 +61,7 @@ namespace PL
                 var p = ProductsLists!.FirstOrDefault(p => p?.ID == id);
                 int index = ProductsLists!.IndexOf(p);
                 ProductsLists[index] = bl?.Product.GetProductCustomer(id, cart!);
+                if(ProductsLists[index]?.AmountInCart==0)
                 cart = c;
                 return true;
             }

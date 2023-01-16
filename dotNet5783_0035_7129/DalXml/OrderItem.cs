@@ -29,7 +29,7 @@ internal class OrderItem : IOrderItem
         {
             return OrderItems;
         }
-        IEnumerable<DO.OrderItem?>? o = OrderItems.Where(i => func(i));
+        IEnumerable<DO.OrderItem?>? o = OrderItems.Where(i => func(i)).OrderBy(o=>o?.ID);
         return o.ToList();
 
     }

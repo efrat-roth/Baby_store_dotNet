@@ -33,6 +33,8 @@ namespace PL
 
         public static readonly DependencyProperty CartProperty =
             DependencyProperty.Register(nameof(cart), typeof(Cart), typeof(Window));
+
+       
         public CartWindow(IBl? bl1, Cart? c, Func<int, Cart?, bool> a)
         {
             try
@@ -40,6 +42,7 @@ namespace PL
                 bl = bl1;
                 cart = c;
                 orderItems = from i in cart?.Items  //convert the all order items in the cart
+                             where i.Amount>0
                              select new ProductDataBiding.OrderItem()
                              {
                                  IDOI = i.ID,
