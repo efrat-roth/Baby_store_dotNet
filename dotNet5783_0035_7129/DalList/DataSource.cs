@@ -12,8 +12,7 @@ namespace Dal
         internal static List<DO.Order?> orders = new List<DO.Order?>();
         internal static List<DO.OrderItem?> orderItems = new List<DO.OrderItem?>();
         /// <summary>
-        /// Constracto
-        /// r that initialize the item
+        /// Constracor that initialize the item.
         /// </summary>
         static DataSource() { Initialize(); }
         private static int countProductID = 100000;
@@ -124,7 +123,7 @@ namespace Dal
             string[] City = new string[10] { "Karmiel", "Bnei Brak", "Netivot", "Tiberias", "Jerusalem", "Beit Shemesh", "Tel Aviv", "Netanya", "Hadera", "Kiryat Shmona" };
             string[] St = new string[10] { "Hshoshanim", "Hertzog", "Najara", "Beit Hadfus", "Zait", "Hertzel", "Tze'elon", "Ktav Sofer", "Yanai", "Ben Gurion" };
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 100; i++)//initialize the order list.
             {
                 Order order = new Order();
                 order.ID = nextCountOrderID();
@@ -149,7 +148,7 @@ namespace Dal
                 orders.Add(order);
             }
             int y = countOrderID - 100;
-            for (int i = 0; i < 180; i++)
+            for (int i = 0; i < 180; i++)//initialize the order items list.
             {
                 Product product = new Product();
                 OrderItem orderItem = new OrderItem();

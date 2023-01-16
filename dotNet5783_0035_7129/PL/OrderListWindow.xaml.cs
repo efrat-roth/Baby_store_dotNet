@@ -39,12 +39,12 @@ namespace PL
         /// <summary>
         /// Helping method to rebuild the list after updating
         /// </summary>
-        /// <param name="products"></param>
+        /// <param name="orderForList"></param>
         private void UpdateO(OrderForList? orderForList)
         {
             var o = OrderForLists?.FirstOrDefault(item => item?.ID == orderForList?.ID);
             int index = OrderForLists!.IndexOf(o);
-            if (orderForList.AmountOfItems != 0)
+            if (orderForList?.AmountOfItems != 0)
             {
                
                 OrderForLists[index] = orderForList;

@@ -22,10 +22,10 @@ namespace PL
     /// </summary>
     public partial class Customer : Window
     {
-        IBl _bl;
-        public Customer(IBl bl)
+        IBl bl;
+        public Customer(IBl bl1)
         {
-            _bl = bl;
+            this.bl = bl1;
             InitializeComponent();
         }
 
@@ -37,7 +37,7 @@ namespace PL
         /// <exception cref="BO.ObgectNullableException"></exception>
         private void ShowNewOrder(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
         {
-            UserDetails userDetails = new UserDetails(_bl ?? throw new BO.ObgectNullableException());
+            UserDetails userDetails = new UserDetails(bl ?? throw new BO.ObgectNullableException());
             userDetails.ShowDialog();
 
         }
@@ -61,13 +61,13 @@ namespace PL
                 orderToTrack1 = new OrderTrackingDataBiding.OrderTracking()
                 {
                     ID = int.Parse(id.Text),
-                    Status = (BO.OrderStatus?)_bl?.Order.GetDetailsOrderManager(int.Parse(id.Text)).Status,
-                    ListDateStatus = new ObservableCollection<NodeDateStatus?>(_bl?.Order.OrderTracking(int.Parse(id.Text)).ListDateStatus)
+                    Status = (BO.OrderStatus?)bl?.Order.GetDetailsOrderManager(int.Parse(id.Text)).Status,
+                    ListDateStatus = new ObservableCollection<NodeDateStatus?>(bl?.Order.OrderTracking(int.Parse(id.Text)).ListDateStatus)
                 };
             }
             catch (FailedGet) { MessageBox.Show("The id is invalid, or not in the database"); return; }
             catch (BO.ObgectNullableException) { MessageBox.Show("an error accured, obect is a nullable, please try again"); return; }
-            OrderTrackingWindow track = new OrderTrackingWindow(_bl ?? throw new BO.ObgectNullableException(), orderToTrack1);
+            OrderTrackingWindow track = new OrderTrackingWindow(bl ?? throw new BO.ObgectNullableException(), orderToTrack1);
             track.ShowDialog();
 
         }

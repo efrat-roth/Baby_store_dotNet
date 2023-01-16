@@ -26,8 +26,8 @@ namespace PL
     /// </summary>
     public partial class OrderWindow : Window
     {
-        BlApi.IBl? _bl;
-        public OrderDataBiding.Order order { get; set; }
+        BlApi.IBl? bl;
+        public OrderDataBiding.Order? order { get; set; }
         public Action<OrderForList?>? Action1 { get; set; }
         /// <summary>
         /// constractor
@@ -39,12 +39,12 @@ namespace PL
         {
             try
             {
-                _bl = bl1;
+                bl = bl1;
                 Action1 = a;
-                BO.Order? orderHelp = _bl?.Order.GetDetailsOrderManager(o?.ID??throw new ObgectNullableException());
+                BO.Order? orderHelp = bl?.Order.GetDetailsOrderManager(o?.ID??throw new ObgectNullableException());
                 OrderDataBiding.Order? order1 = new OrderDataBiding.Order()//build the order with dependency properties for biding
                 {
-                    ID = o.ID,
+                    ID = o!.ID,
                     TotalPrice = o.TotalPrice,
                     Name = o.CustomerName,
                     AmountOfItems = o.AmountOfItems,
@@ -64,7 +64,7 @@ namespace PL
         }
 
         /// <summary>
-        /// Update an order, adiing or update amount of product, update status
+        /// Update an order, adding or update amount of product, update status
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -81,13 +81,13 @@ namespace PL
 
                 if (updateShiped.IsChecked == true)
                 {
-                    order1 = _bl?.Order.DeliveredOrder(order.ID)!;
-                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
+                    order1 = bl?.Order.DeliveredOrder(order.ID)!;
+                    Action1!(bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
                 }
                 if (updateDelivery.IsChecked == true)
                 {
-                    order1 = _bl?.Order.ArrivedOrder(order.ID)!;
-                    Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
+                    order1 = bl?.Order.ArrivedOrder(order.ID)!;
+                    Action1!(bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
                 }
                 MessageBox.Show("The order has been successfuly updated");
                 this.Close();
@@ -171,7 +171,7 @@ namespace PL
                         MessageBox.Show("The data wasn't succeded to convert to int, please input the datails again ");
                         return;
                     }
-                    order1 = _bl?.Order.UpdateOrder(order.ID, idProduct, amount)!;
+                    order1 = bl?.Order.UpdateOrder(order.ID, idProduct, amount)!;
                     if (order1?.Items?.Count() == 0)//if delete the last product in the order, delete the order
                     {
                         OrderForList? orderFor = new OrderForList()
@@ -182,7 +182,7 @@ namespace PL
                         Action1!(orderFor);//update in the list of products
                     }
                     else
-                        Action1!(_bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
+                        Action1!(bl?.Order.GetListOfOrders().FirstOrDefault(o => o?.ID == order1?.ID));//update in the list of products
                     MessageBox.Show("The order has been successfuly updated");
                     this.Close();
                 }

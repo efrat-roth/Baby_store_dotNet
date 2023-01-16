@@ -20,7 +20,7 @@ internal class DalOrder : IOrder
     public int Add(Order? o)
     {
 
-        bool exist = orders.Exists(order => order?.ID == o?.ID);
+        bool exist = orders.Exists(order => order?.ID == o?.ID); //checks if the order is already exists. 
         if (exist)
         {
             throw new IdAlreadyExistException();
@@ -56,7 +56,7 @@ internal class DalOrder : IOrder
     public Order? GetByCondition(Func<Order?, bool>? func)
     {
         func = func ?? throw new InvalidVariableException();
-        Order? o = orders.FirstOrDefault(i => func(i)) ?? throw new IdDoesNotExistException();
+        Order? o = orders.FirstOrDefault(i => func(i)) ?? throw new IdDoesNotExistException();//bring the order by the condition.
         return o;
     }
 
@@ -71,7 +71,7 @@ internal class DalOrder : IOrder
         {
             return orders;
         }
-        IEnumerable<Order?> o = orders.Where(i => func(i)).ToList<Order?>();
+        IEnumerable<Order?> o = orders.Where(i => func(i)).ToList<Order?>();//make a list by the condition.
         return o;
     }
    

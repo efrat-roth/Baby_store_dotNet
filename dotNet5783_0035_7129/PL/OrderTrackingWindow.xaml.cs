@@ -22,13 +22,13 @@ namespace PL
     /// </summary>
     public partial class OrderTrackingWindow : Window
     {
-        BlApi.IBl? _bl;
+        BlApi.IBl? bl;
         Order? order;
         public OrderTrackingDataBiding.OrderTracking? orderToTrack { get; set; }
-        public OrderTrackingWindow(BlApi.IBl? bl , OrderTrackingDataBiding.OrderTracking o)
+        public OrderTrackingWindow(BlApi.IBl? bl1 , OrderTrackingDataBiding.OrderTracking o)
         {
-            _bl = bl;
-            order = _bl?.Order.GetDetailsOrderManager(o.ID);
+            bl = bl1;
+            order = bl?.Order.GetDetailsOrderManager(o.ID);
             orderToTrack = o;            
             InitializeComponent();
         }  
@@ -46,12 +46,12 @@ namespace PL
                 OrderForList? o = new OrderForList()//convert to orderForList in order to send to order window
                 {
                     ID = order?.ID??throw new BO.ObgectNullableException(),
-                    AmountOfItems = _bl!.Order.GetListOfOrders().FirstOrDefault(ord => ord!.ID == order.ID)!.AmountOfItems,
+                    AmountOfItems = bl!.Order.GetListOfOrders().FirstOrDefault(ord => ord!.ID == order.ID)!.AmountOfItems,
                     CustomerName = order.CustomerName,
                     Status = order.Status,
                     TotalPrice = order.TotalPrice
                 };
-                OrderWindow orderWindow = new OrderWindow(null,_bl, o);
+                OrderWindow orderWindow = new OrderWindow(null,bl, o);
                 orderWindow.ShowDialog();
             }
             catch(FailedGet g) { MessageBox.Show(g.ToString()); }

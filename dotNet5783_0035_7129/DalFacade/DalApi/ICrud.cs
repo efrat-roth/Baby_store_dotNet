@@ -10,41 +10,17 @@ namespace DalApi;
 
 public interface ICrud <T> where T : struct
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="t"></param>
-    /// <returns></returns>
+    
    int Add(T? t);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="t"></param>
-    /// <returns></returns>
+   
    bool Update( T? t);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
+   
    bool Delete(int id);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="t"></param>
-    /// <returns></returns>
+    
    T GetByID(int id);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="ID"></param>
-    /// <param name="func"></param>
-    /// <returns></returns>
+    
    T? GetByCondition(Func<T?, bool>? func);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
+    
     IEnumerable<T?> GetAll(Func<T?,bool>? func=null);
 
 

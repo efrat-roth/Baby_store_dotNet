@@ -16,7 +16,7 @@ internal class DalOrderItem : IOrderItem
     /// <exception cref = "Exception" ></ exception >
     public int Add(OrderItem? oi)
     {
-        bool exist = orderItems.Exists(orderI => orderI?.ID == oi?.ID);
+        bool exist = orderItems.Exists(orderI => orderI?.ID == oi?.ID);//if the item is already exist.
         if (exist)
         {
             throw new IdAlreadyExistException();
@@ -72,7 +72,7 @@ internal class DalOrderItem : IOrderItem
     {
         if (id < 0)
             throw new InvalidVariableException();
-        OrderItem? oi = orderItems.FirstOrDefault(oi => oi?.ID == id) ?? throw new IdDoesNotExistException(); ;
+        OrderItem? oi = orderItems.FirstOrDefault(oi => oi?.ID == id) ?? throw new IdDoesNotExistException(); 
         orderItems.Remove(oi);
         return true;
     }
@@ -83,7 +83,7 @@ internal class DalOrderItem : IOrderItem
     /// <returns></returns>True if the id is in the database, else returns false
     public bool Update(OrderItem? oi)
     {
-        OrderItem? orderItem = orderItems.FirstOrDefault(OI => OI?.ID == oi?.ID) ?? throw new IdDoesNotExistException(); ;
+        OrderItem? orderItem = orderItems.FirstOrDefault(OI => OI?.ID == oi?.ID) ?? throw new IdDoesNotExistException(); 
         orderItems.Remove(orderItem);
         orderItems.Add(oi);
         return true;

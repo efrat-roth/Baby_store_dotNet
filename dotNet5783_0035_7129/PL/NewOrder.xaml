@@ -81,6 +81,7 @@
 
                                                         <TextBlock Text="{Binding ItemCount}" FontSize="12" Foreground="{DynamicResource PrimaryHueLightBrush}"  FontStyle="Italic" VerticalAlignment="Bottom" />
 
+                         
                                                         <TextBlock Text=" item(s)" FontSize="12" Foreground="{DynamicResource PrimaryHueLightBrush}" FontStyle="Italic" VerticalAlignment="Bottom" />
                                                     </StackPanel>
                                                 </Expander.Header>
