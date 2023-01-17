@@ -21,15 +21,15 @@ namespace PL
     /// </summary>
     public partial class OrderListWindow : Window
     {
-        BlApi.IBl? _bl;
+        BlApi.IBl? bl;
         public ObservableCollection<OrderForList?>? OrderForLists { get; set; }
         private IEnumerable<OrderForList?>? orderForLists { get; }
-        public OrderListWindow(BlApi.IBl? bl)
+        public OrderListWindow(BlApi.IBl? bl1)
         {
             try
             {
-                _bl = bl;
-                orderForLists = _bl!.Order.GetListOfOrders();
+                this.bl = bl1;
+                orderForLists = this.bl!.Order.GetListOfOrders();
                 OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);//convert to observel in order to update the details 
                 InitializeComponent();
             }
@@ -62,7 +62,7 @@ namespace PL
             try
             {
                 BO.OrderForList? O = (BO.OrderForList?)OrdersListView.SelectedItem;
-                OrderWindow orderWindow = new OrderWindow(UpdateO, _bl ?? throw new BO.ObgectNullableException(), O);
+                OrderWindow orderWindow = new OrderWindow(UpdateO, bl ?? throw new BO.ObgectNullableException(), O);
                 orderWindow.ShowDialog();
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }

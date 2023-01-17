@@ -22,25 +22,31 @@ namespace PL
     /// </summary>
     public partial class Admin : Window
     {
-        BlApi.IBl? _bl;
+        BlApi.IBl? bl;
 
         public Admin(BlApi.IBl bl1)
         {
             InitializeComponent();
-            _bl = bl1;
+            bl = bl1;
 
         }
 
         private void ShowListProducts(object sender, RoutedEventArgs e)
         {
-            ProductListWindow productList=new ProductListWindow(_bl??throw new BO.ObgectNullableException());
+            ProductListWindow productList=new ProductListWindow(bl??throw new BO.ObgectNullableException());
             productList.ShowDialog();
         }
 
         private void ShowListOrders(object sender, RoutedEventArgs e)
         {
-            OrderListWindow orderList = new OrderListWindow(_bl);
+            OrderListWindow orderList = new OrderListWindow(bl);
             orderList.ShowDialog();
+        }
+
+        private void ShowSimulator(object sender, RoutedEventArgs e)
+        {
+            Simulator simulator = new Simulator(bl);
+            simulator.Show();
         }
     }
 }

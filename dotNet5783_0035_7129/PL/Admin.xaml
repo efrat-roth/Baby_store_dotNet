@@ -10,11 +10,15 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+     
 
         <Button x:Name="products" Content="Products in store" Grid.Column="0" HorizontalAlignment="Center"
                   Height="107" Width="236" Click="ShowListProducts" />
         <Button x:Name="orders" Content="orders of the store" Grid.Column="1" HorizontalAlignment="Center"
                   Height="107" Width="236" Click="ShowListOrders" />
+        <Button x:Name="simulator" Content="Status of orders" Grid.Column="2" HorizontalAlignment="Center"
+                  Height="107" Width="236" Click="ShowSimulator" />
     </Grid>
 </Window>

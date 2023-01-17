@@ -30,7 +30,7 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="EnterID" Grid.Column="2" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120"  PreviewKeyDown="IdIsNumber" Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}" Height="18" TextChanged="ValidID" />
-        <Label x:Name="IDxamel" Grid.Column="1" Content="Enter ID of product" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26"  Width="111"/>
+        <Label x:Name="IDxamel" Grid.Column="1" Content="Enter ID of product" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26"  Width="111" />
         <Label x:Name="IDValid" Grid.Column="2" Content="Insert at least 6 digits" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="26"  Width="111" FontSize="9" Foreground="Red" Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}" />
         <Label x:Name="Namexamel" Grid.Row="1" Grid.Column="1" Content="Enter the name" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="91"/>
         <Label x:Name="Categoryxamel" Grid.Row="2" Grid.Column="1" Content="choose the category" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="26"  Width="118"/>

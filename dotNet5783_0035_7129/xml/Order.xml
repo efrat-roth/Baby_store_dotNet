@@ -1,1 +1,921 @@
-﻿<?xml version="1.0" encoding="utf-8"?><ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Order><ID>2</ID><CustomerName>Shilat Rubin</CustomerName><CustomerEmail>ShilatRubin@gmail.com</CustomerEmail><CustomerAdress>Kiryat Shmona Ktav Sofer 108</CustomerAdress><OrderDate>2023-01-08T22:54:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>3</ID><CustomerName>Natan Mansur</CustomerName><CustomerEmail>NatanMansur@gmail.com</CustomerEmail><CustomerAdress>Hadera Beit Hadfus 38</CustomerAdress><OrderDate>2023-01-08T23:46:00+02:00</OrderDate><DeliveredDate>2023-01-09T01:17:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T01:17:00+02:00</ArrivedDate></Order><Order><ID>4</ID><CustomerName>Daniel Mangel</CustomerName><CustomerEmail>DanielMangel@gmail.com</CustomerEmail><CustomerAdress>Karmiel Beit Hadfus 134</CustomerAdress><OrderDate>2023-01-08T22:30:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:53:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:53:00+02:00</ArrivedDate></Order><Order><ID>5</ID><CustomerName>Yael Levi</CustomerName><CustomerEmail>YaelLevi@gmail.com</CustomerEmail><CustomerAdress>Beit Shemesh Zait 130</CustomerAdress><OrderDate>2023-01-08T22:37:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:44:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>6</ID><CustomerName>Hila Levi</CustomerName><CustomerEmail>HilaLevi@gmail.com</CustomerEmail><CustomerAdress>Jerusalem Hshoshanim 66</CustomerAdress><OrderDate>2023-01-08T23:21:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:07:00+02:00</DeliveredDate><ArrivedDate>2023-01-12T00:07:00+02:00</ArrivedDate></Order><Order><ID>7</ID><CustomerName>Yair Mansur</CustomerName><CustomerEmail>YairMansur@gmail.com</CustomerEmail><CustomerAdress>Jerusalem Yanai 51</CustomerAdress><OrderDate>2023-01-08T23:30:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:42:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:42:00+02:00</ArrivedDate></Order><Order><ID>8</ID><CustomerName>Dan Mangel</CustomerName><CustomerEmail>DanMangel@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Hertzel 35</CustomerAdress><OrderDate>2023-01-08T22:58:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:18:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:18:00+02:00</ArrivedDate></Order><Order><ID>9</ID><CustomerName>Rachel Roth</CustomerName><CustomerEmail>RachelRoth@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Hertzel 128</CustomerAdress><OrderDate>2023-01-08T23:39:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:35:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>10</ID><CustomerName>Hila Sharon</CustomerName><CustomerEmail>HilaSharon@gmail.com</CustomerEmail><CustomerAdress>Netanya Yanai 101</CustomerAdress><OrderDate>2023-01-08T22:39:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:24:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>12</ID><CustomerName>Natan Mansur</CustomerName><CustomerEmail>NatanMansur@gmail.com</CustomerEmail><CustomerAdress>Karmiel Ktav Sofer 42</CustomerAdress><OrderDate>2023-01-08T22:35:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:07:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>13</ID><CustomerName>Dan Mangel</CustomerName><CustomerEmail>DanMangel@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Najara 141</CustomerAdress><OrderDate>2023-01-08T22:38:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:09:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:09:00+02:00</ArrivedDate></Order><Order><ID>14</ID><CustomerName>Yael Sharon</CustomerName><CustomerEmail>YaelSharon@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Ktav Sofer 147</CustomerAdress><OrderDate>2023-01-08T23:03:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:26:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:26:00+02:00</ArrivedDate></Order><Order><ID>15</ID><CustomerName>Hila Kahana</CustomerName><CustomerEmail>HilaKahana@gmail.com</CustomerEmail><CustomerAdress>Jerusalem Ktav Sofer 42</CustomerAdress><OrderDate>2023-01-08T22:43:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:41:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:41:00+02:00</ArrivedDate></Order><Order><ID>16</ID><CustomerName>Daniel Levi</CustomerName><CustomerEmail>DanielLevi@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Yanai 88</CustomerAdress><OrderDate>2023-01-08T22:52:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:42:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:42:00+02:00</ArrivedDate></Order><Order><ID>17</ID><CustomerName>Efrat Sharon</CustomerName><CustomerEmail>EfratSharon@gmail.com</CustomerEmail><CustomerAdress>Karmiel Hertzog 60</CustomerAdress><OrderDate>2023-01-08T22:23:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:02:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>18</ID><CustomerName>Ayala Vays</CustomerName><CustomerEmail>AyalaVays@gmail.com</CustomerEmail><CustomerAdress>Hadera Ben Gurion 116</CustomerAdress><OrderDate>2023-01-08T23:29:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:52:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T00:52:00+02:00</ArrivedDate></Order><Order><ID>19</ID><CustomerName>Yael Mangel</CustomerName><CustomerEmail>YaelMangel@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Hertzel 69</CustomerAdress><OrderDate>2023-01-08T22:53:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:18:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:18:00+02:00</ArrivedDate></Order><Order><ID>20</ID><CustomerName>Daniel Mansur</CustomerName><CustomerEmail>DanielMansur@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Yanai 28</CustomerAdress><OrderDate>2023-01-08T22:35:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>21</ID><CustomerName>Hila Mangel</CustomerName><CustomerEmail>HilaMangel@gmail.com</CustomerEmail><CustomerAdress>Tiberias Beit Hadfus 62</CustomerAdress><OrderDate>2023-01-08T23:31:00+02:00</OrderDate><DeliveredDate>2023-01-09T01:05:00+02:00</DeliveredDate><ArrivedDate>2023-01-12T01:05:00+02:00</ArrivedDate></Order><Order><ID>22</ID><CustomerName>Yael Cohen</CustomerName><CustomerEmail>YaelCohen@gmail.com</CustomerEmail><CustomerAdress>Hadera Hertzel 117</CustomerAdress><OrderDate>2023-01-08T22:35:00+02:00</OrderDate><DeliveredDate>2023-01-08T22:56:00+02:00</DeliveredDate><ArrivedDate>2023-01-09T22:56:00+02:00</ArrivedDate></Order><Order><ID>23</ID><CustomerName>Efrat Roth</CustomerName><CustomerEmail>EfratRoth@gmail.com</CustomerEmail><CustomerAdress>Tiberias Najara 124</CustomerAdress><OrderDate>2023-01-08T22:52:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:07:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>24</ID><CustomerName>Rachel Roth</CustomerName><CustomerEmail>RachelRoth@gmail.com</CustomerEmail><CustomerAdress>Netanya Hertzog 134</CustomerAdress><OrderDate>2023-01-08T23:26:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>25</ID><CustomerName>Daniel Mansur</CustomerName><CustomerEmail>DanielMansur@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Najara 19</CustomerAdress><OrderDate>2023-01-08T23:25:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:55:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:55:00+02:00</ArrivedDate></Order><Order><ID>26</ID><CustomerName>Natan Roth</CustomerName><CustomerEmail>NatanRoth@gmail.com</CustomerEmail><CustomerAdress>Netivot Hshoshanim 126</CustomerAdress><OrderDate>2023-01-08T22:59:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:56:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>27</ID><CustomerName>Daniel Sharon</CustomerName><CustomerEmail>DanielSharon@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Tze'elon 144</CustomerAdress><OrderDate>2023-01-08T23:07:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>28</ID><CustomerName>Yair Mansur</CustomerName><CustomerEmail>YairMansur@gmail.com</CustomerEmail><CustomerAdress>Netanya Ben Gurion 100</CustomerAdress><OrderDate>2023-01-08T23:36:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:22:00+02:00</DeliveredDate><ArrivedDate>2023-01-12T00:22:00+02:00</ArrivedDate></Order><Order><ID>29</ID><CustomerName>Daniel Levi</CustomerName><CustomerEmail>DanielLevi@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Tze'elon 69</CustomerAdress><OrderDate>2023-01-08T22:53:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>30</ID><CustomerName>Efrat Rubin</CustomerName><CustomerEmail>EfratRubin@gmail.com</CustomerEmail><CustomerAdress>Netanya Beit Hadfus 37</CustomerAdress><OrderDate>2023-01-08T23:00:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:16:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:16:00+02:00</ArrivedDate></Order><Order><ID>31</ID><CustomerName>Hila Kahana</CustomerName><CustomerEmail>HilaKahana@gmail.com</CustomerEmail><CustomerAdress>Hadera Beit Hadfus 22</CustomerAdress><OrderDate>2023-01-08T22:55:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:52:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T23:52:00+02:00</ArrivedDate></Order><Order><ID>32</ID><CustomerName>Daniel Cohen</CustomerName><CustomerEmail>DanielCohen@gmail.com</CustomerEmail><CustomerAdress>Karmiel Tze'elon 91</CustomerAdress><OrderDate>2023-01-08T23:23:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:50:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>33</ID><CustomerName>Yair Perelman</CustomerName><CustomerEmail>YairPerelman@gmail.com</CustomerEmail><CustomerAdress>Beit Shemesh Tze'elon 148</CustomerAdress><OrderDate>2023-01-08T22:49:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:29:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>34</ID><CustomerName>Hila Rubin</CustomerName><CustomerEmail>HilaRubin@gmail.com</CustomerEmail><CustomerAdress>Beit Shemesh Najara 7</CustomerAdress><OrderDate>2023-01-08T22:45:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:44:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:44:00+02:00</ArrivedDate></Order><Order><ID>35</ID><CustomerName>Ayala Rubin</CustomerName><CustomerEmail>AyalaRubin@gmail.com</CustomerEmail><CustomerAdress>Netanya Ben Gurion 61</CustomerAdress><OrderDate>2023-01-08T22:50:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:15:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>36</ID><CustomerName>Hila Rubin</CustomerName><CustomerEmail>HilaRubin@gmail.com</CustomerEmail><CustomerAdress>Tiberias Zait 52</CustomerAdress><OrderDate>2023-01-08T23:24:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:47:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:47:00+02:00</ArrivedDate></Order><Order><ID>37</ID><CustomerName>Dan Kahana</CustomerName><CustomerEmail>DanKahana@gmail.com</CustomerEmail><CustomerAdress>Netanya Ben Gurion 81</CustomerAdress><OrderDate>2023-01-08T23:15:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:26:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T23:26:00+02:00</ArrivedDate></Order><Order><ID>38</ID><CustomerName>Hila Levi</CustomerName><CustomerEmail>HilaLevi@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Ben Gurion 133</CustomerAdress><OrderDate>2023-01-08T23:22:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:43:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>39</ID><CustomerName>Natan Perelman</CustomerName><CustomerEmail>NatanPerelman@gmail.com</CustomerEmail><CustomerAdress>Netanya Yanai 69</CustomerAdress><OrderDate>2023-01-08T23:44:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:14:00+02:00</DeliveredDate><ArrivedDate>2023-01-12T00:14:00+02:00</ArrivedDate></Order><Order><ID>40</ID><CustomerName>Efrat Roth</CustomerName><CustomerEmail>EfratRoth@gmail.com</CustomerEmail><CustomerAdress>Tiberias Ben Gurion 6</CustomerAdress><OrderDate>2023-01-08T23:27:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:39:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>41</ID><CustomerName>Efrat Mangel</CustomerName><CustomerEmail>EfratMangel@gmail.com</CustomerEmail><CustomerAdress>Karmiel Ben Gurion 20</CustomerAdress><OrderDate>2023-01-08T23:09:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:09:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:09:00+02:00</ArrivedDate></Order><Order><ID>42</ID><CustomerName>Natan Kahana</CustomerName><CustomerEmail>NatanKahana@gmail.com</CustomerEmail><CustomerAdress>Kiryat Shmona Tze'elon 117</CustomerAdress><OrderDate>2023-01-08T23:42:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>43</ID><CustomerName>Ayala Mangel</CustomerName><CustomerEmail>AyalaMangel@gmail.com</CustomerEmail><CustomerAdress>Netanya Beit Hadfus 9</CustomerAdress><OrderDate>2023-01-08T23:45:00+02:00</OrderDate><DeliveredDate>2023-01-09T01:02:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T01:02:00+02:00</ArrivedDate></Order><Order><ID>44</ID><CustomerName>Shilat Mansur</CustomerName><CustomerEmail>ShilatMansur@gmail.com</CustomerEmail><CustomerAdress>Karmiel Hertzog 71</CustomerAdress><OrderDate>2023-01-08T22:50:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:16:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:16:00+02:00</ArrivedDate></Order><Order><ID>45</ID><CustomerName>Ayala Mangel</CustomerName><CustomerEmail>AyalaMangel@gmail.com</CustomerEmail><CustomerAdress>Hadera Hshoshanim 29</CustomerAdress><OrderDate>2023-01-08T23:32:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:44:00+02:00</DeliveredDate><ArrivedDate>2023-01-12T00:44:00+02:00</ArrivedDate></Order><Order><ID>46</ID><CustomerName>Shilat Kahana</CustomerName><CustomerEmail>ShilatKahana@gmail.com</CustomerEmail><CustomerAdress>Netivot Zait 40</CustomerAdress><OrderDate>2023-01-08T22:37:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:25:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>47</ID><CustomerName>Yael Mangel</CustomerName><CustomerEmail>YaelMangel@gmail.com</CustomerEmail><CustomerAdress>Jerusalem Hertzog 50</CustomerAdress><OrderDate>2023-01-08T23:30:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>48</ID><CustomerName>Rachel Sharon</CustomerName><CustomerEmail>RachelSharon@gmail.com</CustomerEmail><CustomerAdress>Tiberias Yanai 98</CustomerAdress><OrderDate>2023-01-08T22:52:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>49</ID><CustomerName>Hila Mangel</CustomerName><CustomerEmail>HilaMangel@gmail.com</CustomerEmail><CustomerAdress>Netanya Yanai 76</CustomerAdress><OrderDate>2023-01-08T22:35:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:57:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:57:00+02:00</ArrivedDate></Order><Order><ID>50</ID><CustomerName>Hila Mangel</CustomerName><CustomerEmail>HilaMangel@gmail.com</CustomerEmail><CustomerAdress>Jerusalem Beit Hadfus 137</CustomerAdress><OrderDate>2023-01-08T22:29:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:37:00+02:00</DeliveredDate><ArrivedDate>2023-01-09T23:37:00+02:00</ArrivedDate></Order><Order><ID>51</ID><CustomerName>Ayala Cohen</CustomerName><CustomerEmail>AyalaCohen@gmail.com</CustomerEmail><CustomerAdress>Kiryat Shmona Ben Gurion 36</CustomerAdress><OrderDate>2023-01-08T22:36:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:27:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>52</ID><CustomerName>Hila Rubin</CustomerName><CustomerEmail>HilaRubin@gmail.com</CustomerEmail><CustomerAdress>Netanya Yanai 116</CustomerAdress><OrderDate>2023-01-08T22:51:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:08:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:08:00+02:00</ArrivedDate></Order><Order><ID>53</ID><CustomerName>Dan Rubin</CustomerName><CustomerEmail>DanRubin@gmail.com</CustomerEmail><CustomerAdress>Karmiel Hertzel 40</CustomerAdress><OrderDate>2023-01-08T23:35:00+02:00</OrderDate><DeliveredDate>2023-01-09T01:13:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>54</ID><CustomerName>Yael Kahana</CustomerName><CustomerEmail>YaelKahana@gmail.com</CustomerEmail><CustomerAdress>Hadera Najara 49</CustomerAdress><OrderDate>2023-01-08T23:16:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:22:00+02:00</DeliveredDate><ArrivedDate>2023-01-12T00:22:00+02:00</ArrivedDate></Order><Order><ID>55</ID><CustomerName>Daniel Cohen</CustomerName><CustomerEmail>DanielCohen@gmail.com</CustomerEmail><CustomerAdress>Hadera Beit Hadfus 6</CustomerAdress><OrderDate>2023-01-08T23:24:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:48:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>56</ID><CustomerName>Natan Mangel</CustomerName><CustomerEmail>NatanMangel@gmail.com</CustomerEmail><CustomerAdress>Netivot Yanai 11</CustomerAdress><OrderDate>2023-01-08T23:24:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:08:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:08:00+02:00</ArrivedDate></Order><Order><ID>57</ID><CustomerName>Daniel Levi</CustomerName><CustomerEmail>DanielLevi@gmail.com</CustomerEmail><CustomerAdress>Kiryat Shmona Zait 29</CustomerAdress><OrderDate>2023-01-08T23:36:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:58:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T23:58:00+02:00</ArrivedDate></Order><Order><ID>58</ID><CustomerName>Ayala Mangel</CustomerName><CustomerEmail>AyalaMangel@gmail.com</CustomerEmail><CustomerAdress>Jerusalem Beit Hadfus 96</CustomerAdress><OrderDate>2023-01-08T22:58:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:45:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:45:00+02:00</ArrivedDate></Order><Order><ID>59</ID><CustomerName>Ayala Perelman</CustomerName><CustomerEmail>AyalaPerelman@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Najara 2</CustomerAdress><OrderDate>2023-01-08T23:40:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>60</ID><CustomerName>Natan Kahana</CustomerName><CustomerEmail>NatanKahana@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Hertzog 70</CustomerAdress><OrderDate>2023-01-08T22:34:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>61</ID><CustomerName>Ayala Vays</CustomerName><CustomerEmail>AyalaVays@gmail.com</CustomerEmail><CustomerAdress>Netanya Yanai 63</CustomerAdress><OrderDate>2023-01-08T23:30:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:20:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>62</ID><CustomerName>Yael Mangel</CustomerName><CustomerEmail>YaelMangel@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Tze'elon 77</CustomerAdress><OrderDate>2023-01-08T23:25:00+02:00</OrderDate><DeliveredDate>2023-01-09T01:02:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>63</ID><CustomerName>Efrat Mansur</CustomerName><CustomerEmail>EfratMansur@gmail.com</CustomerEmail><CustomerAdress>Karmiel Zait 34</CustomerAdress><OrderDate>2023-01-08T23:20:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:55:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>64</ID><CustomerName>Yair Mansur</CustomerName><CustomerEmail>YairMansur@gmail.com</CustomerEmail><CustomerAdress>Hadera Ktav Sofer 105</CustomerAdress><OrderDate>2023-01-08T23:23:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:57:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>65</ID><CustomerName>Shilat Mangel</CustomerName><CustomerEmail>ShilatMangel@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Zait 32</CustomerAdress><OrderDate>2023-01-08T23:26:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:52:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>66</ID><CustomerName>Ayala Mangel</CustomerName><CustomerEmail>AyalaMangel@gmail.com</CustomerEmail><CustomerAdress>Beit Shemesh Yanai 36</CustomerAdress><OrderDate>2023-01-08T23:25:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>67</ID><CustomerName>Yair Mansur</CustomerName><CustomerEmail>YairMansur@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Tze'elon 87</CustomerAdress><OrderDate>2023-01-08T23:43:00+02:00</OrderDate><DeliveredDate>2023-01-09T01:04:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>68</ID><CustomerName>Yair Mansur</CustomerName><CustomerEmail>YairMansur@gmail.com</CustomerEmail><CustomerAdress>Hadera Najara 118</CustomerAdress><OrderDate>2023-01-08T22:41:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>69</ID><CustomerName>Yair Levi</CustomerName><CustomerEmail>YairLevi@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Hertzog 121</CustomerAdress><OrderDate>2023-01-08T22:49:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:07:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:07:00+02:00</ArrivedDate></Order><Order><ID>70</ID><CustomerName>Daniel Kahana</CustomerName><CustomerEmail>DanielKahana@gmail.com</CustomerEmail><CustomerAdress>Beit Shemesh Hertzel 18</CustomerAdress><OrderDate>2023-01-08T22:31:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:31:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>71</ID><CustomerName>Daniel Cohen</CustomerName><CustomerEmail>DanielCohen@gmail.com</CustomerEmail><CustomerAdress>Hadera Hertzog 80</CustomerAdress><OrderDate>2023-01-08T22:35:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:50:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T23:50:00+02:00</ArrivedDate></Order><Order><ID>72</ID><CustomerName>Hila Mangel</CustomerName><CustomerEmail>HilaMangel@gmail.com</CustomerEmail><CustomerAdress>Karmiel Najara 119</CustomerAdress><OrderDate>2023-01-08T23:34:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:14:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T00:14:00+02:00</ArrivedDate></Order><Order><ID>73</ID><CustomerName>Yair Sharon</CustomerName><CustomerEmail>YairSharon@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Ktav Sofer 83</CustomerAdress><OrderDate>2023-01-08T22:53:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:52:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T23:52:00+02:00</ArrivedDate></Order><Order><ID>74</ID><CustomerName>Shilat Mangel</CustomerName><CustomerEmail>ShilatMangel@gmail.com</CustomerEmail><CustomerAdress>Kiryat Shmona Najara 7</CustomerAdress><OrderDate>2023-01-08T22:34:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:24:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:24:00+02:00</ArrivedDate></Order><Order><ID>75</ID><CustomerName>Daniel Rubin</CustomerName><CustomerEmail>DanielRubin@gmail.com</CustomerEmail><CustomerAdress>Beit Shemesh Tze'elon 73</CustomerAdress><OrderDate>2023-01-08T22:33:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:21:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>76</ID><CustomerName>Rachel Mangel</CustomerName><CustomerEmail>RachelMangel@gmail.com</CustomerEmail><CustomerAdress>Kiryat Shmona Ben Gurion 86</CustomerAdress><OrderDate>2023-01-08T22:31:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:07:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T23:07:00+02:00</ArrivedDate></Order><Order><ID>77</ID><CustomerName>Ayala Roth</CustomerName><CustomerEmail>AyalaRoth@gmail.com</CustomerEmail><CustomerAdress>Beit Shemesh Yanai 83</CustomerAdress><OrderDate>2023-01-08T23:16:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>78</ID><CustomerName>Rachel Mansur</CustomerName><CustomerEmail>RachelMansur@gmail.com</CustomerEmail><CustomerAdress>Hadera Hertzel 88</CustomerAdress><OrderDate>2023-01-08T23:43:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>79</ID><CustomerName>Hila Kahana</CustomerName><CustomerEmail>HilaKahana@gmail.com</CustomerEmail><CustomerAdress>Karmiel Hertzel 122</CustomerAdress><OrderDate>2023-01-08T22:40:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:02:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>80</ID><CustomerName>Yael Rubin</CustomerName><CustomerEmail>YaelRubin@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Hertzog 114</CustomerAdress><OrderDate>2023-01-08T22:20:00+02:00</OrderDate><DeliveredDate>2023-01-08T22:32:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>81</ID><CustomerName>Rachel Sharon</CustomerName><CustomerEmail>RachelSharon@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Hertzog 101</CustomerAdress><OrderDate>2023-01-08T23:18:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:52:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T00:52:00+02:00</ArrivedDate></Order><Order><ID>82</ID><CustomerName>Efrat Kahana</CustomerName><CustomerEmail>EfratKahana@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Ben Gurion 66</CustomerAdress><OrderDate>2023-01-08T22:22:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:42:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>83</ID><CustomerName>Hila Mangel</CustomerName><CustomerEmail>HilaMangel@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Hshoshanim 38</CustomerAdress><OrderDate>2023-01-08T23:31:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:51:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>84</ID><CustomerName>Efrat Rubin</CustomerName><CustomerEmail>EfratRubin@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Ben Gurion 94</CustomerAdress><OrderDate>2023-01-08T23:28:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:47:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>85</ID><CustomerName>Hila Rubin</CustomerName><CustomerEmail>HilaRubin@gmail.com</CustomerEmail><CustomerAdress>Netanya Hertzog 64</CustomerAdress><OrderDate>2023-01-08T22:20:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:51:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T23:51:00+02:00</ArrivedDate></Order><Order><ID>86</ID><CustomerName>Rachel Cohen</CustomerName><CustomerEmail>RachelCohen@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Tze'elon 58</CustomerAdress><OrderDate>2023-01-08T23:44:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>87</ID><CustomerName>Dan Roth</CustomerName><CustomerEmail>DanRoth@gmail.com</CustomerEmail><CustomerAdress>Hadera Zait 15</CustomerAdress><OrderDate>2023-01-08T23:46:00+02:00</OrderDate><DeliveredDate>2023-01-09T01:25:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>88</ID><CustomerName>Ayala Kahana</CustomerName><CustomerEmail>AyalaKahana@gmail.com</CustomerEmail><CustomerAdress>Netanya Yanai 88</CustomerAdress><OrderDate>2023-01-08T23:48:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:19:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T00:19:00+02:00</ArrivedDate></Order><Order><ID>89</ID><CustomerName>Ayala Rubin</CustomerName><CustomerEmail>AyalaRubin@gmail.com</CustomerEmail><CustomerAdress>Jerusalem Hertzel 44</CustomerAdress><OrderDate>2023-01-08T23:49:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>90</ID><CustomerName>Rachel Cohen</CustomerName><CustomerEmail>RachelCohen@gmail.com</CustomerEmail><CustomerAdress>Hadera Tze'elon 33</CustomerAdress><OrderDate>2023-01-08T22:56:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:06:00+02:00</DeliveredDate><ArrivedDate>2023-01-12T00:06:00+02:00</ArrivedDate></Order><Order><ID>91</ID><CustomerName>Natan Mangel</CustomerName><CustomerEmail>NatanMangel@gmail.com</CustomerEmail><CustomerAdress>Bnei Brak Najara 96</CustomerAdress><OrderDate>2023-01-08T23:45:00+02:00</OrderDate><DeliveredDate>2023-01-09T01:07:00+02:00</DeliveredDate><ArrivedDate>2023-01-11T01:07:00+02:00</ArrivedDate></Order><Order><ID>92</ID><CustomerName>Yael Mansur</CustomerName><CustomerEmail>YaelMansur@gmail.com</CustomerEmail><CustomerAdress>Kiryat Shmona Zait 58</CustomerAdress><OrderDate>2023-01-08T22:29:00+02:00</OrderDate><DeliveredDate>2023-01-08T22:51:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>93</ID><CustomerName>Yair Mangel</CustomerName><CustomerEmail>YairMangel@gmail.com</CustomerEmail><CustomerAdress>Netivot Yanai 69</CustomerAdress><OrderDate>2023-01-08T23:36:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>94</ID><CustomerName>Efrat Mangel</CustomerName><CustomerEmail>EfratMangel@gmail.com</CustomerEmail><CustomerAdress>Netivot Hertzel 29</CustomerAdress><OrderDate>2023-01-08T23:05:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:50:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>95</ID><CustomerName>Natan Perelman</CustomerName><CustomerEmail>NatanPerelman@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Tze'elon 147</CustomerAdress><OrderDate>2023-01-08T22:46:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:13:00+02:00</DeliveredDate><ArrivedDate>2023-01-10T00:13:00+02:00</ArrivedDate></Order><Order><ID>96</ID><CustomerName>Natan Mangel</CustomerName><CustomerEmail>NatanMangel@gmail.com</CustomerEmail><CustomerAdress>Beit Shemesh Ktav Sofer 51</CustomerAdress><OrderDate>2023-01-08T22:32:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>97</ID><CustomerName>Ayala Perelman</CustomerName><CustomerEmail>AyalaPerelman@gmail.com</CustomerEmail><CustomerAdress>Hadera Hshoshanim 74</CustomerAdress><OrderDate>2023-01-08T23:47:00+02:00</OrderDate><DeliveredDate>2023-01-09T00:28:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>98</ID><CustomerName>Yael Kahana</CustomerName><CustomerEmail>YaelKahana@gmail.com</CustomerEmail><CustomerAdress>Tel Aviv Najara 45</CustomerAdress><OrderDate>2023-01-08T22:29:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>99</ID><CustomerName>Hila Mansur</CustomerName><CustomerEmail>HilaMansur@gmail.com</CustomerEmail><CustomerAdress>Tiberias Hertzog 112</CustomerAdress><OrderDate>2023-01-08T22:45:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:12:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>1</ID><CustomerName>Rachel Mansur</CustomerName><CustomerEmail>RachelMansur@gmail.com</CustomerEmail><CustomerAdress>Hadera Hertzel 29</CustomerAdress><OrderDate>2023-01-08T22:50:00+02:00</OrderDate><DeliveredDate>2023-01-08T23:55:00+02:00</DeliveredDate><ArrivedDate>2023-01-09T00:00:00+02:00</ArrivedDate></Order><Order><ID>100</ID><CustomerName>Itzik Roth</CustomerName><CustomerEmail>Itzik@gmail.com</CustomerEmail><CustomerAdress>Hazait 3 Hertzeliah</CustomerAdress><OrderDate>2023-01-11T00:00:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order><Order><ID>11</ID><CustomerName>Ayala Sharon</CustomerName><CustomerEmail>AyalaSharon@gmail.com</CustomerEmail><CustomerAdress>Netanya Ben Gurion 136</CustomerAdress><OrderDate>2023-01-08T22:23:00+02:00</OrderDate><DeliveredDate>2023-01-12T00:00:00+02:00</DeliveredDate><ArrivedDate xsi:nil="true" /></Order><Order><ID>101</ID><CustomerName>Hadas</CustomerName><CustomerEmail>H@gmail.com</CustomerEmail><CustomerAdress>BeitHadfus 9 Jerusalem</CustomerAdress><OrderDate>2023-01-12T00:00:00+02:00</OrderDate><DeliveredDate xsi:nil="true" /><ArrivedDate xsi:nil="true" /></Order></ArrayOfOrder>
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Order>
+    <ID>2</ID>
+    <CustomerName>Shilat Rubin</CustomerName>
+    <CustomerEmail>ShilatRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Kiryat Shmona Ktav Sofer 108</CustomerAdress>
+    <OrderDate>2023-01-08T22:54:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>3</ID>
+    <CustomerName>Natan Mansur</CustomerName>
+    <CustomerEmail>NatanMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Beit Hadfus 38</CustomerAdress>
+    <OrderDate>2023-01-08T23:46:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T01:17:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T01:17:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>4</ID>
+    <CustomerName>Daniel Mangel</CustomerName>
+    <CustomerEmail>DanielMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Beit Hadfus 134</CustomerAdress>
+    <OrderDate>2023-01-08T22:30:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:53:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:53:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>5</ID>
+    <CustomerName>Yael Levi</CustomerName>
+    <CustomerEmail>YaelLevi@gmail.com</CustomerEmail>
+    <CustomerAdress>Beit Shemesh Zait 130</CustomerAdress>
+    <OrderDate>2023-01-08T22:37:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:44:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>6</ID>
+    <CustomerName>Hila Levi</CustomerName>
+    <CustomerEmail>HilaLevi@gmail.com</CustomerEmail>
+    <CustomerAdress>Jerusalem Hshoshanim 66</CustomerAdress>
+    <OrderDate>2023-01-08T23:21:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:07:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-12T00:07:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>7</ID>
+    <CustomerName>Yair Mansur</CustomerName>
+    <CustomerEmail>YairMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Jerusalem Yanai 51</CustomerAdress>
+    <OrderDate>2023-01-08T23:30:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:42:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:42:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>8</ID>
+    <CustomerName>Dan Mangel</CustomerName>
+    <CustomerEmail>DanMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Hertzel 35</CustomerAdress>
+    <OrderDate>2023-01-08T22:58:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:18:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:18:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>9</ID>
+    <CustomerName>Rachel Roth</CustomerName>
+    <CustomerEmail>RachelRoth@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Hertzel 128</CustomerAdress>
+    <OrderDate>2023-01-08T23:39:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:35:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>10</ID>
+    <CustomerName>Hila Sharon</CustomerName>
+    <CustomerEmail>HilaSharon@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Yanai 101</CustomerAdress>
+    <OrderDate>2023-01-08T22:39:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:24:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>12</ID>
+    <CustomerName>Natan Mansur</CustomerName>
+    <CustomerEmail>NatanMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Ktav Sofer 42</CustomerAdress>
+    <OrderDate>2023-01-08T22:35:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:07:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>13</ID>
+    <CustomerName>Dan Mangel</CustomerName>
+    <CustomerEmail>DanMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Najara 141</CustomerAdress>
+    <OrderDate>2023-01-08T22:38:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:09:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:09:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>14</ID>
+    <CustomerName>Yael Sharon</CustomerName>
+    <CustomerEmail>YaelSharon@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Ktav Sofer 147</CustomerAdress>
+    <OrderDate>2023-01-08T23:03:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:26:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:26:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>15</ID>
+    <CustomerName>Hila Kahana</CustomerName>
+    <CustomerEmail>HilaKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Jerusalem Ktav Sofer 42</CustomerAdress>
+    <OrderDate>2023-01-08T22:43:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:41:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:41:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>16</ID>
+    <CustomerName>Daniel Levi</CustomerName>
+    <CustomerEmail>DanielLevi@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Yanai 88</CustomerAdress>
+    <OrderDate>2023-01-08T22:52:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:42:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:42:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>17</ID>
+    <CustomerName>Efrat Sharon</CustomerName>
+    <CustomerEmail>EfratSharon@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Hertzog 60</CustomerAdress>
+    <OrderDate>2023-01-08T22:23:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:02:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>18</ID>
+    <CustomerName>Ayala Vays</CustomerName>
+    <CustomerEmail>AyalaVays@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Ben Gurion 116</CustomerAdress>
+    <OrderDate>2023-01-08T23:29:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:52:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T00:52:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>19</ID>
+    <CustomerName>Yael Mangel</CustomerName>
+    <CustomerEmail>YaelMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Hertzel 69</CustomerAdress>
+    <OrderDate>2023-01-08T22:53:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:18:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:18:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>20</ID>
+    <CustomerName>Daniel Mansur</CustomerName>
+    <CustomerEmail>DanielMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Yanai 28</CustomerAdress>
+    <OrderDate>2023-01-08T22:35:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>21</ID>
+    <CustomerName>Hila Mangel</CustomerName>
+    <CustomerEmail>HilaMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Tiberias Beit Hadfus 62</CustomerAdress>
+    <OrderDate>2023-01-08T23:31:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T01:05:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-12T01:05:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>22</ID>
+    <CustomerName>Yael Cohen</CustomerName>
+    <CustomerEmail>YaelCohen@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Hertzel 117</CustomerAdress>
+    <OrderDate>2023-01-08T22:35:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T22:56:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-09T22:56:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>23</ID>
+    <CustomerName>Efrat Roth</CustomerName>
+    <CustomerEmail>EfratRoth@gmail.com</CustomerEmail>
+    <CustomerAdress>Tiberias Najara 124</CustomerAdress>
+    <OrderDate>2023-01-08T22:52:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:07:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>24</ID>
+    <CustomerName>Rachel Roth</CustomerName>
+    <CustomerEmail>RachelRoth@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Hertzog 134</CustomerAdress>
+    <OrderDate>2023-01-08T23:26:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>25</ID>
+    <CustomerName>Daniel Mansur</CustomerName>
+    <CustomerEmail>DanielMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Najara 19</CustomerAdress>
+    <OrderDate>2023-01-08T23:25:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:55:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:55:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>26</ID>
+    <CustomerName>Natan Roth</CustomerName>
+    <CustomerEmail>NatanRoth@gmail.com</CustomerEmail>
+    <CustomerAdress>Netivot Hshoshanim 126</CustomerAdress>
+    <OrderDate>2023-01-08T22:59:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:56:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>27</ID>
+    <CustomerName>Daniel Sharon</CustomerName>
+    <CustomerEmail>DanielSharon@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Tze'elon 144</CustomerAdress>
+    <OrderDate>2023-01-08T23:07:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>28</ID>
+    <CustomerName>Yair Mansur</CustomerName>
+    <CustomerEmail>YairMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Ben Gurion 100</CustomerAdress>
+    <OrderDate>2023-01-08T23:36:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:22:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-12T00:22:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>29</ID>
+    <CustomerName>Daniel Levi</CustomerName>
+    <CustomerEmail>DanielLevi@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Tze'elon 69</CustomerAdress>
+    <OrderDate>2023-01-08T22:53:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>30</ID>
+    <CustomerName>Efrat Rubin</CustomerName>
+    <CustomerEmail>EfratRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Beit Hadfus 37</CustomerAdress>
+    <OrderDate>2023-01-08T23:00:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:16:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:16:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>31</ID>
+    <CustomerName>Hila Kahana</CustomerName>
+    <CustomerEmail>HilaKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Beit Hadfus 22</CustomerAdress>
+    <OrderDate>2023-01-08T22:55:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:52:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T23:52:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>32</ID>
+    <CustomerName>Daniel Cohen</CustomerName>
+    <CustomerEmail>DanielCohen@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Tze'elon 91</CustomerAdress>
+    <OrderDate>2023-01-08T23:23:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:50:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>33</ID>
+    <CustomerName>Yair Perelman</CustomerName>
+    <CustomerEmail>YairPerelman@gmail.com</CustomerEmail>
+    <CustomerAdress>Beit Shemesh Tze'elon 148</CustomerAdress>
+    <OrderDate>2023-01-08T22:49:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:29:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>34</ID>
+    <CustomerName>Hila Rubin</CustomerName>
+    <CustomerEmail>HilaRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Beit Shemesh Najara 7</CustomerAdress>
+    <OrderDate>2023-01-08T22:45:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:44:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:44:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>35</ID>
+    <CustomerName>Ayala Rubin</CustomerName>
+    <CustomerEmail>AyalaRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Ben Gurion 61</CustomerAdress>
+    <OrderDate>2023-01-08T22:50:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:15:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>36</ID>
+    <CustomerName>Hila Rubin</CustomerName>
+    <CustomerEmail>HilaRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Tiberias Zait 52</CustomerAdress>
+    <OrderDate>2023-01-08T23:24:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:47:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:47:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>37</ID>
+    <CustomerName>Dan Kahana</CustomerName>
+    <CustomerEmail>DanKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Ben Gurion 81</CustomerAdress>
+    <OrderDate>2023-01-08T23:15:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:26:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T23:26:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>38</ID>
+    <CustomerName>Hila Levi</CustomerName>
+    <CustomerEmail>HilaLevi@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Ben Gurion 133</CustomerAdress>
+    <OrderDate>2023-01-08T23:22:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:43:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>39</ID>
+    <CustomerName>Natan Perelman</CustomerName>
+    <CustomerEmail>NatanPerelman@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Yanai 69</CustomerAdress>
+    <OrderDate>2023-01-08T23:44:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:14:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-12T00:14:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>40</ID>
+    <CustomerName>Efrat Roth</CustomerName>
+    <CustomerEmail>EfratRoth@gmail.com</CustomerEmail>
+    <CustomerAdress>Tiberias Ben Gurion 6</CustomerAdress>
+    <OrderDate>2023-01-08T23:27:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:39:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>41</ID>
+    <CustomerName>Efrat Mangel</CustomerName>
+    <CustomerEmail>EfratMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Ben Gurion 20</CustomerAdress>
+    <OrderDate>2023-01-08T23:09:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:09:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:09:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>42</ID>
+    <CustomerName>Natan Kahana</CustomerName>
+    <CustomerEmail>NatanKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Kiryat Shmona Tze'elon 117</CustomerAdress>
+    <OrderDate>2023-01-08T23:42:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>43</ID>
+    <CustomerName>Ayala Mangel</CustomerName>
+    <CustomerEmail>AyalaMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Beit Hadfus 9</CustomerAdress>
+    <OrderDate>2023-01-08T23:45:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T01:02:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T01:02:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>44</ID>
+    <CustomerName>Shilat Mansur</CustomerName>
+    <CustomerEmail>ShilatMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Hertzog 71</CustomerAdress>
+    <OrderDate>2023-01-08T22:50:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:16:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:16:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>45</ID>
+    <CustomerName>Ayala Mangel</CustomerName>
+    <CustomerEmail>AyalaMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Hshoshanim 29</CustomerAdress>
+    <OrderDate>2023-01-08T23:32:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:44:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-12T00:44:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>46</ID>
+    <CustomerName>Shilat Kahana</CustomerName>
+    <CustomerEmail>ShilatKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Netivot Zait 40</CustomerAdress>
+    <OrderDate>2023-01-08T22:37:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:25:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>47</ID>
+    <CustomerName>Yael Mangel</CustomerName>
+    <CustomerEmail>YaelMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Jerusalem Hertzog 50</CustomerAdress>
+    <OrderDate>2023-01-08T23:30:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>48</ID>
+    <CustomerName>Rachel Sharon</CustomerName>
+    <CustomerEmail>RachelSharon@gmail.com</CustomerEmail>
+    <CustomerAdress>Tiberias Yanai 98</CustomerAdress>
+    <OrderDate>2023-01-08T22:52:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>49</ID>
+    <CustomerName>Hila Mangel</CustomerName>
+    <CustomerEmail>HilaMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Yanai 76</CustomerAdress>
+    <OrderDate>2023-01-08T22:35:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:57:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:57:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>50</ID>
+    <CustomerName>Hila Mangel</CustomerName>
+    <CustomerEmail>HilaMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Jerusalem Beit Hadfus 137</CustomerAdress>
+    <OrderDate>2023-01-08T22:29:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:37:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-09T23:37:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>51</ID>
+    <CustomerName>Ayala Cohen</CustomerName>
+    <CustomerEmail>AyalaCohen@gmail.com</CustomerEmail>
+    <CustomerAdress>Kiryat Shmona Ben Gurion 36</CustomerAdress>
+    <OrderDate>2023-01-08T22:36:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:27:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>52</ID>
+    <CustomerName>Hila Rubin</CustomerName>
+    <CustomerEmail>HilaRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Yanai 116</CustomerAdress>
+    <OrderDate>2023-01-08T22:51:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:08:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:08:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>53</ID>
+    <CustomerName>Dan Rubin</CustomerName>
+    <CustomerEmail>DanRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Hertzel 40</CustomerAdress>
+    <OrderDate>2023-01-08T23:35:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T01:13:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>54</ID>
+    <CustomerName>Yael Kahana</CustomerName>
+    <CustomerEmail>YaelKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Najara 49</CustomerAdress>
+    <OrderDate>2023-01-08T23:16:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:22:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-12T00:22:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>55</ID>
+    <CustomerName>Daniel Cohen</CustomerName>
+    <CustomerEmail>DanielCohen@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Beit Hadfus 6</CustomerAdress>
+    <OrderDate>2023-01-08T23:24:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:48:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>56</ID>
+    <CustomerName>Natan Mangel</CustomerName>
+    <CustomerEmail>NatanMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Netivot Yanai 11</CustomerAdress>
+    <OrderDate>2023-01-08T23:24:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:08:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:08:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>57</ID>
+    <CustomerName>Daniel Levi</CustomerName>
+    <CustomerEmail>DanielLevi@gmail.com</CustomerEmail>
+    <CustomerAdress>Kiryat Shmona Zait 29</CustomerAdress>
+    <OrderDate>2023-01-08T23:36:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:58:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T23:58:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>58</ID>
+    <CustomerName>Ayala Mangel</CustomerName>
+    <CustomerEmail>AyalaMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Jerusalem Beit Hadfus 96</CustomerAdress>
+    <OrderDate>2023-01-08T22:58:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:45:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:45:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>59</ID>
+    <CustomerName>Ayala Perelman</CustomerName>
+    <CustomerEmail>AyalaPerelman@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Najara 2</CustomerAdress>
+    <OrderDate>2023-01-08T23:40:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>60</ID>
+    <CustomerName>Natan Kahana</CustomerName>
+    <CustomerEmail>NatanKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Hertzog 70</CustomerAdress>
+    <OrderDate>2023-01-08T22:34:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>61</ID>
+    <CustomerName>Ayala Vays</CustomerName>
+    <CustomerEmail>AyalaVays@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Yanai 63</CustomerAdress>
+    <OrderDate>2023-01-08T23:30:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:20:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>62</ID>
+    <CustomerName>Yael Mangel</CustomerName>
+    <CustomerEmail>YaelMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Tze'elon 77</CustomerAdress>
+    <OrderDate>2023-01-08T23:25:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T01:02:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>63</ID>
+    <CustomerName>Efrat Mansur</CustomerName>
+    <CustomerEmail>EfratMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Zait 34</CustomerAdress>
+    <OrderDate>2023-01-08T23:20:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:55:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>64</ID>
+    <CustomerName>Yair Mansur</CustomerName>
+    <CustomerEmail>YairMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Ktav Sofer 105</CustomerAdress>
+    <OrderDate>2023-01-08T23:23:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:57:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>65</ID>
+    <CustomerName>Shilat Mangel</CustomerName>
+    <CustomerEmail>ShilatMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Zait 32</CustomerAdress>
+    <OrderDate>2023-01-08T23:26:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:52:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>66</ID>
+    <CustomerName>Ayala Mangel</CustomerName>
+    <CustomerEmail>AyalaMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Beit Shemesh Yanai 36</CustomerAdress>
+    <OrderDate>2023-01-08T23:25:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>67</ID>
+    <CustomerName>Yair Mansur</CustomerName>
+    <CustomerEmail>YairMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Tze'elon 87</CustomerAdress>
+    <OrderDate>2023-01-08T23:43:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T01:04:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>68</ID>
+    <CustomerName>Yair Mansur</CustomerName>
+    <CustomerEmail>YairMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Najara 118</CustomerAdress>
+    <OrderDate>2023-01-08T22:41:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>69</ID>
+    <CustomerName>Yair Levi</CustomerName>
+    <CustomerEmail>YairLevi@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Hertzog 121</CustomerAdress>
+    <OrderDate>2023-01-08T22:49:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:07:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:07:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>70</ID>
+    <CustomerName>Daniel Kahana</CustomerName>
+    <CustomerEmail>DanielKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Beit Shemesh Hertzel 18</CustomerAdress>
+    <OrderDate>2023-01-08T22:31:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:31:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>71</ID>
+    <CustomerName>Daniel Cohen</CustomerName>
+    <CustomerEmail>DanielCohen@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Hertzog 80</CustomerAdress>
+    <OrderDate>2023-01-08T22:35:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:50:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T23:50:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>72</ID>
+    <CustomerName>Hila Mangel</CustomerName>
+    <CustomerEmail>HilaMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Najara 119</CustomerAdress>
+    <OrderDate>2023-01-08T23:34:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:14:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T00:14:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>73</ID>
+    <CustomerName>Yair Sharon</CustomerName>
+    <CustomerEmail>YairSharon@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Ktav Sofer 83</CustomerAdress>
+    <OrderDate>2023-01-08T22:53:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:52:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T23:52:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>74</ID>
+    <CustomerName>Shilat Mangel</CustomerName>
+    <CustomerEmail>ShilatMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Kiryat Shmona Najara 7</CustomerAdress>
+    <OrderDate>2023-01-08T22:34:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:24:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:24:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>75</ID>
+    <CustomerName>Daniel Rubin</CustomerName>
+    <CustomerEmail>DanielRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Beit Shemesh Tze'elon 73</CustomerAdress>
+    <OrderDate>2023-01-08T22:33:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:21:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>76</ID>
+    <CustomerName>Rachel Mangel</CustomerName>
+    <CustomerEmail>RachelMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Kiryat Shmona Ben Gurion 86</CustomerAdress>
+    <OrderDate>2023-01-08T22:31:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:07:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T23:07:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>77</ID>
+    <CustomerName>Ayala Roth</CustomerName>
+    <CustomerEmail>AyalaRoth@gmail.com</CustomerEmail>
+    <CustomerAdress>Beit Shemesh Yanai 83</CustomerAdress>
+    <OrderDate>2023-01-08T23:16:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>78</ID>
+    <CustomerName>Rachel Mansur</CustomerName>
+    <CustomerEmail>RachelMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Hertzel 88</CustomerAdress>
+    <OrderDate>2023-01-08T23:43:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>79</ID>
+    <CustomerName>Hila Kahana</CustomerName>
+    <CustomerEmail>HilaKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Karmiel Hertzel 122</CustomerAdress>
+    <OrderDate>2023-01-08T22:40:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:02:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>80</ID>
+    <CustomerName>Yael Rubin</CustomerName>
+    <CustomerEmail>YaelRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Hertzog 114</CustomerAdress>
+    <OrderDate>2023-01-08T22:20:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T22:32:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>81</ID>
+    <CustomerName>Rachel Sharon</CustomerName>
+    <CustomerEmail>RachelSharon@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Hertzog 101</CustomerAdress>
+    <OrderDate>2023-01-08T23:18:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:52:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T00:52:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>82</ID>
+    <CustomerName>Efrat Kahana</CustomerName>
+    <CustomerEmail>EfratKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Ben Gurion 66</CustomerAdress>
+    <OrderDate>2023-01-08T22:22:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:42:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>83</ID>
+    <CustomerName>Hila Mangel</CustomerName>
+    <CustomerEmail>HilaMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Hshoshanim 38</CustomerAdress>
+    <OrderDate>2023-01-08T23:31:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:51:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>84</ID>
+    <CustomerName>Efrat Rubin</CustomerName>
+    <CustomerEmail>EfratRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Ben Gurion 94</CustomerAdress>
+    <OrderDate>2023-01-08T23:28:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:47:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>85</ID>
+    <CustomerName>Hila Rubin</CustomerName>
+    <CustomerEmail>HilaRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Hertzog 64</CustomerAdress>
+    <OrderDate>2023-01-08T22:20:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:51:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T23:51:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>86</ID>
+    <CustomerName>Rachel Cohen</CustomerName>
+    <CustomerEmail>RachelCohen@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Tze'elon 58</CustomerAdress>
+    <OrderDate>2023-01-08T23:44:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>87</ID>
+    <CustomerName>Dan Roth</CustomerName>
+    <CustomerEmail>DanRoth@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Zait 15</CustomerAdress>
+    <OrderDate>2023-01-08T23:46:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T01:25:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>88</ID>
+    <CustomerName>Ayala Kahana</CustomerName>
+    <CustomerEmail>AyalaKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Yanai 88</CustomerAdress>
+    <OrderDate>2023-01-08T23:48:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:19:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T00:19:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>89</ID>
+    <CustomerName>Ayala Rubin</CustomerName>
+    <CustomerEmail>AyalaRubin@gmail.com</CustomerEmail>
+    <CustomerAdress>Jerusalem Hertzel 44</CustomerAdress>
+    <OrderDate>2023-01-08T23:49:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>90</ID>
+    <CustomerName>Rachel Cohen</CustomerName>
+    <CustomerEmail>RachelCohen@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Tze'elon 33</CustomerAdress>
+    <OrderDate>2023-01-08T22:56:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:06:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-12T00:06:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>91</ID>
+    <CustomerName>Natan Mangel</CustomerName>
+    <CustomerEmail>NatanMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Bnei Brak Najara 96</CustomerAdress>
+    <OrderDate>2023-01-08T23:45:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T01:07:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-11T01:07:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>92</ID>
+    <CustomerName>Yael Mansur</CustomerName>
+    <CustomerEmail>YaelMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Kiryat Shmona Zait 58</CustomerAdress>
+    <OrderDate>2023-01-08T22:29:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T22:51:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>94</ID>
+    <CustomerName>Efrat Mangel</CustomerName>
+    <CustomerEmail>EfratMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Netivot Hertzel 29</CustomerAdress>
+    <OrderDate>2023-01-08T23:05:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:50:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>95</ID>
+    <CustomerName>Natan Perelman</CustomerName>
+    <CustomerEmail>NatanPerelman@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Tze'elon 147</CustomerAdress>
+    <OrderDate>2023-01-08T22:46:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:13:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-10T00:13:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>96</ID>
+    <CustomerName>Natan Mangel</CustomerName>
+    <CustomerEmail>NatanMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Beit Shemesh Ktav Sofer 51</CustomerAdress>
+    <OrderDate>2023-01-08T22:32:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>97</ID>
+    <CustomerName>Ayala Perelman</CustomerName>
+    <CustomerEmail>AyalaPerelman@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Hshoshanim 74</CustomerAdress>
+    <OrderDate>2023-01-08T23:47:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-09T00:28:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>98</ID>
+    <CustomerName>Yael Kahana</CustomerName>
+    <CustomerEmail>YaelKahana@gmail.com</CustomerEmail>
+    <CustomerAdress>Tel Aviv Najara 45</CustomerAdress>
+    <OrderDate>2023-01-08T22:29:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>99</ID>
+    <CustomerName>Hila Mansur</CustomerName>
+    <CustomerEmail>HilaMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Tiberias Hertzog 112</CustomerAdress>
+    <OrderDate>2023-01-08T22:45:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:12:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1</ID>
+    <CustomerName>Rachel Mansur</CustomerName>
+    <CustomerEmail>RachelMansur@gmail.com</CustomerEmail>
+    <CustomerAdress>Hadera Hertzel 29</CustomerAdress>
+    <OrderDate>2023-01-08T22:50:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-08T23:55:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-09T00:00:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>100</ID>
+    <CustomerName>Itzik Roth</CustomerName>
+    <CustomerEmail>Itzik@gmail.com</CustomerEmail>
+    <CustomerAdress>Hazait 3 Hertzeliah</CustomerAdress>
+    <OrderDate>2023-01-11T00:00:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>11</ID>
+    <CustomerName>Ayala Sharon</CustomerName>
+    <CustomerEmail>AyalaSharon@gmail.com</CustomerEmail>
+    <CustomerAdress>Netanya Ben Gurion 136</CustomerAdress>
+    <OrderDate>2023-01-08T22:23:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-12T00:00:00+02:00</DeliveredDate>
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>101</ID>
+    <CustomerName>Hadas</CustomerName>
+    <CustomerEmail>H@gmail.com</CustomerEmail>
+    <CustomerAdress>BeitHadfus 9 Jerusalem</CustomerAdress>
+    <OrderDate>2023-01-12T00:00:00+02:00</OrderDate>
+    <DeliveredDate xsi:nil="true" />
+    <ArrivedDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>93</ID>
+    <CustomerName>Yair Mangel</CustomerName>
+    <CustomerEmail>YairMangel@gmail.com</CustomerEmail>
+    <CustomerAdress>Netivot Yanai 69</CustomerAdress>
+    <OrderDate>2023-01-08T23:36:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-16T00:00:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-16T00:00:00+02:00</ArrivedDate>
+  </Order>
+  <Order>
+    <ID>102</ID>
+    <CustomerName>Adina</CustomerName>
+    <CustomerEmail>adinamislton@gmail.com</CustomerEmail>
+    <CustomerAdress>Alon Shvut</CustomerAdress>
+    <OrderDate>2023-01-16T00:00:00+02:00</OrderDate>
+    <DeliveredDate>2023-01-16T00:00:00+02:00</DeliveredDate>
+    <ArrivedDate>2023-01-16T00:00:00+02:00</ArrivedDate>
+  </Order>
+</ArrayOfOrder>

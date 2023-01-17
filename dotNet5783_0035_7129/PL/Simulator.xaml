@@ -1,0 +1,64 @@
+﻿<Window x:Class="PL.Simulator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ValueConverterDemo"
+        mc:Ignorable="d"
+        Title="Simulator" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <Window.Resources>
+        <local:StatusToBackgroundConverter x:Key="statusToBackgroundConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="OrdersListView"  Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=6  }" 
+                  Background="#FFFBE6F4" FontSize="12"  ItemsSource="{Binding OrderForLists}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View >
+
+                <GridView>
+                    <GridViewColumn Header="ID" Width="70" x:Name="idP" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Name of customer" Width="auto" DisplayMemberBinding="{Binding CustomerName}"/>
+                    <GridViewColumn Header="Amount of items" Width="auto" DisplayMemberBinding="{Binding AmountOfItems}"/>
+                    <GridViewColumn Header="Total price" Width="auto" DisplayMemberBinding="{Binding TotalPrice}"/>
+                    <GridViewColumn Header="Status" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Width="100" Content="{Binding Status}" Background="{Binding Status , Converter={StaticResource statusToBackgroundConverter}}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Order Tracking" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  Content="orderTracking" Click="OrderTracingWindow" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Column="1" Background="#FFFBE6F4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Button Content="Start tracking" Grid.Row="0" Background="White" HorizontalAlignment="Center"  VerticalAlignment="Center" Click="StartTracking"/>
+            <Button Content="Stop tracking" Grid.Row="1" HorizontalAlignment="Center" Background="White"  VerticalAlignment="Center" Click="StopTracking"/>
+        </Grid>
+    </Grid>
+
+</Window>

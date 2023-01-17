@@ -12,7 +12,7 @@
     <Name>BasicBabygro</Name>
     <Category>Clothes</Category>
     <Price>70</Price>
-    <InStock>179</InStock>
+    <InStock>178</InStock>
   </Product>
   <Product>
     <ID>100002</ID>
@@ -33,14 +33,14 @@
     <Name>SmallBottle</Name>
     <Category>Bottles</Category>
     <Price>21</Price>
-    <InStock>148</InStock>
+    <InStock>147</InStock>
   </Product>
   <Product>
     <ID>100005</ID>
     <Name>BrownCarriage</Name>
     <Category>BabyCarriages</Category>
     <Price>540</Price>
-    <InStock>146</InStock>
+    <InStock>144</InStock>
   </Product>
   <Product>
     <ID>100006</ID>
@@ -61,7 +61,7 @@
     <Name>Lego</Name>
     <Category>Toys</Category>
     <Price>100</Price>
-    <InStock>137</InStock>
+    <InStock>130</InStock>
   </Product>
   <Product>
     <ID>100009</ID>
@@ -89,7 +89,7 @@
     <Name>WarmSocks</Name>
     <Category>Socks</Category>
     <Price>9</Price>
-    <InStock>224</InStock>
+    <InStock>215</InStock>
   </Product>
   <Product>
     <ID>100013</ID>
@@ -135,10 +135,10 @@
   </Product>
   <Product>
     <ID>100019</ID>
-    <Name>PinkCarriage</Name>
+    <Name>Orange Carriage</Name>
     <Category>BabyCarriages</Category>
-    <Price>400</Price>
-    <InStock>245</InStock>
+    <Price>2000</Price>
+    <InStock>30</InStock>
   </Product>
   <Product>
     <ID>100020</ID>
@@ -153,5 +153,12 @@
     <Price>50</Price>
     <InStock>200</InStock>
     <Category>Toys</Category>
+  </Product>
+  <Product>
+    <ID>123456</ID>
+    <Name>Avent</Name>
+    <Price>46</Price>
+    <InStock>44</InStock>
+    <Category>Bottles</Category>
   </Product>
 </ArrayOfProduct>
