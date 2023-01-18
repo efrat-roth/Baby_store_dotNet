@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using BO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -20,54 +22,86 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+
+
+
+    namespace PL
 {
     /// <summary>
     /// Interaction logic for Simulator.xaml
     /// </summary>
     public partial class Simulator : Window
     {
-        BlApi.IBl? bl;
-        public ObservableCollection<OrderForList?>? OrderForLists { get; set; }
-        private IEnumerable<OrderForList?>? orderForLists { get; }
+        ProgressBar ProgressBar=new ProgressBar();
+        IBl? bl;
         public BackgroundWorker? updateStatus;
-        DateTime time;
+        BO.Order? order=new BO.Order();
+        /// <summary>
+        /// a random variable to use when it's needed.
+        /// </summary>
+        //public static readonly Random random = new Random(DateTime.Now.Millisecond);
+
+        ///The date of the window
+        public DateTime time=DateTime.Now;
+
+        //Global variable for all time sleep
+        private const int c_timeSleep = 2000;
+
+        public List<BO.OrderForList?> OrderForLists
+        {
+            get { return (List<BO.OrderForList?>)GetValue(OrderForListsProperty); }
+            set { SetValue(OrderForListsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for OrderForLists.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OrderForListsProperty =
+            DependencyProperty.Register("OrderForLists", typeof(List<BO.OrderForList>), typeof(Simulator), new PropertyMetadata(null));
+
         public Simulator(BlApi.IBl bl1)
+        
         {
             try
             {
+                InitializeComponent();
                 bl = bl1;
-                orderForLists = bl.Order.GetListOfOrders();
-                OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);//convert to observel in order to update the details
+                OrderForLists = bl.Order.GetListOfOrders();//convert to observel in order to update the details
                 updateStatus = new BackgroundWorker();
                 updateStatus.DoWork += Status_DoWork;
                 updateStatus.ProgressChanged += Status_ProgressChanged;
                 updateStatus.RunWorkerCompleted += Status_RunWorkerCompleted;
                 updateStatus.WorkerReportsProgress = true;
                 updateStatus.WorkerSupportsCancellation = true;
-                time = DateTime.Now;
-                InitializeComponent();
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
+        /// <summary>
+        /// Start the process of changing the dates of order
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Status_DoWork(object sender, DoWorkEventArgs e)
         {
-            //int timeToArrived = int.Parse(e.Argument.ToString());
-            //for (int i = 0; i <= timeToArrived; i++)
-            //{
             try
             {
-                if (updateStatus?.CancellationPending == true)
+                while(true)
                 {
-                    e.Cancel = true;
+                    if (updateStatus?.CancellationPending == true)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    else
+                    {
+                        Thread.Sleep(c_timeSleep);
+                        time.AddMonths(1);
+                        if (updateStatus?.WorkerReportsProgress == true)
+                        {                            
+                            updateStatus.ReportProgress(11);//Go to the change in the process
+                        }
+                    }
                 }
-                else
-                {
-                    Thread.Sleep(2000);
-                    if (updateStatus?.WorkerReportsProgress == true)
-                        updateStatus.ReportProgress(0);
-                }
+                
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             //}
@@ -75,60 +109,57 @@ namespace PL
 
         }
 
-        private void UpdateList()
-        {
-            try
-            {
-                OrderForLists?.Clear();
-                foreach (var o in bl?.Order.GetListOfOrders())
-                {
-                    OrderForLists?.Add(o);
-                }
-            }
-            catch(Exception ex) { MessageBox.Show(ex.Message); }
-        }
-
+        /// <summary>
+        /// The process of changing the dates of order
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Status_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             try
             {
-                UpdateList();
-                for (int i = 0; i < OrderForLists?.Count()*2; i++)
+                for (int i = 0; i < OrderForLists.Count; i++)
                 {
-                    var confirmed = bl?.Order.GetListOfOrders().Where(o => (BO.OrderStatus?)o?.Status == BO.OrderStatus.ConfirmedOrder);
-                    if (confirmed?.Count() != 0)
+                    time.AddDays(2);
+                    if (OrderForLists[i].Status != BO.OrderStatus.ArrivedOrder)//find only orders that not arrived
                     {
-                        OrderForList? maxC = confirmed?.MaxBy(o => bl?.Order.DateStatus(o!.ID) - time);
-                        int index = OrderForLists!.IndexOf(maxC);
-                        var oUpdated=bl?.Order.DeliveredOrder(maxC?.ID ?? throw new ObgectNullableException());
-                        OrderForLists![index] = bl?.Order.GetListOfOrders().Find(o=>o?.ID==maxC?.ID);
+                        order = bl.Order.GetDetailsOrderManager(OrderForLists[i].ID);
                     }
-                    UpdateList();
-                    Thread.Sleep(2000);
-                    var delivered = bl?.Order.GetListOfOrders().Where(o => o?.Status == BO.OrderStatus.DeliveredOrder);
-                    if (delivered?.Count() != 0)
+                    if (time - order.OrderDate >= new TimeSpan(0, 2, 0, 0)
+                        && OrderForLists[i].Status == BO.OrderStatus.ConfirmedOrder)//if the order was created before more 2 days
                     {
-                        OrderForList? maxD = delivered?.MaxBy(o => bl?.Order.DateStatus(o!.ID) - time);
-                        int index = OrderForLists!.IndexOf(maxD);
-                        bl?.Order.ArrivedOrder(maxD!.ID);
-                        OrderForLists![index] = bl?.Order.GetListOfOrders().Find(o => o?.ID == maxD?.ID);
+                        order.OrderDate = time.AddDays(1);
+                        order = bl.Order.DeliveredOrder(OrderForLists[i].ID);
+
                     }
-                    UpdateList();
-                    Thread.Sleep(100000);
+                    else if (time - order.OrderDate >= new TimeSpan(0, 10, 0, 0) &&
+                        OrderForLists[i].Status == BO.OrderStatus.DeliveredOrder)//if the order was created before more than 7 days
+                    {
+                        order.ShipDate = time.AddDays(2);
+                        order = bl.Order.ArrivedOrder(OrderForLists[i].ID);
+                    }
+                    OrderForLists = new List<OrderForList?>(bl.Order.GetListOfOrders());
 
                 }
+
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
 
         }
+
+        /// <summary>
+        /// Finish the process of update dates of orders
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Status_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
                 if (e.Cancelled == true)
                 {
-                    OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);
+                    OrderForLists = new List<OrderForList?>(bl.Order.GetListOfOrders());
                 }
                 else
                 {
@@ -147,24 +178,47 @@ All the orders have arrived");
             catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
+        /// <summary>
+        /// Cancel the process of changing dates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StopTracking(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (updateStatus?.WorkerSupportsCancellation == true)
-                    updateStatus.CancelAsync();
+                { updateStatus.CancelAsync();
+                    MessageBox.Show("Stop update status");
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-        //למלא
+        
+        /// <summary>
+        /// The method show the track details of order
+        /// </summary>
+        /// <param name="sender"></param>Button
+        /// <param name="e"></param>
         private void OrderTracingWindow(object sender, RoutedEventArgs e)
         {
+                Button button = (sender as Button);
+                int x = (int)button.Tag;//Gets the ID
             try
             {
-                MessageBox.Show($@"");
+                MessageBox.Show($@" ID: {x}
+status: {bl?.Order.OrderTracking(x).Status}
+Dates: 
+                { bl.Order.OrderTracking(x).ListDateStatus.First()}
+                { bl.Order.OrderTracking(x).ListDateStatus.FirstOrDefault(node => node?.status == "The order was delivered")}
+                { bl.Order.OrderTracking(x).ListDateStatus.FirstOrDefault(node => node?.status == "The order was arrived")}
+                ");//Gets the dates by bl method
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
             
         }
     }
+   
+
+
 }

@@ -24,15 +24,19 @@ internal class Order : BlApi.IOrder
     {
         IEnumerable<DO.Order?> orders = dal?.Order.GetAll() ?? throw new ObgectNullableException();
         IEnumerable<DO.OrderItem?> orderItems = dal?.OrderItem.GetAll()??throw new ObgectNullableException();
+        var orderItemsGroups = from oi in orderItems
+                               group oi by oi?.OrderID into g
+                               select g;
         IEnumerable<OrderForList?> ordersOrderedReturn = from o in orders
                                                          where (o?.OrderDate <= DateTime.Today && !(o?.ArrivedDate <= DateTime.Today) && !(o?.DeliveredDate <= DateTime.Today))
                                                          let oNew = new OrderForList()
                                                          {
                                                              ID = o?.ID ?? throw new ObgectNullableException(),
-                                                             AmountOfItems = (from oi in orderItems
-                                                                              group oi by oi?.OrderID into g
-                                                                              where g.Key==o?.ID
-                                                                              select g).ToList().Count(),
+                                                             AmountOfItems = (from oi in orderItemsGroups
+                                                                              where oi.Key == o?.ID
+                                                                              let selected = (from o in oi
+                                                                                             select 1).ToList().Sum()
+                                                                              select selected).Sum(),
                                                              CustomerName = o?.CustomerName,
                                                              TotalPrice = (from oi in orderItems
                                                                            where oi?.OrderID == o?.ID
@@ -49,10 +53,11 @@ internal class Order : BlApi.IOrder
                                                            let oNew = new OrderForList()
                                                            {
                                                                ID = o?.ID ?? throw new ObgectNullableException(),
-                                                               AmountOfItems = (from oi in orderItems
-                                                                                group oi by oi?.OrderID into g
-                                                                                where g.Key == o?.ID
-                                                                                select g).ToList().Count(),
+                                                               AmountOfItems = (from oi in orderItemsGroups
+                                                                               where oi.Key == o?.ID
+                                                                               let selected = (from o in oi
+                                                                                               select 1).ToList().Sum()
+                                                                               select selected).Sum(),
                                                                CustomerName = o?.CustomerName,
                                                                TotalPrice = (from oi in orderItems
                                                                              where oi?.OrderID == o?.ID
@@ -69,10 +74,11 @@ internal class Order : BlApi.IOrder
                                                          let oNew = new OrderForList()
                                                          {
                                                              ID = o?.ID ?? throw new ObgectNullableException(),
-                                                             AmountOfItems = (from oi in orderItems
-                                                                              group oi by oi?.OrderID into g
-                                                                              where g.Key == o?.ID
-                                                                              select g).ToList().Count(),
+                                                             AmountOfItems = (from oi in orderItemsGroups
+                                                                             where oi.Key == o?.ID
+                                                                             let selected = (from o in oi
+                                                                                             select 1).ToList().Sum()
+                                                                             select selected).Sum(),
                                                              CustomerName = o?.CustomerName,
                                                              TotalPrice = (from oi in orderItems
                                                                            where oi?.OrderID == o?.ID
@@ -418,16 +424,5 @@ internal class Order : BlApi.IOrder
         }
 
     }
-    public DateTime? DateStatus(int id)
-    {
-        DO.Order? order=dal?.Order.GetAll().FirstOrDefault(o => o?.ID == id);
-        if (order?.ArrivedDate != null && order?.ArrivedDate <= DateTime.Today)
-            return order?.ArrivedDate;
-        else if (order?.DeliveredDate != null && order?.DeliveredDate <= DateTime.Today)
-            return order?.DeliveredDate;
-        else if (order?.OrderDate != null && order?.OrderDate <= DateTime.Today)
-            return order?.OrderDate;
-        else
-            throw new InvalidVariableException();
-    }
+    
 }

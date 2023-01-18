@@ -51,6 +51,7 @@ internal class Order : IOrder
         }
         int y = order?.ID ?? throw new InvalidVariableException();
         orders.Add(order);
+        orders.OrderBy(o => o?.ID);
         Tools<DO.Order?>.saveListToXML(orders, OrderPath);
         return y;
     }
@@ -69,6 +70,7 @@ internal class Order : IOrder
         DO.Order? o = orders.FirstOrDefault(order1 => order1?.ID == order?.ID) ?? throw new IdDoesNotExistException(); ;
         orders.Remove(o);
         orders.Add(order);
+        orders.OrderBy(o => o?.ID);
         Tools<DO.Order?>.saveListToXML(orders, OrderPath);
         return true;
     }
@@ -87,6 +89,7 @@ internal class Order : IOrder
             throw new InvalidVariableException();
         DO.Order? o = orders.FirstOrDefault(o => o?.ID == id) ?? throw new IdDoesNotExistException(); ;
         orders.Remove(o);
+        orders.OrderBy(o=>o?.ID);
         Tools<DO.Order?>.saveListToXML(orders,OrderPath);
         return true;
     }

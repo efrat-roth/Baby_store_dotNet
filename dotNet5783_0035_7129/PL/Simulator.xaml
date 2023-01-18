@@ -42,7 +42,14 @@
                     <GridViewColumn Header="Order Tracking" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button  Content="orderTracking" Click="OrderTracingWindow" />
+                                <Button  Content="orderTracking" Click="OrderTracingWindow" Tag="{Binding ID}"  />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Order Tracking" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar   Value="0" IsIndeterminate="True" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

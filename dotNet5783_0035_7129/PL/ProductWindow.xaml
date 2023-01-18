@@ -34,7 +34,7 @@
         <Label x:Name="IDValid" Grid.Column="2" Content="Insert at least 6 digits" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="26"  Width="111" FontSize="9" Foreground="Red" Visibility="{Binding product, Converter={StaticResource nullToVisibilityConverter}}" />
         <Label x:Name="Namexamel" Grid.Row="1" Grid.Column="1" Content="Enter the name" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="91"/>
         <Label x:Name="Categoryxamel" Grid.Row="2" Grid.Column="1" Content="choose the category" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="26"  Width="118"/>
-        <TextBox x:Name="EnterName" Background="#FFFAEFF5" Grid.Row="1" Grid.Column="2" Text="{Binding product.NameP}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="17" />
+        <TextBox x:Name="EnterName" Width="120"   Background="#FFFAEFF5" Grid.Row="1" Grid.Column="2" Text="{Binding product.NameP}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"  Height="17" />
         <ComboBox x:Name="ChooseCategory" Background="#FFFAEFF5" Grid.Row="2" Grid.Column="2" SelectedItem="{Binding product.CategoryP}" HorizontalAlignment="Left" ItemsSource="{Binding _Category}" VerticalAlignment="Center" Width="120" Text="Choose category of product " Height="22"/>
         <Label x:Name="Pricexamel" Grid.Row="3" Grid.Column="1" Content="Enter the price" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Width="87"/>
         <TextBox x:Name="EnterPrice" Background="#FFFAEFF5" Grid.Row="3" Grid.Column="2" Text="{Binding product.PriceP}" HorizontalAlignment="Left" 
