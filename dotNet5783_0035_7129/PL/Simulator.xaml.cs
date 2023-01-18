@@ -27,115 +27,144 @@ namespace PL
     /// </summary>
     public partial class Simulator : Window
     {
-        BlApi.IBl bl;
+        BlApi.IBl? bl;
         public ObservableCollection<OrderForList?>? OrderForLists { get; set; }
         private IEnumerable<OrderForList?>? orderForLists { get; }
-        public BackgroundWorker updateStatus;
-        TimeOnly now=TimeOnly.FromDateTime(DateTime.Now);
-
+        public BackgroundWorker? updateStatus;
+        DateTime time;
         public Simulator(BlApi.IBl bl1)
         {
-            bl= bl1;
-            orderForLists = bl.Order.GetListOfOrders();
-            OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);//convert to observel in order to update the details
-            updateStatus = new BackgroundWorker();
-            updateStatus.DoWork += Status_DoWork;
-            updateStatus.ProgressChanged += Status_ProgressChanged;
-            updateStatus.RunWorkerCompleted += Status_RunWorkerCompleted;
-            updateStatus.WorkerReportsProgress = true;
-            updateStatus.WorkerSupportsCancellation = true;
-            InitializeComponent();
+            try
+            {
+                bl = bl1;
+                orderForLists = bl.Order.GetListOfOrders();
+                OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);//convert to observel in order to update the details
+                updateStatus = new BackgroundWorker();
+                updateStatus.DoWork += Status_DoWork;
+                updateStatus.ProgressChanged += Status_ProgressChanged;
+                updateStatus.RunWorkerCompleted += Status_RunWorkerCompleted;
+                updateStatus.WorkerReportsProgress = true;
+                updateStatus.WorkerSupportsCancellation = true;
+                time = DateTime.Now;
+                InitializeComponent();
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void Status_DoWork(object sender, DoWorkEventArgs e)
         {
-            int timeStatus = int.Parse(e.Argument.ToString());
-            for(int i=0;i<=timeStatus;i++)
+            //int timeToArrived = int.Parse(e.Argument.ToString());
+            //for (int i = 0; i <= timeToArrived; i++)
+            //{
+            try
             {
-                if(updateStatus.CancellationPending==true)
+                if (updateStatus?.CancellationPending == true)
                 {
-                    e.Cancel=true;
-                    break;
+                    e.Cancel = true;
                 }
                 else
                 {
-                    Thread.Sleep(1000);
-                    if (updateStatus.WorkerReportsProgress == true)
-                        updateStatus.ReportProgress(i * 100 / timeStatus);
+                    Thread.Sleep(2000);
+                    if (updateStatus?.WorkerReportsProgress == true)
+                        updateStatus.ReportProgress(0);
                 }
             }
-
-        } 
-        private void Status_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            //OrderForLists.Clear();//clear the list
-            //for (int i = 0; i < bl.Order.GetListOfOrders().Count(); i++)//update the orders in the store
-            //{
-            //    OrderForLists.Add(bl.Order.GetListOfOrders()[i]);
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
             //}
 
-            //updates the orders on the store
-            OrderForLists = new ObservableCollection<OrderForList?>(bl.Order.GetListOfOrders());            
-            for (int i=0;i<OrderForLists.Count();i++)
+
+        }
+
+        private void UpdateList()
+        {
+            try
             {
-                OrderForList? order = OrderForLists[i];
-                if(order?.Status==OrderStatus.ConfirmedOrder) 
+                OrderForLists?.Clear();
+                foreach (var o in bl?.Order.GetListOfOrders())
                 {
-                    OrderForLists[i].Status = OrderStatus.DeliveredOrder;
-                }
-                else if(order?.Status == OrderStatus.DeliveredOrder)
-                {
-                    OrderForLists[i].Status = OrderStatus.ArrivedOrder;
-                }
-                Thread.Sleep(100);
-                var orders = from o in bl.Order.GetListOfOrders()
-                             let selectOrder = OrderForLists.Where(ofl => ofl.ID == o.ID)
-                             where selectOrder.Count() == 0
-                             select o;
-                for (int j = 0; j < orders.Count(); j++)//adding the orders that added to the store
-                {
-                    OrderForLists.Add(orders.ToList()[j]);
+                    OrderForLists?.Add(o);
                 }
             }
-            
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void Status_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            try
+            {
+                UpdateList();
+                for (int i = 0; i < OrderForLists?.Count()*2; i++)
+                {
+                    var confirmed = bl?.Order.GetListOfOrders().Where(o => (BO.OrderStatus?)o?.Status == BO.OrderStatus.ConfirmedOrder);
+                    if (confirmed?.Count() != 0)
+                    {
+                        OrderForList? maxC = confirmed?.MaxBy(o => bl?.Order.DateStatus(o!.ID) - time);
+                        int index = OrderForLists!.IndexOf(maxC);
+                        var oUpdated=bl?.Order.DeliveredOrder(maxC?.ID ?? throw new ObgectNullableException());
+                        OrderForLists![index] = bl?.Order.GetListOfOrders().Find(o=>o?.ID==maxC?.ID);
+                    }
+                    UpdateList();
+                    Thread.Sleep(2000);
+                    var delivered = bl?.Order.GetListOfOrders().Where(o => o?.Status == BO.OrderStatus.DeliveredOrder);
+                    if (delivered?.Count() != 0)
+                    {
+                        OrderForList? maxD = delivered?.MaxBy(o => bl?.Order.DateStatus(o!.ID) - time);
+                        int index = OrderForLists!.IndexOf(maxD);
+                        bl?.Order.ArrivedOrder(maxD!.ID);
+                        OrderForLists![index] = bl?.Order.GetListOfOrders().Find(o => o?.ID == maxD?.ID);
+                    }
+                    UpdateList();
+                    Thread.Sleep(100000);
+
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+
+
         }
         private void Status_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if(e.Cancelled==true)
+            try
             {
-                OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);
+                if (e.Cancelled == true)
+                {
+                    OrderForLists = new ObservableCollection<OrderForList?>(orderForLists);
+                }
+                else
+                {
+                    MessageBox.Show(@$"             Well Done!
+All the orders have arrived");
+                }
             }
-            else
-            {
-                MessageBox.Show(@$"         Well Done!
-                                   All the orders have arrived");
-                this.Cursor = Cursors.Arrow;
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private void StartTracking(object sender, RoutedEventArgs e)
         {
-            Thread simulator = Thread.CurrentThread;
-            new Thread(() => { Thread.Sleep(1000); simulator.Interrupt();  }).Start();
+            try{
+                if (updateStatus?.IsBusy != true)
+                    updateStatus?.RunWorkerAsync();
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void StopTracking(object sender, RoutedEventArgs e)
         {
-            if(updateStatus.WorkerSupportsCancellation==true)
-                updateStatus.CancelAsync();
+            try
+            {
+                if (updateStatus?.WorkerSupportsCancellation == true)
+                    updateStatus.CancelAsync();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
+        //למלא
         private void OrderTracingWindow(object sender, RoutedEventArgs e)
         {
-            //Button button = (Button)sender;
-            //OrderForList orderForList = (OrderForList)OrdersListView.SelectedItem;
-            //OrderTrackingDataBiding.OrderTracking orderTracking = new OrderTrackingDataBiding.OrderTracking()
-            //{
-            //    ID = orderForList.ID,
-            //    Status = orderForList.Status,
-            //    ListDateStatus = new ObservableCollection<NodeDateStatus?>(bl.Order.OrderTracking(orderForList.ID).ListDateStatus)
-            //};
-            //OrderTrackingWindow orderTracingWindow = new OrderTrackingWindow(bl, orderTracking);
-            //orderTracingWindow.Show();
+            try
+            {
+                MessageBox.Show($@"");
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+            
         }
     }
 }

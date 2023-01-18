@@ -418,4 +418,16 @@ internal class Order : BlApi.IOrder
         }
 
     }
+    public DateTime? DateStatus(int id)
+    {
+        DO.Order? order=dal?.Order.GetAll().FirstOrDefault(o => o?.ID == id);
+        if (order?.ArrivedDate != null && order?.ArrivedDate <= DateTime.Today)
+            return order?.ArrivedDate;
+        else if (order?.DeliveredDate != null && order?.DeliveredDate <= DateTime.Today)
+            return order?.DeliveredDate;
+        else if (order?.OrderDate != null && order?.OrderDate <= DateTime.Today)
+            return order?.OrderDate;
+        else
+            throw new InvalidVariableException();
+    }
 }

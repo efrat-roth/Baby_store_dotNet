@@ -57,4 +57,6 @@ public interface IOrder
     /// <returns></returns>BO.Order with the new amount
     /// <exception cref="Exception"></exception>The ID is less than zero / The order was shiped already
     public BO.Order UpdateOrder(int IDOrder, int IDProduct, int newAmount);
+
+    public DateTime? DateStatus(int id);
 }

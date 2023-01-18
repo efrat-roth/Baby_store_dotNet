@@ -39,7 +39,7 @@ internal class Cart:ICart
         {
             orderItem = finalCart?.Items?.FirstOrDefault(o => o?.ProductID == id);
         }
-        catch (Exception? inner) { throw inner; }
+        catch (Exception? ex) { throw ex; }
             if (orderItem == null)
             {
                 int idOI = dal?.OrderItem.GetAll().Last()?.ID ?? throw new InvalidVariableException();
@@ -216,7 +216,7 @@ internal class Cart:ICart
         while (!flag1)//while he id is in he store
         {
             try { DO.Order? o = dal.Order.GetByID(id1); }
-            catch (DO.IdDoesNotExistException x) { flag1 = true; break; }
+            catch (DO.IdDoesNotExistException ) { flag1 = true; break; }
             ++id1;
         }
         DO.Order finalOrder = new DO.Order
@@ -237,7 +237,7 @@ internal class Cart:ICart
         while (!flag)//while he id is in he store
         {            
             try { DO.OrderItem? o = dal.OrderItem.GetByID(id); }
-            catch (DO.IdDoesNotExistException x) { flag = true; break; }
+            catch (DO.IdDoesNotExistException ) { flag = true; break; }
             ++id;
         }
         try{

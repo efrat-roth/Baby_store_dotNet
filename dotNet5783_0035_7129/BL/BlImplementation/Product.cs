@@ -173,7 +173,6 @@ internal class Product : IProduct
         if (exist != null)// if the product is exist
         {
             throw new BO.CanNotDOActionException();
-            return;
         }
         if (!_dal?.Product.Delete(ID) ?? throw new BO.ObgectNullableException())//delete the product
             throw new BO.IdDoesNotExistException();
