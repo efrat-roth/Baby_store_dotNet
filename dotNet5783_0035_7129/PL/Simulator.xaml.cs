@@ -36,16 +36,16 @@ using System.Windows.Shapes;
         IBl? bl;
         public BackgroundWorker? updateStatus;
         BO.Order? order=new BO.Order();
-        /// <summary>
-        /// a random variable to use when it's needed.
-        /// </summary>
-        //public static readonly Random random = new Random(DateTime.Now.Millisecond);
 
         ///The date of the window
         public DateTime time=DateTime.Now;
 
         //Global variable for all time sleep
         private const int c_timeSleep = 2000;
+
+        
+        /// field  for check if the all order was arrives
+        bool allOrderArrived ;
 
         public List<BO.OrderForList?> OrderForLists
         {
@@ -64,6 +64,7 @@ using System.Windows.Shapes;
             {
                 InitializeComponent();
                 bl = bl1;
+                allOrderArrived = false;
                 OrderForLists = bl.Order.GetListOfOrders();//convert to observel in order to update the details
                 updateStatus = new BackgroundWorker();
                 updateStatus.DoWork += Status_DoWork;
@@ -84,7 +85,7 @@ using System.Windows.Shapes;
         {
             try
             {
-                while (true)
+                while (!allOrderArrived)
                 {
                     if (updateStatus?.CancellationPending == true)
                     {
@@ -96,9 +97,7 @@ using System.Windows.Shapes;
                         Thread.Sleep(c_timeSleep);
                         time.AddMonths(1);
                         if (updateStatus?.WorkerReportsProgress == true)
-                        {               
-                            if (OrderForLists.All(o => o.Status == OrderStatus.ArrivedOrder))
-                                    break;
+                        {  
                             updateStatus.ReportProgress(11);//Go to the change in the process
                         }
                     }
@@ -123,27 +122,26 @@ using System.Windows.Shapes;
                 time.AddMonths(1);
                 for (int i = 0; i < OrderForLists.Count; i++)
                 {
-                    if (OrderForLists[i].Status != BO.OrderStatus.ArrivedOrder)//find only orders that not arrived
+                    if (OrderForLists[i]!.Status != BO.OrderStatus.ArrivedOrder)//find only orders that not arrived
                     {
-                        order = bl.Order.GetDetailsOrderManager(OrderForLists[i].ID);
+                        order = bl?.Order.GetDetailsOrderManager(OrderForLists[i]!.ID);
                     }
-                    if (time - order.OrderDate >= new TimeSpan(0, 2, 0, 0)
-                        && OrderForLists[i].Status == BO.OrderStatus.ConfirmedOrder)//if the order was created before more 2 days
+                    if (time - order?.OrderDate >= new TimeSpan(0, 2, 0, 0)
+                        && OrderForLists[i]!.Status == BO.OrderStatus.ConfirmedOrder)//if the order was created before more 2 days
                     {
-                        order.OrderDate = time.AddDays(1);
-                        order = bl.Order.DeliveredOrder(OrderForLists[i].ID);
+                        order!.OrderDate = time.AddDays(1);
+                        order = bl?.Order.DeliveredOrder(OrderForLists[i]!.ID);
 
                     }
-                    else if (time - order.OrderDate >= new TimeSpan(0, 3, 0, 0) &&
-                        OrderForLists[i].Status == BO.OrderStatus.DeliveredOrder)//if the order was created before more than 7 days
+                    else if (time - order?.OrderDate >= new TimeSpan(0, 3, 0, 0) &&
+                        OrderForLists[i]!.Status == BO.OrderStatus.DeliveredOrder)//if the order was created before more than 7 days
                     {
                         order.ShipDate = time.AddDays(2);
-                        order = bl.Order.ArrivedOrder(OrderForLists[i].ID);
+                        order = bl?.Order.ArrivedOrder(OrderForLists[i]!.ID);
                     }
-                    OrderForLists = new List<OrderForList?>(bl.Order.GetListOfOrders());
-                    
-
-
+                    OrderForLists = new List<OrderForList?>(bl?.Order.GetListOfOrders()!);
+                    if (OrderForLists.All(o => o?.Status == OrderStatus.ArrivedOrder)) 
+                            allOrderArrived = true;
                 }
 
             }
