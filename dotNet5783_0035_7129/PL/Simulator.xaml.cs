@@ -139,6 +139,9 @@ using System.Windows.Shapes;
                         order = bl.Order.ArrivedOrder(OrderForLists[i].ID);
                     }
                     OrderForLists = new List<OrderForList?>(bl.Order.GetListOfOrders());
+                    if (OrderForLists.All(o => o.Status == OrderStatus.ArrivedOrder))
+                        break;
+
 
                 }
 

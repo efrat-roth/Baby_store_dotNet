@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -79,36 +80,36 @@ namespace ValueConverterDemo
             throw new NotImplementedException();
         }
     }
-    //public class StatusToProgressBarConverter : IValueConverter
-    //{
-    //    //convert from source property type to target property type
-    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        BO.OrderStatus stingValue = (BO.OrderStatus)value;
-    //        if (stingValue == BO.OrderStatus.ConfirmedOrder)
-    //        {
+    public class StatusToProgressBarConverter : IValueConverter
+    {
+        //convert from source property type to target property type
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            BO.OrderStatus stingValue = (BO.OrderStatus)value;
+            if (stingValue == BO.OrderStatus.ConfirmedOrder)
+            {
 
-    //            return "#FFDC1690";
-    //        }
-    //        else if (stingValue == BO.OrderStatus.DeliveredOrder)
-    //        {
-    //            return "#FFF74EB6";
-    //        }
-    //        else if (stingValue == BO.OrderStatus.ArrivedOrder)
-    //        {
-    //            return "#FFF3A2D4";
-    //        }
-    //        else
-    //            return null;
-    //    }
-    //    //convert from target property type to source property type
-    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-   
-    
+                return 0;
+            }
+            else if (stingValue == BO.OrderStatus.DeliveredOrder)
+            {
+                return 50;
+            }
+            else if (stingValue == BO.OrderStatus.ArrivedOrder)
+            {
+                return 100;
+            }
+            else
+                return null;
+        }
+        //convert from target property type to source property type
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
     public class FullToVisibilityConverter : IValueConverter
     {
         //convert from source property type to target property type

@@ -9,6 +9,7 @@
         DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Window.Resources>
         <local:StatusToBackgroundConverter x:Key="statusToBackgroundConverter"/>
+        <local:StatusToProgressBarConverter x:Key="statusToProgressBarConverter"/>
     </Window.Resources>
 
     <Grid>
@@ -49,7 +50,7 @@
                     <GridViewColumn Header="Order Tracking" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ProgressBar   Value="0" IsIndeterminate="True" />
+                                <ProgressBar IsIndeterminate="True"  Value="{Binding Status, Converter={StaticResource statusToProgressBarConverter}}"   Width="100" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
