@@ -84,7 +84,7 @@ using System.Windows.Shapes;
         {
             try
             {
-                while(true)
+                while (true)
                 {
                     if (updateStatus?.CancellationPending == true)
                     {
@@ -96,7 +96,9 @@ using System.Windows.Shapes;
                         Thread.Sleep(c_timeSleep);
                         time.AddMonths(1);
                         if (updateStatus?.WorkerReportsProgress == true)
-                        {                            
+                        {               
+                            if (OrderForLists.All(o => o.Status == OrderStatus.ArrivedOrder))
+                                    break;
                             updateStatus.ReportProgress(11);//Go to the change in the process
                         }
                     }
@@ -139,8 +141,7 @@ using System.Windows.Shapes;
                         order = bl.Order.ArrivedOrder(OrderForLists[i].ID);
                     }
                     OrderForLists = new List<OrderForList?>(bl.Order.GetListOfOrders());
-                    if (OrderForLists.All(o => o.Status == OrderStatus.ArrivedOrder))
-                        break;
+                    
 
 
                 }
