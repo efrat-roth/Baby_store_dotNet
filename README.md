@@ -8,7 +8,7 @@
 
 #Baby's items store
 
-<<<<<<<Bonus:
+<<<<<<< Bonus:
 
 #data contex and biding in xaml in all windows
 
@@ -38,7 +38,7 @@
 
 #an option to return to main window fom all the windows
 
-#Thank you!
+# Thank you!
 <<<<<
 
 
