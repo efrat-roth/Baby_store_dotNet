@@ -50,7 +50,7 @@
                     <GridViewColumn Header="Order Tracking" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ProgressBar IsIndeterminate="True"  Value="{Binding Status, Converter={StaticResource statusToProgressBarConverter}}"   Width="100" />
+                                <ProgressBar Background="LightGray" Height="8" Foreground="#FFEBC2C9" Value="{Binding ID, Converter={StaticResource statusToProgressBarConverter}}"   Width="100" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

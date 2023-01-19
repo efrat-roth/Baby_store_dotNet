@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -83,26 +84,38 @@ namespace ValueConverterDemo
     public class StatusToProgressBarConverter : IValueConverter
     {
         //convert from source property type to target property type
+        private IBl bl = Factory.Get();
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            BO.OrderStatus stingValue = (BO.OrderStatus)value;
-            if (stingValue == BO.OrderStatus.ConfirmedOrder)
+            BO.Order order = new();
+            int id = (int)value;
+            try
             {
-
+                order = bl.Order.GetDetailsOrderManager(id);
+            }
+            catch (BO.ObgectNullableException ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+            catch (BO.InvalidVariableException ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (order.Status == BO.OrderStatus.ArrivedOrder)
+                return 100; //the order is completed
+                            //take the days that passed*10
+            else if (order.Status == BO.OrderStatus.ConfirmedOrder)
                 return 0;
-            }
-            else if (stingValue == BO.OrderStatus.DeliveredOrder)
-            {
-                return 50;
-            }
-            else if (stingValue == BO.OrderStatus.ArrivedOrder)
-            {
-                return 100;
-            }
             else
-                return null;
+                return 50;
         }
-        //convert from target property type to source property type
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

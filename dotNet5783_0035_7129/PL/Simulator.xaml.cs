@@ -118,9 +118,9 @@ using System.Windows.Shapes;
         {
             try
             {
+                time.AddMonths(1);
                 for (int i = 0; i < OrderForLists.Count; i++)
                 {
-                    time.AddDays(2);
                     if (OrderForLists[i].Status != BO.OrderStatus.ArrivedOrder)//find only orders that not arrived
                     {
                         order = bl.Order.GetDetailsOrderManager(OrderForLists[i].ID);
@@ -132,7 +132,7 @@ using System.Windows.Shapes;
                         order = bl.Order.DeliveredOrder(OrderForLists[i].ID);
 
                     }
-                    else if (time - order.OrderDate >= new TimeSpan(0, 10, 0, 0) &&
+                    else if (time - order.OrderDate >= new TimeSpan(0, 3, 0, 0) &&
                         OrderForLists[i].Status == BO.OrderStatus.DeliveredOrder)//if the order was created before more than 7 days
                     {
                         order.ShipDate = time.AddDays(2);
