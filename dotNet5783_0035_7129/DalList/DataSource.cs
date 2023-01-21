@@ -156,7 +156,7 @@ namespace Dal
                 orderItem.ID = nextCountOrderItemsID();
                 orderItem.ProductID = product.ID;
                 orderItem.Amount = rnd.Next(1, 11);
-                orderItem.OrderID = (++y) % 100;
+                orderItem.OrderID = (++y) % 101;
                 orderItem.Price = orderItem.Amount * product.Price;
                 orderItems.Add(orderItem);
             }

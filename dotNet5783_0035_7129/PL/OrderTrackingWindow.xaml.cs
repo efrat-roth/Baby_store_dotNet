@@ -42,7 +42,7 @@ namespace PL
         private void ShowOrder(object sender, RoutedEventArgs e)
         {
             try
-            {                                   
+            {                                  
                 OrderForList? o = new OrderForList()//convert to orderForList in order to send to order window
                 {
                     ID = order?.ID??throw new BO.ObgectNullableException(),
