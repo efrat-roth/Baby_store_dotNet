@@ -1,2 +1,4 @@
-# Baby store project
+<<<<<<< HEAD
+
+
 
