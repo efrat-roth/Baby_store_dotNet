@@ -8,3 +8,4 @@ while the manager login allows more actions.
 The project was done in a VisualStudio work environment, by using c# language, In addition, the process was done according to the layers model.  
 The data are imported and saved in XML files, and the graphic layer uses the XAML language.  
 Enjoy your shopping
+
