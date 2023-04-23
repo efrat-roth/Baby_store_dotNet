@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ***Baby store project - a dsektop aplictaion***
 ===============
 
