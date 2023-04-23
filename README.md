@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 ***Baby store project - a dsektop aplictaion***
-
+===============
 
 The project manages a store of baby products, like clothes, carriages, etc.  
 The store includes two login options, it's possible to log in as a customer, but this option is limited,   
