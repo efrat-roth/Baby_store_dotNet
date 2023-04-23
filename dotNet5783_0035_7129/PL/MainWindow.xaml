@@ -6,25 +6,29 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="460" Width="800">
+
     <Grid x:Name="Main" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Image Source="/Background (2).JPG"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <Button x:Name="Admin" Content="Admin" HorizontalAlignment="Stretch" Grid.Row="0"   Grid.Column="1"
-                Height="107" Width="236"
-                FontSize="20" Background="#FFFFF0DB" Click="ShowProductList" />
-        <Button x:Name="Customer" Content="Customer" HorizontalAlignment="Stretch" Grid.Row="1"   Grid.Column="1"
-                Height="107" Width="236"
-                FontSize="20" Background="#FFFFF0DB" Click="Customer_Click" />
-
-
-
+            <Button x:Name="Admin" Content="Admin" Grid.Row="2" Grid.Column="3"
+                FontSize="30" Click="ShowProductList" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="#FF4FB5C4" FontFamily="Chiller" Foreground="White" />
+            <Button x:Name="Customer" Content="Customer" Grid.Row="3" Grid.Column="3"
+                FontSize="30" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="#FF4FB5C4" FontFamily="Chiller" Foreground="White" Click="Customer_Click"  />
+        </Grid>
     </Grid>
 </Window>
