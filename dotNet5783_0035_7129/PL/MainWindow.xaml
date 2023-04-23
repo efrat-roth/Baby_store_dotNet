@@ -8,7 +8,11 @@
         Title="MainWindow" Height="460" Width="800">
 
     <Grid x:Name="Main" >
-        <Image Source="/Background (2).JPG"/>
+        <Image Source="/Background (2).JPG">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="/Pictures/Background (2).JPG"/>
+            </Image.OpacityMask>
+        </Image>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -26,9 +30,9 @@
             </Grid.RowDefinitions>
 
             <Button x:Name="Admin" Content="Admin" Grid.Row="2" Grid.Column="3"
-                FontSize="30" Click="ShowProductList" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="#FF4FB5C4" FontFamily="Chiller" Foreground="White" />
+                FontSize="30" Click="ShowProductList" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="#FFCDDFE9" FontFamily="Chiller" Foreground="White" />
             <Button x:Name="Customer" Content="Customer" Grid.Row="3" Grid.Column="3"
-                FontSize="30" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="#FF4FB5C4" FontFamily="Chiller" Foreground="White" Click="Customer_Click"  />
+                FontSize="30" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="#FFCDDFE9" FontFamily="Chiller" Foreground="White" Click="Customer_Click"  />
         </Grid>
     </Grid>
 </Window>
