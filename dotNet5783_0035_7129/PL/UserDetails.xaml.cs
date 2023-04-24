@@ -21,12 +21,12 @@ namespace PL
     /// </summary>
     public partial class UserDetails : Window
     {
-        IBl bl;
+        IBl? bl;
         BO.Cart Cart { get; set; }
-        public UserDetails(IBl bl1)
+        public UserDetails(IBl? bl1)
         {
             Cart = new BO.Cart();
-             bl = bl1;
+            bl = bl1;
             InitializeComponent();
         }
 
@@ -56,7 +56,7 @@ namespace PL
                 MessageBox.Show("The mail must contain a @");
                 return;
             }
-            if(UserEmail.Text[0] == '@' || UserEmail.Text[UserEmail.Text.Length - 1] == '@')
+            if (UserEmail.Text[0] == '@' || UserEmail.Text[UserEmail.Text.Length - 1] == '@')
             {
                 MessageBox.Show("The @ must cannot be in the first or the last place");
                 return;
@@ -69,9 +69,9 @@ namespace PL
                 CustomerEmail = UserEmail.Text
             };
             Cart = c;
-            NewOrder newOrder = new NewOrder(bl,Cart);
+            Customer customer = new Customer(bl, Cart);
             this.Close();
-            newOrder.ShowDialog();
+            customer.ShowDialog();
         }
     }
 }

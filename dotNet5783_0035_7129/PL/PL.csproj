@@ -15,6 +15,7 @@
   <ItemGroup>
     <None Remove="Background.JPG" />
     <None Remove="BackgroundAdmin.jpg" />
+    <None Remove="BackgroundUser.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
 
   <ItemGroup>
     <Resource Include="Background.JPG" />
+    <Resource Include="BackgroundUser.jpg" />
   </ItemGroup>
 
 </Project>

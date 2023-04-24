@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="UserDetails" Height="200" Width="400">
+        Title="UserDetails" Height="400" Width="600">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/BackgroundUser.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.6*"/>
             <ColumnDefinition Width="*"/>
@@ -17,12 +20,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Enter name" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Enter Email" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Enter Adress" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="UserName" Background="#FFFAEFF5" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72"/>
-        <TextBox x:Name="UserEmail" Background="#FFFAEFF5" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72" />
-        <TextBox x:Name="UserAdress" Background="#FFFAEFF5" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72"/>
-        <Button x:Name="OrderW" Content="Go to the store" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" FontSize="9"  Click="OrderW_Click" />
+        <Label Content="Name:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Chiller" Foreground="#FF5899BF" FontSize="32"/>
+        <Label Content="Email:" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Chiller" Foreground="#FF5899BF" FontSize="32"/>
+        <Label Content="Adress:" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Chiller" Foreground="#FF5899BF" FontSize="32"/>
+        <TextBox x:Name="UserName" FontFamily="Chiller" FontSize="20" Background="{x:Null}" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72" Height="30"/>
+        <TextBox x:Name="UserEmail" FontFamily="Chiller" FontSize="20" Background="{x:Null}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72" Height="30" />
+        <TextBox x:Name="UserAdress" FontFamily="Chiller" FontSize="20" Background="{x:Null}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72" Height="30"/>
+        <Button x:Name="OrderW" Content="Login" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="2" FontSize="20"  Click="OrderW_Click" Foreground="#FF5899BF" FontFamily="Chiller" Background="#FFE8B4B4" BorderBrush="{x:Null}"/>
     </Grid>
 </Window>

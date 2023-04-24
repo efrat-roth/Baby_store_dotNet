@@ -23,10 +23,12 @@ namespace PL
     public partial class Customer : Window
     {
         IBl bl;
-        public Customer(IBl bl1)
+        Cart? cart = new Cart();
+        public Customer(IBl bl1, Cart? cart)
         {
             this.bl = bl1;
             InitializeComponent();
+            this.cart = cart;
         }
 
         /// <summary>
@@ -37,8 +39,8 @@ namespace PL
         /// <exception cref="BO.ObgectNullableException"></exception>
         private void ShowNewOrder(object sender, RoutedEventArgs e)//In click event. open the ProductListWindow
         {
-            UserDetails userDetails = new UserDetails(bl ?? throw new BO.ObgectNullableException());
-            userDetails.ShowDialog();
+            NewOrder newOrder = new NewOrder(bl ?? throw new BO.ObgectNullableException(), cart);
+            newOrder.ShowDialog();
 
         }
 
@@ -58,6 +60,11 @@ namespace PL
                     MessageBox.Show("Input id of order to track after the order");
                     return;
                 }
+                if (bl.Order.GetDetailsOrderCustomer(int.Parse(id.Text)).CustomerName != cart.CustomerName)
+                { //Check if it's a same user
+                    MessageBox.Show("You can't track after orders of other user");
+                    return;
+                }
                 orderToTrack1 = new OrderTrackingDataBiding.OrderTracking()
                 {
                     ID = int.Parse(id.Text),
@@ -66,7 +73,7 @@ namespace PL
                 };
             }
             catch (FailedGet) { MessageBox.Show("The id is invalid, or not in the database"); return; }
-            catch (BO.ObgectNullableException) { MessageBox.Show("an error accured, obect is a nullable, please try again"); return; }
+            catch (BO.ObgectNullableException) { MessageBox.Show("an error occured, object is a nullable, please try again"); return; }
             OrderTrackingWindow track = new OrderTrackingWindow(bl ?? throw new BO.ObgectNullableException(), orderToTrack1);
             track.ShowDialog();
 

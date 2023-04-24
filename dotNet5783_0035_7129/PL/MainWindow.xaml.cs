@@ -40,7 +40,7 @@ namespace PL
         {
             Admin admin = new Admin(bl ?? throw new BO.ObgectNullableException());
             admin.ShowDialog();
-            
+
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace PL
         /// <param name="e"></param>
         private void Customer_Click(object sender, RoutedEventArgs e)
         {
-            Customer customer = new Customer(bl);
-            customer.ShowDialog();
+            UserDetails user = new UserDetails(bl);
+            user.ShowDialog();
         }
     }
 }
