@@ -8,30 +8,61 @@
         Title="OrderTrackingWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
 
-   
+    <Window.Resources>
+        <Style x:Key="lab" TargetType="Label">
+            <Setter Property="FontFamily" Value="Chiller"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF9DBACF"/>
+        </Style>
+        <Style x:Key="but" TargetType="Button">
+            <Setter Property="FontFamily" Value="Chiller"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="#FFC5DDED"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF9DBACF"/>
+        </Style>
+    </Window.Resources>
     <Grid x:Name="MainGrid">
+        <Grid.Background>
+            <ImageBrush ImageSource="/BackgroundUser.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Name="Title" Content="The order state:" Grid.Row="0" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="IDO" Content="ID of the order:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="StatusO" Content="The status:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Name="DateO" Content="The date status of the order" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <Label x:Name="IDInput"  Background="#FFFAEFF5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding orderToTrack.ID}" Width="100"  />
-        <Label Content="{Binding orderToTrack.Status}"  Background="#FFFAEFF5" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <ListView x:Name="statusNodes"  Background="#FFFAEFF5" ItemsSource="{Binding orderToTrack.ListDateStatus}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-        </ListView>
-        <Button x:Name="orderDetails" Content="Press to see the details of the order" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowOrder"/>
-        <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="4" Click="Exit_Click" Height="34" Width="99" />
+        <Label Name="Title" Content="The order state:" Grid.Column="2" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Center"
+               Style="{StaticResource lab}"  Grid.ColumnSpan="2" Margin="133,0,0,0"/>
+        <Label Name="IDO" Content="ID of the order:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right"
+               VerticalAlignment="Center" Style="{StaticResource lab}"/>
+        <Label Name="StatusO" Content="The status:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" 
+               VerticalAlignment="Center" Style="{StaticResource lab}"/>
+        <Label Name="DateO" Content="The date status of the order" Grid.Row="3" Grid.Column="2" 
+               HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource lab}"/>
+        <Label x:Name="IDInput" Background="#FFC5DDED" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" 
+               VerticalAlignment="Center" Content="{Binding orderToTrack.ID}" Width="100" Style="{StaticResource lab}"/>
+        <Label Content="{Binding orderToTrack.Status}"  Background="#FFC5DDED" Grid.Row="2" Grid.Column="3" 
+               HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Style="{StaticResource lab}"/>
+        <ListView x:Name="statusNodes" Background="#FFC5DDED" ItemsSource="{Binding orderToTrack.ListDateStatus}" 
+                  Grid.Row="3" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                  FontFamily="Chiller" FontSize="10" Foreground="White"/>
+        <Button x:Name="orderDetails" Content="Details of the order" Grid.Row="4" Grid.Column="3" 
+                HorizontalAlignment="Left" VerticalAlignment="Center" Click="ShowOrder" Style="{StaticResource but}"/>
+        <Button x:Name="Exit" Content="To main window" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                Grid.Column="3" Grid.Row="6" Click="Exit_Click" Height="24" Width="99" Style="{StaticResource but}"/>
 
     </Grid>
 </Window>

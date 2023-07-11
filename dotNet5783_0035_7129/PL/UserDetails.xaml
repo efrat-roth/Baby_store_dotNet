@@ -23,9 +23,9 @@
         <Label Content="Name:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Chiller" Foreground="#FF5899BF" FontSize="32"/>
         <Label Content="Email:" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Chiller" Foreground="#FF5899BF" FontSize="32"/>
         <Label Content="Adress:" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Chiller" Foreground="#FF5899BF" FontSize="32"/>
-        <TextBox x:Name="UserName" FontFamily="Chiller" FontSize="20" Background="{x:Null}" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72" Height="30"/>
-        <TextBox x:Name="UserEmail" FontFamily="Chiller" FontSize="20" Background="{x:Null}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72" Height="30" />
-        <TextBox x:Name="UserAdress" FontFamily="Chiller" FontSize="20" Background="{x:Null}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="72" Height="30"/>
+        <TextBox x:Name="UserName" FontFamily="Chiller" FontSize="16" Background="{x:Null}" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="160" Height="30"/>
+        <TextBox x:Name="UserEmail" FontFamily="Chiller" FontSize="16" Background="{x:Null}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="160" Height="30" />
+        <TextBox x:Name="UserAdress" FontFamily="Chiller" FontSize="16" Background="{x:Null}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="160" Height="30"/>
         <Button x:Name="OrderW" Content="Login" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="2" FontSize="20"  Click="OrderW_Click" Foreground="#FF5899BF" FontFamily="Chiller" Background="#FFE8B4B4" BorderBrush="{x:Null}"/>
     </Grid>
 </Window>

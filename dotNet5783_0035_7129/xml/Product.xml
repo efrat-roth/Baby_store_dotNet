@@ -12,7 +12,7 @@
     <Name>BasicBabygro</Name>
     <Category>Clothes</Category>
     <Price>70</Price>
-    <InStock>178</InStock>
+    <InStock>173</InStock>
   </Product>
   <Product>
     <ID>100002</ID>
@@ -25,7 +25,7 @@
     <ID>100003</ID>
     <Name>Pacifier</Name>
     <Category>Accessories</Category>
-    <Price>20</Price>
+    <Price>30</Price>
     <InStock>239</InStock>
   </Product>
   <Product>
@@ -131,7 +131,7 @@
     <Name>Pillow</Name>
     <Category>Toys</Category>
     <Price>50</Price>
-    <InStock>221</InStock>
+    <InStock>220</InStock>
   </Product>
   <Product>
     <ID>100019</ID>

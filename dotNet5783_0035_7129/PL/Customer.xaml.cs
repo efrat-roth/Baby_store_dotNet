@@ -60,7 +60,7 @@ namespace PL
                     MessageBox.Show("Input id of order to track after the order");
                     return;
                 }
-                if (bl.Order.GetDetailsOrderCustomer(int.Parse(id.Text)).CustomerName != cart.CustomerName)
+                if (bl.Order.GetDetailsOrderCustomer(int.Parse(id.Text)).CustomerName != cart?.CustomerName)
                 { //Check if it's a same user
                     MessageBox.Show("You can't track after orders of other user");
                     return;

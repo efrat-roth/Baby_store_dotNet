@@ -138,6 +138,7 @@ namespace PL
         {
             CartWindow c = new CartWindow(bl!,cart!, AmountChanged);
             c.ShowDialog();
+            this.Close();
         }
 
         /// <summary>
